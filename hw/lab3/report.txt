@@ -1,0 +1,7 @@
+report.txt - Aaron Wang - Fund Comp - lab 3 - report
+
+From the users perspective,, my program asks for the operation and then the two numbers two operate on. It then either returns an error or the result of this operation and asks for the next operation until it is told to quit.
+
+The program works by the use of many functions. If first uses a function that displays the operators and their corresponding values. It then makes sure that the user enterred a valid integer. After that, it asks for the two numbers to operate on and then chooses the right operation method in which the result is calculated and printed. It then cycles through until 0 is entered for an operater and it quits the program.
+
+I verified this programs output by testing multiple different values to see if the calculator would work.

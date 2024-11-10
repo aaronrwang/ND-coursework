@@ -1,0 +1,15 @@
+Aaron Wang - Fund Comp - Lab 7 -  report.txt
+
+From the users perspective, the program asks for a file which it reads data from. 
+Then a menu is given for the user to choose.
+The user can display all data, take a quiz, or ask for information based on years or quit the program.
+
+Internally, the program asks for a file name. (If file is not found it returns)
+It then reads all the data from that file and gives the user a menu of options.
+Depending on the option, it goes into a function
+The display function just redisplays the csv to terminal with printf.
+The quiz functions ask for # of questions and then give the state name and ask for other attributes of the state.
+The year functions asks for a year and prints the states that were created before/after that year.
+The last choice exits the while loops and prints goodbye.
+
+To verify my output, I tried every function of the program several times.

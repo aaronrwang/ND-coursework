@@ -1,0 +1,12 @@
+From the users perspective:
+The program asks for a file name and then gives them a menu to choose from.
+It then asks for a choice and further prompts the user if necessary and then does the function whether that be displaying,changing, or writing a file.
+It then loops until the user quits (enters 5).
+
+Internally, the necessary variables are created and then the user is prompted for a file name.
+If the file works, it will continue and if not it will return 1;
+After that the program prints a menu and uses a while loop to check for valid input.
+After a choice is made, it prompts the user (if necessary) and does the function of that choice.
+It then loops through until the user quits.
+
+I verified this program by testing each option and incorrect inputs.

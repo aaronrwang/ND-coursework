@@ -1,0 +1,10 @@
+1. What your program from part 2 is meant to do, from the user's perspective.
+My program is supposed to take 2 vectors (3x1) and find the cross product of these 2 vectors.
+
+2. How the program is structured, from the programmer's perspective.
+
+My program first initializes the variables that store user input. It then gives instructions and takes the user input. The three variables at the end are the 3 values of the computed cross product vector. It then prints out this vector back to the user.
+
+3. How you evaluated the program for correctness. Did you verify that it produces correct results? Are there any cases where it produces incorrect results? Why?
+
+I evaluated the program for correctness by checking different pairs of vectors and comparing it to an online cross product calculator. In my testing, my calculator never printed incorrect values.

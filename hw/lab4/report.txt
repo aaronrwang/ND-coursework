@@ -1,0 +1,5 @@
+The user gets a menu to choose what statistics they would like to see. They then can choose what statistic are given corresponding information and/or prompts.
+
+Internally, there is a while loops that prints the menu, asks for a VALID input and then runs the right function accordingly.
+
+I verified the output of the program by testing it and looking at wiki to see if it was accurate.

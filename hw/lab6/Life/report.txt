@@ -1,0 +1,11 @@
+Aaron Wang - Fund Comp - Lab 6 -  report.txt
+
+The user can either type in just the executable (1 argument) or the executable and the name of a file with data points(2 arguments). Otherwise, the program gives an error of too many arguments
+If there is only one argument, the game is controlled by the user with 5 commands: a x y, r x y, n q or p which add a cell, remove a cell, move to next iteration, quit and play forever respectivelly.
+If there are two arguments, they see the game played out with the coords taken in from the starting file.
+
+On the programmer's side, a board is initially initialized to all dead cells and printed to screen. It then either repeatedly asks the user for commands or reads the file until 'p'. 
+If n is chosen, The program counts the living neighboring cells of each cell and puts an according value in line with the rules in a temp array. After this process, the temp array is copied to the board.
+If p is chosem, the command of n, display, delay and clear are looped until ^c is hit.
+
+I verified my output with glider.txt and commonly found sequences like still life, oscillators and space ships.

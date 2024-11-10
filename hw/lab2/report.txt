@@ -1,0 +1,10 @@
+For part 3, I chose an arbitrary equation and based it off of that. From the users perspective, you are told the equation, shown a table, a graph and the minimum and maximum along that range.
+I first made a function that would spit out a y value for each x value inputed.
+
+I then printed the Header of the table and the information for the graph at the top of the main function.
+I then made a for loop to calculate every value from x=0 to x=20 with an interval of 0.2 between each iteration.
+Within this loop, I called the function to and printed the x and y values.
+I also always checked if the new point was a maximum or a minimum and if it was, I saved the value. 
+Finally I printed the graph, rounded to the nearest int.
+At the end, I printed the max and min values after iterating through the whole range.
+I verified my outputs by comparing it to desmos.

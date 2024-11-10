@@ -1,0 +1,164 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, bm, faktor, mathrsfs, mathtools, mdframed, thmtools, xfrac, graphicx}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+\renewcommand\qedsymbol{Q.E.D.}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup\:}
+\newcommand{\intersect}{\cap\:}
+\newcommand{\defeq}{\coloneqq}
+\title{Problem Set 4}
+\author{Aaron Wang}
+\date{February 18 2024}
+
+\begin{document}
+
+\maketitle
+%q1%
+\begin{enumerate}
+    \item Show the following
+    \begin{enumerate}
+%1a%
+      \item 
+        Show $\forall x (\Emptyset \subseteq x)$.
+        \begin{proof}
+        Let x be a set. Towards a contradiction, suppose $\Emptyset \notsubseteq x$. Consequently, there must exist some z such that $z\in\Emptyset\land z\notin x$ by definition. This implies $z \in \Emptyset$; however, we know $\forall w (w\notin \Emptyset)$. Therefore, because we achieved a contradiction we conclude $\Emptyset\subseteq x$.\\
+        \end{proof}
+%1b%
+      \item
+        Show $\forall x (x \subseteq x)$.
+        \begin{proof}
+        Let x and z be sets. Recall that $z \in x \implies z \in x$. By definition $x \subseteq x$.\\
+        \end{proof}
+%1c%
+      \item
+        Show $\forall x (\Emptyset \in \mathbb{P}(x))$.
+        \begin{proof}
+        Let x be a set. By definition, $\mathbb{P}(x) = \{ w | w \subseteq x\}$. Therefore, since $\Emptyset \subseteq x$ (1a), we can conclude $\forall x (\Emptyset \in \mathbb{P}(x))$.\\
+        \end{proof}
+%1d%
+      \item
+        Show $\forall x (x \in \mathbb{P}(x))$.
+        \begin{proof}
+        Let x be a set. By definition, $\mathbb{P}(x) = \{ w | w \subseteq x\}$. Therefore, since $x \subseteq x$ (1b), we  can conclude $\forall x (x \in \mathbb{P}(x))$.\\
+        \end{proof}
+%1e%
+      \item
+        Show $\forall x \forall y \forall z ((x \subseteq y) \land (y \subseteq z) \implies x \subseteq z)$.
+        \begin{proof}
+        Let x, y, and z be sets. Assume $(x \subseteq y) \land (y \subseteq z)$. Towards a contradiction, assume $x \notsubseteq z$. Consequently, there must exist some w such that $w \in x \land w \notin z$ by definition of a subset. Using $w \in x$ and $x \subseteq y$, we conclude $w \in y$ by definition of a subset. Following the same logic, from $w \in y$ and $y \subseteq z$ we conclude $w \in z$. Consequently, since we assumed $w \notin z$ and arrived at $w \in z$, we have reached a contradiction and can conclude that $\forall x \forall y \forall z ((x \subseteq y) \land (y \subseteq z) \implies x \subseteq z)$.\\
+        \end{proof}
+    \end{enumerate}
+%q2%
+    \item We define the $\intersect$ and $\backslash$ of any two sets $x$ and $y$ below.
+    \begin{align*}
+      x \intersect y &\defeq \{z | z \in x \land z \in y\} \\
+      x \:\backslash\: y &\defeq \{z | z \in x \land z \not \in y\}
+    \end{align*}
+    \begin{enumerate}
+%2a%
+      \item
+        Show $\forall x \forall y \exists z (z = x \intersect y)$.
+        \begin{proof}
+            Let x and y be arbitrary sets. Let $\varphi(w)=w\in y$. By the Schema of Separation, $\{w|w\in x \land \varphi(w)\}$ exists. Let $z \defeq \{w|w\in x \land \varphi(w)\}$. Substituting in $\varphi$ we can get $z = \{w|w\in x \land w \in y\}$. Thus by the definition of intersection, $z = x\intersect y$. Thus, we know that $\forall x \forall y \exists z (z = x \intersect y)$.\\
+        \end{proof}
+%2b%
+      \item
+        Show $\forall x \forall y \exists z (z = x \:\backslash\: y)$.
+        \begin{proof}
+            Let x and y be arbitrary sets. Let $\varphi(w)=w\notin y$. By the Schema of Separation, $\{w|w\in x \land \varphi(w)\}$ exists. Let $z \defeq \{w|w\in x \land \varphi(w)\}$. Substituting in $\varphi$ we can get $z = \{w|w\in x \land w \notin y\}$. Thus by the definition of difference, $z = x\:\backslash\: y$. Thus, we know that $\forall x \forall y \exists z (z = x \:\backslash\: y)$.\\
+        \end{proof}
+    \end{enumerate}
+%q3%
+    \item We define the $\union$ of any two sets $x$ and $y$ below.
+    \begin{equation*}
+      x \union y \defeq \{z | z \in x \lor z \in y\}
+    \end{equation*}
+    \begin{enumerate}
+%3a%
+      \item Show $\forall x \forall y (x \intersect y \subseteq x)$.
+        \begin{proof}
+        Let x and y be arbitrary sets. To show that $x \intersect y \subseteq x$, we must show that $\forall z(z \in x \intersect y \implies z \in x)$. Assume $z \in x \intersect y$. By definition of intersection, we can conclude that $z \in x \land z \in y$. By conjunction elimination, we get $z \in x$. Thus, we get $\forall z(z \in x \intersect y \implies z \in x)$, and consequently, by the definition of subsets, we can conclude $x \intersect y \subseteq x$. Furthermore, since x and y are arbitrary sets using universal introduction we get $\forall x \forall y (x \subseteq x \intersect y \subseteq x)$.\\
+        \end{proof}
+%3b%
+    \item Show $\forall x \forall y (x \subseteq x \union y)$.
+      \begin{proof} 
+      Let x and y be arbitrary sets. To show that $x \subseteq x \union y$, we must show that $\forall z(z \in x \implies z \in x \union y)$. Assume $z \in x$. By disjunction introduction, we get $z \in x \lor z \in y$, and consequently, by the definition of union, we can conclude $z \in x \union y$. Thus, we get $\forall z(z \in x \implies z \in x \union y)$, and consequently, by the definition of subsets, we can conclude $x \subseteq x \union y$. Furthermore, since x and y are arbitrary sets using universal introduction we get $\forall x \forall y (x \subseteq x \union y)$.\\
+      \end{proof}
+\pagebreak
+%3c%
+    \item Show $\forall x \forall y (\mathbb{P}(x) \union \mathbb{P}(y) \subseteq \mathbb{P}(x \union y))$.
+      \begin{proof}
+      Let x and y be arbitrary sets. To show that $\mathbb{P}(x)\union\mathbb{P}(y) \subseteq \mathbb{P}(x \union y)$, we must show that $\forall z (z \in \mathbb{P}(x)\union\mathbb{P}(y) \implies z \in \mathbb{P}(x \union y))$. Assume $z \in \mathbb{P}(x)\union\mathbb{P}(y)$. By definition of union, we get $z \in \mathbb{P}(x)\lor z \in \mathbb{P}(y)$. Let's consider these two cases separately.
+      \begin{enumerate}
+          \item $z \in \mathbb{P}(x)$ means that $z \subseteq x$ by definition of a power set. We proved $x \subseteq x \union y$ in 3b. Consequently, by 1e, $z \subseteq x \union y$  which by definition of power sets states that $z \in \mathbb{P}(x \union y)$.
+          \item $z \in \mathbb{P}(y)$ means that $z \subseteq y$ by definition of a power set. We proved $y \subseteq x \union y$ in 3b. Consequently, by 1e, $z \subseteq x \union y$ which by definition of power sets states that $z \in \mathbb{P}(x \union y)$.
+      \end{enumerate}
+      Thus, $\forall z (z \in \mathbb{P}(x)\union\mathbb{P}(y) \implies z \in \mathbb{P}(x \union y))$. Furthermore, since x and y are arbitrary sets, by universal introduction, we conclude $\forall x \forall y (\mathbb{P}(x) \union \mathbb{P}(y) \subseteq \mathbb{P}(x \union y))$.\\
+      \end{proof}
+%3d%
+    \item Show $\forall x \forall y (x \intersect y = x \iff x \in \mathbb{P}(y))$.
+      \begin{proof}
+      Let x and y be arbitrary sets. To show $x \intersect y = x \iff x \in \mathbb{P}(y)$ we must show $x \intersect y = x \implies x \in \mathbb{P}(y)$ and $x \in \mathbb{P}(y) \implies x \intersect y = x$.
+      \begin{enumerate}
+          \item $x \intersect y = x \implies x \in \mathbb{P}(y)$\\
+          Assume $x \intersect y = x$. By extensionality, we know that  $z\in x \iff (z\in x \land z \in y)$. Thus breaking up the biconditional we get $z\in x \implies (z\in x \land z \in y)$. Assume $z\in x$. Thus, $(z\in x \land z \in y)$. Consequently, by conjunction elimination, we get $z \in y$. Since we derived $z\in x \implies z \in y$, $x\subseteq y$ by definition of subsets. Since $x \subseteq y$, by definition of a power set, $x \in \mathbb{P}(y)$.
+          \item $x \in \mathbb{P}(y) \implies x \intersect y = x$\\
+          Assume $x \in \mathbb{P}(y)$. To show that $x \intersect y = x$ we must show $(z\in x \implies (z\in x \land z \in y)) \land ((z\in x \land z \in y)\implies z\in x)$ (extensionality). 
+          \begin{enumerate}
+              \item $z\in x \implies (z\in x \land z \in y)$\\
+              Assume $z \in x$. Thus we have $z \in x$. By definition of power sets, $x \subseteq y$ from the assumption $x \in \mathbb{P}(y)$. Consequently, the definition of subsets states that $z \in x \implies z \in y$ so from $z\in x$ we can conclude $(z\in x \land z \in y)$.
+              \item $(z\in x \land z \in y)\implies z\in x$\\
+              Assume $(z\in x \land z \in y)$. Using conjunction elimination we conclude $z \in x$. 
+          \end{enumerate}
+            Thus, we have shown that $x \in \mathbb{P}(y) \implies x \intersect y = x$.
+      \end{enumerate}
+      Since we have shown $x \intersect y = x \implies x \in \mathbb{P}(y) \land x \in \mathbb{P}(y) \implies x \intersect y = x$, we have $x \intersect y = x \iff x \in \mathbb{P}(y)$. Furthermore, because x and y are arbitrary sets, $\forall x \forall y (x \intersect y = x \iff x \in \mathbb{P}(y))$.\\
+      \end{proof}
+    \end{enumerate}
+%q4%
+\pagebreak
+    \item
+    We define the $\union x$ and $\intersect x$ for any set $x$ below.
+    \begin{align*}
+      \union x &\defeq \{z | \exists y (y \in x \land z \in y)\} \\
+      \intersect x &\defeq \{z | \forall y (y \in x \implies z \in y)\}
+    \end{align*}
+    \begin{enumerate}
+%4a%
+      \item Show that $\forall x (\union \mathbb{P}(x) = x)$.
+        \begin{proof}
+        Let x be an arbitrary set. By 1d, $x \in \mathbb{P}(x)$. As such, by existential elimination $\union \mathbb{P}(x)=\{z | \exists y (y \in \mathbb{P}(x) \land z \in y)\}=\{z|x \in \mathbb{P}(x) \land z \in x\}$. Because $x \in \mathbb{P}(x)$ we can conclude $\{z|x \in \mathbb{P}(x) \land z \in x\}=\{z|z \in x\}$ and since all the elements of $\{z|z \in x\}$ are in $x$ and all the elements of $x$ are in $\{z|z \in x\}$ by extensionality, $\{z|z \in x\}=x$ (see 4d for concrete proof).\\
+        \end{proof}
+%4b%
+      \item What is $\union \Emptyset$? Justify your answer with a proof.
+      \begin{proof}
+        We know from the definition of union that $\union \Emptyset = \{z|\exists y (y \in \Emptyset \land z \in y\}$. Since we know that the empty set is empty, there exists no y in the context of that predicate. Thus, the predicate for $\union \Emptyset$ is always false. Consequently, no element satisfies the predicate and $\union \Emptyset = \Emptyset$.\\
+      \end{proof}
+%4c%
+      \item What is $\intersect \Emptyset$? Justify your answer with a proof.
+      \begin{proof}
+        Towards a contradiction assume that $\intersect \Emptyset$ exists. From the definition of intersection, we know that $\intersect \Emptyset = \{z|\forall y (y \in \Emptyset \implies z \in y\}$. Using logic we know that the predicate $\forall y (y \in \Emptyset \implies z \in y) \equiv \neg\exists y (y \in \Emptyset \land z \notin y)$. From this, we can see that the predicate will always be True and as such every element will be in $\intersect \Emptyset$. As such, because the theorem of Well-Foundedness of Elementhood states that a set can not contain itself, the $\intersect \Emptyset$ can not exist. \\
+      \end{proof}
+%4d%
+      \item
+        Is $\Emptyset = \{z | z \in \Emptyset\}$? Justify your answer with a proof.
+        \begin{proof}
+        Let $x$ be a set. To show that $x = \{z | z \in x\}$ we must show that $\forall w(w \in x \iff w \in \{z | z \in x\})$ (extensionality).
+        \begin{enumerate}
+            \item Let $w$ be a set. Suppose $w \in x$. By definition of set comprehension notation, $w \in \{z | z \in x\}$.
+            \item Let $w$ be a set. Suppose $w \in \{z | z \in x\}$. By definition of set comprehension notation, $w \in x$.
+        \end{enumerate}
+        Thus, as $x = \{z | z \in x\}$ for any arbitrary $x$, we know that $\Emptyset = \{z | z \in \Emptyset\}$.\\    
+        \end{proof}
+%4e%
+      \item
+        Is $\Emptyset = \{z | z \notin \Emptyset\}$? Justify your answer with a proof.
+        \begin{proof}
+        Let $x \defeq \{z | z \notin \Emptyset\}$. In any universe of discourse, $x \in x$ because $x \notin \Emptyset$. However the theorem of Well-Foundedness of Elementhood states $x \notin x$, Thus, $\{z | z \notin \Emptyset\}$ does not exist as it leads to a contradiction and as such $\Emptyset \neq \{z | z \notin \Emptyset\}$.\\
+        \end{proof}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

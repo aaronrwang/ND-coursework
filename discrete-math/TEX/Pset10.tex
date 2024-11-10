@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, bm, faktor, mathrsfs, mathtools, mdframed, thmtools, xfrac, graphicx, multicol, stmaryrd}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\renewcommand\qedsymbol{Q.E.D.}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup\:}
+\newcommand{\intersect}{\cap\:}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\divides}{\:\mathbb{|}\: }
+\newcommand{\notdivides}{\nmid}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\fibonacci}{\mathcal{F}}
+\newcommand{\id}{\texttt{id}}
+\newcommand{\injects}{\hookrightarrow}
+\newcommand{\concat}{+\!\!\!+}
+\newcommand{\ceil}[1]{\lceil {#1} \rceil}
+\newcommand{\reals}{\mathbb{R}}
+\newenvironment{case}[1][Case]
+    {\par\textit{#1:}\hfill\break}
+    {}
+
+\title{Problem Set 10}
+\author{Aaron Wang}
+\date{April 22 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item  Construct---\emph{with proof}---the \emph{explicit} functions requested below.
+    \begin{enumerate}
+      \item A bijection from $\{x \in \reals | -1 < x < 1\}$ to $\{x \in \reals | -\pi < x < \pi\}$.
+      \begin{proof}
+          Let $A \defeq \{x \in \reals | -1 < x < 1\}$ and let $B \defeq\{x \in \reals | -\pi < x < \pi\}$.
+          Let $f:A \to B$ where $f(a)=\pi \cdot a$.
+          \begin{itemize}
+            \item Injective\\ Let $a_1,a_2 \in A$ and assume $f(a_1)=f(a_2)$. By definition of $f$, we get $\pi \cdot a_1=\pi \cdot a_2$. Since $\pi \neq 0$, we know by multiplicative cancellation $a_1=a_2$. Thus, f is injective.
+            \item Surjective\\ Let $b \in B$. Let $x \defeq \frac{b}{\pi}$. Observe that $x > -1$ because $b>-\pi \implies \frac{b}{-\pi}>\frac{-\pi}{\pi}=-1$. Similarly, observe that $x < 1$ because $b<\pi \implies \frac{b}{\pi}<\frac{\pi}{\pi}=1$. Since $x \in \reals \land -1 < x < 1$, $x \in A$ so $f(x)=b$. Therefore, $f$ is surjective.      
+          \end{itemize}
+          As $f$ is surjective and injective, it is bijective.
+      \end{proof}
+      \item A surjection from $\naturals$ to $\{p | p \text{ is prime}\}$.
+      \begin{proof}
+          Let $P \defeq \{p | p \text{ is prime}\}$. Let $f:\naturals \to P$ where 
+          \[f(n)=
+          \begin{cases}
+              n \quad \text{when $n$ is prime }\\
+              2 \quad \text{otherwise}
+          \end{cases}
+          \]
+        Let $p \in P$. Let $x=p$. Observe that $x \in \naturals$ and $x$ is prime so $f(x)=p$. Thus, $f$ is a surjection.
+      \end{proof} 
+
+      \item An injection from $X$ to $\power(X)$ for \emph{every} set $X$.
+        \begin{proof}
+            Let $X$ be an arbitrary set. Let $f: X \to \power(X)$ where $f(x)=\{x\}$. Let $x_1,x_2 \in X$ and assume $f(x_1)=f(x_2)$. Thus, we know that $\{x_1\}=\{x_2\}$. By extensionality, we know that $x_1 \in \{x_1\} \iff x_1 \in \{x_2\}$. Since $x_2$ is the only element in $\{x_2\}$, we know $x_1=x_2$. Thus, $f$ is injective.
+        \end{proof}
+\pagebreak
+      \item A surjection from $\power(X)$ to $X$ for \emph{every} set $X \neq \Emptyset$.
+        \begin{proof}
+            Let $X$ be an arbitrary set and let $x_0 \in X$. Let $f: \power(X) \to X$ where 
+            \[f(y)=
+            \begin{cases}
+                \union\!y \quad \text{if }|y|=1\\
+                x_0 \quad \text{otherwise}\\
+            \end{cases}
+            \]
+            Let $x \in X$. Let $y=\{x\}$. Observe that $y \subseteq X$ and $|y|=1$ so $f(y)=\union\!y=x$. Thus, $f$ is surjective.
+        \end{proof}
+    \end{enumerate}
+    \item Let $A$ be an arbitrary finite set of cardinality $|A| = n$, where $n \in \naturals$. How many finite strings over $A$ are there?
+    \begin{proof}
+    
+        Let $k \in \naturals$ and let $s:k \to A$. Observe that there are $k^{|A|}$ distinct strings $s$. Let $S_k \defeq \{s|s:k \to A\}$ so as shown above $|S_k|=k^{|A|}$. Also let $S \defeq \{S_k|k \in \naturals\}$. By theorem 8.8, since $|S| \leq |\naturals|$ and $(\forall k \in \naturals) (|S_k|\leq|\naturals|)$, we know that $|\union\!\!S|\leq|\naturals|$.\\ 
+        Towards a contradiction, assume that $|\union\!S|=n$ for some $n \in \naturals$. So there must be $f: n \to \union\!S$ such that $f$ is surjective. Let $a \in A$ and let $h \defeq f(0)\concat f(1)\concat...\concat f(n-1)\concat a$. Observe $|h|=\bigr(\sum_{i=0}^{n-1}|f(i)|\bigr)+1$. Thus we know that $(\forall k \in n)(|f(k)| \leq \sum_{i=0}^{n-1}|f(i)|< \bigr(\sum_{i=0}^{n-1}|f(i)|\bigr)+1=|h|$. Since $(\forall k \in n)(|f(k)|<|h|)$ we know that $(\forall k \in n)(f(k)\neq h)$. Thus we have achieved a contradiction as $h$ is a finite string over $A$ (aka $h \in \union\!S$) and $f$ does not map to $h$ so $f$ can not be surjective.\\
+        Consequently, $\union\!S\neq n$ for any $n \in \naturals$ so $|\union\!S|\geq|\naturals|$. \\
+        From $|\union\!S|\leq|\naturals|$ and $|\union\!S|\geq|\naturals|$, we know $|\union\!S|=|\naturals|=\aleph_0$.\\
+        \textcolor{red}{There are $\aleph_0$ many finite strings over $A$.}
+    \end{proof}
+    \item The Library
+    \begin{proof}
+        Let $S\defeq$ the set of all books in the library. Let $\beta \defeq$ the set of all sentences. Observe that there are a countable infinite amount of sentences so $|\beta|=|\naturals|$. Also observe that since $\beta$ is numbered, we can use $\naturals$ to represent the sentences in $\beta$. Now, let $i:\naturals \to \naturals$ (a string of infinite length over alphabet $\naturals$ which represents the sentences in $\beta$) represent a book of infinite length. Let $I \defeq \{i|i:\naturals \to \naturals\}$ (the set of all infinite books).\\
+        Towards a contradiction, assume that $|\naturals|\geq|I|$. This means that there exists an $f:\naturals \to I$ where f is surjective. Let us define $g:\naturals \to \naturals$ where:
+        \[
+        g(i)=
+        \begin{cases}
+            1 \quad f(i)(i)\neq1\\ 
+            2 \quad f(i)(i)=1\\
+        \end{cases}
+        \]
+        Notice that since $f$ is surjective so for some value $t \in \naturals$, $f(t)=g$. As such, $(\forall i \in \naturals)(f(t)(i)=g(i))$ so $f(t)(t)=g(t)$. Note that there are two cases: $f(t)(t)=1$ or $f(t)(t)\neq1$\\
+        $f(t)(t)=1$ implies that $g(t)=2\neq1$ so $f(t)(t)\neq g(t) \lightning$.\\
+        $f(t)(t)\neq1$ implies that $g(t)=1$ so $f(t)(t)\neq g(t) \lightning$.\\
+        In both cases, we achieve a contradiction and since $f$  was arbitrary, we know that there are no injective functions from $\naturals\to I$. As such, $|\naturals|<|I|$. Notice that $I \subseteq S$. Consequently, $|\naturals|<|S|$ as well so we know that $S$ is uncountable. \textcolor{red}{Therefore, as there are an uncountable amount of books, I will not be set free.}
+    \end{proof}
+\end{enumerate}
+\end{document}

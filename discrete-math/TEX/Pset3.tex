@@ -1,0 +1,276 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[left=1.5in, right=2in]{geometry}
+\usepackage{xcolor}
+\renewcommand\qedsymbol{Q.E.D.}
+\usepackage{txfonts}
+\title{Problem Set 3}
+\author{Aaron Wang}
+\date{February 11 2024}
+\newcommand{\lif}{\mathrel{\rightarrow}}
+\newcommand{\liff}{\mathrel{\leftrightarrow}}
+\newcommand{\proves}{\mathrel{\vdash}}
+\newcommand{\defeq}{\mathrel{\coloneqq}}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+%q1%
+    \item Prove each of the following statements for any propositions $\varphi$, $\psi$, $\xi$.
+    \begin{enumerate}
+%1a%
+        \item $(\varphi \lif \psi), (\psi \lif \xi) \proves (\varphi \lif \xi)$
+        \begin{proof}
+        Let $\varphi$, $\psi$, and $\xi$. be arbitrary propositions, and suppose $\varphi \lif \psi$ and $\psi \lif \xi$. We will first show that $\varphi \proves \xi$. Assume $\varphi$. Since we have $\varphi\lif\psi$, we get $\psi$ by modus ponens. Further, since we have $\psi \lif \xi$, we get $\xi$ by modus ponens. Thus, $\varphi \proves \xi$. Therefore, by applying the deduction rule, we can conclude $\varphi \lif \xi$
+        \\
+        \end{proof}
+%1b%
+        \item $\varphi, \psi \proves \varphi \land \psi$
+        \begin{proof}
+        Let $\varphi$ and $\psi$ be arbitrary propositions. Assume $\varphi$, and also separately assume $\psi$. Towards a contradiction, suppose $\neg ( \varphi \land \psi)$. We can see that
+        \begin{align*}
+          \neg (\varphi \land \psi)
+            &\equiv \neg\varphi\lor\neg\psi
+              &\quad
+              &\text{by \emph{De Morgan's laws}}
+              \\
+            &\equiv \varphi\lif\neg\psi
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+        \end{align*}
+        So we have $\varphi$ and $\varphi\lif\neg\psi$, which gives us $\neg\psi$ by modus ponens. However, since we had $\psi$ by assumption, we get a contradiction.
+        
+        Therefore, we can conclude $\varphi \land \psi$ by Reductio ad absurdum. 
+        \\
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+%q2%
+    \item Prove each of the following statements for any propositions $\varphi$, $\psi$, $\xi$.
+    \begin{enumerate}
+%2a%
+        \item $\proves \varphi \lif \varphi$
+        \begin{proof}
+        Let $\varphi$ be an arbitrary proposition. Assume $\varphi$. Now observe that $\varphi$ follows from this assumption. Therefore, $\varphi\proves\varphi$. Now by deduction rule, we can conclude $\varphi\lif\varphi$.
+        \\
+        \end{proof}
+
+%2b%
+        \item $\proves (\neg \varphi \lif \varphi) \lif \varphi$
+        \begin{proof} 
+        Let $\varphi$ be an arbitrary proposition. Let's first show that \\$\varphi \equiv \neg \varphi \lif \varphi $
+        \begin{align*}
+          \varphi
+            &\equiv \varphi\lor\varphi
+              &\quad 
+              &\text{by \emph{idempotence}}
+              \\
+            &\equiv \neg(\neg\varphi)\lor\varphi
+              &\quad
+              &\text{by \emph{double negation}}
+              \\
+            &\equiv \neg \varphi \lif \varphi
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+        \end{align*}
+        Now we can substitute $\varphi$ for $\neg \varphi \lif \varphi $ which turns $(\neg \varphi \lif \varphi) \lif \varphi$ into an equivalent expression $\varphi \lif \varphi$, something we have already proved in (a). Therefore we can conclude $(\neg \varphi \lif \varphi) \lif \varphi$.
+        \\
+        \end{proof}
+%2c%
+        \item $\proves \neg \varphi \lif (\varphi \lif \neg \psi)$
+        \begin{proof}
+        Let $\varphi$ and $\psi$ be arbitrary propositions. Let's first show that \\$\psi \lif \neg \varphi \equiv \varphi \lif \neg \psi$.
+        \begin{align*}
+          \psi \lif \neg \varphi
+            &\equiv \neg\psi\lor\neg\varphi
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv \neg\varphi\lor\neg\psi
+              &\quad
+              &\text{by \emph{commutativity}}
+              \\
+            &\equiv \varphi \lif \neg \psi 
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+        \end{align*}
+        Using this equivalence, we can substitute $\psi \lif \neg \varphi$ for $\varphi \lif \neg \psi$ in $\neg \varphi \lif (\varphi \lif \neg \psi)$ to create an equivalent expression $\neg \varphi \lif (\psi \lif \neg \varphi)$ which is in the form of Hilbert's first axiom. Consequently, by Hilbert's first axiom, we can conclude $\neg \varphi \lif (\varphi \lif \neg \psi)$.
+        \\
+        \end{proof}
+\pagebreak
+%2d%
+        \item $\varphi \land \psi \proves \varphi$
+        \begin{proof}
+        Let $\varphi$ and $\psi$ be arbitrary propositions. Assume $\varphi\land\psi$. \\
+        Assume towards a contradiction $\neg\varphi$. Using conjunction introduction,  \\$\varphi\land\psi,\neg\varphi\proves(\varphi\land\psi)\land(\neg\varphi)$.
+        Observe:
+        \begin{align*}
+          (\varphi\land\psi)\land\neg\varphi
+            &\equiv (\psi\land\varphi)\land\neg\varphi
+              &\quad
+              &\text{by \emph{commutativity}}
+              \\
+            &\equiv \psi\land(\varphi\land\neg\varphi)
+              &\quad
+              &\text{by \emph{associativity}}
+              \\
+            &\equiv \psi\land(\bot)
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv \bot
+              &\quad
+              &\text{by \emph{domination}}
+              \\
+        \end{align*}
+        So, we have $\bot$. However, we also have $\top$ which is proven by the Truth theorem (proven by the fact that we proved (a) and (a) is a tautology). Therefore, by Reductio ad Absurdum we can conclude $\varphi$.
+        \\
+        \end{proof}
+%2e%
+        \item $\proves \top$
+        \begin{proof}
+        From (a) we concluded $\varphi \lif \varphi$. Since $\varphi \lif \varphi \equiv \top$ (proved in PSet 2), we can also conclude $\top$.
+        \\
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+%q3%
+    \item Prove each of the following statements for any propositions $\varphi$, $\psi$, $\xi$, $\chi$
+    \begin{enumerate}
+%3a%
+        \item $\varphi \proves (\varphi \lor \psi)$
+        \begin{proof}
+        Let $\varphi$ and $\psi$ be arbitrary propositions. Assume $\varphi$. Towards a contradiction, suppose $\neg ( \varphi \lor \psi )$. Using conjunction introduction, \\$\varphi$,$\neg (\varphi \lor \psi) \proves\varphi\land \neg (\varphi \lor \psi)$ Observe:
+        \begin{align*}
+          \varphi\land \neg (\varphi \lor \psi)
+            &\equiv \varphi\land(\neg\varphi\land\neg\psi)
+              &\quad
+              &\text{by \emph{De Morgan's laws}}
+              \\
+            &\equiv (\varphi\land\neg\varphi)\land\neg\psi
+              &\quad
+              &\text{by \emph{associativity}}
+              \\
+            &\equiv \bot\land\neg\psi
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv \bot
+              &\quad
+              &\text{by \emph{domination}}
+              \\
+        \end{align*} 
+        So, we have $\neg (\varphi \lor \psi)\proves\bot$. However, we also have $\neg (\varphi \lor \psi)\proves\top$ because we assumed $\neg (\varphi \lor \psi)$. Therefore, by Reductio ad Absurdum we can conclude $\neg(\neg (\varphi \lor \psi))$ or $\varphi \lor \psi$.\\
+        \end{proof}
+%3b%
+        \item $(\varphi \lif \xi), (\psi \lif \xi), (\varphi \lor \psi) \proves \xi$
+        \begin{proof}
+        Let $\varphi$, $\psi$ and $\xi$ be arbitrary propositions. Assume $(\varphi \lif \xi),\\(\psi \lif \xi)$, and $(\varphi \lor \psi)$. Assume towards a contradiction $\neg\xi$.\\Using conjunction introduction: $$(\varphi \lif \xi), (\psi \lif \xi), \proves (\varphi \lif \xi)\land (\psi \lif \xi)$$
+        Observe:\\
+        $(\varphi \lif \xi)\land (\psi \lif \xi)$
+        \begin{align*}
+            &\equiv (\neg\varphi \lor \xi)\land (\neg\psi \lor \xi)
+              &\quad
+              &\text{by \emph{conditional disintegration}}\times2
+              \\
+            &\equiv (\neg\varphi\land\neg\psi)\lor\xi
+              &\quad
+              &\text{by \emph{distributivity}}
+              \\
+            &\equiv \neg(\varphi\lor\psi)\lor\xi
+              &\quad
+              &\text{by \emph{De Morgan's laws}}
+              \\
+            &\equiv (\varphi\lor\psi)\lif\xi
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+        \end{align*}
+        So, we have $\varphi\lor\psi$ and$(\varphi\lor\psi)\lif\xi$. By \emph{modus ponens} we can conclude $\xi$.\\
+        \end{proof}
+%3c%
+\pagebreak
+        \item $\varphi, \neg \varphi \proves \psi$
+        \begin{proof}
+        Let $\varphi$ and $\psi$ be arbitrary propositions. Assume $\varphi$ as a premise. By disjunction introduction, $\varphi\proves\varphi\lor\psi$. Observe:
+        \begin{align*}
+          \varphi\lor\psi
+            &\equiv \neg(\neg\varphi)\lor\psi
+              &\quad
+              &\text{by \emph{double negation}}
+              \\
+            &\equiv \neg\varphi\lif\psi
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+        \end{align*}
+        Now assume $\neg\varphi$ as another premise. By modus ponens, we conclude $\psi$.\\
+        \end{proof}
+%3d%
+        \item $(\varphi \lor \psi), \neg \varphi \proves \psi$
+        \begin{proof}
+        Let $\varphi$ and $\psi$ be arbitrary propositions. Assume $(\varphi\lor\psi)$ and $\neg\varphi$. Observe:
+        \begin{align*}
+          \varphi\lor\psi
+            &\equiv \neg(\neg\varphi)\lor\psi
+              &\quad
+              &\text{by \emph{double negation}}
+              \\
+            &\equiv \neg\varphi\lif\psi
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+        \end{align*}
+        So, we have $\neg\varphi$ and $\neg\varphi\lif\psi$. By \emph{modus ponens} we can conclude $\psi$.\\
+        \end{proof}
+%3e%
+        \item $(\varphi \lif \xi), (\psi \lif \chi), (\varphi \lor \psi) \proves \xi \lor \chi$
+        \begin{proof}
+        Let $\varphi$, $\psi$, $\xi$, and $\chi$ be arbitrary propositions.\\
+        Assume $\varphi \lif \xi$, $\psi \lif \chi$, and $\varphi \lor \psi$.
+        Assume towards a contradiction $\neg(\xi\lor\chi)$.
+        Observe that by De Morgan's laws $\neg(\xi\lor\chi)\equiv\neg\xi\lor\neg\chi$ from which we can use conjunction elimination to conclude $\neg\xi$ and $\neg\chi$.
+        Now, by modus tollens, we can use $\neg\xi$ and $\varphi \lif \xi$ to conclude $\neg\varphi$.
+        Similarly, by modus tollens, we can use $\neg\chi$ and $\psi \lif \chi$ to conclude $\neg\psi$.
+        Since we have $\neg\psi$ and $\neg\varphi$ we can use conjuction introduction to conclude $\neg\psi\land\neg\varphi$
+        which is equivalent to $\neg(\varphi \lor \psi)$ by De Morgan's laws. Since we proved $\neg(\varphi \lor \psi)$ and assumed $\varphi \lor \psi$, by Reductio Ad Absurdum we can conclude $\neg(\neg(\xi\lor\chi))$ or $\xi\lor\chi$.
+        \\
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+%q4%
+    \item Let $\mathcal{L}$ be a binary predicate. Prove the following statement.
+    \begin{equation*}
+      \proves  \neg \exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))
+    \end{equation*}
+    \begin{proof}
+    Let $\mathcal{L}$ be a binary predicate. Towards a contradiction, assume $\exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))$ which by existential elimination says $\forall y (\mathcal{L}(t, y) \liff \neg \mathcal{L}(y, y))$ for a new term $t$. By universal elimination, $\forall y (\mathcal{L}(t, y) \liff \neg \mathcal{L}(y, y))$ is true for any value y so let y = t. In this case, $\mathcal{L}(t,t) \liff \neg \mathcal{L}(t, t)\equiv\bot$ so $\exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))\proves\bot$ (Look at a truth table). However, we assumed $\exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))$ so by the truth theorem $\exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))\proves\top$. Since $\exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))$ leads to a contradiction, we can conclude $\neg\exists x \forall y (\mathcal{L}(x, y) \liff \neg \mathcal{L}(y, y))$ by Reductio Ad Absurdum.
+    \\
+    \end{proof} 
+%q5%
+    \item Consider a universe of discourse consisting of every natural number.
+    Recall that a positive integer is \emph{prime} when it has \emph{exactly two} positive divisors: one and itself.
+
+    Let $\omega(x) \defeq \emph{``}x\emph{ is an odd number.''}$ \\
+    Let $\pi(x) \defeq \emph{``}x\emph{ is a prime number.''}$
+
+    Further, suppose the following statements only contain propositions.
+    \begin{enumerate}
+      \item
+        Prove $\varphi$, where $\varphi$ is the statement $\varphi \proves \forall x \left(\omega(x) \lif \pi(x)\right)$.
+        \begin{proof}
+        Let $\varphi\coloneqq$``$\varphi \proves \forall x \left(\omega(x) \lif \pi(x)\right)$''. Assume  $\varphi$. Therefore we have $\varphi$ which says $\varphi \proves \forall x \left(\omega(x) \lif \pi(x)\right)$. Observe that $\varphi \proves \forall x \left(\omega(x) \lif \pi(x)\right)$ is $\varphi \lif \forall x \left(\omega(x) \lif \pi(x)\right)$ by deduction rule. Thus by modus ponens, we use $\varphi$ and $\varphi \lif \forall x \left(\omega(x) \lif \pi(x)\right)$ to get $\forall x \left(\omega(x) \lif \pi(x)\right)$. Therefore by modus ponens $\varphi \proves \forall x \left(\omega(x) \lif \pi(x)\right)$
+ \\
+        \end{proof}
+      \item
+        Prove $\forall x \left(\omega(x) \lif \pi(x)\right)$.
+        \begin{proof}
+        From (a) we found $\proves\varphi$. Thus, we have $\varphi \proves \forall x \left(\omega(x) \lif \pi(x)\right)$ from which deduction rule gives us $\varphi \lif \forall x \left(\omega(x) \lif \pi(x)\right)$. By Modus ponens, since we have $\varphi$ and $\varphi \lif \forall x \left(\omega(x) \lif \pi(x)\right)$, we can conclude $\forall x \left(\omega(x) \lif \pi(x)\right)$.//
+        \end{proof}
+  \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,601 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[left=1.5in, right=2in]{geometry}
+\usepackage{xcolor}
+\renewcommand\qedsymbol{Q.E.D.}
+
+\title{Problem Set 2}
+\author{Aaron Wang}
+\date{February 4 2024}
+\newcommand{\negland}{\mathrel{\neg\!\!\land}}
+
+\begin{document}
+
+\maketitle
+%q1%
+\begin {enumerate}
+    \item Consider the following proof of $p \rightarrow (q \rightarrow r) \equiv (p \rightarrow q) \rightarrow r$.
+
+      \vspace{2ex}
+      \begin{proof}
+        Observe the following chain of reasoning.
+        \begin{align*}
+          p \rightarrow (q \rightarrow r)
+            &\equiv p \lor \neg(q \rightarrow r)
+              &\quad
+              &\text{by \emph{conditional disintegration}} 
+              & (1)
+              \\
+            &\equiv p \lor \neg(q \lor \neg r)
+              &\quad
+              &\text{by \emph{conditional disintegration}} & (2)
+              \\
+            &\equiv p \lor \neg q \lor \neg r
+              &\quad
+              &\text{by \emph{associativity}} 
+              & (3)
+              \\
+            % &\equiv (p \lor \neg q) \lor \neg r
+              % &\quad
+              % &\text{by \emph{associativity}} \\
+            &\equiv (p \lor \neg q) \lor \neg r
+              &\quad
+              &\text{by \emph{associativity}} 
+              & (4)
+              \\
+            &\equiv (p \rightarrow q) \lor \neg r
+              &\quad
+              &\text{by \emph{conditional disintegration}} & (5)
+              \\
+            &\equiv (p \rightarrow q) \rightarrow r
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              & (6)
+        \end{align*}
+        
+        Therefore, $p \rightarrow (q \rightarrow r) \equiv (p \rightarrow q) \rightarrow r$.
+        \end{proof}
+        
+        Find all of the mistakes, if any, in this proof, and explain why.
+
+        \textcolor{red}{p,q and r are not declared as propositions.}
+        
+        \textcolor{red}{In lines 1, 2, 5, and 6, conditional disintegration is incorrectly used}. The axiom states ``$p\rightarrow q\equiv\neg p\lor q$" yet the proof incorrectly uses ``$p\rightarrow q\equiv p\lor\neg q$"
+        
+        \textcolor{red}{From (2) to (3) the proof incorrectly uses associativity}. First, it incorrectly distributes $\neg$ and then it gets rid of the parenthesis, two things that should not happen.
+\newgeometry{left=0.75in, right=1.25in}
+\pagebreak  
+%q2%
+    \item
+        Prove the claims below \emph{without truth tables} for all propositions $p, q, r$.
+
+    \begin{enumerate}
+%2a%
+      \item
+        $p \rightarrow q \equiv \neg q \rightarrow \neg p$.
+        
+        \vspace{2ex}
+        \begin{proof}
+        Let p and q be propositions. Observe the following chain of reasoning.
+        \begin{align*}
+          p \rightarrow q 
+            &\equiv \neg p \lor q
+              &\quad
+              &\text{by \emph{conditional disintegration}} 
+              \\
+            &\equiv q \lor \neg p
+              &\quad
+              &\text{by \emph{commutativity}} 
+              \\
+            &\equiv \neg (\neg q) \lor \neg p
+              &\quad
+              &\text{by \emph{double negation}} 
+              \\
+            &\equiv \neg q \rightarrow \neg p
+              &\quad
+              &\text{by \emph{conditional disintegration}} 
+        \end{align*}
+        Therefore, $p \rightarrow q \equiv \neg q \rightarrow \neg p$.
+        \end{proof}
+\hrulefill
+ 
+%2b%       
+      \item
+        $(p \land (p \rightarrow q)) \rightarrow q$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p and q be propositions. Observe the following chain of reasoning.
+        \begin{align*}
+          (p \land (p \rightarrow q)) \rightarrow q
+            &\equiv (p \land (\neg p \lor q)) \rightarrow q
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv ((p \land \neg p) \lor (p \land q)) \rightarrow q
+              &\quad
+              &\text{by \emph{distributivity}}
+              \\
+            &\equiv (\bot \lor (p \land q)) \rightarrow q
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv (p \land q) \rightarrow q
+              &\quad
+              &\text{by \emph{identity}}
+              \\
+            &\equiv \neg(p \land q) \lor q
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv (\neg p \lor \neg q) \lor q
+              &\quad
+              &\text{by \emph{de morgan's laws}}
+              \\
+            &\equiv \neg p \lor (\neg q \lor q)
+              &\quad
+              &\text{by \emph{associativity}}
+              \\
+            &\equiv \neg p \lor \top
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv \top \lor \neg p
+              &\quad
+              &\text{by \emph{commutativity}}
+              \\
+            &\equiv \top
+              &\quad
+              &\text{by \emph{domination}}
+              \\
+        \end{align*}
+        Therefore, $(p \land (p \rightarrow q)) \rightarrow q$ is a tautology.
+        \end{proof}
+\pagebreak
+%2c%
+      \item
+        $(\neg q \land (p \rightarrow q)) \rightarrow \neg p$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p and q be propositions. Observe the following chain of reasoning.
+        \begin{align*}
+          (\neg q \land (p \rightarrow q)) \rightarrow \neg p
+            &\equiv (\neg q \land (\neg p \lor q)) \rightarrow \neg p
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv ((\neg q \land \neg p) \lor (\neg q \land  q)) \rightarrow \neg p
+              &\quad
+              &\text{by \emph{distributivity}}
+              \\
+            &\equiv ((\neg q \land \neg p) \lor \bot) \rightarrow \neg p
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv (\bot \lor (\neg q \land \neg p)) \rightarrow \neg p
+              &\quad
+              &\text{by \emph{commutativity}}
+              \\
+            &\equiv (\neg q \land \neg p) \rightarrow \neg p
+              &\quad
+              &\text{by \emph{identity}}
+              \\
+            &\equiv \neg(\neg q \land \neg p) \lor \neg p
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv (q \lor p) \lor \neg p
+              &\quad
+              &\text{by \emph{de morgans laws}}
+              \\
+            &\equiv q \lor (p \lor \neg p)
+              &\quad
+              &\text{by \emph{associativity}}
+              \\
+            &\equiv q \lor (\neg p \lor p)
+              &\quad
+              &\text{by \emph{commutativity}}
+              \\
+            &\equiv q \lor \top
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv \top \lor q
+              &\quad
+              &\text{by \emph{commutativity}}
+              \\
+            &\equiv \top
+              &\quad
+              &\text{by \emph{domination}}
+              \\
+        \end{align*}
+        Therefore, $(\neg q \land (p \rightarrow q)) \rightarrow \neg p$ is a tautology.
+        \end{proof}
+        
+\hrulefill
+
+%2d%
+      \item
+        $(p \rightarrow q) \rightarrow ((p \rightarrow \neg q) \rightarrow \neg p)$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p and q be propositions. Observe the following chain of reasoning.
+        \begin{align*}
+          (p \rightarrow q) \rightarrow ((p \rightarrow \neg q) \rightarrow \neg p)
+            &\equiv(p \rightarrow q) \rightarrow ((\neg p \lor \neg q) \rightarrow \neg p)
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow (\neg(\neg p \lor \neg q) \lor \neg p)
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow (\neg(\neg p)\land \neg(\neg q)) \lor \neg p)
+              &\quad
+              &\text{by \emph{de morgans laws}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow ((p \land q) \lor \neg p)
+              &\quad
+              &\text{by \emph{double negation}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow (\neg p \lor(p \land q))
+              &\quad
+              &\text{by \emph{double negation}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow ((\neg p \lor p) \land (\neg p \lor q))
+              &\quad
+              &\text{by \emph{distributivity}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow (\top \land (\neg p \lor q))
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+            &\equiv(p \rightarrow q) \rightarrow (\neg p \lor q)
+              &\quad
+              &\text{by \emph{identity}}
+              \\
+            &\equiv(\neg p \lor q) \rightarrow (\neg p \lor q)
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv \neg(\neg p \lor q) \lor (\neg p \lor q)
+              &\quad
+              &\text{by \emph{conditional disintegration}}
+              \\
+            &\equiv \top
+              &\quad
+              &\text{by \emph{complement}}
+              \\
+        \end{align*}
+        Therefore, $(p \rightarrow q) \rightarrow ((p \rightarrow \neg q) \rightarrow \neg p)$ is a tautology.
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+%q3%
+    \item In this problem, we will progressively establish that the alternative axioms Hilbert proposed are all tautologies \emph{without truth tables}.
+    Here, the variables $p$, $q$, and $r$ all represent arbitrary propositions.
+    \begin{enumerate}
+%3a%
+      \item
+        Show $p \rightarrow p$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p be a proposition. Observe the following chain of reasoning.
+        \begin{align*}
+          p \rightarrow p
+           &\equiv \neg p \lor p
+            &\quad
+            &\text{by \emph{conditional disintegration}}
+            \\
+           &\equiv \top
+            &\quad
+            &\text{by \emph{complement}}
+            \\
+        \end{align*}
+        Therefore, $p \rightarrow p$ is a tautology.
+        \end{proof}
+
+\hrulefill
+
+%3b%
+      \item
+        Show $(p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p and q be propositions. Observe the following chain of reasoning.
+        \begin{align*}
+        (p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)
+          &\equiv(\neg p \lor q) \rightarrow  (\neg(\neg q) \lor \neg p)
+            &\quad
+            &\text{by \emph{conditional disintegration}}\times2
+            \\
+          &\equiv(\neg p \lor q) \rightarrow  (q \lor \neg p)
+            &\quad
+            &\text{by \emph{double negation}}
+            \\
+          &\equiv(\neg p \lor q) \rightarrow  (\neg p \lor q)
+            &\quad
+            &\text{by \emph{commutativity}}
+            \\
+          &\equiv \neg(\neg p \lor q) \lor  (\neg p \lor q)
+            &\quad
+            &\text{by \emph{conditional disintegration}}
+            \\
+          &\equiv \top
+            &\quad
+            &\text{by \emph{complement}}
+            \\
+        \end{align*}
+        Therefore, $(p \rightarrow q) \rightarrow  (\neg q \rightarrow \neg p)$ is a tautology.
+        \end{proof}
+\pagebreak
+%3c%
+      \item
+        Show $p \rightarrow (q \rightarrow p)$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p and q be propositions. Observe the following chain of reasoning.
+        \begin{align*}
+          p \rightarrow (q \rightarrow p)
+            &\equiv p \rightarrow (\neg q \lor p)
+              &\quad
+              &\text{by \emph{conditional disintegration}} 
+              \\
+            &\equiv \neg p \lor (\neg q \lor p)
+              &\quad
+              &\text{by \emph{conditional disintegration}} 
+              \\
+            &\equiv \neg p \lor (p \lor \neg q)
+              &\quad
+              &\text{by \emph{commutativity}} 
+              \\
+            &\equiv (\neg p \lor p)\lor \neg q
+              &\quad
+              &\text{by \emph{associativity}} 
+              \\
+            &\equiv \top\lor \neg q
+              &\quad
+              &\text{by \emph{complement}} 
+              \\
+            &\equiv \top
+              &\quad
+              &\text{by \emph{domination}} 
+              \\
+        \end{align*}
+        
+        Therefore, $p \rightarrow (q \rightarrow p)$ is a tautology.
+        \end{proof}
+
+\hrulefill
+
+%3d%
+      \item
+        Show $(p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r))$ is a tautology.
+
+        \vspace{2ex}
+        \begin{proof}
+        Let p, q, and r be propositions. Observe the following chain of reasoning.
+        
+        \vspace {0.1in}
+        
+        $(p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r))$
+        \begin{align*}
+          &\equiv (p \rightarrow (\neg q \lor r)) \rightarrow ((\neg p \lor q) \rightarrow (\neg p \lor r))
+            &\quad
+            &\text{by \emph{conditional disintegration}} \times3 
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow (\neg(\neg p \lor q) \lor (\neg p \lor r))
+            &\quad
+            &\text{by \emph{conditional disintegration}} \times 2
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow ((\neg(\neg p) \land \neg q) \lor (\neg p \lor r))
+            &\quad
+            &\text{by \emph{de morgans law}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow ((p \land \neg q) \lor (\neg p \lor r))
+            &\quad
+            &\text{by \emph{double negation}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow ((p \lor (\neg p \lor r)) \land (\neg q \lor (\neg p \lor r)))
+            &\quad
+            &\text{by \emph{distributivity}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow (((p \lor \neg p) \lor r) \land (\neg q \lor (\neg p \lor r)))
+            &\quad
+            &\text{by \emph{associativity}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow (((\neg p \lor p) \lor r) \land (\neg q \lor (\neg p \lor r)))
+            &\quad
+            &\text{by \emph{commutativity}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow ((\top \lor r) \land (\neg q \lor (\neg p \lor r)))
+            &\quad
+            &\text{by \emph{complement}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow (\top \land (\neg q \lor (\neg p \lor r)))
+            &\quad
+            &\text{by \emph{domination}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow (\neg q \lor (\neg p \lor r))
+            &\quad
+            &\text{by \emph{identity}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow ((\neg q \lor \neg p) \lor r)
+            &\quad
+            &\text{by \emph{associativity}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow (( \neg p \lor \neg q) \lor r)
+            &\quad
+            &\text{by \emph{commutativity}}
+            \\
+          &\equiv (\neg p \lor (\neg q \lor r)) \rightarrow ( \neg p \lor (\neg q \lor r))
+            &\quad
+            &\text{by \emph{associativity}}
+            \\
+          &\equiv \neg(\neg p \lor (\neg q \lor r)) \lor ( \neg p \lor (\neg q \lor r))
+            &\quad
+            &\text{by \emph{conditional disintegration}}
+            \\
+          &\equiv \top
+            &\quad
+            &\text{by \emph{complement}}
+            \\
+        \end{align*}
+
+        Therefore, $(p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r))$ is a tautology.
+        \end{proof}
+    \end{enumerate}  
+\pagebreak
+%q4%
+    \item Show that $\neg$ and $\land$ are sufficient to express \emph{any} proposition.
+\begin{proof}
+    Observe the following chain of reasoning starting with the formal definition of a proposition.
+    
+    We say that $r$ is a proposition if $r$ satisfies the following recurrence.
+    \begin{enumerate}
+        \item[1.] $r = \top$ or $r = \bot$.
+        \item[2.] $r = \neg p$, where $p$ is a proposition.
+        \item[3.] $r = (p) \land (q)$ where $p$ and $q$ are propositions.
+        \item[4.] $r = (p) \lor (q)$ where $p$ and $q$ are propositions.
+        \item[5.] $r = (p) \rightarrow (q)$ where $p$ and $q$ are propositions.
+        \item[6.] $r = (p) \leftrightarrow (q)$ where $p$ and $q$ are propositions.
+    \end{enumerate}
+    From this definition, five logical connectives ($\neg$, $\land$, $\lor$,  $\rightarrow$, and $\leftrightarrow$) are sufficient to express any proposition. Thus if we can express $\lor$, $\rightarrow$, and $\leftrightarrow$ with $\neg$ and $\land$ then $\neg$ and $\land$ are sufficient to express any proposition
+
+    Let p and q  represent arbitrary propositions. Observe the following chain of reasoning.
+    \begin{enumerate}
+        \item $\top$ or $\bot$
+            
+            This is the base case of the recursive definition and will always be a proposition.
+        \item $\neg$
+            
+            This only uses $\neg$ and thus does not need to be altered to for this question.
+        \item $\land$
+            
+            This only uses $\land$ and thus does not need to be altered to for this question.
+        \item $\lor$
+            \begin{align*}
+                \neg(\neg p \land \neg q)
+                    &\equiv \neg(\neg p) \lor \neg(\neg q)
+                        &\quad
+                        &\text{by \emph{de morgans laws}} 
+                        \\
+                    &\equiv p \lor q
+                        &\quad
+                        &\text{by \emph{double negation}}\times2 
+                        \\
+            \end{align*}
+        \item $\rightarrow$
+            \begin{align*}
+                \neg(p \land \neg q)
+                    &\equiv \neg p \lor \neg(\neg q)
+                        &\quad
+                        &\text{by \emph{de morgans laws}} 
+                        \\
+                    &\equiv \neg p \lor q
+                        &\quad
+                        &\text{by \emph{double negation}} 
+                        \\
+                    &\equiv p \rightarrow q
+                        &\quad
+                        &\text{by \emph{conditional disintegration}} 
+                        \\
+            \end{align*}
+        \item $\leftrightarrow$
+            \begin{align*}
+                \neg(q \land \neg p) \land \neg(p \land \neg q)
+                    &\equiv (\neg q \lor \neg(\neg p)) \land (\neg p \lor \neg(\neg q))
+                        &\quad
+                        &\text{by \emph{de morgans laws}} \times 2
+                        \\
+                    &\equiv (\neg q \lor p)\land (\neg p \lor q)
+                        &\quad
+                        &\text{by \emph{double negation}} \times2
+                        \\
+                    &\equiv (q \rightarrow p) \land (p \rightarrow q)
+                        &\quad
+                        &\text{by \emph{conditional disintegration}} \times2
+                        \\
+                    &\equiv p \leftrightarrow q
+                        &\quad
+                        &\text{by \emph{biconditional disintegration}} 
+                        \\
+            \end{align*}
+    \end{enumerate}
+    Using these 6 premises, we can additionally break down all sub-propositions to only contain $\neg$ and $\land$ as long as they are of finite length. If they are not of finite length, then they are not propositions.
+    
+    Therefore, as $\neg$ and $\land$ can express the three other logical connectives, $\neg$ and $\land$ are sufficient to express \emph{any} proposition with this new definition.
+
+    We say that $r$ is a proposition if $r$ satisfies the following recurrence.
+    
+    \begin{enumerate}
+        \item[1.] $r = \top$ or $r = \bot$.
+        \item[2.] $r = \neg p$, where $p$ is a proposition.
+        \item[3.] $r = (p) \land (q)$ where $p$ and $q$ are propositions.
+        \item[4.] $r = (p) \lor (q)$ which can be rewritten as $\neg(\neg p \land \neg q)$ where $p$ and $q$ are propositions.
+        \item[5.] $r = (p) \rightarrow (q)$ which can be rewritten as $\neg(p \land \neg q)$ where $p$ and $q$ are propositions.
+        \item[6.] $r = (p) \leftrightarrow (q)$ which can be rewritten as $\neg(q \land \neg p) \land \neg(p \land \neg q)$ where $p$ and $q$ are propositions.
+    \end{enumerate}
+\end{proof}
+\pagebreak
+\restoregeometry    
+    \item Is there a \emph{single connective} capable of expressing \emph{any} proposition?
+    
+    Yes, there is a single connective capable of expressing any proposition. Looking at this question, all we need is an expression that is able to express $\neg$ and $\land$ because of the logic shown in question 4. This new logical connective I will call ``negand'' with the symbol being $\negland$ and it will act like this: $p \negland q \equiv \neg p \land q$. Now to prove that this single connective can express any proposition, it has to be able to do the function of $\neg$ and the function of $\land$.
+\begin{proof}
+    Let p and q  represent arbitrary propositions. Observe the following chain of reasoning.
+    \begin{enumerate}
+        \item $\neg$
+            \begin{align*}
+                p \negland \top
+                    &\equiv \neg p \land \top
+                        &\quad
+                        &\text{by \emph{definition of negand}} 
+                        \\
+                    &\equiv \neg p
+                        &\quad
+                        &\text{by \emph{identity}}
+                        \\
+            \end{align*}
+        \item $\land$
+            \begin{align*}
+                (p \negland q) \negland q
+                    &\equiv \neg(\neg p \land q) \land q
+                        &\quad
+                        &\text{by \emph{definition of negand}}\times2
+                        \\
+                    &\equiv (\neg(\neg p) \lor \neg q) \land q
+                        &\quad
+                        &\text{by \emph{de morgans laws}} 
+                        \\
+                    &\equiv (p \lor \neg q) \land q
+                        &\quad
+                        &\text{by \emph{double negation}} 
+                        \\
+                    &\equiv (p \land q)\lor (\neg q \land q)
+                        &\quad
+                        &\text{by \emph{definition of negation}}
+                        \\
+                    &\equiv (p \land q)\lor \bot
+                        &\quad
+                        &\text{by \emph{complement}}
+                        \\
+                    &\equiv p \land q
+                        &\quad
+                        &\text{by \emph{identity}}
+                        \\
+            \end{align*}
+
+    \end{enumerate}
+    Therefore, because every proposition can be expressed by $\land$ and $\neg$, and $\negland$ can form these two logical connectives, every proposition can be expressed by a single connective.
+\end{proof}
+
+\end{enumerate}
+\end{document}

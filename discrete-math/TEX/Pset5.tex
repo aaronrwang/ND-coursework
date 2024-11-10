@@ -1,0 +1,344 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, bm, faktor, mathrsfs, mathtools, mdframed, thmtools, xfrac, graphicx, multicol}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+\renewcommand\qedsymbol{Q.E.D.}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup\:}
+\newcommand{\intersect}{\cap\:}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\setlength{\columnseprule}{0.4pt}
+\newenvironment{case}[1][Case]
+    {\par\textit{#1:}\hfill\break}
+    {}
+
+\title{Problem Set 5}
+\author{Aaron Wang}
+\date{February 27 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+%q1%
+    \item Find and explain the flaw(s) in this argument.
+    \begin{mdframed}
+      We prove every nonempty set of people all have the same age.
+      \begin{proof}
+        We denote the age of a person $p$ by $\alpha(p)$.
+        \begin{case}[Basis Step]
+          Suppose $P = \{p\}$ is a set with one person in it.
+          Clearly, all the people in $P$ have the same age as each other.
+        \end{case}
+        
+        \begin{case}[Inductive Step]
+          Let $k \in \naturals_+$ and suppose any set of $k$-many people all have the same age.
+          Let $P = \{p_1, p_2, \dots p_k, p_{k + 1}\}$ be a set with $k + 1$ people in it.
+          Consider $L \defeq \{p_1, \dots p_k\}$ and $R \defeq \{p_2, \dots p_{k + 1}\}$.
+          Since $L$ and $R$ both have $k$ people, we know everyone in these sets has the same age by the \emph{inductive hypothesis.}
+          % Everyone in $L \intersect R = \set{p_2, \dots p_k}$ has the same age for the same reason.
+
+          Let $\ell, r \in P$.
+          If $\ell \in L \land r \in L$, then $\alpha(\ell) = \alpha(r)$.
+          Similarly, if $\ell \in R \land r \in R$, then $\alpha(\ell) = \alpha(r)$.
+          Now, suppose $\ell \in L \land r \in R$.
+          % Then, $\alpha(\ell) = \alpha(p_1)$ and $\alpha(p_{k + 1}) = \alpha(r)$.
+          \begin{equation*}
+            \alpha(\ell) = \alpha(p_1) = \alpha(p_2) = \alpha(p_{k + 1}) = \alpha(r)
+          \end{equation*}
+          So, all people in $P$ have the same age.
+        \end{case}
+
+        Therefore, everyone on Earth has the same age.
+      \end{proof}
+    \end{mdframed}
+    The argument wants to prove $\forall n (\varphi(n))$ where n is a nonempty set. However, the inductive step iterates over the size of each set rather than each set. In other words, the inductive step considers a set of k people for all k, but not all sets of k people.
+
+    In addition to that, the inductive step falsely assumes that $p_2 \in L$ for every case ($p_2 \notin L$ when k=1). As such, it makes a false claim that $\alpha(p_1) = \alpha(p_2)$.
+%q2%
+    \item Show that $\forall x (x \neq x \union \{x\})$.
+    \begin{proof}
+        Let $x$ be an arbitrary set. Let $y \defeq x \union \{x\}$. By definition of union, we know that $y = \{z|z \in x \lor z \in \{x\}\}$. To show that $x\neq y$, we must find an element that is in one set but not the other (extensionality). Looking at $y$, we see that $x\in y$ but looking at x, we see that $x \notin x$. Therefore, since there is an element in y that is not in x, $y \neq x$ and as such $x \neq x \union x$.\\
+    \end{proof}
+\pagebreak
+%q3%
+  \item We will work up to a proof of the commutativity of addition on $\naturals$.
+    \begin{enumerate}
+      \item
+        Show $(\forall x \in \naturals)(x + 0 = 0 + x)$.
+        \begin{proof} Proof by mathematical induction.
+        \begin{case}[Basis Step] 
+        Need to show $0+0=0+0$
+        \begin{equation*}
+            0+0=0+0
+        \end{equation*}
+        \end{case}
+        \begin{case}[Inductive Step]
+        Let $x \in \naturals$ and assume that $x+0=0+x$.\\
+        Need to show $\s(x)+0=0+\s(x)$
+        \begin{align*}
+          \s(x)+0
+            &=\s(x)
+            &\quad
+            &\text{By $+$ Rule 1}
+              \\
+            &=\s(x+0)
+            &\quad
+            &\text{By $+$ Rule 1}
+              \\
+            &=\s(0+x)
+            &\quad
+            &\text{By IH}
+              \\
+            &=0+\s(x)
+            &\quad
+            &\text{By $+$ Rule 2}
+        \end{align*}
+        \end{case}
+        Thus by mathematical induction, we can conclude $(\forall x \in \naturals)(x + 0 = 0 + x)$.\\  
+        \end{proof}
+      \item
+        Show $(\forall x, y \in \naturals)(x + \s(y) = \s(y) + x)$.
+        \begin{proof}
+        Let $x,y \in \naturals$ and assume that $x+y=y+x$.\\
+        Need to show $x + \s(y) = \s(y) + x$
+        \begin{align*}
+          x+\s(y)
+            &=\s(x+y)
+            &\quad
+            &\text{By $+$ Rule 2}
+              \\
+            &=\s(y+x)
+            &\quad
+            &\text{By IH}
+              \\
+            &=y+\s(x)
+            &\quad
+            &\text{By $+$ Rule 2}
+              \\
+            &=y+1+x
+            &\quad
+            &\text{By Theorem 2}
+            \\
+            &=\s(y)+x
+            &\quad
+            &\text{By Theorem 1}
+        \end{align*} 
+        \end{proof}
+      \item
+        Show $(\forall x, y \in \naturals)(x + y = y + x)$.
+        \begin{proof} Proof by mathematical induction.\\\\
+        \emph{Basis Step:} We can conclude $x+0=0+x$ by 3a\\
+        \emph{Inductive Step:} We can conclude $x + \s(y) = \s(y) + x$ by 3b\\\\
+        Thus by mathematical induction, we can conclude $(\forall x, y \in \naturals)(x + y = y + x)$.\\  
+        \end{proof}
+    \end{enumerate}
+%q4%
+\pagebreak
+  \item Show $(\forall x, y, z \in \naturals)(x \cdot (y + z) = (x \cdot y) + (x \cdot z))$.
+    \begin{proof}
+    Proof by mathematical induction
+    \begin{case}[Basis Step]
+    Let $x,y \in \naturals$.
+    Need to show $x \cdot (y + 0) = (x \cdot y) + (x \cdot 0)$.
+    \begin{align*}
+      x \cdot (y + 0)
+        &=x \cdot y
+        &\quad
+        &\text{By $+$ Rule 1}
+          \\
+        &=(x \cdot y) + 0
+        &\quad
+        &\text{By $+$ Rule 1}
+          \\
+        &=(x \cdot y) + (x \cdot 0)
+        &\quad
+        &\text{By $\cdot$ Rule 1} 
+    \end{align*}
+    \end{case}
+    \begin{case}[Inductive Step]
+    Let $x,y,z \in \naturals$ and assume $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$.\\
+    Need to show $x \cdot (y + \s(z)) = (x \cdot y) + (x \cdot \s(z))$.
+    \begin{align*}
+      x \cdot (y + \s(z))
+        &=x \cdot \s(y + z)
+        &\quad
+        &\text{By $+$ Rule 2}
+          \\
+        &=x \cdot (y + z) + x
+        &\quad
+        &\text{By $\cdot$ Rule 2}
+          \\
+        &=(x \cdot y) + (x \cdot z)+x
+        &\quad
+        &\text{By IH} 
+          \\
+        &=(x \cdot y) + (x \cdot \s(z))
+        &\quad
+        &\text{By $\cdot$ Rule 2} 
+    \end{align*}
+    \end{case}
+    Therefore by mathematical induction, we can conclude $(\forall x, y, z \in \naturals)(x \cdot (y + z) = (x \cdot y) + (x \cdot z))$.\\
+    \end{proof}
+\newgeometry{left=0.5in, right=1in}
+\newpage
+%q5%
+  \item Prove the following statement for all $n \in \naturals$.
+    \begin{equation*}
+      1+\sum_{i = 0}^{n} 2^i = 2^{n + 1}
+    \end{equation*}
+    
+    \begin{proof}
+    Proof by mathematical induction
+    \begin{multicols}{2}
+    \begin{case}[Basis Step]
+    Need to show $1+\sum_{i = 0}^{0} 2^i = 2^{0 + 1}$.
+    \begin{align*}
+      1+\sum_{i = 0}^{0} 2^i
+        &=1+2^0
+        &\quad
+        &\text{By $\sum$ Rule 1}
+          \\
+        &=1+1
+        &\quad
+        &\text{By $n^m$ Rule 1}
+          \\
+        &=\s(1)
+        &\quad
+        &\text{By Theorem}
+          \\
+        &=2
+        &\quad
+        &\text{By Def of $\s(n)$}
+          \\
+        &=2+0
+        &\quad
+        &\text{By $+$ Rule 1}
+          \\
+        &=0+2
+        &\quad
+        &\text{By Comm.}
+          \\
+        &=(2\cdot0)+2
+        &\quad
+        &\text{By $\cdot$ Rule 1}
+          \\
+        &=2\cdot\s(0)
+        &\quad
+        &\text{By $\cdot$ Rule 2}
+          \\
+        &=2\cdot1
+        &\quad
+        &\text{By Def of $\s(n)$}
+          \\
+        &=2\cdot2^0
+        &\quad
+        &\text{By $n^m$ Rule 1}
+          \\
+        &=2^{\s(0)}
+        &\quad
+        &\text{By $n^m$ Rule 2}
+          \\
+        &=2^{1}
+        &\quad
+        &\text{By Def of $\s(n)$}
+          \\
+        &=2^{0+1}
+        &\quad
+        &\text{By Theorem}
+    \end{align*}
+    \end{case}
+    \columnbreak
+    \begin{case}[Inductive Step]
+    Assume $1+\sum_{i = 0}^{n} 2^i = 2^{n + 1}$.\\
+    Need to show $1+\sum_{i = 0}^{\s(n)} 2^i = 2^{\s(n) + 1}$.
+    \begin{align*}
+      1+\sum_{i = 0}^{\s(n)} 2^i
+        &=1+\sum_{i = 0}^{n} 2^i+2^{\s(n)}
+        &\quad
+        &\text{By $\sum$ Rule 2}
+          \\
+        &=2^{n+1}+2^{\s(n)}
+        &\quad
+        &\text{By IH}
+          \\
+        &=2^{\s(n)}+2^{\s(n)}
+        &\quad
+        &\text{By Def of }\s(n) 
+          \\
+        &=2^{\s(n)}+0+2^{\s(n)}
+        &\quad
+        &\text{By $+$ Rule 1}
+          \\
+        &=2^{\s(n)}+(2^{\s(n)}\cdot0)+2^{\s(n)}
+        &\quad
+        &\text{By $\cdot$ Rule 1}
+          \\
+        &=2^{\s(n)}+(2^{\s(n)}\cdot\s(0))
+        &\quad
+        &\text{By $\cdot$ Rule 2}
+          \\
+        &=2^{\s(n)}+(2^{\s(n)}\cdot1)
+        &\quad
+        &\text{By Def of }\s(n)
+          \\
+        &=(2^{\s(n)}\cdot1)+2^{\s(n)}
+        &\quad
+        &\text{By Comm.}
+          \\
+        &=(2^{\s(n)}\cdot\s(1))
+        &\quad
+        &\text{By $\cdot$ Rule 2}
+          \\
+        &=2^{\s(n)}\cdot2
+        &\quad
+        &\text{By Def of }\s(n)
+          \\
+        &=2\cdot2^{\s(n)}
+        &\quad
+        &\text{By Comm.}
+          \\
+        &=2^{\s(\s(n))}
+        &\quad
+        &\text{By $n^m$ Rule 2}
+          \\
+        &=2^{\s(n)+1}
+        &\quad
+        &\text{By Def of }\s(n)
+    \end{align*}
+    \end{case}
+    \end{multicols}
+    Therefore by mathematical induction, we can conclude $1+\sum_{i = 0}^{n} 2^i = 2^{n + 1}$.\\
+    \end{proof}
+\restoregeometry  
+  \item We say $x$ is $\in$-transitive by definition when $(\forall y \in x)(\forall z \in y)(z \in x)$. 
+    Show that every natural number is $\in$-transitive.
+    \begin{proof}
+    Proof by mathematical induction.
+    \begin{case}[Basis Step]
+        Let $y,z \in \naturals$\\
+        Need to show: 0 is $\in$-transitive or $(\forall y \in 0)(\forall z \in y)(z \in 0)$.\\
+
+        Assume that $y \in 0$ and $z \in y$. By the recursive definition of natural numbers, $0\defeq \Emptyset$. This means that $y \in \Emptyset$. However, as the empty set is empty, $y \notin \Emptyset$. Thus, we can conclude by the explosion theorem that $z \in \Emptyset$. Consequently, 0 is $\in$-transitive.
+    \end{case}
+    \begin{case}[Inductive Step]
+        Let $n,y,z \in \naturals$ and assume $(\forall y \in n)(\forall z \in y)(z \in n)$.\\
+        Need to show $(\forall y \in \s(n))(\forall z \in y)(z \in \s(n))$.\\
+        Let $y \in \s(n)$ and $z \in y$. First, observe that by definition, $\s(n)=n\union\{n\}$. This means that $y \in n \lor y \in \{n\}$. Now let's consider these as two cases.\\
+        \begin{case}[$y\in n$]
+             We can see that $z \in n$ by inductive hypothesis. 
+        \end{case}
+        \begin{case}[$y \in \{n\}$]
+             Since $y \in \{n\}$, we can see that $y=n$. Since we know that $z \in y$, we know that $z \in n$ by extensionality. Furthermore, since $\s(n)=n\union \{n\}$, we know that $z \in \s(n)$.\\\\
+        \end{case}
+    \end{case}
+    As such, by mathematical induction, we can conclude that $(\forall y \in x)(\forall z \in y)(z \in x)$.\\
+    \end{proof}
+\end{enumerate}
+
+\end{document}

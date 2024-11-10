@@ -1,0 +1,152 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, bm, faktor, mathrsfs, mathtools, mdframed, thmtools, xfrac, graphicx, multicol, stmaryrd}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\renewcommand\qedsymbol{Q.E.D.}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup\:}
+\newcommand{\intersect}{\cap\:}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\divides}{\:\mathbb{|}\: }
+\newcommand{\notdivides}{\nmid}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\fibonacci}{\mathcal{F}}
+\newcommand{\id}{\texttt{id}}
+\newcommand{\injects}{\hookrightarrow}
+\newenvironment{case}[1][Case]
+    {\par\textit{#1:}\hfill\break}
+    {}
+
+\title{Problem Set 8}
+\author{Aaron Wang}
+\date{April 4 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item
+    Including the instructor, there are $32$ people in our class.
+    Prove that two of these people were born on the same day of the month.
+    \begin{proof}
+    Consider the set $P$ which represents the people in our class and the set $D$ which represents the days of the month. Notice that $|P|=32$ and $|D|=31$. Let $f:P \to D$ given by $f(p_i) \defeq$ the day of the month that they $p_i$ was born.
+    Since $|P|=32>31=|D|$. we know that f is not injective by PHP. So, by definition, there exists $p_i,p_j \in P$ such that $f(p_i)=f(p_j)$ meaning there are two people who were born on the same day.
+    \end{proof}
+  \item
+    As of the 28\textsuperscript{th} of March, 2024, there are over 8.1 billion people living on Earth. A person's heart will beat no more than $7 \times 10^9$ times over their lifespan. Show that there are two currently-living people on Earth whose hearts have beat the exact same number of times.
+    \begin{proof}
+    Consider the set $P$ which represents the people in the world and the set $H$ which represents the number of heartbeats they've had. Notice that $|P|=8.1\times 10^9$ and $|H|=7\times 10^9$. Let $f:P \to D$ given by $f(p_i) \defeq$ the number of heartbeats $p_i$ has had.
+    Since $|P|=8.1\times 10^9>7\times 10^9=|D|$. we know that f is not injective by PHP. So, by definition, there exists $p_i,p_j \in P$ such that $f(p_i)=f(p_j)$ meaning there are two people who have had the same heartbeats.
+    \end{proof}
+
+  \item
+    Let $n \in \naturals_+$ and consider $\mathcal{A} \subseteq \naturals$ such that $|\mathcal{A}| = n + 1$.
+    Prove there exist $x, y \in \mathcal{A}$ with $x \neq y$ such that $n \divides x - y$.
+    \begin{proof}
+        Let $n \in \naturals_+$ and consider $\mathcal{A} \subseteq \naturals$ such that $|\mathcal{A}| = n + 1$. Define $f:\mathcal{A} \to n$ where 
+        \[f(a)= r \text{ such that } (\exists q,r \in \integers)(a=qn+r)\text{ and } 0 \leq r < n\] 
+        Observe that $|\mathcal{A}|=n+1>n=|n|$ so we know that $f$ is not injective by PHP. So, by definition, there exists $a_i,a_j \in \mathcal{A}$ such that $f(a_i)=f(a_j)$. Let $q_i,q_j,r_i,r_j\in \integers$ and let them satisfy $a_i=q_in+r_i$ such that $0 \leq r_i < n$ and $a_j=q_jn+r_j$ such that $0 \leq r_j < n$. We know $r_i=r_j$ because $f(a_i)=f(a_j)$. Consequently, $a_i-a_j=(q_in+r_i)-(q_jn+r_j)=(q_i-q_j)n$. We know that $(q_i-q_j) \in \integers$ because $q_i,q_j \in \integers$ and $a_i-a_j=(q_i-q_j)n$, so we know that $n|a_i-a_j$. Consequently, there exist $x, y \in \mathcal{A}$ with $x \neq y$ such that $n \divides x - y$.
+%NEED TO FINISH%.
+    \end{proof}
+\pagebreak
+  \item
+    Consider $\mathcal{S} \defeq \{3, 4, 7, 8, 9, 10, 12, 15, 18, 19, 27, 28\}$ and $\mathcal{X} \subseteq \mathcal{S}$ with $|\mathcal{X}| \geq 9$.
+    Show that there exist three \emph{distinct} elements $x_1, x_2, x_3 \in \mathcal{X}$ such that $x_1 + x_2 + x_3 = 40$.
+    \begin{proof}
+        Consider $\mathcal{S} \defeq \{3, 4, 7, 8, 9, 10, 12, 15, 18, 19, 27, 28\}$. Let $X \subseteq S$ with $|X| \geq 9$. Since $X$ is a subset of $S$, $X$ will only contain elements that are already in $S$. Observe that there are 4 sets, all with distinct elements, that sum up to 40: 3,10,27; 4,8,28; 7,15,18; 9,12,19. Thus if we show that one of these triples always exists in $X$, we have shown that there exists three distinct elements $x_1, x_2, x_3 \in \mathcal{X}$ such that $x_1 + x_2 + x_3 = 40$. Using this information, let us define $A \defeq \{\{3,10,27\}, \{4,8,28\}, \{7,15,18\}, \{9,12,19\}\}$ and define $f: X \to A$ where 
+        \[ f(x)= a \text{ such that } x \in a\]
+        Note that $f$ is a function because every input has a unique output. Also notice that by PHP, since $|X| \geq 9$ and $|A| = 4$, there exists always exists three distinct elements of $\mathcal{X}$ which map to the same element of $A$. In other words, there exists $x_1,x_2,x_3 \in \mathcal{X}$, such that $f(x_1)=f(x_2)=f(x_3)$. Finally, by definition of $f$, since three distinct elements map to the same value, $x_1 + x_2 + x_3 = 40$.
+    \end{proof}
+    
+  \item
+    Recall that $\binom{n}{0} = \binom{n}{n} = 1$ for all $n, k \in \naturals$ when $k \leq n$.
+    % Let $n, k \in \naturals$ with $k \leq n$ and recall that $\binom{n}{}$
+    \begin{enumerate}
+      \item
+        Show $\binom{n}{k} = \binom{n}{n - k}$ for all $n, k \in \naturals$ where $k \leq n$.
+        \begin{proof}
+            Assume $n, k \in \naturals$ where $k \leq n$. Let $A \defeq \{z|z \subseteq n \land |z|=k\}$ and $B \defeq \{z|z \subseteq n \land |z|=n-k\}$. Let $f: A \to B$ given by $f(a) \defeq n \backslash a$.
+            \begin{enumerate}
+                \item [] Observe that $f$ is injective. Assume $a_1,a_2 \in A$ and $f(a_1)=f(a_2)$. This implies that $n \backslash a_1=n \backslash a_2$. Towards a contradiction suppose $a_1 \neq a_2$. This means that there exists $z \in a_1$ such that $z \notin a_2$. Because $a_1\subseteq n$, $z\in n$. Since $z\in n \land z \notin a_2$, $z \in n \backslash a_2$ which means that $z \in n \backslash a_1$. However, $z \in a_1$ so $z \notin n \backslash a_1$. $\lightning$
+                Thus $a_1= a_2$ and $f$ is injective.
+                \item []Let $g: B \to A$ given by $g(b) \defeq n \backslash b$. Observe that $b$ is injective by the same logic that $f$ is injective.    
+            \end{enumerate}
+            Since $f$ is injective $|A|\leq|B|$ and since $g$ is injective $|B|\leq|A|$. Thus we know $|A|=|B|$ by Cantor-Schöder-Bernstein. Consequently as $\binom{n}{k}=|A|$ and $\binom{n}{n-k}=|B|$, we know that $\binom{n}{k} = \binom{n}{n - k}$.
+        \end{proof}
+\pagebreak
+      \item
+        Show $\binom{n + 1}{k + 1} = \binom{n}{k + 1} + \binom{n}{k}$ for all $n, k \in \naturals$ where $k \leq n$.
+        \begin{proof}
+            Assume $n, k \in \naturals$ where $k \leq n$. Let $A \defeq \{z|z \subseteq n+1 \land |z|=k+1\}$ and $B \defeq \{z|z \subseteq n \land (|z|=k+1\lor |z| = k)\}$. Let $f: A \to B$ given by 
+            \[f(a) \defeq
+            \begin{cases}
+                a & \text{if } (n \notin a)\\
+                a \backslash \{n\} & \text{if } (n \in a)\\
+            \end{cases}
+            \]
+            Let $a_1,a_2 \in A$ and assume $f(a_1)=f(a_2)$.
+            \begin{case}[$|f(a_1)|=k+1$]
+                If $|f(a_1)|=k+1$, $|f(a_2)|=k+1$. Suppose towards a contradiction that $n \in a_1$. This means that $f(a_1)=a_1 \backslash \{n\}$ which means that $|f(a_1)|=k$. $\lightning$. The same logic applies for $a_2$. As a result, we know that $n \notin a_1,a_2$ so $f(a_1)=a_1$ and $f(a_2)=a_2$. Consequently, $a_1=a_2$.
+            \end{case}
+            \begin{case}[$|f(a_1)|=k$]
+                If $|f(a_1)|=k$, $|f(a_2)|=k$. Suppose towards a contradiction that $n \notin a_1$. This means that $f(a_1)=a_1$ which means that $|f(a_1)|=k+1$. $\lightning$. The same logic applies for $a_2$. As a result, we know that $n \in a_1,a_2$ so $f(a_1)=a_1 \backslash \{n\}$ and $f(a_2)=a_2 \backslash \{n\}$. Furthermore, since we know $a_1 \backslash \{n\}=a_2 \backslash \{n\}$ and $n \in a_1,a_2$, we conclude that $a_1=a_2$.\\
+            \end{case}
+            Consequently, $f$ is injective.\\
+            Furthermore, we need to show that $f$ is surjective. Let $b \in B$. $|b|=k+1$ or $|b|=k$ by definition of $B$.
+            \begin{case}[$|b|=k+1$]
+                Because $b \subseteq A$ and $|b|=k+1$, $b \in A$ and $f(b)=b$. Therefore, there exists an input in $A$ for $b \in B$ such that $|b|=k+1$.
+            \end{case}
+            \begin{case}[$|b|=k$]
+                Because $b \subseteq A$ and $|b|=k$, $b \union \{n\} \in A$ and $f(b \union \{n\})=b$. Therefore, there exists an input in $A$ for $b \in B$ such that $|b|=k$.\\
+            \end{case}
+            Thus, for every element of $B$, there is an input in $A$ which maps to that element of $B$. Consequently, $f$ is surjective.
+    
+            Observe that $f$ is injective and surjective so $f$ is bijective. Thus we know $|A|=|B|$. 
+            Observe that $\binom{n+1}{k+1}=|A|$. Let $C \defeq \{z|z \subseteq n \land |z|=k+1\}$ and $D \defeq \{z|z \subseteq n \land |z| = k\}$.
+           
+            $\binom{n}{k + 1} + \binom{n}{k}=|C|+|D|$.
+            Additionally, $|C|+|D|=|C \union D|$ because $|C \intersect D|=0$ as $C$ only contains sets of cardinality $k+1$ and $D$ only contains sets of cardinality $k$.
+             Additionaly observe that $B=C \union D$ by definition so $\binom{n}{k + 1} + \binom{n}{k}=|B|$.
+            Consequently as $\binom{n+1}{k+1}=|A|$ and $\binom{n}{k + 1} + \binom{n}{k}=|B|$, we know that $\binom{n+1}{k+1} = \binom{n}{k + 1} + \binom{n}{k}$.
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+  \item
+    Prove that $|\power(X)| = 2^{|X|}$ for any finite set $X$.
+    \begin{proof}
+        \begin{case}[Basis Step]
+        Let $X$ be a set such that $|X|=0$ so $X=\Emptyset$.\\
+        Show that $|\power(\Emptyset)| = 2^{|\Emptyset|}$\\
+        $|\power(\Emptyset)|=|\{\Emptyset\}|=1$.\\
+        $2^{|\Emptyset|}=2^0=1$
+        \end{case}
+        \begin{case}[Inductive Step]
+        Let $X$ be a set such that $|X|=n$.\\
+        Inductive Hypothesis: $|\power(X)| = 2^{|X|}$.\\
+        Let $a,Y$ be sets such that $a\notin X$.\\
+        Let's define $Y\defeq X \union\{a\}$.\\
+        Observe that $|Y|=n+1$.\\
+        Show that $|\power(Y)| = 2^{|Y|}$\\
+        Define $Z \defeq \{z|(\exists w \in \power(X))(z=w\union\{a\})\}|$\\
+        Observe that $\power(Y)=\power(X)\union Z$ as $\power(X)$ contains all the subsets of $Y$ which don't contain $a$ and $Z$ contains the subsets which contain $a$.\\
+        Intersection of the two sets is empty because $(\forall z \in Z)(a \in z)$ and $(\forall x \in \power(X))(a \notin x)$.\\ Consequently, $|\power(Y)|=|\power(X)|+|Z|$.\\
+        Let's define a function $f:\power(X) \to Z$ where $f(x)=x\union{a}$.\\
+        Let $x_1,x_2 \in \power(X)$. Assume $f(x_1)=f(x_2)$. We know that $x_1\union{a}=x_2\union{a}$. Since $a \notin x_1,x_2$, we know $x_1=x_2$. Thus, $f$ is injective.\\
+        Furthermore, let $z \in Z$. By definition of $Z$, $\exists x \in \power(X)$ such that $z=x \union \{a\}$. Therefore $f$ is surjective.\\ 
+        Since $f$ is surjective and injective, it is bijective. Consequently $|\power(X)|=|Z|$.\\
+        Thus, $|\power(X)|+|Z|=|\power(X)|+|\power(X)|=2\cdot |\power(X)|$.\\
+        Using the IH, we know that $2\cdot |\power(X)|=2 \cdot 2^{|X|}$.\\
+        $2^{|Y|}=2^{|X|+1}=2 \cdot 2^{|X|}$\\
+        Therefore $|\power(Y)| = 2^{|Y|}$.\\
+        \end{case}
+        By induction, we have shown that $\forall X(|\power(X)| = 2^{|X|})$.
+    \end{proof}
+\end{enumerate}
+\end{document}

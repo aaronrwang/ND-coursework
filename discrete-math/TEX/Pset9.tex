@@ -1,0 +1,201 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, bm, faktor, mathrsfs, mathtools, mdframed, thmtools, xfrac, graphicx, multicol, stmaryrd}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\renewcommand\qedsymbol{Q.E.D.}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup\:}
+\newcommand{\intersect}{\cap\:}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\divides}{\:\mathbb{|}\: }
+\newcommand{\notdivides}{\nmid}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\fibonacci}{\mathcal{F}}
+\newcommand{\id}{\texttt{id}}
+\newcommand{\injects}{\hookrightarrow}
+\newcommand{\concat}{+\!\!\!+}
+\newcommand{\ceil}[1]{\lceil {#1} \rceil}
+\newenvironment{case}[1][Case]
+    {\par\textit{#1:}\hfill\break}
+    {}
+
+\title{Problem Set 9}
+\author{Aaron Wang}
+\date{April 16 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+%1%
+    \item
+    A palindrome of length $k \in \naturals$ over an alphabet $X$ is a string $s: k \to X$ such that $(\forall i \in k)(s(i) = s(k - 1 - i))$.
+    How many possible palindromic words of length $k \in \naturals$ are there in the English language?
+    \begin{proof}
+        Let $X$ be the set of the letters of the English alphabet. Observe that $|X|=26$. Now let $A \defeq \{s|s:k \to X$ such that $(\forall i \in k)(s(i) = s(k - 1 - i))\}$ and $B \defeq \{s|s:\ceil{\frac{k}{2}} \to X\}$. Let's define $f:A \to B$ where $f(a) \defeq b:\ceil{\frac{k}{2}} \to X$ such that $b(i)=a(i) $ for $ i \in \ceil{\frac{k}{2}}$.\\
+        \begin{case}[Injectivity]
+            Let $a_1,a_2 \in A$ and assume $f(a_1)=f(a_2)$.\\ 
+            Needs to show $a_1=a_2$ by showing that $(\forall i \in k)(a_1(i)=a_2(i))$
+            \begin{enumerate}
+                \item[] $i < \ceil{\frac{k}{2}}$\\
+                By definition $f(a_1)(i)=f(a_2)(i)$. Further, $f(a_1)(i)=a_1(i)$ and $f(a_2)(i)=a_2(i)$ so $a_1(i)=a_2(i)$.
+                \item[] $i \geq \ceil{\frac{k}{2}}$\\
+                By definition $f(a_1)(k-1-i)=f(a_2)(k-1-i)$. Further, $f(a_1)(k-1-i)=a_1(i)$ and $f(a_2)(k-1-i)=a_2(i)$ so $a_1(i)=a_2(i)$.
+            \end{enumerate}
+            Since $(\forall i \in k)(a_1(i)=a_2(i))$, we know $a_1=a_2$. Consequently, we know that $f$ is injective.
+        \end{case}
+        \begin{case}[Surjectivity]
+            Let $b \in B$. Let's define $s:k \to X$ such that
+            \[s(i)=
+            \begin{cases}
+                b(i) \quad 0 \leq i < \ceil{\frac{k}{2}}\\
+                b(k-1-i) \quad \ceil{\frac{k}{2}} \leq i < k\\
+            \end{cases}
+            \]
+            Observe that $f(s)=b$ as by definition of s, $f(s)(i)=s(i)=b(i)$ for all $i$ such that $0 \leq i < \ceil{\frac{k}{2}}$.\\
+            Additionally, observe that $s:k \to X$ such that $(\forall i \in k)(s(i) = s(k - 1 - i))$. Consequently, by definition of $A$, $s \in A$ so $f$ is surjective as every element of the codomain has a preimage.
+        \end{case}
+        Since $f$ is subjective and injective, $f$ is bijective. Consequently $|A|=|B|$.
+        We know that $|B|=|X|^{\ceil{\frac{k}{2}}}$ by theorem 6.10 because the elements of $B$ are strings of length $k$ over the alphabet $|X|$. Since $|X|=26$, $|B|=26^{\ceil{\frac{k}{2}}}$ and since $|A|=|B|$, $|A|=26^{\ceil{\frac{k}{2}}}$. Thus there are $26^{\ceil{\frac{k}{2}}}$ possible palindromic words of length $k \in \naturals$ in the English Language.
+    \end{proof}
+\pagebreak
+%2%
+    \item Given a natural number $k \in \naturals$, how many ordered pairs $(a, b)$ are there such that $a, b \in \naturals$ and $a + b = k$?
+    \begin{proof}
+        Let $k \in \naturals$. and let $X \defeq \{(a,b)|a,b \in \naturals \land a+b=k\}$. Let $f:X \to k+1$ where $f((a,b))=a$. 
+        \begin{case}[Injectivity]
+           Let $(a_1,b_1),(a_2,b_2) \in X$ and assume $f((a_1,b_1))=f((a_2,b_2))$. By definition of $f$, $a_1=a_2$. Additionally, observe that $b_1=k-a_1$ and $b_2=k-a_2$ by definition of $X$. From $b_1=k-a_1$, $b_2=k-a_2$, and $a_1=a_2$ we can conclude that $b_1=b_2$. Consequently, as $a_1=a_2$ and $b_1=b_2$, we get $(a_1,b_1)=(a_2,b_2)$. 
+        \end{case}
+        \begin{case}[Surjectivity]
+            Let $n \in k+1$. Let $x\defeq (n,k-n)$. Notice that $n+(k-n)=k$ and $n,k-n \in \naturals$. Thus by definition of $X$, $x \in X$ so $f$ is surjective as every element of the codomain has a preimage.
+        \end{case}
+        Since $f$ is subjective and injective, $f$ is bijective. Consequently $|X|=|k+1|$. Thus we know that $|X|=k+1$ or there are $k+1$ many ordered pairs $(a, b)$ such that $a, b \in \naturals$ and $a + b = k$ 
+    \end{proof}
+%3%
+    \item Let $n \in \naturals_+$ and suppose you have an $n \times n$ chess board.
+    We say two pieces on the board threaten each other if it is possible for one to capture the other by moving to occupy its square on the next move. In how many ways can $n \in \naturals_+$ rooks possibly be arranged on an $n \times n$ chess board so that no two rooks threaten each other?\\
+    \textcolor{red}{(I understand that a chess board is numbered 1 to n for rows and a,b,c... for columns but I am designating it as 0 to n-1 for simplicity).}
+    \begin{proof}
+        Let $n \in \naturals_+$. Observe that no rook can be placed in the same row or column because if it is placed on the same column, it threatens another rook. Since there are $n$ columns and $n$ rooks, each column must have one and only one rook. Further, since there are $n$ rows and $n$ rooks, two rooks must not be in the same row. As such, the placement of the rooks can be represented as a string that maps a rook from its column to its row. Let this string be $s:n \to n$ such that $(\forall i,j \in n)(i \neq j \implies s(i)\neq s(j))$ (mathematical representation of no two different rooks are in the same row). Observe that by definition of $s$, this set is injective. As such, we know that there are $\frac{|n|!}{(|n|-|n|)!}$ such functions $s$ by theorem 6.11. Observe that $\frac{|n|!}{(|n|-|n|)!}=\frac{n!}{(0!)}=\frac{n!}{1}=n!$. Thus, there are $n!$ ways $n \in \naturals_+$ rooks possibly be arranged on an $n \times n$ chess board so that no two rooks threaten each other
+    \end{proof}
+\pagebreak
+%4%
+    \item We can write $4$ as a sum of positive integers in 8 distinct ways.
+    \begin{equation*}
+      \begin{tabular}{cccccccc}
+                      &\quad& 1 + 1 + 2 &\quad& 1 + 3           \\
+        1 + 1 + 1 + 1 &\quad& 1 + 2 + 1 &\quad& 2 + 2 &\quad& 4 \\
+                      &\quad& 2 + 1 + 1 &\quad& 3 + 1           \\
+      \end{tabular}
+    \end{equation*}
+    Given a natural number $n \in \naturals$, how many distinct ways are there to write $n$ as a sum of positive integers?
+    \begin{proof}
+        Let $n \in \naturals$.
+        \begin{case}[$n=0$]
+            There are no ways in which positive integers can add to 0.
+        \end{case}
+        \begin{case}[$n>0$]
+            Observe that $1+1+1...$ $n$ times $=n$ and there are $n-1$ `$+$' in this case.
+            Also, observe that $n=n$ and there are $0$ `$+$' in this case. Let us reframe these distinct ways to write the sums of a positive integer as a binary string of length $n-1$. Let $s:n-1 \to \{0,1\}$ be a representation of these sums where 1 represents the existence of `$+$' and 0 represents the lack of (implicit existence of) `$+$' to demonstrate this phenomenon.\\
+            \textcolor{blue}{
+            The following examples are just for understanding.
+            }
+            \begin{enumerate}
+                \item let $n=4$ and $s=$`111'. This represents 1+1+1+1
+                \item let $n=4$ and $s=$`011'. This represents 2+1+1
+                \item let $n=4$ and $s=$`101'. This represents 1+2+1
+                \item let $n=4$ and $s=$`110'. This represents 1+1+2
+                \item let $n=4$ and $s=$`100'. This represents 1+3
+                \item let $n=4$ and $s=$`010'. This represents 2+2
+                \item let $n=4$ and $s=$`001'. This represents 3+1
+                \item let $n=4$ and $s=$`000'. This represents 4
+            \end{enumerate}
+        \end{case}
+        We know that there are $|\{0,1\}|^{|n-1|}=2^{n-1}$ distinct strings (functions) by theorem 6.10 so there are $2^{n-1}$ distinct ways to write $n$ as a sum of positive integers.
+    \end{proof}
+\pagebreak 
+    \item The Hermetic Monk
+    \begin{proof}
+    Let $n \in \naturals$. Let $A_n \defeq \{s|(\exists k \in \naturals)(s:k \to \{1,2\} \land \sum_{i=0}^{k-1}s(i)=n)\}$. $A_n$ represents the set of all possible ways to climb the ladder of $n$ rungs such that the monk only takes 1 or 2 steps at a time. Let $\varphi(n) \defeq |A_n|$ or the number of ways the monk can climb the ladder of $n$ rungs.
+    \begin{case}[Basis Steps]
+    \vspace{-0.7cm}
+        \begin{enumerate}
+            \item []$n=0$ or ladder of 0 rungs.
+                \begin{itemize}
+                    \item $k=0$\\
+                        Observe that $\sum_{i=0}^{k-1}s(i)=0$ because $k=0$. Therefore, the monk can climb the ladder one way if there are no steps taken.
+                    \item $k>1$\\
+                        Observe that $\sum_{i=0}^{k-1}s(i)\geq 1$ because $k > 1$ and $(\forall i \in k)(s(i) \geq 1)$. Therefore, $\sum_{i=0}^{k-1}s(i) \neq 0$ so the monk can not climb the ladder any other ways.
+                \end{itemize}
+                Consequently, $|A_0|=1$. \textcolor{red}{$\varphi(0)=1=\fibonacci(1)$}.
+            \item []$n=1$ or ladder of 1 rung.
+                \begin{itemize}
+                    \item $k=1$
+                    \begin{itemize}
+                        \item [$\bullet$]$(\forall s \in A)(s(0)=1)$ or first step is 1 rung.\\
+                            Observe that $\sum_{i=0}^{k-1}s(i))=1$ because $k= 1$ and $s(0) = 1$. Thus, $\sum_{i=0}^{k-1}s(i))= 1$. Therefore, we have one way to climb a ladder of 1 rung.
+                        \item [$\bullet$]$(\forall s \in A)(s(0)=2)$ or first step is 2 rungs.\\
+                            Observe that $\sum_{i=0}^{k}s(i))=2$ because $k=1$ and $s(0)=2$. Thus, $\sum_{i=0}^{n}s(i))=3$. So, the monk can not climb the ladder this way.
+                    \end{itemize}
+                    \item $k>1$\\
+                    Observe that $\sum_{i=0}^{k}s(i))\geq 2$ because $k > 1$ and $(\forall i \in k)(s(i) \geq 1)$. Therefore, $1+\sum_{i=0}^{n}s(i)) \neq 1$ so the monk can not climb the ladder any other ways.
+                \end{itemize}
+            Consequently, $|A_1|=1$. \textcolor{red}{$\varphi(1)=1=\fibonacci(2)$}.
+        \end{enumerate}
+        
+    \end{case}
+\pagebreak
+    \begin{case}[Inductive Step]
+        IH: $\varphi(n-1)=\fibonacci(n)$ and $\varphi(n-2)=\fibonacci(n-1)$.\\
+        NTS: $\varphi(n)=\fibonacci(n+1)$\\
+        Let $B_n \subseteq A_n$ such that $(\forall s \in B_n)(s(0)=1)$. The set of ways when the first step is 1 rung.\\ 
+        Let $C_n \subseteq A_n$ such that $(\forall s \in C_n)(s(0)=2)$. The set of ways when the first step is 2 rungs.\\ 
+        Observe that $|A_n| = |B_n|+|C_n|$ because $(\forall s \in A_n)(s(0)=1 \iff s(0)\neq2)$ so $B_n \intersect C_n = \Emptyset$.
+        \begin{itemize}
+            \item[] \!\!\!\!\!$|B_n|=|A_{n-1}|$\\
+                Let $f:B_n \to A_{n-1}$ where $f(b)\defeq a: k\backslash1 \to \{1,2\}$ such that $b(i)=a(i)$ for all $i \in k\backslash1$.
+                \begin{case}[Injective]
+                    Let $b_1,b_2 \in B_n$ and assume $f(b_1)=f(b_2)$. To show $b_1=b_2$ we must show $(\forall i \in k)(b_1(k)=b_2(k)$.
+                    \begin{itemize}
+                        \item []$i=0$\\
+                            By definition of $B_n$, $b_1(0)=1$ and $b_2(0)=1$ so $b_1(0)=b_2(0)$.
+                        \item []$i>0$\\
+                            By definition of $f$, $b_1(i)=f(b_1)(i-1)$ and $b_2(0)=f(b_2)(i-1)$. $f(b_1)(i-1)=f(b_2)(i-1)$ because $f(b_1)=f(b_2)$ so $b_1(i)=b_2(i)$.
+                    \end{itemize}
+                    Therefore $b_1=b_2$ so $f$ is injective.
+                \end{case}
+                \begin{case}[Surjective]
+                    Let $a \in A_{n-1}$. Let $s\defeq$`1'$\concat a$. Observe that by def of $A_{n-1}$, $\sum_{i=0}^{k}a(i)=n-1$. Additionally, $s(0)=1$. Consequently, $\sum_{i=0}^{k}s(i)=1+\sum_{i=0}^{k}a(i)=n-1+1=n$.  Thus we know that $s \in B_n$ so there is a preimage for $a$. Consequently, $f$ is surjective.
+                \end{case}
+                Thus, $f$ is bijective so $|B_n|=|A_{n-1}|$.
+            \item[] \!\!\!\!\!$|C_n|=|A_{n-2}|$ \textcolor{blue}{Essentially same as above}\\
+                Let $g:C_n \to A_{n-2}$ where $g(c)\defeq a: k\backslash1 \to \{1,2\}$ such that $c(i)=a(i)$ for all $i \in k\backslash1$.
+                \begin{case}[Injective]
+                    Let $c_1,c_2 \in C_n$ and assume $g(c_1)=g(c_2)$. To show $c_1=c_2$ we must show $(\forall i \in k)(c_1(k)=c_2(k)$.
+                    \begin{itemize}
+                        \item []$i=0$\\
+                            By definition of $C_n$, $c_1(0)=2$ and $c_2(0)=2$ so $c_1(0)=c_2(0)$.
+                        \item []$i>0$\\
+                            By definition of $g$, $c_1(i)=g(c_1)(i-1)$ and $c_2(0)=g(c_2)(i-1)$. $g(c_1)(i-1)=g(c_2)(i-1)$ because $g(c_1)=g(c_2)$ so $c_1(i)=c_2(i)$.
+                    \end{itemize}
+                    Therefore $c_1=c_2$ so $g$ is injective.
+                \end{case}
+                \begin{case}[Surjective]
+                    Let $a \in A_{n-2}$. Let $s\defeq$`2'$\concat a$. Observe that by def of $A_{n-1}$, $\sum_{i=0}^{k}a(i)=n-2$. Additionally, $s(0)=2$. Consequently, $\sum_{i=0}^{k}s(i)=2+\sum_{i=0}^{k}a(i)=n-2+2=n$.  Thus we know that $s \in C_n$ so there is a preimage for $a$. Consequently, $g$ is surjective.
+                \end{case}
+                Thus, $g$ is bijective so $|C_n|=|A_{n-2}|$.
+        \end{itemize}
+        Thus, $|A_n| = |A_{n-1}|+|A_{n-2}|$. So $\varphi(n)=\varphi(n-1)+\varphi(n-2)$. Additonally, observe that $\varphi(n-1)=\fibonacci(n)$ and $\varphi(n-2)=\fibonacci(n-1)$.
+        Thus $\varphi(n)=\varphi(n-1)+\varphi(n-2)=\fibonacci(n)+\fibonacci(n-1)=\fibonacci(n+1)$
+    \end{case}
+    Thus we have shown that there are \textcolor{red}{$\fibonacci(n+1)$} ways for the monk to climb the ladder.
+    \end{proof}
+\end{enumerate}
+\end{document}

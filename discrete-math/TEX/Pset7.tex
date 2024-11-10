@@ -1,0 +1,264 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, amscd, amsthm, bm, faktor, mathrsfs, mathtools, mdframed, thmtools, xfrac, graphicx, multicol, stmaryrd}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\renewcommand\qedsymbol{Q.E.D.}
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup\:}
+\newcommand{\intersect}{\cap\:}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\divides}{\:\mathbb{|}\: }
+\newcommand{\notdivides}{\nmid}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\fibonacci}{\mathcal{F}}
+\newcommand{\id}{\texttt{id}}
+\newcommand{\injects}{\hookrightarrow}
+\newenvironment{case}[1][Case]
+    {\par\textit{#1:}\hfill\break}
+    {}
+
+\title{Problem Set 7}
+\author{Aaron Wang}
+\date{March 25 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+%q1%
+    \item Let $X$ be a set. Show that $(\forall Y \in \power(X))$ $(|Y| \leq |X|)$.
+    \begin{proof}
+        Let $X$ and $Y$ be arbitrary sets. Assume $Y \in \power(X)$. By definition of power sets, $Y \subseteq X$. Consider the function $f: Y \to X$ given by $f(a) \defeq a$. Suppose $a_1,a_2 \in Y$ and assume $f(a_1)=f(a_2)$. Then, since $f(a_1) = a_1$ and $f(a_2) = a_2$, we know $a_1=a_2$ by definition. This proves $(\forall x, y \in A)(f(x) = f(y) \implies x = y)$, meaning $f$ is injective. Since f is injective, by Equinumerosity, $|Y|\leq|X|$. Thus, $(\forall Y \in \power(X))$ $(|Y| \leq |X|)$.
+    \end{proof}
+    
+%q2%
+    \item Show that $\forall X \forall Y (|X| \leq  |Y| \implies \exists Z(Z \subseteq Y \land |X| = |Z|))$.
+    \begin{proof}
+        Let $X$ and $Y$ be arbitrary sets. Assume $|X| \leq  |Y|$. By Equinumerosity, we know that $\exists f(f:X \injects Y)$. Let $Z \defeq \{w|((\exists a \in X)(w=f(a)))\land w \in y\}$. Additionally, let $g \defeq f$ where $g:X \to Z$.
+        \begin{enumerate}
+            \item[] $|X| = |Z|$\\
+            $g$ is injective because $f$ is injective. Let $z \in Z$. By the definition of $Z$, there exists an $x \in X$ such that $f(x)=z$. Since $g=f$, there exists an $x \in X$ such that $g(x)=z$. Therefore, $(\forall z \in Z)(\exists x \in X)(g(x)=z)$. Consequently, $g$ is surjective. Since $g$ is injective and surjective, $g$ is bijective, and by the definition of Equinumerosity, $|X|=|Z|$.
+            \item[] $Z \subseteq Y$\\
+                By definition of $Z$, $Z$ only contains elements that are already contained in $Y$. Therefore, $\forall w (w \in Z \implies w \in Y$). Thus, $Z \subset Y$.
+        \end{enumerate}
+        Thus, since $X$ and $Y$ are arbitrary sets, $\forall X \forall Y (|X| \leq  |Y| \implies \exists Z(Z \subseteq Y \land |X| = |Z|))$.
+    \end{proof}
+%q3%
+\pagebreak
+    \item
+    Let $X, Y, Z$ be sets and consider $f: X \to Y$ and $g: Y \to Z$. We define the composition of $f$ with $g$ to be the function $g \circ f: X \to Z$ given by $(g \circ f)(x) \defeq g(f(x))$ for all $x \in X$.
+    \begin{enumerate}
+      \item
+        Show that, if $f$ and $g$ are both injections,
+        then $g \circ f$ is injective.
+        \begin{proof}
+            Let $a,b \in X$. We know that $f(a)=f(b) \implies a=b$ because f is injective. Similarly, we know $g(f(a))=g(f(b)) \implies f(a)=f(b)$ because g is injective. Thus, by hypothetical syllogism, we know that $g(f(a))=g(f(b)) \implies a=b$ and since $(g \circ f)(x) \defeq g(f(x))$, we know $(g \circ f)(a)=(g \circ f)(b) \implies a=b$. As such, we know that $g \circ f$ is injective.
+        \end{proof}
+      \item
+        Show that, if $f$ and $g$ are both surjections,
+        then $g \circ f$ is surjective.
+        \begin{proof}
+            Let $z \in Z$. Because $g$ is surjective, we know that there is a $y \in Y$ such that $g(y)=z$. Similarly, since $f$ is surjective, we know that there is an $x \in X$ such that $f(x)=y$. Because $f(x)=y$ and $g(y)=z$, we know that $g(f(x))=z$ so by definition $g \circ f(x)=z$. As such, there exists an $x\in X$ such that $g \circ f(x)=z$. Since z was arbitrary, we know that $(\forall z \in Z)(\exists x \in X)(g \circ f(x)=z)$.
+        \end{proof}
+      \item
+        Show that, if $f$ and $g$ are both bijections,
+        then $g \circ f$ is bijective.
+        \begin{proof}
+            To show that $f \circ g$ is bijective, we must show that it is injective and surjective. Note that $f$ and $g$ are both injective and surjective because they are bijective.
+            \begin{case}[Injective]
+                Let $a,b \in X$. We know that $f(a)=f(b) \implies a=b$ because f is injective. Similarly, we know $g(f(a))=g(f(b)) \implies f(a)=f(b)$ because g is injective. Thus, by hypothetical syllogism, we know that $g(f(a))=g(f(b)) \implies a=b$ and since $(g \circ f)(x) \defeq g(f(x))$, we know $(g \circ f)(a)=(g \circ f)(b) \implies a=b$. As such, we know that $g \circ f$ is injective.
+            \end{case}
+            \begin{case}[Surjective]
+            Let $z \in Z$. Because $g$ is surjective, we know that there is a $y \in Y$ such that $g(y)=z$. Similarly, since $f$ is surjective, we know that there is an $x \in X$ such that $f(x)=y$. Because $f(x)=y$ and $g(y)=z$, we know that $g(f(x))=z$ so by definition $g \circ f(x)=z$. As such, there exists an $x\in X$ such that $g \circ f(x)=z$. Since z was arbitrary, we know that $(\forall z \in Z)(\exists x \in X)(g \circ f(x)=z)$.\\
+        \end{case}
+        Therefore, $f \circ g$ is bijective.
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+%q4%
+    \item
+    For this problem, let $X$ and $Y$ be arbitrary sets and let $f: X \to Y$.
+    \begin{enumerate}
+      \item
+        % Suppose $f: X \inject Y$ is injective.
+        If $f$ is injective, show there exists $g: Y \to X$ such that $g \circ f = \id_X$.
+        \begin{proof}
+            Let $x \in X$ and define $g: Y \to X$ where 
+                \[
+                g(y) = 
+                \begin{cases}
+                    a & \text{if } (\exists a \in X)(f(a)=y)\\
+                    x & \text{otherwise}
+                \end{cases}
+                \]
+            Since $f$ is injective, for any $a,b \in X$, if $f(b)=f(a)$, $b=a$. As such, for each input into g, if there is an $a$ that satisfies the first predicate, there is only one output. Evidently, for any other input, there is only one output and that output is $x$. Thus, g is a well-defined function.
+            Now, Let $c \in X$ and observe that $g \circ f(c)= \id_X(c)$.
+            \begin{align*}
+            g \circ f(c)
+              & = g(f(c))
+                &\quad
+                &\text{By definition of } g \circ f(x)\\
+              & = c
+                &\quad
+                &\text{By definition of } g(x)\\
+            & = \id_X(c)
+                &\quad
+                &\text{By definition of } \id\\
+            \end{align*}
+            Consequently, since $c$ was arbitrary, $g \circ f= \id_X$.
+        \end{proof}
+      \item
+        If $f$ is surjective, show there exists $g: Y \to X$ such that $f \circ g = \id_Y$.
+        \begin{proof}
+            Define $g: Y \to X$ where 
+            \begin{equation*}
+                g(y) \defeq x \text{ where } x \in X \text{ such that } f(x)=y\text{; If there are multiple such $x$, pick one.}
+            \end{equation*}
+            $g$ is a well-defined function because for every input in $Y$, there exists a unique output in $X$. In other words, $g$ is well-defined because $(\forall y \in Y)(\exists!x \in X)(g(y)=x)$.\\
+            Let $b \in Y$. Observe $f \circ g(b)= \id_Y(b)$.
+            \begin{align*}
+            f \circ g(b)
+              & = f(g(b))
+                &\quad
+                &\text{By def of } f \circ g(y)\\
+              & = b
+                &\quad
+                &\text{By def of } f(x)\\
+            & = \id_Y(b)
+                &\quad
+                &\text{By def of } \id\\
+            \end{align*}
+            Since $b$ was arbitrary, $f \circ g= \id_Y$.
+        \end{proof}
+\pagebreak
+        \item
+        If $f$ is a bijection, then show that there exists a function $g: Y \to X$ such that $g \circ f = \id_X$ and $f \circ g = \id_Y$.
+        \begin{proof}
+            Define $f: Y \to X$ where 
+            \begin{equation*}
+                g(y) \defeq x \text{ where } x \in X \text{ such that } f(x)=y
+            \end{equation*}
+            Because f is bijective, f is injective and subjective. Since f is injective, no two values in $X$ map to the same value in $Y$, and since f is surjective f maps a value to every element of $Y$. Thus, g is a well-defined function.
+            \begin{multicols}{2}
+            Let $a \in X$. Observe $g \circ f(a)= \id_X(a)$.
+            \begin{align*}
+            g \circ f(a)
+              & = g(f(a))
+                &\quad
+                &\text{By def of } g \circ f(x)\\
+              & = a
+                &\quad
+                &\text{By def of } g(y)\\
+            & = \id_X(a)
+                &\quad
+                &\text{By def of } \id\\
+            \end{align*}
+            Since $a$ was arbitrary, $g \circ f= \id_X$.\\
+            Let $b \in Y$. Observe $f \circ g(b)= \id_Y(b)$.
+            \begin{align*}
+            f \circ g(b)
+              & = f(g(b))
+                &\quad
+                &\text{By def of } f \circ g(y)\\
+              & = b
+                &\quad
+                &\text{By def of } f(x)\\
+            & = \id_Y(b)
+                &\quad
+                &\text{By def of } \id\\
+            \end{align*}
+            Since $b$ was arbitrary, $f \circ g= \id_Y$.
+            \end{multicols}
+            Consequently, we have shown that there is a well-defined function $g: Y \to X$ such that $g \circ f = \id_X$ and $f \circ g = \id_Y$.
+        \end{proof}
+    \end{enumerate}
+\pagebreak
+%q5%
+\item
+    Euler's totient function is the function $\varphi_e: \naturals \to \naturals$ that counts how many positive integers are \emph{coprime} with each $n \in \naturals$, defined below.
+    \begin{equation*}
+      \varphi_e(n)
+      \defeq |\{z \in \naturals | 1 \leq z \leq n \land \gcd(z, n) = 1\}|
+    \end{equation*}
+    \begin{enumerate}
+      \item
+        If $p, k, m \in \naturals_+$ are \emph{positive} naturals such that $p$ is prime and $m \leq p^k$, then prove $\gcd(p^k, m) \neq 1 \iff p \divides m$.
+        \begin{proof}
+            Let $p, k, m \in \naturals_+$ such that $p$ is prime and $m \leq p^k.$ To show the biconditional, we must show that the conditional goes both ways.
+            \begin{enumerate}
+                \item []$\gcd(p^k, m) \neq 1 \implies p \divides m$\\
+                Assume $\gcd(p^k, m) \neq 1$.\\ 
+                Theorem 5.7 says: $\gcd(a,b)=1 \iff (\forall p \in \naturals)(p \text{ is prime} \implies (p \notdivides a \lor p \notdivides b))$.\\ 
+                So we know: $\neg (\gcd(a,b)=1) \iff \neg ((\forall p \in \naturals)(p \text{ is prime} \implies (p \notdivides a \lor p \notdivides b))$.\\
+                This is equivalent to: $\gcd(a,b) \neq 1 \iff (\exists p \in \naturals)(p \text{ is prime} \land (p \divides a \land p \divides b))$.\\ 
+                Consequently, our assumption gives us $(\exists n \in \naturals)(n \text{ is prime} \land (n \divides p^k \land n \divides m))$.\\
+                We can see that $p$ is the only natural number that is prime and divides $p^k$.\\
+                Thus, $p$ is the only natural number that satisfies ``$n$ is prime" and ``$n \divides p^k$."\\
+                Consequently, since a value exists it must be $p$ so we know $(p \text{ is prime} \land (p \divides p^k \land p \divides m))$.\\
+                Finally, with conjunction elimination, we get $p \divides m$.\\
+                
+                \item []$p \divides m \implies \gcd(p^k, m) \neq 1$\\
+                Assume $p \divides m$. Observe $p\cdot p^{k-1}=p^k$. When $k \in \naturals_+$,  $p^{k-1} \in \integers$, so we know that $p \divides p^k$. Thus since  $p \divides p^k \land p \divides m$, we can conclude that $p \divides \gcd(p^k,m)$. Towards a contradiction, assume that $\gcd(p^k, m) = 1$. Putting those two facts together implies that $p \divides 1$, so $p \leq 1$. However, $p > 1$ since p is prime. $\lightning$. Therefore, $\gcd(p^k, m) \neq 1$.
+            \end{enumerate}
+            Since we have shown that $\gcd(p^k, m) \neq 1 \implies p \divides m$ and $p \divides m \implies \gcd(p^k, m) \neq 1$ by biconditional disintegration we know $\gcd(p^k, m) \neq 1 \iff p \divides m$.
+        \end{proof}
+      \item
+        If $p$ is prime, then prove that $\varphi_e(p) = p - 1$.
+        \begin{proof}
+            Let $p$ be a prime number.\\ 
+            By definition, $\varphi_e(p)=|\{z \in \naturals| 1 \leq z \leq p \land \gcd(z,p)=1\}|$\\
+            Observe that since $p,z \in \naturals_+$, we can apply (a) so $\varphi_e(p)=|\{z \in \naturals| 1 \leq z \leq p \land p \notdivides z\}|$\\
+            An equivalent way to express this is $\varphi_e(p)=|\{z \in \naturals| (1 \leq z < p \lor z = p) \land p \notdivides z\}|$\\
+            Distributing the $\land$ we get $\varphi_e(p)=|\{z \in \naturals| (1 \leq z < p \land p \notdivides z) \lor (z = p \land p \notdivides z) \}|$\\
+            Contrapositive of Absolute Monotonicity of Divisibility says: $(1 \leq z < p) \implies p \notdivides z$.\\
+            so $\varphi_e(p)=|\{z \in \naturals| (1 \leq z < p) \lor (z = p \land p \notdivides z) \}|$ because $p \notdivides z$ is implied by $(1 \leq z < p)$.\\
+            Further, $z=p \implies p|z$ because $p|p$ so $(z = p \land p \notdivides z)\equiv \bot$ so $\varphi_e(p)=|\{z \in \naturals| (1 \leq z < p)\}|$\\
+            Thus, $\varphi_e(p)=|\{1,2,...p-1\}|$.\\
+            By Lemma 6.2 we know that $|\{1,2,...p-1\}|=p-1$ so $\varphi_e(p) = p - 1$.
+        \end{proof}
+\pagebreak
+      \item
+        If $p$ is prime and $k \in \naturals_+$, then prove that $\varphi_e(p^k) = p^k - p^{k - 1}$.
+        \begin{proof}
+            Let $p$ be a prime number and $k \in \naturals_+$. By definition, $\varphi_e(p^k)=|\{z \in \naturals| 1 \leq z \leq p^k \land \gcd(z,p^k)=1\}|$\\
+            Observe that since $p,z,k \in \naturals_+$, we can apply (a) so $\varphi_e(p)=|\{z \in \naturals| 1 \leq z \leq p^k \land p \notdivides z\}|$\\
+            By Theorem 6.4, we know $\varphi_e(p)=|\{z \in \naturals| 1 \leq z \leq p^k\}| - |\{z \in \naturals| 1 \leq z \leq p^k \land p \divides z\}|$.\\
+            \begin{enumerate}
+                \item $|\{z \in \naturals| 1 \leq z \leq p\}|=p^k$\\
+                $|\{z \in \naturals| 1 \leq z \leq p^k\}|=|\{1,2,...p^k\}|$. By Lemma 6.2 we know that $|\{1,2,...p^k\}|=p^k$.\\
+                
+                \item $|\{z \in \naturals| 1 \leq z \leq p^k \land p \divides z\}|=p^{k-1}$\\
+                Define $A \defeq |\{z\in \naturals_+|z\leq p^{k-1}\}$\\
+                Define $B \defeq |\{z \in \naturals| 1 \leq z \leq p^k \land p \divides z\}|$.\\
+                Observe $B = |\{z \in \naturals|1 \leq z \leq p^k \land (\exists c \in \integers)(pc = z)\}|$\\
+                $B = |\{z \in \naturals|(\exists c \in \integers)(1 \leq z \leq p^k \land p \cdot c = z)\}|$\\
+                $B = |\{z \in \naturals_+|(\exists c \in \naturals_+)(z \leq p^k \land p \cdot c = z)\}|$\\
+                $B = |\{z \in \naturals_+|(\exists c \in \naturals_+)(p \cdot c \leq p^k \land p \cdot c = z)\}|$\\
+                $B = |\{z \in \naturals_+|(\exists c \in \naturals_+)(c \leq p^{k-1} \land p \cdot c = z)\}|$\\
+                So we have $A = |\{z\in \naturals_+|z\leq p^{k-1}\}$\\
+                and $B = |\{z \in \naturals_+|(\exists c \in \naturals_+)(c \leq p^{k-1} \land p \cdot c = z)\}|$.\\
+                Let us define a function $f:A \to B$ where
+                \begin{equation*}
+                    f(a)=p \cdot a
+                \end{equation*}
+                    \begin{enumerate}
+                        \item $f$ is injective\\
+                        Let $a_1,a_2 \in A$. Assume $f(a_1)=f(a_2)$. By definition of f(a), we know that $p \cdot a_1=p \cdot a_2$. Further by multiplicative cancellation, $a_1=a_2$. Therefore, f is injective.
+                        \item $f$ is surjective\\
+                        Let $b \in B$. By definition of $B$, $(\exists c \in \naturals_+)(c \leq p^{k-1} \land p \cdot c = z)$. Thus, $(\exists a \in A)(p \cdot a=b)$. Since b was arbitrary, we know that $(\forall b \in B)(\exists a \in A)(f(a)=b)$
+                    \end{enumerate}
+                Since $f$ is both subjective and injective, $f$ is bijective.  We know that $|A|=p^{k-1}$ because $|\{z \in \naturals| 1 \leq z \leq p^k\}|=|\{1,2,...p^{k-1}\}|$ and by Lemma 6.2 we know that $|\{1,2,...p^{k-1}\}|=p^{k-1}$. Further, since sets, with a bijective function between them have the same cardinality, $|A|=|B|$ so $|B|=p^{k-1}$.
+            \end{enumerate}
+            Consequently, we have shown that $|\{z \in \naturals| 1 \leq z \leq p\}|=p^k$ and $|\{z \in \naturals| 1 \leq z \leq p^k \land p \divides z\}|=p^{k-1}$. From these two facts, we know that $\varphi_e(p)=p^k-p^{k-1}$.
+        \end{proof}
+
+    \end{enumerate}
+\end{enumerate}
+\end{document}

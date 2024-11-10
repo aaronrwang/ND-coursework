@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+\title{Problem Set 1}
+\author{Aaron Wang}
+\date{January 28 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item 
+        Determine the truth value of each sentence below.
+    \begin{enumerate}
+ 	\item 
+            Madrid is the capital of Spain.
+            
+            \textcolor{red}{True}: Here, we have a declarative sentence. Since the aforementioned declarative sentence is accurate, (a) is true.
+\vspace{0.1in}
+ 	\item Santa Claus lives on the North Pole.
+            
+            \textcolor{red}{False}: Here we have a declarative sentence. Looking at the North Pole, we can see that Santa Claus does not live there. Subsequently, (b) is false.
+\vspace{0.1in}
+        \item This sentence is \emph{false.}
+            
+            \textcolor{red}{No Truth Value}: Let's assume that (c) is true. Asserting (c) as true would cause the self-referential statement to assert (c) as false. Therefore (c) can not be true. Now, let's assume that (c) is false. Asserting (c) as false would cause us to believe that the self-referential statement is not false. Consequently, as something can not be both false and not false, (c) can not be false. Since (c) can not be true or false, there is no truth value.
+\vspace{0.1in}
+        \item The set of all sets that don't contain themselves contains itself.
+            
+            \textcolor{red}{No Truth value}: Let's declare S $\coloneqq$ the set of all sets that don't contain themselves. Assuming (d)$\equiv\top$, S contains itself. Yet, if S contains itself, then it must not contain itself as S is a set of all sets that don't contain themselves. As such, we have achieved a contradiction. Assuming S$\equiv\bot$, S does not contain itself. Yet, if S does not contain itself, then it must contain itself. As such, we have achieved a contradiction because in both assumptions, (d)$\equiv\top$ and (d)$\equiv\bot$, a contradiction is returned. Thus, (d) has no truth value.
+            \vspace{0.1in}
+        \item Red is a beautiful color.
+            
+            \textcolor{red}{False}: This is a declarative statement I do not believe to be true. Red is not a beautiful color, therefore (e) is false.
+\vspace{0.1in}
+        \item Every declarative sentence is either \emph{true} or \emph{false} but not both.
+            
+            \textcolor{red}{False}: Although the axiom (principle of Bivalence) states that any sentence expressing a truth value is either true or false but not both, not every well-formed, declarative sentence expresses a truth value. Therefore, (f) is false.
+
+\pagebreak
+        \item If this sentence is \emph{false,} then $7$ is a prime number.
+
+        %answer%
+            \textcolor{red}{True}: (g) is a conditional and can thus be separated into two atomic statements. Let p $\coloneqq$ ``this sentence is false''  where this sentence refers to p$\rightarrow$q and let q$\coloneqq$ ``7 is a prime number.'' First, it is evident that q $\equiv$ $\top$ as it is an accurate declarative statement. Therefore only two conditions are now possible 
+            \begin{equation}
+                \text{p} \equiv \top \text{ and q} \equiv \top \text{ meaning (p}\rightarrow \text{q)} \equiv \top
+            \end{equation}
+            \begin{equation}
+                \text{p} \equiv \bot \text{ and q} \equiv \top \text{ meaning (p}\rightarrow \text{q)} \equiv \top
+            \end{equation}
+            
+            Considering (1), a contradiction occurs as p$\rightarrow$q $\equiv \top$ and p $\equiv \top$ declares that p$\rightarrow$q $\equiv \bot$. 
+            Considering (2), no contradictions occur: p$\rightarrow$q $\equiv \top$ and p $\equiv \bot$ declares that p$\rightarrow$q $\equiv \neg \bot$. Thus, (g) is true.
+\vspace{0.1in}
+        \item The set of all sets contains itself.
+        
+            \textcolor{red}{True}: The statement claims that the set contains all sets. Therefore, if the set contains all sets, it must include the set that is itself. Thus, (h) is true. 
+\vspace{0.1in}
+        \item This sentence is \emph{true.}
+
+        \textcolor{red}{True or False}: Let's assume that (i) is true. Asserting (i) as true would cause the self-referential statement to assert (i) itself as true. Therefore (i) can be true. Now, let's assume that (i) is false. Asserting (i) as false would cause us to believe that the self-referential statement is not true. Since both trains of thought do not end in a contradiction, (i) can be both true or false.
+\vspace{0.1in}
+        \item If this sentence is \emph{true,} then $2$ is an odd number.
+
+        %answer%
+        \textcolor{red}{No Truth Value}: (j) is a conditional and can thus be separated into two atomic statements. Let p $\coloneqq$ ``this sentence is true''  where this sentence refers to p$\rightarrow$q and let q$\coloneqq$ ``2 is an odd number.'' First, it is evident that q $\equiv$ $\bot$ as it is an inaccurate declarative statement. Therefore only two conditions are now possible 
+            \begin{equation}
+                \text{p} \equiv \top \text{ and q} \equiv \bot \text{ meaning (p}\rightarrow \text{q)} \equiv \bot
+            \end{equation}
+            \begin{equation}
+                \text{p} \equiv \bot \text{ and q} \equiv \bot \text{ meaning (p}\rightarrow \text{q)} \equiv \top
+            \end{equation}
+            
+            Considering (3), a contradiction occurs as p$\rightarrow$q $\equiv \bot$ and p $\equiv \top$ declares that p$\rightarrow$q $\equiv \top$. 
+            Considering (4), a contradictions occurs as p$\rightarrow$q $\equiv \top$ and p $\equiv \bot$ declares that p$\rightarrow$q $\equiv \neg \top$. Thus, as the only two possible conditions are contradictions, there is no truth value.
+    \end{enumerate}
+\pagebreak
+    \item Suppose we have an infinite sequence of sentences
+    
+    \begin{equation}
+      S_0, S_1, S_2, \dots S_i, \dots
+    \end{equation}
+    
+    where each sentence asserts that every sentence following it is \emph{false.}
+    
+    \begin{equation*}
+      S_i \coloneqq \text{``}S_j \text{ is \emph{false} for all } j > i\text{.''}
+    \end{equation*}
+    
+    What are the truth values of the sentences in this sequence?
+
+    %answer%
+    \textcolor{red}{$S_i$ has No Truth Value for all $i >= 0$}: Let us separate this question into two separate assumptions. The first where $S_0\equiv\top$ and the second where $S_0\equiv\bot$.
+
+    %Reflect back all have no truth value%
+    \begin{enumerate}
+        \item Case 1: $S_0\equiv\top$
+
+        In the first case, we assume that $S_0\equiv\top$. From this, we learn that $S_n\equiv\bot$ for $n > 0$. Moving to $S_1$ we learn at least one $S_m\equiv\neg\bot$ for $m > 1$ because we do not believe what $S_1$ declares. Consequently, there is at least one statement $S_k$ that is contradictory for  $k > 1$ as $S_0$ implies that every $S_k\equiv\bot$ and $S_1$ declares that at least one $S_k\equiv\neg\bot$. T
+        \item Case 2: $S_0\equiv\bot$
+        
+        In the second case, we assume that $S_0\equiv\bot$. From this, we learn $S_n\equiv\neg\bot\equiv\top$ for a value $n > 0$.  Looking at this we fall into the same logic that led Case 1 to a contradiction as $S_n$ acts like $S_0$
+    \end{enumerate}
+    After analyzing these two cases, we then realize that $S_0$ has no truth value. We also realize that once $S_0$ has no truth value, $S_1$ acts like $S_0$, and then the same set of contradictions occur. Consequently, no sentence in this infinite series has any truth value.
+\vspace{0.5in}
+    \item
+    In the sentence below, \emph{``you''} refers to \emph{you}\emph{,} the student reading these sentences and solving this problem set.
+    Determine the truth value of the following sentence.
+    
+    \begin{equation*}
+      \text{``You have finitely many beliefs.''}
+    \end{equation*}
+    
+    \textcolor{red}{True}: I have lived for a finite amount of time. With that, neural signals in the brain travel slower than the speed of light, and neural signals have to travel over at least 1 micron of neurons. Because of these two facts, I can not think faster than the time it takes for my brain to send a neural signal over the neurons in my head. Thus, I can not form a belief faster than the time it takes my brain to send a neural signal. Assuming that every thought and as such every belief forms at the speed of light, only a finite amount of beliefs would be able to be formed in a finite amount of time. Consequently, as I have lived for a finite amount of time, "I have finitely many beliefs" is a true statement.
+\end{enumerate}
+
+\end{document}

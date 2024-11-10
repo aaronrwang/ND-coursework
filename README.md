@@ -1,3 +1,3 @@
-# Fundamentals Of Computing.
+# Coursework
 
-Attached are all my files from Fundamentals of Computing
+Attached are many of my files from my classes at the University of Notre Dame

@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 7}
+\author{Aaron Wang}
+\date{November 18 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Suppose that a random variable Y has a probability density function given by
+    \[
+    f(y)=
+    \begin{cases}
+        ky^3e^{-y/2} & y > 0 \\
+        0 & \text{elsewhere}
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Find the values of k that make $f(y)$ a density function.\\
+        The pdf of a Gamma random variable is
+        \[
+        f(x)=
+        \begin{cases}
+            \frac{\lambda^{\alpha}}{\Gamma(\alpha)}e^{-\lambda x}x^{\alpha-1} & x > 0 \\
+            0 & \text{elsewhere}
+        \end{cases}
+        \]
+        Thus, for f(y) to be a pdf, $k = \frac{\lambda^{\alpha}}{\Gamma(\alpha)}$.\\
+        $\alpha-1=3 \rightarrow \alpha = 4$; $\lambda=\frac{1}{2}$; $\Gamma(4)=3!=6$;
+        $k=\frac{1/2^{4}}{6}=\textcolor{red}{\frac{1}{96}}$
+        \item What are the mean and Standard Deviation of $Y$?\\
+        $E(Y)=\frac{\alpha}{\lambda}=\frac{4}{1/2}=\textcolor{red}{8}$\\
+        $\sigma(Y)=\sqrt{\frac{\alpha}{\lambda^2}}=\sqrt{\frac{4}{1/2^2}}=\sqrt{16}=\textcolor{red}{4}$
+    \end{enumerate}
+    \item Suppose that a random variable Y has a probability density function given by
+    \[
+    f(y)=
+    \begin{cases}
+        6y(1-y) & 0 \leq y \leq 1\\
+        0 & \text{elsewhere}
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Find $F(y)$
+        \[
+        \int_0^y6t-6t^2=3t^2-2t^3\Big|_0^y=3y^2-2y^3
+        \]
+        \textcolor{red}{\[
+        F(y)=
+        \begin{cases}
+        0 & y < 0\\
+        3y^2-2y^3 & 0 \leq y \leq 1\\
+        1 & y > 1
+    \end{cases}
+        \]}
+        \item Find $P(0.5 \leq Y \leq 0.8)$
+        \[F(0.8)-F(0.5)=(3(0.8)^2-2(0.8)^3)-(3(0.5)^2-2(0.5)^3)\]
+        \[=(1.92-1.024)-(0.75-0.25)=0.896-0.5=\textcolor{red}{0.396}\]
+    \end{enumerate}
+    \item The Weibull cumulative distribution function is
+    \[
+    F(x)=
+    \begin{cases}
+        0 & x < 0\\
+        1-e^{-(x/\alpha)^\beta} & x \geq 0
+    \end{cases}
+    \]
+    for $\alpha$, $\beta > 0$.
+    \begin{enumerate}
+        \item Find the density function
+        \[
+            \frac{d}{dx} \big[1-e^{-(x/\alpha)^\beta}\big]=-e^{-(x/\alpha)^\beta}(-\frac{x}{\alpha}^{\beta-1})\beta\frac{1}{\alpha}=\frac{\beta}{\alpha}\frac{x}{\alpha}^{\beta-1}e^{-(x/\alpha)^\beta}
+        \]
+        \textcolor{red}{\[
+        f(x)=
+        \begin{cases}
+            0 & x < 0\\
+            \frac{\beta}{\alpha}\frac{x}{\alpha}^{\beta-1}e^{-(x/\alpha)^\beta} & x \geq 0
+        \end{cases}
+        \]}
+        \item Show that if W follows a Weibull distribution, then $X = (W/\alpha)^\beta$ follows an exponential distribution.\\
+        The cdf of an exponential distribution is
+        \[
+        F(x)=
+        \begin{cases}
+            1 - e^{-\lambda x} & 0 \leq x  \\
+            0 & x < 0
+        \end{cases}
+        \]
+        Assume: 
+        \[
+        F(w)=
+        \begin{cases}
+            0 & w < 0\\
+            1-e^{-(w/\alpha)^\beta} & w \geq 0
+        \end{cases}
+        \]
+        Observe that $w=0 \rightarrow x = 0$ and substitute $w=\alpha (x^{-\beta})$:
+        \[ F(x)=
+        \begin{cases}
+            0 & x < 0\\
+            1-e^{-(\alpha (x^{-\beta})/\alpha)^\beta} & x \geq 0
+        \end{cases}
+        \]
+        Thus:
+        \[ F(x)=
+        \begin{cases}
+            0 & x < 0\\
+            1-e^{-x} & x \geq 0
+        \end{cases}
+        \]
+        This follows the form of an exponential cdf where $\lambda=1$
+    \end{enumerate}
+\pagebreak
+    \item A supplier of kerosene has a weekly demand Y possessing a probability density function given by $f(y)$ with measurements in hundreds of gallons. The supplier's profit is given by $U = 10Y - 4$.
+    \[
+    f(y)=
+    \begin{cases}
+        y & 0 \leq y \leq 1 \\
+        1 & 1 < y \leq 1.5 \\
+        0 & \text{elsewhere}
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Find the probability density function for U.
+    
+        Assume: $F_Y(y)=F_U(u)$. Thus $\frac{d}{du}F_Y(y)=\frac{d}{du}F_U(u)$ which means that $\frac{dy}{du}f_Y(y)=f_U(u)$.\\
+        $Y=\frac{U+4}{10}$; $\frac{dy}{du}= \frac{1}{10}$; $f_U(u)=\frac{1}{10}f_Y(y)$\\
+        Now we must consider the boundaries.
+        \[
+            U(Y=0)=-4;\text{ } U(Y=1)=6;\text{ }U(Y=1.5)=11
+        \]
+        Thus,
+        \[
+        f(u)=\frac{1}{10}
+        \begin{cases}
+            \frac{u+4}{10} & -4 \leq u \leq 6 \\
+            1 & 4 < u \leq 11 \\
+            0 & \text{elsewhere}
+        \end{cases}
+        \]
+        or \textcolor{red}{\[
+        f(u)=
+        \begin{cases}
+            \frac{u+4}{100} & -4 \leq u \leq 6 \\
+            \frac{1}{10} & 4 < u \leq 11 \\
+            0 & \text{elsewhere}
+        \end{cases}
+        \]}
+        \item Find $E(U)$
+        \[
+        E(U)=\int_{-\infty}^\infty u \cdot f(u)du = \int_{-4}^{11} u\cdot f(u)du=\int_{-4}^{6} u\cdot f(u)du+\int_{6}^{11} u\cdot f(u)du
+        \]
+        \[
+            \int_{-4}^{6} u\cdot f(u)du = \frac{1}{100}\int_{-4}^{6}u^2+4udu=\frac{1}{100}\Big(\frac{u^3}{3}+2u^2\Big)\Bigg|_{-4}^6=\frac{4}{3}
+        \]
+        \[
+            \int_{6}^{11} u\cdot f(u)du = \frac{1}{10}\int_{6}^{11} udu =\frac{u^2}{20}\Bigg|_6^{11}=\frac{121-36}{20}=\frac{17}{4}
+        \]
+        \[
+        \frac{4}{3}+\frac{17}{4}=\textcolor{red}{\frac{67}{12}}
+        \]
+    \end{enumerate}
+\pagebreak
+    \item Find the density of $cX$ when $X$ follows a gamma distribution. Show that only $\lambda$ is affected by such a transformation, which justifies calling $\lambda$ a rate (or scale) parameter.\\
+    The pdf of a Gamma random variable is
+        \[
+        f(x)=
+        \begin{cases}
+            \frac{\lambda^{\alpha}}{\Gamma(\alpha)}e^{-\lambda x}x^{\alpha-1} & x > 0 \\
+            0 & \text{elsewhere}
+        \end{cases}
+    \]
+    Let $Y=cX$ and observe $X=\frac{Y}{c}$ and $\frac{dx}{dy}=\frac{1}{c}$\\
+    Assume: $F_X(x)=F_Y(y)$. Thus $\frac{d}{dy}F_X(x)=\frac{d}{dy}F_Y(y)$ gives us $\frac{dx}{dy}f_X(x)=f_Y(y)$ which means $\frac{1}{c}f_X(x)=f_Y(y)$.\\
+    So $\textcolor{red}{\frac{\lambda^{\alpha}}{\Gamma(\alpha)}e^{-\lambda x}x^{\alpha-1}}
+    =\frac{1}{c}\frac{\lambda^{\alpha}}{\Gamma(\alpha)}e^{-\lambda \frac{y}{c}}(\frac{\lambda}{c})^{\alpha-1}
+    =\textcolor{red}{\frac{(\frac{\lambda}{c})^{\alpha}}{\Gamma(\alpha)}e^{-(\frac{\lambda}{c}) y}(y)^{\alpha-1}}$.\\
+    \textcolor{red}{From this example, we can see that c only affects $\lambda$ as $\lambda$ now is $\lambda/c$} which justifies calling $\lambda$ a rate (or scale) parameter. 
+
+\end{enumerate}
+\end{document}

@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+
+\title{Homework 1}
+\author{Aaron Wang}
+\date{September 13 2024}
+
+\begin{document}
+\maketitle
+    \begin{enumerate}
+    \item Two six-sided dice are thrown sequentially, and the face values that come up are recorded.
+    \begin{enumerate}
+        \item List the sample space.
+        \[
+            S = \left\{ 
+            \begin{array}{l}
+            (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), \\
+            (2,1), (2,2), (2,3), (2,4), (2,5), (2,6), \\
+            (3,1), (3,2), (3,3), (3,4), (3,5), (3,6), \\
+            (4,1), (4,2), (4,3), (4,4), (4,5), (4,6), \\
+            (5,1), (5,2), (5,3), (5,4), (5,5), (5,6), \\
+            (6,1), (6,2), (6,3), (6,4), (6,5), (6,6)
+            \end{array}
+            \right\}
+        \]
+        \item List the elements that make up the following events: 
+        \begin{enumerate}
+            \item A = the sum of the two values is at least 5
+            \[
+                A = \left\{ 
+                \begin{array}{r}
+                                     (1,4), (1,5), (1,6), \\
+                              (2,3), (2,4), (2,5), (2,6), \\
+                       (3,2), (3,3), (3,4), (3,5), (3,6), \\
+                (4,1), (4,2), (4,3), (4,4), (4,5), (4,6), \\
+                (5,1), (5,2), (5,3), (5,4), (5,5), (5,6), \\
+                (6,1), (6,2), (6,3), (6,4), (6,5), (6,6)\:
+                \end{array}
+                \right\}
+            \]
+            \item B = the value of the first die is higher than the value of the second
+            \[
+                B = \left\{ 
+                \begin{array}{l}
+                (2,1), \\
+                (3,1), (3,2), \\
+                (4,1), (4,2), (4,3),\\
+                (5,1), (5,2), (5,3), (5,4),\\
+                (6,1), (6,2), (6,3), (6,4), (6,5)
+                \end{array}
+                \right\}
+            \]
+            \item C = the first value is 4
+            \[
+            C = \{
+                 (4,1), (4,2), (4,3), (4,4), (4,5), (4,6)
+            \}
+            \]
+        \end{enumerate}
+        \item List the elements of the following events: 
+        \begin{enumerate}
+            \item A $\intersect$ C
+            \[
+                A \intersect C= \{(4,1), (4,2), (4,3), (4,4), (4,5), (4,6)\}
+            \]
+            \item B $\union$ C
+            \[
+                B \union C= \left\{ 
+                \begin{array}{l}
+                (2,1), \\
+                (3,1), (3,2), \\
+                (4,1), (4,2), (4,3), (4,4), (4,5), (4,6),\\
+                (5,1), (5,2), (5,3), (5,4),\\
+                (6,1), (6,2), (6,3), (6,4), (6,5)
+                \end{array}
+                \right\}
+            \]
+            \item A $\intersect$ (B $\union$ C)
+            \[
+                A \intersect (B \union C) = \left\{ 
+                \begin{array}{l}
+                \quad\quad\:\:\:(3,2), \\
+                (4,1), (4,2), (4,3), (4,4), (4,5), (4,6),\\
+                (5,1), (5,2), (5,3), (5,4),\\
+                (6,1), (6,2), (6,3), (6,4), (6,5)
+                \end{array}
+                \right\}
+            \]
+        \end{enumerate}
+    \end{enumerate}
+    \item In a game of poker, what is the probability that a five-card hand will contain a ...\\\\
+    52 cards in a poker deck so $\binom{52}{5} = \frac{52!}{5!(52-5)!} = 2,598,960$ possible five-card hands.
+    \begin{enumerate}
+        \item straight (defined as five cards in an unbroken numerical sequence, with the exclusion of a straight flush) \\\\
+        There are 10 different ranks of straights. (A,2,3,4,5),(2,3,4,5,6)...(10,J,Q,K,A).
+        Within a straight, each number can be one of 4 suits. Thus there are $4^5$ different combinations. 
+        However, there are 4 straight flushes for each rank so there are actually $4^5-4$ different combinations of straights for each rank.
+        Ultimately, we have $10*(4^5-4) = 10,200$ different straights in a five-card hand.
+        Probability of a straight is $\frac{10,200}{2,598,960}=$\textcolor{red}{$0.39\%$}.
+
+        \item four of a kind \\\\
+        There are 13 different card (numbers) in a poker deck A,2,...K.
+        A four of a kind consists of four of a number and since each deck only has 4 cards of each number only 1 combination of each card exists ($\binom{4}{4} = 1$).
+        The last card can be any of the remaining 48 cards from the deck.
+        Thus, there are $13 \cdot 1 \cdot 48 = 624$ different four of a kind, five-card hands.
+        Probability of a four of a kind is $\frac{624}{2,598,960}=$\textcolor{red}{$0.02\%$}.
+        
+        \item full house\\\\
+        There are 13 different card (numbers) in a poker deck A,2,...K.
+        Consider first the triple.
+        For each triple there are $\binom{4}{3} = 4$ combinations.
+        Next consider the pair. The pair cannot be the same number as the triple, it can only be one of the other 12 numbers. Additionally consider there are $\binom{4}{2} = 4$ combinations for each pair. Therefore, we have $13 \cdot \binom{4}{3} \cdot 12 \cdot \binom{4}{2} = 3744$ different full house hands.
+        Probability of a four of a kind is $\frac{3744}{2,598,960}=$\textcolor{red}{$0.14\%$}.
+        
+    \end{enumerate}
+    \pagebreak
+    \item A fair coin is tossed five times. What is the probability of getting at least 3 consecutive heads?\\\\
+    Observe that $\mathbb{P}(\geq $3H in a row$) = \mathbb{P}($3H in a row$) + \mathbb{P}($4H in a row$) + \mathbb{P}($5H in a row$)$.
+    \begin{itemize}
+        \item 3 heads in a row: (H,H,H,T,T),(H,H,H,T,H),(T,H,H,H,T),(T,T,H,H,H),(H,T,H,H,H).
+        \item 4 heads in a row: (H,H,H,H,T),(T,H,H,H,H).
+        \item 5 heads in a row: (H,H,H,H,H).
+    \end{itemize}
+    In total, there are $5+2+1=8$ possibilities of getting at least 3 consecutive heads. Consider that since there are two options and 5 coin tosses, there are $2^5=32$ total possible outcomes. Thus $\mathbb{P}(\geq $3H in a row$) = \frac{8}{32}=$\textcolor{red}{$25\%$}.
+
+    \item Events A and B are defined on a sample space S such that $P ((A \union B)^c) = 0.6$ and $P (A \intersect B) = 0.2$. What is the probability that either A or B but not both will occur? \\\\
+    A or B but not both is $P(A \triangle B)$ \\
+    $P (A \union B) = 1 - P ((A \union B)^c) = 1 - 0.6 = 0.4$\\
+    $P(A \triangle B) = P (A \union B) - P (A \intersect B) = 0.4 - 0.2 =0.2=$\textcolor{red}{$20\%$}
+    \item  A balanced die is tossed six times, and the number on the uppermost face is recorded each time. What is the probability that the numbers recorded are 1, 2, 3, 4, 5, and 6 in any order? \\\\
+    Consider the first toss can result in any number.
+    The second toss can result in any number except the number that has already been tossed.
+    This cycle continues until the last toss where there is only one number that has not been recorded.
+    Thus, the probability of this happening is $\frac{6}{6} \cdot \frac{5}{6} \cdot \frac{4}{6} \cdot \frac{3}{6} \cdot \frac{2}{6} \cdot \frac{1}{6} =$ \textcolor{red}{$1.54\%$}. 
+    \end{enumerate}
+\end{document}

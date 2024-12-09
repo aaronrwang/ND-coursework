@@ -1,0 +1,121 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 6}
+\author{Aaron Wang}
+\date{October 18 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Suppose that the lifetime of an electronic component follows an exponential distribution with $\lambda = 0.1$.
+    \[
+        F(x)=1-e^{-\lambda x}=1-e^{-0.1x}
+    \]
+    \begin{enumerate}
+        \item Find the probability that the lifetime is less than 10.
+        \[F(10)=1-e^{-0.1(10)}=1-e^{-1} \approx \textcolor{red}{0.6321}\]
+        \item Find the probability that the lifetime is between 5 and 15.
+        \[F(15)=1-e^{-0.1(15)}=1-e^{-1.5} \approx 0.7769\]
+        \[F(5)=1-e^{-0.1(5)}=1-e^{-0.5} \approx 0.3935\]
+        \[F(15)-F(5) \approx \textcolor{red}{0.3834}\]
+        \item Find t such that the probability that the lifetime is greater than $t$ is 0.01.
+        \[F(t)=1-0.01=\]
+        \[1-e^{-0.1(t)}=1-0.01\]
+        \[e^{-0.1(t)}=0.01\]
+        \[-0.1(t)=ln(0.01)\]
+        \[t=-\frac{ln(0.01)}{0.01} \approx \textcolor{red}{46.05}\]
+    \end{enumerate}
+\pagebreak
+    \item The SAT and ACT college entrance exams are taken by thousands of students each year. The mathematics portions of each of these exams produce scores that are approximately normally distributed. In recent years, SAT mathematics exam scores have averaged 480 with standard deviation 100. The average and standard deviation for ACT mathematics scores are 18 and 6, respectively.
+    \[
+        f(y)=\frac{1}{\sigma \sqrt{2\pi}}e^{\frac{(-y-\mu)^2}{2 \sigma^2}}
+    \]
+    \begin{enumerate}
+        \item An engineering school sets 550 as the minimum SAT math score for new students. What percentage of students will score below 550 in a typical year?
+        \[
+            \mu = 480 \text{ and } \sigma = 100
+        \]
+        \[
+            f(y)=\frac{1}{(100) \sqrt{2\pi}}e^{\frac{(-y-(480))^2}{2 (100)^2}}
+        \]
+        \[\int_{0}^{550}f(y)dy\approx 0.7580\]
+        About \textcolor{red}{$75.80\%$} students will score below 550 in a typical year.
+        \item What score should the engineering school set as a comparable standard on the ACT math test?
+        \[
+            \mu = 18 \text{ and } \sigma = 6
+        \]
+        \[
+            f(y)=\frac{1}{(6) \sqrt{2\pi}}e^{\frac{(-y-(18))^2}{2 (6)^2}}
+        \]
+        \[\int_{0}^{s}f(y)dy= 0.7580\]
+        \[s \approx 22.2\]
+        Thus, a comparable score on the ACT is a \textcolor{red}{$22$}.
+    \end{enumerate}
+    \item Let $T$ be an exponential random variable with parameter $\lambda$. Let $X$ be a discrete random variable defined as $X = k$ if $k \leq T < k + 1$, $k = 0, 1, . . .$. Find the probability mass function of $X$.
+    \[
+    \text{Exponential Random Variable: }F(x)=1-e^{-\lambda x}
+    \]
+    \[
+    F(X=k)=(1-e^{-\lambda (k+1)})-(1-e^{-\lambda k})
+    \]
+    \[
+    =e^{-\lambda (k)}-e^{-\lambda (k+1)}
+    \]
+    \[
+    =e^{-\lambda k}-e^{-\lambda k-\lambda}
+    \]
+    \[
+    =e^{-\lambda k}-e^{-\lambda k}\cdot e^{-\lambda}
+    \]
+    \[
+    =e^{-\lambda k}\cdot(1- e^{-\lambda})
+    \]
+    Thus the PMF is \textcolor{red}{$F(X=k)=e^{-\lambda k}\cdot(1- e^{-\lambda})$}.
+\pagebreak 
+    \item The magnitude of earthquakes recorded in a region of North America can be modeled as having an exponential distribution with mean 2.4, as measured on the Richter scale. Find the probability that an earthquake striking this region will
+    \[2.4=\frac{1}{\lambda} \text{ so } \lambda = \frac{5}{12}\]
+    \[F(x)=1-e^{-\lambda x}=1-e^{-\frac{5}{12}x}\]
+    \begin{enumerate}
+        \item exceed 3.0 on a Richter scale.
+        \[
+            F(3)=0.7135
+        \]
+        \[
+            1-F(3)=1-0.7135=\textcolor{red}{0.2865}
+        \]
+        \item fall between 2.0 and 3.0 on a Richter scale.
+        \[
+            F(2)=0.5654
+        \]
+        \[
+            F(3)-F(2)=0.7135-0.5654=\textcolor{red}{0.1481}
+        \]
+    \end{enumerate}
+    \item If $Y$ has an exponential distribution and $P (Y > 2) = 0.0821$, what is
+    \begin{enumerate}
+        \item $E(Y)$
+        \[1-F(2)=0.0821\]
+        \[1-(1-e^{-2\lambda})=0.0821\]
+        \[e^{-2\lambda}=0.0821\]
+        \[\lambda=-\frac{\ln(0.0821)}{2}=1.2499\]
+        \[E(Y)=\frac{1}{1.2499}=\textcolor{red}{0.8001}\]
+        \item $P(Y \leq 1.7)$
+        \[P(Y \leq 1.7)=F(1.7)=1-e^{-{1.2499(1.7)}}=\textcolor{red}{0.8805}\]
+    \end{enumerate}
+\end{enumerate}
+\end{document}

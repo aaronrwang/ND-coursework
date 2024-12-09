@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 11}
+\author{Aaron Wang}
+\date{December 13 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Suppose $X$ and $Y$ are i.i.d. random variables, where $Var(X) < 1$. Show that
+    \[
+        P(|X-Y|>2) \leq \frac{Var(X)}{2}.
+    \]
+    \textcolor{red}{
+    Observe that $X$ and $Y$ are identical. Thus $E[X-Y] = 0$
+    \[P(|X-Y|>2) = P(|(X-Y)-E[X-Y]|>2)\]
+    By Chebyshev's Inequality 
+    \[P(|X-Y-E[X-Y]|>2) \leq \frac{Var(X-Y)}{2^2}\]
+    Observe that since X and Y are identical $Var(X)=Var(Y)$:
+    \[Var(X-Y) = Var(X)+ Var(Y) = 2Var(X)\]
+    \[P(|X-Y-E[X-Y]|>2) \leq \frac{2Var(X)}{2^2}\]
+    \[P(|X-Y|>2) \leq \frac{Var(X)}{2}\]
+    }
+\pagebreak
+    \item Suppose that $X_1$, $X_2$, ..., $X_n$ and $Y_1$, $Y_2$, ..., $Y_n$ are independent random samples from populations with means $\mu_1$ and $\mu_2$ and variances $\sigma^2_1$ and $\sigma^2_2$ , respectively. Let $\bar{X} = n^{-1}\Sigma^n_{i=1} X_i$ and $\bar{Y} = n^{-1}\Sigma^n_{i=1} Y_i$. Show that the random variable $U_n$, which is defined as
+    \[
+        U_n = \frac{(\bar{X} - \bar{Y})-(\mu_1-\mu_2)}{\sqrt{(\sigma^2_1 +\sigma^2_2)/n}}
+    \]
+    converges to a standard normal distribution function as n $\rightarrow \infty$.
+    \textcolor{red}{
+    \begin{center}
+        \begin{tabular}{c c}
+         $E[X] = \mu_1$ & $E[Y] = \mu_2$ \\
+         $Var[X] = \sigma_1^2$ & $Var[Y] = \sigma_2^2$
+    \end{tabular}
+    \end{center}
+    \begin{center}
+    \begin{tabular}{c c}
+         $E[\bar{X}] = \mu_1$ & $E[\bar{Y}] = \mu_2$ \\
+         $Var[\bar{X}] = \frac{\sigma_1^2}{n}$ & $Var[\bar{Y}] = \frac{\sigma_2^2}{n}$
+    \end{tabular}
+    Let $\bar{Z} = \bar{X}-\bar{Y}$
+    \end{center}
+    \[
+        \text{Let } \mu_Z = E[\bar{Z}] = E[\bar{X}-\bar{Y}] = E[\bar{X}]-E[\bar{Y}]=\mu_1 - \mu_2
+    \]
+    \[
+        \text{ Let } \frac{\sigma_Z^2}{n} = Var[\bar{Z}] = Var[\bar{X}-\bar{Y}] = Var[\bar{X}] + Var[\bar{Y}] = \frac{\sigma_1^2 + \sigma_2^2}{n}
+    \]
+    \[
+        U_n = \frac{\bar{Z}-\mu_Z}{\sqrt{\sigma_Z^2/n}}
+    \]
+    Finally, by the Central Limit Theorem, as $n \to \infty$, $U_n \to N(0,1)$
+    }
+    
+    \item Suppose $\{X_k\}_{k\geq1}$ are i.i.d. \!\!\!Unif$(0, 1)$ random variables, and for each integer $k \geq 1$, define $Y_n \defeq min(X_1, ..., X_n)$. Show that $Y_n \xrightarrow{P} 0$ as $n \rightarrow \infty$.
+    \textcolor{red}{
+    \[F_{Y_n}(y) = P[min(X_1, ..., X_n) \leq y ] = 1 - P[min(X_1, ..., X_n) > y ]\] 
+    \[= 1 - \Pi_{k=1}^nP(X_k > y) = 1 - \Pi_{k=1}^n(1-y) = 1-(1-y)^n\]
+    \[
+        \text{ Observe } 0 < y < 1 \text{ so } 0 < 1-y < 1\text{.  Additionally, observe } \lim_{n\to\infty} (1-y)^n = 0
+    \]
+    \[
+        \text { Thus, } \lim_{n\to\infty} F_{Y_n}(y) = \lim_{n\to\infty} 1-(1-y)^n = 1
+    \]
+    \[
+        F_{Y_n}(y)= P[Y_n \leq y ] = P[|Y_n-0| \leq y ] = 1 \text{ So } Y_n \xrightarrow{\mathbb{P}} 0\text{ as }n \rightarrow \infty
+    \]
+    }
+\pagebreak
+    \item An experiment is designed to test whether operator A or operator B gets the job of operating a new machine. Each operator is timed on 50 independent trials involving the performance of a certain task using the machine. If the sample means for the 50 trials differ by more than 1 second, the operator with the smaller mean time gets the job. Otherwise, the experiment is considered to end in a tie. If the standard deviations of times for both operators are assumed to be 2 seconds, what is the probability that operator A will get the job even though both operators have equal ability?
+    \textcolor{red}{
+    \[
+        \sigma_{diff} = \sqrt{(\sigma_1^2+\sigma_2^2)/n} = 0.4
+    \]
+    \[
+        Z = \frac{1-0}{0.4} = 2.5
+    \]
+    Looking to a normal distribution graph, $P(Z>2.5) = 0.0062$
+    }
+    \item [6. ] Suppose $X_1$, $X_2$, ..., $X_n$, are i.i.d. $Unif(0, 1)$ random variables, let $Y_n = (\Pi^n_{k=1} X_k)^{1/n}$. Show that $Y_n \xrightarrow{\mathbb{P}} c$, where $c$ is a constant. And find the value of $c$.
+    \textcolor{red}{
+    \[
+        Y_n = (\prod^n_{k=1} X_k)^{1/n} \Rightarrow \ln Y_n = \frac{1}{n} \sum_{k=1}^n \ln X_k
+    \]
+    \[
+        E[\ln X_k]  = \int_0^1 \ln xdx = -1 
+    \]
+    By weak law of large numbers, $\ln Y_n$ converges to $E[\ln X_k]$ so 
+    \[
+        \ln Y_n \xrightarrow{\mathbb{P}} E[\ln X_k] = -1
+    \]
+    Now when we exponentiate both sides:
+    \[
+        Y_n \xrightarrow{\mathbb{P}}  \frac{1}{e} \text{ so } c = \frac{1}{e}
+    \]
+    }
+
+\end{enumerate}
+\end{document}

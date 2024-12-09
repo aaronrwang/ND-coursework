@@ -1,0 +1,202 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 5}
+\author{Aaron Wang}
+\date{October 11 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Let $F(x) = 1 - exp(- \alpha x^{\beta})$ for $x \geq 0$, $\alpha > 0$, $\beta > 0$, and $F(x) = 0$ for $x<0$. Show that $F$ is a cdf, and find the corresponding density.
+    \[
+    F(x)=
+    \begin{cases}
+        1 - e^{- \alpha x^{\beta}} & 0 \leq x  \\
+        0 & x < 0
+    \end{cases}
+    \]
+    
+    \begin{itemize}
+        \item []Property 1: \(F(-\infty) \equiv \displaystyle \lim_{x\to-\infty} F(x) = 0\)
+        \item []Property 2: \(F(\infty) \equiv \displaystyle \lim_{x\to\infty} F(x) = 1\)
+        \item []Property 3: $F(x)$ is a nondecreasing function of $x$ $F'(x)$ is always positive. Look below at density function.
+    \end{itemize}
+    \textcolor{red}{ As $F(x)$ satisified these three properties, it is a cdf.}
+
+
+    Density: f(x)=F'(x)
+    \textcolor{red}{
+    \[
+    f(x)=
+    \begin{cases}
+        e^{- \alpha x^{\beta}}(\alpha\beta x^{\beta-1}) & 0 \leq x  \\
+        0 & x < 0
+    \end{cases}
+    \]
+    }
+\pagebreak
+    \item Suppose that $X$ has the density function 
+    \[
+    f(x)=
+    \begin{cases}
+        cx^2 & 0 \leq x \leq 1 \\
+        0 & \text{otherwise}
+    \end{cases}
+    \]
+    \[
+    \text{Thus} \int_{-\infty}^{x} f(t) = F(x)=
+    \begin{cases}
+        0 & x < 0 \\
+        \frac{cx^3}{3} & 0 \leq x \leq 1 \\
+        1 & 1 < x
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Find c\\
+    Since $F(x)$ must be continuous, $F(1)=1$. Thus, $\frac{c(1)^3}{3}=1$ so \textcolor{red}{$c=3$}
+        \item Find the cdf\\
+        Plug in c from above and we get: \textcolor{red}{
+        \[
+        F(x)=
+        \begin{cases}
+            0 & x < 0 \\
+            x^3 & 0 \leq x \leq 1 \\
+            1 & 1 < x
+        \end{cases}
+        \]}
+        \item What is $P(0.1 \leq X \leq 0.5)$\\
+        $P(0.1 \leq X \leq 0.5)=F(0.5)-F(0.1)=0.125-0.001=$\textcolor{red}{$0.124$}
+        \item Find $E(X)$
+        \[
+        E(X)=\int_{-\infty}^{\infty}xf(x)dx
+        \]
+        \[
+        =\int_{0}^{1}x(3x^2)dx=\int_{0}^{1}(3x^3)dx=\frac{3x^4}{4}\Big|_0^1=\textcolor{red}{\frac{3}{4}}
+        \]
+        \item Find $Var(X)$
+        \[
+        E(X^2)=\int_{-\infty}^{\infty}x^2f(x)dx
+        \]
+        \[
+        =\int_{0}^{1}x(3x^2)dx=\int_{0}^{1}(3x^4)dx=\frac{3x^5}{5}\Big|_0^1=\frac{3}{5}
+        \]
+        \[
+        Y(X)=E(X^2)-E(X)^2=\frac{3}{5}-\frac{3}{4}^2=\frac{3}{5}-\frac{9}{16}=\textcolor{red}{\frac{3}{80}}
+        \]
+    \end{enumerate}
+\pagebreak
+    \item Suppose that $Y$ has density function
+    \[
+    f(y)=
+    \begin{cases}
+        ky(1-y) & 0 \leq y \leq 1 \\
+        0 & \text{elsewhere}
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Find the value of $k$ that makes $f(y)$ a probability density function
+        \begin{itemize}
+            \item[]Property 1 $f(y) \geq 0$ for all $y$, $-\infty < y < \infty$
+            \item[]Property 2 $\int_{-\infty}^{\infty}f(y)dy=1$
+        \end{itemize}
+        Observe:
+        \[
+            \int_{-\infty}^{\infty}f(y)dy=\int_{0}^{1}ky(1-y)dy=k\int_{0}^{1}y-y^2dy=k(\frac{y^2}{2}-\frac{y^3}{3})\Big|_0^1=\frac{k}{6}
+        \]
+        To be a probability density function, both properties must be satisfied. Property 1 is always satisfied by this equation. Property 2 is satisfied when \textcolor{red}{k = 6}.
+        Observe: 
+        \[
+            F(y)=\int_{-\infty}^{y}f(t)dt=\int_{0}^{y}6y(1-y)dy=6\int_{0}^{y}y-y^2dy=6(\frac{y^2}{2}-\frac{y^3}{3})\Big|_0^y=3y^2-2y^3
+        \]
+        \[
+        F(y)=
+        \begin{cases}
+            0 & y < 0 \\
+            3y^2-2y^3 & 0 \leq y \leq 1 \\
+            0 & 1 < y
+        \end{cases}
+        \]
+        \item Find $P(0.4 \leq Y \leq 1)$
+        \[
+            P(0.4 \leq Y \leq 1)=F(1)-F(0.4)=(3(1)^2-2(1)^3)-(3(0.4)^2-2(0.4)^3)=\textcolor{red}{0.648}
+        \]
+        \item Find $P(0.4 \leq Y < 1)$
+        \[\text{By theorem 4.3 } P(0.4 \leq Y \leq 1)=P(0.4 \leq Y < 1)=\textcolor{red}{0.648}\]
+        \item Find $P(Y \leq 0.4|Y \leq 0.8)$
+        \[P(A|B)=\frac{P(A \intersect B)}{P(B)}\]
+        \[P(Y \leq 0.4 \intersect Y \leq 0.8)= P(Y \leq 0.4)\]
+        \[P(Y \leq 0.4) = F(0.4)=0.352\]
+        \[P(Y \leq 0.4) = F(0.8)=0.896\]
+        \[P(Y \leq 0.4|Y \leq 0.8)=\frac{P(Y \leq 0.4)}{P(Y \leq 0.8)}=\frac{0.352}{0.896}\approx\textcolor{red}{.393}\]
+        \item Find $P(Y \leq 0.4|Y < 0.8)$
+        \[\text{Same as (d) }P(Y \leq 0.8)=P(Y < 0.8)\text{ so } P(Y \leq 0.4|Y < 0.8) \approx\textcolor{red}{.393} \]
+    \end{enumerate}
+\pagebreak
+    \item Let $f(x) = (1 + \alpha x)/2$ for $-1 \leq x \leq 1$ and $f(x) = 0$ otherwise, where $-1 \leq \alpha \leq 1$.
+    \begin{enumerate}
+        \item Show that f is a density.
+        \begin{itemize}
+            \item[]Property 1 $f(x) \geq 0$ for all $x$, $-\infty < x < \infty$\\\\
+            This property is satisfied as the range of f(x) for $-1 \leq x \leq 1$ is from $(1-\alpha)/2$ to $(1+\alpha)/2$ and since $-1 \leq \alpha \leq 1$, for any $\alpha, x \in [0,1]$, $f(x)$ is between $[0,1]$ and $f(x)=0$ otherwise so $f(x) \geq 0$ for all $-\infty < x < \infty$\\\\
+            \item[]Property 2 $\int_{-\infty}^{\infty}f(x)dx=1$
+            \[\int_{-\infty}^{\infty}f(x)dx=\int_{-1}^{1}\frac{1 + \alpha x}{2}dx=(\frac{x}{2}+\frac{\alpha x^2}{4})\Big|_{-1}^{1}=\frac{(1)}{2}-\frac{(-1)}{2}=1\]
+            Therefore, no matter what $\alpha$ is, property 2 is always satisfied.
+        \end{itemize}
+        \textcolor{red}{Since both properties are always satisfied, $f$ is a density function.}
+        \item Find the corresponding cdf.
+        \[
+            \int_{-\infty}^{x}f(t)dt=\int_{-1}^{x}\frac{1 + \alpha t}{2}dt=(\frac{t}{2}+\frac{\alpha t^2}{4})\Big|_{-1}^{x}=\frac{x}{2}+\frac{\alpha x^2}{4}-(\frac{-1}{2}+\frac{\alpha (-1)^2}{4})
+            =\frac{\alpha x^2}{4}+\frac{x}{2}+\frac{1-\alpha}{4}
+        \]
+        \textcolor{red}{
+        \[
+        F(x)=
+        \begin{cases}
+            0 & x < -1\\
+            \frac{\alpha x^2}{4}+\frac{x}{2}+\frac{1-\alpha}{4} & -1 \leq x \leq 1\\
+            1 & 1 < x
+        \end{cases}
+        \]
+        }
+    \end{enumerate}
+    \item Define the function
+    \[
+    f(x) =
+    \begin{cases}
+        9x^2 - 4x^3 + b & x \in [0, 1]\\
+        0 & \text{otherwise}
+    \end{cases}
+    \]
+    Show that there is no value of b for which this is the p.d.f. of some continuous random variable.
+    \begin{itemize}
+            \item[]Property 1 $f(x) \geq 0$ for all $x$, $-\infty < x < \infty$\\\\
+            This property is satisfied if and only if $b \geq 0$ because $f(0) = b$.\\\\
+            \item[]Property 2 $\int_{-\infty}^{\infty}f(x)dx=1$
+            \[\int_{-\infty}^{\infty}f(x)dx
+            =\int_{0}^{1}(9x^2 - 4x^3 + b)dx
+            =3x^3-x^4+bx\Big|_{0}^{1}
+            \]
+            \[
+            =3(1)^3-(1)^4+b(1)-(3(0)^3-(0)^4+b(0))=3-1+b=b+2
+            \]
+            Therefore, only $b=-1$ satisfies this requirement.
+        \end{itemize}
+    \textcolor{red}{As the two properties can not be satisfied simultaneously, there is no value $b$ for which this is the p.d.f. of some continuous random variable.}
+    
+\end{enumerate}
+\end{document}

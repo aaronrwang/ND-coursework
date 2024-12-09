@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+
+\title{Homework 2}
+\author{Aaron Wang}
+\date{September 20 2024}
+
+\begin{document}
+\maketitle
+    \begin{enumerate}
+        \item A fair coin is tossed three times.
+        \begin{enumerate}
+            \item What is the probability of two or more heads given that there was at least one head?\\\\
+            There are 8 possible combinations of different results given three fair coin tosses.
+            Let $P(A)=P(H\geq2)$ and let $P(B)=P(H \geq 1)$. The conditional probability of event A, given that event B has occurred, is equal to $P(A|B)=\frac{P(A\intersect B)}{P(B)}$.
+            $P(B)=\frac{7}{8}$ because this happens $\binom{3}{3} + \binom{3}{2} + \binom{3}{1}= 1+3+3=7$ out of 8 combinations.
+            $P(A)=\frac{4}{8}$ because this happens $\binom{3}{3} + \binom{3}{2} = 1+3=4$ out of 8 combinations. 
+            Also observe that when there are greater than 2 heads, there is more than one head so $A \subset B$ which means that $P(A\intersect B) = P(A)$. 
+            Now, using the formula, we know that $P(A|B)=\frac{P(A\intersect B)}{P(B)}=\frac{P(A)}{P(B)}=\frac{4/8}{7/8}=$\textcolor{red}{$57.14\%$}.
+            \\\\
+            \item What is the probability of two or more heads given that there was at least one tail?\\\\
+            There are 8 possible combinations of different results given three fair coin tosses.
+            Let $P(A)=P(H\geq2)$ and let $P(B)=P(H \leq 2)$. The conditional probability of event A, given that event B has occurred, is equal to $P(A|B)=\frac{P(A\intersect B)}{P(B)}$.
+            $P(B)=\frac{7}{8}$ because this happens $\binom{3}{0} + \binom{3}{1} + \binom{3}{2}= 1+3+3=7$ out of 8 combinations.
+            $P(A)=\frac{4}{8}$ because this happens $\binom{3}{3} + \binom{3}{2} = 1+3=4$ out of 8 combinations. 
+            Notice that $P(H=2)=\binom{3}{2}/8$ applies in both cases so $P(A\intersect B)=\frac{3}{8}$.
+            Now, using the formula, we know that $P(A|B)=\frac{P(A\intersect B)}{P(B)}=\frac{3/8}{7/8}=$\textcolor{red}{$42.86\%$}.
+            \\\\
+        \end{enumerate}
+\pagebreak
+        \item If a parent has genotype Aa, he transmits either A or a to an offspring (each with a 1/2 chance). The gene he transmits to one offspring is independent of the one he transmits to another. Consider a parent with three children and the following events: A=\{children 1 and 2 have the same gene\}, B=\{children 1 and 3 have the same gene\}, C=\{children 2 and 3 have the same gene\}. Show that these events are pairwise independent but not mutually independent.\\\\
+        Observe that each child can either have gene a or A. Thus, for two children to have the same genes they can either both have A or neither have A. There are $2^2=4$ total possible combinations of genes among two children and for two children to have the same genes there are $\binom{2}{2} + \binom{2}{0} = 2$ different combinations. Thus the probability for two children to have the same genes is $\frac{1}{2}$. This means that $P(A)=P(B)=P(C)=\frac{1}{2}$. \\\\
+        Observe that $P(A)*P(B)=\frac{1}{4}$. Also observe that for $P(A \intersect B)$, all 3 children must have the same gene because $c_1=c_2$ and $c_1=c_3$ implies $c_1=c_2=c_3$. The chances of this are $(\binom{3}{3} + \binom{3}{0})/2^3=\frac{1}{4}$. Because $P(A \intersect B) = P(A)*P(B)$, A and B are pairwise similar. The same logic can be applied to $A$ and $C$ and $B$ and $C$.\\\\
+        However, the events are not mutually independent because $P(A \intersect B \intersect C)$ also has a probability of $\frac{1}{4}$ as it implies that all 3 of the children have the same gene (same as $P(A \intersect B)$), but $P(A)*P(B)*P(C)=\frac{1}{8}$ so they are not mutually independent.
+        
+        \item An urn contains three red and two white balls. A ball is drawn, and then it and another ball of the same color are placed back in the urn. Finally, a second ball is drawn.
+        \begin{enumerate}
+            \item What is the probability that the second ball drawn is white?\\\\
+            First, consider the case where the first ball drawn is red. There is a $\frac{3}{5}$ chance that this occurs. In this case, the bag will now have 4 red and 2 white balls. The chance of drawing a white ball here is $\frac{1}{3}$.\\\\
+            Now, consider the case where the first ball drawn is white. There is a $\frac{2}{5}$ chance that this occurs. In this case, the bag will now have 3 red and 3 white balls. The chance of drawing a white ball here is $\frac{1}{2}$.\\\\
+            Putting it together we realize that the probability of drawing a white ball second is $\frac{3}{5}\cdot\frac{1}{3}+\frac{2}{5}\cdot\frac{1}{2}=$\textcolor{red}{$40\%$}.
+            \item If the second ball drawn is white, what is the probability that the first ball drawn was red?\\
+            We can find the probability of $A$ given $B$ using Bayes' Theorem: $P(A|B)=\frac{P(B|A) \cdot P(A)}{P(B)}$. We know $P(A)=\frac{3}{5}$ and $P(B)=\frac{2}{5}$ from prior calculations. To find  $P(B|A)$ we need $P(B\intersect A)$ which we know is $\frac{3}{5}\cdot\frac{1}{3}=\frac{1}{5}$ from above. $P(A|B)=\frac{P(B|A) \cdot P(A)}{P(B)}=\frac{P(B \intersect A) \cdot P(A)}{P(A) \cdot P(B)}=\frac{P(B \intersect A)}{P(B)}=\frac{1/5}{2/5}=\frac{1}{2}=$\textcolor{red}{$50\%$}.
+        \end{enumerate}
+\pagebreak
+        \item Suppose that $A$ and $B$ are mutually disjoint events, with $P(A) > 0$ and $P(B) < 1$. Are $A$ and $B$ independent? Prove your answer.\\\\
+            $A$ and $B$ are mutually disjoint events implies that $P(A \intersect B) = 0$.
+            To be independent, $P(A \intersect B) = P(A)*P(B)$. We know that $P(A) \neq 0$ so for $A$ and $B$ to be independent, $P(B)=0$. Thus, \textcolor{red}{the two events are independent if and only if $P(B)=0$}.
+            \item A communications network has a built-in safeguard system against failures. In this system if line I fails, it is bypassed and line II is used. If line II also fails, it is bypassed and line III is used. The probability of failure of any one of these three lines is .01, and the failures of these lines are independent events. What is the probability that this system of three lines does not completely fail?\\\\
+            First define each line as $L_i$ and the chance of line $i$ failing is $P(L_i)$. Observe $\forall i(P(L_i)=.01)$. Also, notice that since the failure of three lines are independent events $P(L_1 \intersect L_2 \intersect L_3)=P(L_1) \cdot P(L_2) \cdot P(L_3) = .01 \cdot .01 \cdot .01 = .000001$. Now the chance of the system not failing would be $1-P(L_1 \intersect L_2 \intersect L_3) = .999999=$\textcolor{red}{$99.9999\%$}.
+    \end{enumerate}
+\end{document}

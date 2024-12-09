@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 9}
+\author{Aaron Wang}
+\date{November 25 2024}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item If $U_1$, ..., $U_n$ are independent uniform random variables on $[0,1]$, find $E(U_{(n)}-
+U_{(1)})$, where $U_{(n)} =$ max\{$U_1$, ..., $U_n$\} and $U_{(1)} = $ min\{$U_1$, ..., $U_n$\}. (Hint: From beta distribution, we have $\int_0^1 x^{a-1}(1 - x)^{b-1}dx = \Gamma(a)\Gamma(b)/\Gamma(a + b)$, for any a, b $> 0$.)
+\[
+f_{U_{(n)}}(x) = n x^{n-1}, \quad 0 \leq x \leq 1
+\]
+\[
+f_{U_{(1)}}(x) = n (1 - x)^{n-1}, \quad 0 \leq x \leq 1
+\]
+
+\[
+E(U_{(n)}) = \int_0^1 x f_{U_{(n)}}(x) \, dx = n \int_0^1 x^n \, dx = n \cdot \frac{x^{n+1}}{n+1}\Bigg|_0^1 = \frac{n}{n+1}.
+\]
+
+\[
+E(U_{(1)}) = \int_0^1 x f_{U_{(1)}}(x) \, dx = n \int_0^1 x^{2-1} (1 - x)^{n-1} \, dx = n\frac{\Gamma(2)\Gamma(n)}{\Gamma(2 + n)}=n\frac{1!(n-1)!}{(n+1)!}=\frac{1}{n+1}.
+\]
+\[
+E(U_{(n)} - U_{(1)}) = E(U_{(n)}) - E(U_{(1)}) = \frac{n}{n+1} - \frac{1}{n+1} = \textcolor{red}{\frac{n-1}{n+1}}.
+\]
+\item You have two dice, one with three sides labeled $0, 1, 2$ and one with $4$ sides,
+labeled $0, 1, 2, 3$. Let $X_1$ be the outcome of rolling the first die, and $X_2$ the outcome
+of rolling the second. The rolls are independent.
+\begin{enumerate}   
+    \item What is the joint p.m.f. of $(X_1, X_2)$?
+\[
+P[X_1=x_1, X_2 = x_2] = \frac{1}{12}\text{ for } x_1 \in \{0,1,2\} \text{ and } x_2 \in \{0,1,2,3\}  
+\]
+    \item Let $Y_1 = X_1 \cdot X_2$ and $Y_2 =$ max\{$X_1, X_2$\}. Make a table for the joint p.m.f. of $(Y_1,Y_2)$.
+\[
+\begin{array}{c|c|c|c|c}
+Y_1 \backslash Y_2 & 0 & 1 & 2 & 3 \\
+\hline
+0 & 1/12 & 1/6 & 1/6 & 1/12 \\
+1 & 0 & 1/12 & 0 & 0 \\
+2 & 0 & 0 & 1/6 & 0 \\
+3 & 0 & 0 & 0 & 1/12 \\
+4 & 0 & 0 & 1/12 & 0 \\
+6 & 0 & 0 & 0 & 1/12 \\
+\end{array}
+\]
+    \item Are $Y_1$, $Y_2$ independent?\\
+$P(Y_1=0)=1/2$, $P(Y_2=0)=1/12$, $P(Y_1=0,Y_2=0)=1/12$.\\
+$P(Y_1=0)P(Y_2=0)\neq P(Y_1=0,Y_2=0)$ so \textcolor{red}{NOT independent}.
+\end{enumerate}
+\pagebreak
+\item Let $Z$ be a standard normal random variable and let $Y_1 = Z$ and $Y_2 = Z^2$.
+\begin{enumerate}
+    \item What are $E(Y_1)$ and $E(Y_2)$?
+    Standard Normal Random Variable means $\mu = 0$ and $\sigma = 1$.
+    \[
+    E(Y_1)=E(Z)=\mu=\textcolor{red}{0}
+    \]
+    \[
+    E(Y_2) = E(Z^2) = Var(Z)-[E(Z)]^2 = \sigma - \mu^2 = \textcolor{red}{1}
+    \]
+    \item What is $E(Y_1Y_2)$?
+    \[
+    E(Y_1Y_2)=E(Z^3)=\textcolor{red}{0} \text{ because of the symmetric distribution.}
+    \]
+    \item What is $Cov(Y_1,Y_2)$?
+    \[
+    Cov(Y_1,Y_2) = E(Y_1Y_2) - E(Y_1)E(Y_2)=(0)-(0)(1)=\textcolor{red}{0}
+    \]
+    \item Notice that $P(Y_2 > 1 | Y_1 > 1) = 1$. Are $Y_1$ and $Y_2$ independent?\\
+    If independent, then $P(Y_2 > 1 | Y_1 > 1)=P(Y_2 > 1)$. However we know that $P(Y_2 > 1) < 1$. Therefore, $Y_1$ and $Y_2$ are \textcolor{red}{NOT independent}.
+    \item What can you learn from part (c) and (d)?\\
+    From (c) and (d) we learn that the \textcolor{red}{Covariance of two variables being 0 does not imply independence}.
+\end{enumerate}
+    \item [5.] Let $Y_1$ denote the weight (in tons) of a bulk item stocked by a supplier at the beginning of a week and suppose that $Y_1$ has a uniform distribution over the interval $0 \leq y_1 \leq 1$. Let $Y_2$ denote the amount (by weight) of this item sold by the supplier during the week and suppose that $Y_2$ has a uniform distribution over the interval $0 \leq y_2 \leq y_1$, where $y_1$ is a specific value of $Y_1$. If the supplier stocked $3/4$ ton, what amount could be expected to be sold during the week?
+    \[
+    E[Y_2|Y_1=y_1]=\frac{y_1}{2} = \frac{3/4}{2}=\textcolor{red}{\frac{3}{8}}
+    \]
+    \item [8.] Let $X \sim$ Exp$(2)$ (rate parameter 2), $Y \sim$ Unif$[1, 3]$, and assume that $X$ and $Y$ are independent. Calculate $P (Y - X \geq 1/2)$.
+    \[
+    f(x)=2e^{-2x} \text{ for } 0 \leq x
+    \]
+    \[
+    f(y)=1/2 \text{ for } 1 \leq y \leq 3
+    \]
+    \[
+    f(x,y)=e^{-2x} \text{ for } 0 \leq x \text{ and } 1 \leq y \leq 3
+    \]
+    \[
+    P(Y - X \geq 1/2) = \int_1^3 \int_0^{y-1/2} f(x,y) dxdy = \textcolor{red}{0.9097}.
+    \]
+
+\end{enumerate}
+\end{document}

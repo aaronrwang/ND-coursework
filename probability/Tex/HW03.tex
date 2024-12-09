@@ -1,0 +1,197 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 3}
+\author{Aaron Wang}
+\date{September 30 2024}
+
+\begin{document}
+\maketitle
+    \begin{enumerate}
+        \item A single fair die is tossed once. Let $Y$ be the number facing up. Find the expected value and variance of $Y$.
+        \begin{enumerate}
+            \item 
+        
+        \begin{equation*}
+            \expect(Y) = \sum\limits_y y\cdot p(y)
+        \end{equation*}
+        \begin{equation*}
+            = 
+            1\cdot p(1) +
+            2\cdot p(2) +
+            3\cdot p(3) +
+            4\cdot p(4) +
+            5\cdot p(5) +
+            6\cdot p(6)
+        \end{equation*}
+        \begin{equation*}
+            = 
+            1\cdot \frac{1}{6} +
+            2\cdot \frac{1}{6} +
+            3\cdot \frac{1}{6} +
+            4\cdot \frac{1}{6} +
+            5\cdot \frac{1}{6} +
+            6\cdot \frac{1}{6}
+        \end{equation*}
+        \begin{equation*}
+            = 
+            \frac{1}{6} +
+            \frac{2}{6} +
+            \frac{3}{6} +
+            \frac{4}{6} +
+            \frac{5}{6} +
+            \frac{6}{6} = \textcolor{red}{3.5}
+        \end{equation*}
+            \item
+        \begin{equation*}
+            \var(Y) = \expect(Y^2) - \expect(Y)^2
+        \end{equation*}
+        \begin{equation*}
+            = 
+            1\cdot p(1) +
+            4\cdot p(2) +
+            9\cdot p(3) +
+            16\cdot p(4) +
+            25\cdot p(5) +
+            36\cdot p(6) - 
+            3.5^2
+        \end{equation*}
+        \begin{equation*}
+            = 
+            1\cdot \frac{1}{6} +
+            4\cdot \frac{1}{6} +
+            9\cdot \frac{1}{6} +
+            16\cdot \frac{1}{6} +
+            25\cdot \frac{1}{6} +
+            36\cdot \frac{1}{6} - 
+            12.25
+        \end{equation*}
+        \begin{equation*}
+            = 
+            \frac{1}{6} +
+            \frac{4}{6} +
+            \frac{9}{6} +
+            \frac{16}{6} +
+            \frac{25}{6} +
+            \frac{36}{6} - 
+            12.25
+        \end{equation*}
+        \begin{equation*}
+            = 15.17-12.25=\textcolor{red}{2.92}
+        \end{equation*}
+        \end{enumerate}
+\pagebreak
+        \item A multiple-choice test consists of 20 items, each with four choices. A student is able to eliminate one of the choices on each question as incorrect and chooses randomly from the remaining three choices. A passing grade is 18 items or more correct.
+        \begin{enumerate}
+            \item What is the probability that the student passes\\\\
+                There are $n=20$ questions. There are 4 answer choices. Since one can be eliminated, there are essentially only three answer choices. Thus, the probabilty of Success is $p=\frac{1}{3}$ and the probability of failure is $q=\frac{2}{3}$. Notice that this experiment is a binomial experiment as it follows the 5 properties. The probability that a student passes is $p(\geq 18)$.
+                \begin{equation*}
+                    p(Y\geq 18) = p(Y=18)+p(Y=19)+p(Y=20)
+                \end{equation*}
+                \begin{equation*}
+                    p(y)=\binom{n}{y}p^yq^{n-y}
+                \end{equation*}
+                \begin{equation*}
+                    p(18)=\binom{20}{18}\frac{1}{3}^{18}\frac{2}{3}^{20-18}=2.18\cdot10^{-7}
+                \end{equation*}
+                \begin{equation*}
+                    p(19)=\binom{20}{19}\frac{1}{3}^{19}\frac{2}{3}^{20-19}=1.15\cdot10^{-8}
+                \end{equation*}
+                \begin{equation*}
+                    p(20)=\binom{20}{20}\frac{1}{3}^{20}\frac{2}{3}^{20-20}=2.87\cdot10^{-10}
+                \end{equation*}
+                \begin{equation*}
+                    p(Y\geq 18) = \textcolor{red}{2.30\cdot10^{-7}}
+                \end{equation*}
+                
+            \item Answer the question in part (a) again, assuming that the student can eliminate
+two of the choices on each question.\\\\
+                We can follow the same logic as before except this time success is $p=\frac{1}{2}$ and failure is $q=\frac{1}{2}$.
+                \begin{equation*}
+                    p(Y\geq 18) = p(Y=18)+p(Y=19)+p(Y=20)
+                \end{equation*}
+                \begin{equation*}
+                    p(y)=\binom{n}{y}p^yq^{n-y}
+                \end{equation*}
+                \begin{equation*}
+                    p(18)=\binom{20}{18}\frac{1}{2}^{18}\frac{1}{2}^{20-18}=1.81\cdot10^{-4}
+                \end{equation*}
+                \begin{equation*}
+                    p(19)=\binom{20}{19}\frac{1}{2}^{19}\frac{1}{2}^{20-19}=1.91\cdot10^{-5}
+                \end{equation*}
+                \begin{equation*}
+                    p(20)=\binom{20}{20}\frac{1}{2}^{20}\frac{1}{2}^{20-20}=9.54\cdot10^{-7}
+                \end{equation*}
+                \begin{equation*}
+                    p(Y\geq 18) = \textcolor{red}{2.01\cdot10^{-4}}
+                \end{equation*}
+        \end{enumerate}
+\pagebreak
+        \item Suppose that in a sequence of independent Bernoulli trials, each with probability
+of success p, the number of failures up to the first success is counted. 
+        \begin{enumerate}
+            \item What is the probability mass function for this random variable?
+            \begin{equation*}
+                p(X=k)=(1-p)^kp
+            \end{equation*}
+            \item Continuing with Part (a), find the probability mass function for the number of failures up to the r-th success.
+            \begin{equation*}
+                p(Z=k)=\binom{k+r-1}{r-1}p^r(1-p)^{k}
+            \end{equation*}
+            This is modeled by the Negative Binomial distribution such that k is the number of failures up to the r-th success (not the total number of trials).
+        \end{enumerate}
+        \item[5.] In a gambling game a person draws a single card from an ordinary 52-card playing
+deck. A person is paid $\$15$ for drawing a jack or a queen and $\$5$ for drawing a king or an ace. A person who draws any other card pays $\$4$. If a person plays this game, what is the expected gain?
+
+
+
+        P(J,Q)$=\frac{8}{52}=\frac{2}{13}$
+        
+        P(K,A)$=\frac{8}{52}=\frac{2}{13}$
+        
+        P(2,3,4,5,6,7,8,9,10)$=\frac{36}{52}=\frac{9}{13}$
+        \begin{equation*}
+            \expect(Y) = \sum\limits_y y\cdot p(y)
+        \end{equation*}
+        \begin{equation*}
+            \expect(Y) = 15 \cdot p(J,Q) + 5 \cdot p(K,A) + (-4) \cdot p(2,3,4,5,6,7,8,9,10)
+        \end{equation*}
+        \begin{equation*}
+            =15 \cdot \frac{2}{13} + 5 \cdot \frac{2}{13} + (-4) \cdot \frac{9}{13}
+        \end{equation*}
+        \begin{equation*}
+            \frac{30}{13} + \frac{10}{13} - \frac{36}{13}=\textcolor{red}{\frac{4}{13}}
+        \end{equation*}
+        \item[6.] An oil prospector will drill a succession of holes in a given area to find a productive well. The probability that he is successful on a given trial is 0.2.
+        \begin{enumerate}
+            \item What is the probability that the third hole drilled is the first to yield a productive well?\\\\
+            We have a geometric random variable Y and we want to find $p(Y=3)$.
+            \begin{equation*}
+                p(y)=q^{y-1} \cdot p=(1-p)^{y-1} \cdot p
+            \end{equation*}
+            \begin{equation*}
+                p(3)=(1-0.2)^{3-1} \cdot 0.2=\textcolor{red}{0.128}
+            \end{equation*}
+            \item If the prospector can afford to drill at most ten wells, what is the probability that he will fail to find a productive well?\\\\
+            To find the probability of success, let's consider Y as a variable of a binomial experiment. Consider p = 0.2 (we want failure), q=0.8, we have 10 trials, and want 0 to successes.
+            \begin{equation*}
+                p(0)=\binom{10}{0}\cdot0.2^{0}\cdot0.8^{10-0}=\textcolor{red}{0.107}
+            \end{equation*}
+            
+        \end{enumerate}
+    \end{enumerate}
+\end{document}

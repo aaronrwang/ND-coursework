@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools}
+\usepackage{textcomp}
+\usepackage[left=1in, right=1.5in]{geometry}
+\usepackage{xcolor}
+
+\newcommand{\Emptyset}{\varnothing}
+\newcommand{\notsubseteq}{\mathrel{\not\subseteq}}
+\newcommand{\union}{\cup}
+\newcommand{\intersect}{\cap}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\naturals}{\mathbb{N}}
+\newcommand{\s}{\mathbb{S}}
+\newcommand{\power}{\mathbb{P}}
+\newcommand{\expect}{E}
+\newcommand{\var}{Var}
+
+\title{Homework 4}
+\author{Aaron Wang}
+\date{October 7 2024}
+
+\begin{document}
+\maketitle
+    \begin{enumerate}
+%1
+        \item Twenty identical looking packets of white power are such that 15 contain cocaine and 5 do not. Four packets were randomly selected, and the contents were tested and found to contain cocaine. Two additional packets were selected from the remainder and sold by undercover police officers to a single buyer. What is the probability that the 6 packets randomly selected are such that the first 4 all contain cocaine and the 2 sold to the buyer do not?
+        
+        
+        Let $A$ be the event that the first four packets selected are all cocaine.
+        \begin{equation*}
+            P(A)=\frac{\binom{15}{4}}{\binom{20}{4}}\approx 0.28
+        \end{equation*}
+        Let $B|A$ be the event that the next two packets selected are all not cocaine given the first four were cocaine.
+        \begin{equation*}
+            P(B|A)=\frac{\binom{5}{2}}{\binom{16}{2}}\approx 0.08
+        \end{equation*}
+        \begin{equation*}
+            P(A \intersect B)=P(A) \cdot P(B|A)\approx \textcolor{red}{0.02}
+        \end{equation*}
+\pagebreak
+%2
+        \item A salesperson has found that the probability of a sale on a single contact is approximately 0.03. If the salesperson contacts 100 prospects, what is the probability of making at least one sale? Please provide an accurate probability and an approximated probability, and comment on whether they are close to each other.
+        \begin{itemize}
+            \item Accurate probability
+
+            Let $X \sim$ Binom$(n,p)$ such that $n=100$ and $p=0.03$
+            \begin{equation*}
+                P(X=0)=\binom{100}{0}0.03^0(1-0.03)^{100-0}\approx 0.0476
+            \end{equation*}
+            This is the probability that no sale is made.
+            Thus to get the probability that at least one sale is made we do $1-0.0476=$\textcolor{red}{$0.9524$}
+            \item Approximated Probability
+
+
+            Let $S \sim$ Poi$(\lambda)$ such that $\lambda=p\cdot100=0.03\cdot100=3$
+            \begin{equation*}
+                P(S=0)=\frac{e^{-3}3^0}{0!}\approx 0.0498
+            \end{equation*}
+            This is the probability that no sale is made.
+            Thus to get the probability that at least one sale is made we do $1-0.0498=$\textcolor{red}{$0.9502$}
+        \end{itemize}
+        The accurate and approximated probability are close to each other because it is over a fairly large span of trials (100 trials). 
+        \item Suppose that in a city, the number of suicides can be approximated by a Poisson process with $\mu = 0.33$ per month.
+        \begin{enumerate}
+            \item Find the probability of k suicides in a year for $k = 0, 1, 2, ....$ What is the most probable number of suicides?
+
+            
+            Let $S \sim$ Poi$(\lambda)$ such that $\lambda=0.33\cdot12=3.96$
+            \textcolor{red}{
+                \begin{equation*}
+                    P(S)=\frac{e^{-3.96}3.96^k}{k!}
+                \end{equation*}
+            }
+            $E(S)=\lambda=3.96$ Thus \textcolor{red}{the most probable number of suicides would be 4} (closest whole number).
+            \item What is the probability of two suicides in one week?
+
+            Assume 4 weeks in 1 month.
+            Let $S \sim$ Poi$(\lambda)$ such that $\lambda=\frac{0.33}{4}=0.0825$
+            \begin{equation*}
+                P(S=2)=\frac{e^{-0.0825}0.0825^2}{2!}=\textcolor{red}{0.0031}
+            \end{equation*}
+        \end{enumerate}
+\pagebreak
+%4
+        \item Suppose that a rare disease has an incidence of 1 in 1000. Assuming that members of the population are affected independently, find the probability of k cases in a population of 100,000 for k = 0, 1, 2. In addition, provide an approximated probability using Poisson approximation, and comment on whether they are close to each other.
+        \begin{itemize}
+            \item Accurate probability
+
+            Let $X \sim$ Binom$(n,p)$ such that $n=100000$ and $p=\frac{1}{1000}=0.001$
+            \textcolor{red}{
+            \begin{equation*}
+                P(X)=\binom{100000}{k}0.001^k(1-0.001)^{100000-k}
+            \end{equation*}
+            }
+            \begin{equation*}
+                P(X=0)=\binom{100000}{0}0.001^0(1-0.001)^{100000-0}\approx \textcolor{red}{3.54\cdot 10^{-44}}
+            \end{equation*}
+            \begin{equation*}
+                P(X=1)=\binom{100000}{1}0.001^1(1-0.001)^{100000-1}\approx \textcolor{red}{3.54\cdot 10^{-42}}
+            \end{equation*}
+            \begin{equation*}
+                P(X=2)=\binom{100000}{2}0.001^2(1-0.001)^{100000-2}\approx \textcolor{red}{1.77\cdot 10^{-40}}
+            \end{equation*}
+            
+            \item Approximated Probability
+
+            Let $S \sim$ Poi$(\lambda)$ such that $\lambda=0.001\cdot100000=100$
+            \textcolor{red}{
+            \begin{equation*}
+                P(S)=\frac{e^{-100}100^k}{k!}
+            \end{equation*}
+            }
+            \begin{equation*}
+                P(S=0)=\frac{e^{-100}100^0}{0!}\approx \textcolor{red}{3.72\cdot 10^{-44}}
+            \end{equation*}
+            \begin{equation*}
+                P(S=1)=\frac{e^{-100}100^1}{1!}\approx \textcolor{red}{3.72\cdot 10^{-42}}
+            \end{equation*}
+            \begin{equation*}
+                P(S=2)=\frac{e^{-100}100^2}{2!}\approx \textcolor{red}{1.86\cdot 10^{-40}}
+            \end{equation*}
+        \end{itemize}
+        The accurate and approximated probability are extremely close to each other because it is over a extremely large span of trials (100000 trials). 
+%5
+        \item The number of typing errors made by a typist has a Poisson distribution with an average of four errors per page. If more than four errors appear on a given page, the typist must retype the whole page. What is the probability that a randomly selected page does not need to be retyped?
+        
+        Let $S \sim$ Poi$(\lambda)$ such that $\lambda=4$
+        \begin{equation*}
+            P(S)=\frac{e^{-4}4^k}{k!}
+        \end{equation*}
+        \begin{equation*}
+            P(S \leq 4)=\sum_{k=0}^4\frac{e^{-4}4^k}{k!}=\textcolor{red}{0.63}
+        \end{equation*}
+        
+    \end{enumerate}
+\end{document}

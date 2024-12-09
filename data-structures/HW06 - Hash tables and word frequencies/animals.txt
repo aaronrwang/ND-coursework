@@ -1,0 +1,3 @@
+dog cat armadillo bear
+bear dog cat dog
+dog bear

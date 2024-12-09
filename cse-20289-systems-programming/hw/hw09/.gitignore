@@ -1,0 +1,8 @@
+# Ignore object files
+*.o
+
+# Ignore the final executable
+redextract
+redextract-debug
+# Ignore backup files created by text editors (like vim or emacs)
+*~

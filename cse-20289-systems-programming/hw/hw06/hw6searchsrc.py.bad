@@ -1,0 +1,116 @@
+# Aaron Wang
+# awang27@nd.edu
+
+import argparse
+import re
+import os
+
+def read_file(fileName):
+    # fileRegex = re.compile(r'^(.*\/)([^\/]*)$') # greedy 
+    # mo = fileRegex.search(fileName)
+    # print("path: " + mo[1])
+    # print("file: " + mo[2])
+
+    count = 0
+    codeLines = []
+    with open(fileName, "r") as f:
+        # read file into a list line by line and count lines
+        for x in f:
+            codeLines.append(x)
+        return codeLines
+
+def count_lines(code):
+    return len(code)
+
+def count_include(code):
+    count = 0
+    includeRegex = re.compile(r'^#include')
+    for x in code:
+        mo = includeRegex.search(x)
+        if(mo): #check if line starts with '#include' and count
+            count+=1
+    return count
+
+def count_include_local(code):
+    count = 0
+    includeLocalRegex = re.compile(r'^#include\s+\".*\"')
+    for x in code:
+        mo = includeLocalRegex.search(x)
+        if(mo): #check if line starts with '#include "' and count
+            count+=1
+    return count
+    
+def count_member_funcs(code):
+    count = 0
+    memberRegex = re.compile(r'^[a-zA-Z0-9].*::.*') #\w potentially instead???
+    for x in code:
+        mo = memberRegex.search(x)
+        if mo:
+            count+=1 #check if line has with '::' and count
+    return count
+
+def count_one_line_funcs(code):
+    count = 0
+    funcRegex1 = re.compile(r'^[a-zA-Z0-9].*')
+    funcRegex2 = re.compile(r'^[a-zA-Z0-9].*{')
+    funcRegex3 = re.compile(r'^{')
+    funcRegex4 = re.compile(r'^}')
+    for i in range(len(code)-2):
+        mo1 = funcRegex1.search(code[i])
+        if mo1: #check if member function text exists
+            mo2 = funcRegex2.search(code[i])
+            if mo2: # check case that bracket is on same line
+                mo4 = funcRegex4.search(code[i+2])
+                if mo4: # check ending
+                    count+=1
+            mo3 = funcRegex3.search(code[i+1])
+            if mo3 and i < len(code)-3: # check case that bracket is on next line make sure no overflow
+                mo4 = funcRegex4.search(code[i+3])
+                if mo4: # check ending
+                    count+=1
+    return count
+
+def path_name (fullPath):
+    return os.path.dirname(fullPath)
+
+def base_name (fullPath):
+    return os.path.basename(fullPath)
+
+# main code
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    
+    # add all arguments to parse 
+    parser.add_argument("file", type=str)
+    parser.add_argument("--include", action="store_true")
+    parser.add_argument("--includelocal", action="store_true")
+    parser.add_argument("--memberfuncs", action="store_true")
+    parser.add_argument("--onelinefuncs", action="store_true")
+
+    args = parser.parse_args()
+
+# Task 3d modifications; see read me
+    if os.path.isdir(args.file):
+        print(args.file,"is a directory.")
+        exit()
+    if args.file[-3:]!='.cc':
+        print(args.file,"is not a .cc.")
+        exit()
+    if not os.path.isfile(args.file):
+        print(args.file,"is not a valid file path.")
+        exit()
+    
+
+    print('path:', path_name(args.file))
+    print('base:',base_name(args.file))
+    code = read_file(args.file)
+    print('lines:',count_lines(code))
+    if args.include:
+        print('include:',count_include(code))
+    if args.includelocal:
+        print('includelocal:',count_include_local(code))
+    if args.memberfuncs:
+        print('memberfuncs:',count_member_funcs(code))
+    if args.onelinefuncs:
+        print('one linefuncs:',count_one_line_funcs(code))
+

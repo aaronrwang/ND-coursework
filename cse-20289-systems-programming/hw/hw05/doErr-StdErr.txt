@@ -1,0 +1,5 @@
+Yippee!
+Traceback (most recent call last):
+  File "doErr.py", line 2, in <module>
+    print(1 / 0)  # Divid by 0 error.
+ZeroDivisionError: division by zero

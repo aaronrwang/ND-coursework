@@ -1,0 +1,13 @@
+total 180
+-rw-r--r-- 1 awang27 notre-dame   119 Oct  7 19:55 host-ip-mac.csv
+-rw------- 1 awang27 notre-dame     8 Oct  7 16:36 NETID
+-rw------- 1 awang27 notre-dame   464 Oct  7 16:49 ouput-xxd.txt
+-rw------- 1 awang27 notre-dame 80171 Oct  7 16:37 Out-Dump.txt
+-rw------- 1 awang27 notre-dame     0 Oct  7 19:57 out-ls
+-rw------- 1 awang27 notre-dame  3714 Oct  7 16:43 output-endFile.txt
+-rw------- 1 awang27 notre-dame    57 Oct  7 19:51 output-reverse.txt
+-rw------- 1 awang27 notre-dame  1853 Oct  7 16:42 output-startFile.txt
+-rw------- 1 awang27 notre-dame     0 Oct  7 16:35 README.md
+-rw------- 1 awang27 notre-dame   187 Oct  7 19:56 revND.txt
+-rw------- 1 awang27 notre-dame 67592 Oct  7 16:44 Test-Small.pcap
+-rw------- 1 awang27 notre-dame     4 Oct  7 16:40 theLines.txt

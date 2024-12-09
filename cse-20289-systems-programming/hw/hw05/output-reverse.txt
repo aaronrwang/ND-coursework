@@ -1,0 +1,1 @@
+143.152.74.129.in-addr.arpa	name = student13.cse.nd.edu.

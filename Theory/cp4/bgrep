@@ -1,0 +1,472 @@
+#!/usr/bin/env python3
+
+import sys
+from typing import Tuple, List, Deque, Dict
+from collections import defaultdict, deque
+
+
+class Node:
+  def __init__(self, type, value=None, children=[]):
+    self.type = type # symbol, epsilon, union, concat, star
+    self.value = value # if symbol what value
+    self.children = children # if operator (union, concat, star), what does it operate on?
+
+class NFA:
+  def __init__(self, states=[], alphabet=[], start=None, accept=[], transitions=defaultdict(list)):
+    self.states = states
+    self.alphabet = alphabet
+    self.start = start
+    self.accept = accept
+    self.transitions = transitions
+
+def write_nfa(nfa: NFA):
+  try:
+    string = ''
+    string += ' '.join(nfa.states) + ' \n'
+    string += ' '.join(nfa.alphabet) + ' \n'
+    string += nfa.start + '\n'
+    string += ' '.join(nfa.accept) + ' \n'
+    for key in nfa.transitions:
+      if key[1] == '&&':
+        for q, g in nfa.transitions[key]:
+          string +=key[0] +' ' + g + ' ' + q + '\n'
+      elif key[1] == 'copy':
+        for q, g in nfa.transitions[key]:
+          string +=key[0] +' copy[' + g + '] ' + q + '\n'
+      else:
+        for q in nfa.transitions[key]:
+          string +=' '.join(key)+' '+q+'\n'
+    print(string, end="")
+    return True
+  except:
+    raise("Error in write_nfa")
+    return False
+  
+def epsilon_nfa() -> NFA: #epsilon NFA
+  M = NFA(['q0'],[],'q0',['q0'],defaultdict(list))
+  return M 
+
+def symbol_nfa(symbol: str) -> NFA:  #NFA with one letter
+  M = NFA(['q0', 'q1'],[symbol],'q0',['q1'],defaultdict(list))
+  M.transitions[('q0',symbol)].append('q1')
+  return M
+
+def copy_nfa(group: int) -> NFA:  #NFA with one copy transition
+  M = NFA(['q0', 'q1'],[],'q0',['q1'],defaultdict(list))
+  M.transitions[('q0','copy')].append(('q1',f'{group}'))
+  return M
+#reads nfa from file
+def read_nfa(filename: str) -> NFA:
+  with open(filename,'r') as fp:
+      states = set(fp.readline().strip().split(" "))
+      alphabet = set(fp.readline().strip().split(" "))
+      start = fp.readline().strip()
+      accept = set(fp.readline().strip().split(" "))
+      data = fp.readlines()
+      transitions = defaultdict(list)
+      for line in data:
+        q_0,t,q_1 = line.strip().split(" ")
+        transitions[(q_0,t)].append(q_1)
+  nfa = NFA(states, alphabet, start, accept, transitions)
+  return nfa
+
+#returns dicts for {oldState: newState} of concatenated nfas
+def combinedStatesDicts(states_1: List[str], states_2: List[str]) -> Tuple[Dict[str, str], Dict[str, str]]:
+  newStates_1 = defaultdict(str)
+  newStates_2 = defaultdict(str)
+
+  count = 1
+  for state in states_1:
+    newStates_1[state] = 'q' + str(count)
+    count += 1
+  
+  for state in states_2:
+    newStates_2[state] = 'q' + str(count)
+    count += 1
+
+  return newStates_1, newStates_2
+
+def newStatesDict(states_1: List[str]) -> Dict[str, str]:
+  newStates_1 = defaultdict(str)
+  count = 1 #start at 1 for extra q0 start state
+  for state in states_1:
+    newStates_1[state] = 'q' + str(count)
+    count += 1
+
+  return newStates_1
+
+
+#create nfa recognizing the concatenation of two nfas
+def concat_nfa(nfa_1: NFA, nfa_2: NFA) -> NFA:
+  states_1, states_2 = combinedStatesDicts(nfa_1.states, nfa_2.states) #get new state names
+  states = list(states_1.values()) + list(states_2.values())
+  alphabet = set(nfa_1.alphabet) | set(nfa_2.alphabet)
+  start = states_1[nfa_1.start]
+  accept = list(map(lambda q: states_2[q], nfa_2.accept))
+  transitions = defaultdict(list)
+
+  #add new state names to all transitions
+  for q0, t in nfa_1.transitions.keys():
+    if t == '&&' or t == 'copy':
+      transitions[(states_1[q0], t)] = list(map(lambda a: (states_1[a[0]],a[1]) , nfa_1.transitions[(q0, t)]))
+    else:
+      transitions[(states_1[q0], t)] = list(map(lambda q1: states_1[q1] , nfa_1.transitions[(q0, t)]))
+
+  for q0, t in nfa_2.transitions.keys():
+    if t == '&&' or t == 'copy':
+      transitions[(states_2[q0], t)] = list(map(lambda a: (states_2[a[0]],a[1]) , nfa_2.transitions[(q0, t)]))
+    else:
+      transitions[(states_2[q0], t)] = list(map(lambda q1: states_2[q1] , nfa_2.transitions[(q0, t)]))
+  # for q0, t in nfa_1.transitions.keys():
+  #   transitions[(states_1[q0], t)] = list(map(lambda q1: states_1[q1], nfa_1.transitions[(q0, t)]))
+  
+  # for q0, t in nfa_2.transitions.keys():
+  #   transitions[(states_2[q0], t)] = list(map(lambda q1: states_2[q1], nfa_2.transitions[(q0, t)]))
+
+  #add transitions from accept of nfa_1 to start of nfa_2
+  for q0 in nfa_1.accept:
+    transitions[(states_1[q0], '&')].append(states_2[nfa_2.start])
+  concat_nfa = NFA(states, alphabet, start, accept, transitions)
+  return concat_nfa
+
+def union_nfa(nfa_1: NFA, nfa_2: NFA) -> NFA:
+  states_1, states_2 = combinedStatesDicts(nfa_1.states, nfa_2.states) #get new state names
+  states = ["q0"] + list(states_1.values()) + list(states_2.values())
+  alphabet = set(nfa_1.alphabet) | set(nfa_2.alphabet)
+  start = "q0"
+  acceptNfa_1 = list(map(lambda q: states_1[q], nfa_1.accept))
+  acceptNfa_2 = list(map(lambda q: states_2[q], nfa_2.accept))
+  accept = acceptNfa_1 + acceptNfa_2
+  transitions = defaultdict(list)
+
+  #add new state names to all transitions
+  for q0, t in nfa_1.transitions.keys():
+    if t == '&&' or t == 'copy':
+      transitions[(states_1[q0], t)] = list(map(lambda a: (states_1[a[0]],a[1]) , nfa_1.transitions[(q0, t)]))
+    else:
+      transitions[(states_1[q0], t)] = list(map(lambda q1: states_1[q1] , nfa_1.transitions[(q0, t)]))
+
+  for q0, t in nfa_2.transitions.keys():
+    if t == '&&' or t == 'copy':
+      transitions[(states_2[q0], t)] = list(map(lambda a: (states_2[a[0]],a[1]) , nfa_2.transitions[(q0, t)]))
+    else:
+      transitions[(states_2[q0], t)] = list(map(lambda q1: states_2[q1] , nfa_2.transitions[(q0, t)]))
+
+  #add start transitions
+  transitions[(start, '&')] = [states_1[nfa_1.start], states_2[nfa_2.start]]
+  union_nfa = NFA(states, alphabet, start, accept, transitions)
+  return union_nfa
+
+
+#create nfa recognizing Kleene star of nfa
+def star_nfa(nfa: NFA) -> NFA:
+  newStates = newStatesDict(nfa.states) #get new state names
+  states = ["q0"] + list(newStates.values())
+  alphabet = nfa.alphabet
+  start = "q0"
+  accept = ["q0"] + list(map(lambda q: newStates[q], nfa.accept))
+  transitions = defaultdict(list)
+
+  #add new state names to all transitions
+  for q0, t in nfa.transitions.keys():
+    if t == '&&' or t == 'copy':
+      transitions[(newStates[q0], t)] = list(map(lambda a: (newStates[a[0]],a[1]) , nfa.transitions[(q0, t)]))
+    else:
+      transitions[(newStates[q0], t)] = list(map(lambda q1: newStates[q1] , nfa.transitions[(q0, t)]))
+
+  #add transitions from accept of nfa to start of nfa
+  for q0 in nfa.accept:
+    transitions[(newStates[q0], '&')].append(newStates[nfa.start])
+
+  #add transition from new start state
+  transitions[(start, '&')] = [newStates[nfa.start]]
+  star_nfa = NFA(states, alphabet, start, accept, transitions)
+  return star_nfa
+
+def group_nfa(nfa: NFA, group: int) -> NFA:
+  # Follows principles in star_nfa
+  newStates = newStatesDict(nfa.states) #get new state names
+  states = ["q0"] + list(newStates.values())
+  end_state =f"q{len(states)}"
+  states.append(end_state)
+  alphabet = nfa.alphabet
+  start = "q0"
+  accept = [end_state]
+  transitions = defaultdict(list)
+  #add new state names to all transitions
+  for q0, t in nfa.transitions.keys():
+    if t == '&&':
+      transitions[(newStates[q0], t)] = list(map(lambda a: (newStates[a[0]],a[1]) , nfa.transitions[(q0, t)]))
+    else:
+      transitions[(newStates[q0], t)] = list(map(lambda q1: newStates[q1] , nfa.transitions[(q0, t)]))
+
+  # add transitions from accept of nfa to to new accept state, epsilon close transition
+  for q0 in nfa.accept:
+    transitions[(newStates[q0], '&&')].append((end_state, f'close[{group}]'))
+
+  #add open transition from new start state
+  transitions[(start, '&&')] = [(newStates[nfa.start],f'open[{group}]')]
+  group_nfa = NFA(states, alphabet, start, accept, transitions)
+  return group_nfa
+
+
+# Debugging code.
+def dfsdebug(root: Node, tabs: int):
+  for i in range(tabs):
+    print(' ',end='')
+  print(root.type, root.value)
+  for node in root.children:
+    dfsdebug(node, tabs+1)
+
+#code for union
+def union(tree: Deque[Node]) -> Node:
+  left = tree.popleft()
+  while len(tree):
+    middle = tree.popleft()
+    if middle.type !='union':
+      raise Exception('Unexpected value in union')
+    right = tree.popleft()
+    node = Node('union',None,[left,right])
+    left = node
+  return left
+
+# code for concat
+def concat(tree: Deque[Node]) -> List[Node]:
+  new_tree = deque()
+  left = tree.popleft()
+  while len(tree):
+    right = tree.popleft()
+    if right.type == 'union':
+      new_tree.append(left)
+      new_tree.append(right)
+      left = Node('epsilon')
+      continue
+    if left.type == 'epsilon':
+      left = right
+      continue
+    node = Node('concat',None,[left,right])
+    left = node
+  new_tree.append(left)
+  return new_tree
+
+#code for star
+def star(tree: Deque[Node]) -> List[Node]:
+  new_tree = deque([tree.popleft()])
+  while len(tree):
+    right = tree.popleft()
+    if right.type == 'star':
+      if new_tree[-1].type == 'epsilon':
+        raise Exception('error: unexpected *')
+      right.children=[new_tree.pop()]
+      new_tree.append(right)
+    else:
+      new_tree.append(right)
+  return new_tree
+
+# first find all *s, then concat, then union
+def union_concat_star(tree: List[Node]) -> Node:
+  return union(concat(star(tree)))
+  
+def parse_re(regex: list, index: int, group:int = 0) -> Node:
+  
+  prev = Node('epsilon')
+  tree = deque([prev])
+  group_count = group + 1
+  while index < len(regex):
+    #print(tree)
+    #print(regex[index])
+    c = regex[index]
+    node = None
+    if c =='(':
+      # open subexpression
+      node, index, group_count = parse_re(regex, index+1,group_count)
+    elif c == ')':
+      # close subexpression
+      if not group:
+        raise Exception('error: expected end of regular expression but found )')
+      node = Node('subexpr',group,[union_concat_star(tree)])
+      return node, index, group_count
+    elif c == '|':
+      # create union node
+      node = Node('union')
+    elif c == '*':
+      # create star node
+      node = Node('star')
+    elif c == '\\':
+      index += 1
+      if index == len(regex) and regex[index] != 'g':
+        raise Exception(f'error: expected g but found {regex[index]}')
+      index += 1
+      if index == len(regex) and regex[index] != '<':
+        raise Exception(f'error: expected < but found {regex[index]}')
+      num = ''
+      while True:
+        index += 1
+        if index == len(regex):
+          raise Exception(f'error: back reference not closed')
+        if regex[index] == '>':
+          break
+        num += regex[index]
+      try:
+        num = int(num)
+      except:
+        raise Exception(f'error: Number expected as back reference but got {num}')
+      node = Node('backref', num)
+    else:
+      # create symbol
+      node = Node('symbol', c)
+    tree.append(node)
+    index+=1
+  if group:
+    raise Exception('error: expected ) but found ⊣')
+
+  # close total expression
+  root = union_concat_star(tree)
+
+  return root
+
+def dfsprint(root: Node):
+  if root.type == 'symbol':
+    print(f'symbol[{root.value}]',end='')
+  elif root.type == 'backref':
+    print(f'backref[{root.value}]',end='')
+  elif root.type == 'epsilon':
+    print('epsilon',end='')
+  elif root.type == 'star':
+    print('star(',end='')
+    dfsprint(root.children[0])
+    print(')',end='')
+  elif root.type == 'subexpr':
+    print(f'group[{root.value}](',end='')
+    dfsprint(root.children[0])
+    print(')',end='')
+  else:
+    print(f'{root.type}(',end='')
+    dfsprint(root.children[0])
+    print(',',end='')
+    dfsprint(root.children[1])
+    print(')',end='')
+  
+def treeToNFA(root: Node): #recursively converts based off type
+  if root.type == 'symbol':
+    return symbol_nfa(root.value)
+  elif root.type == 'backref':
+    return copy_nfa(root.value)
+  elif root.type == 'epsilon':
+    return epsilon_nfa()
+  elif root.type == 'star':
+    return star_nfa(treeToNFA(root.children[0]))
+  elif root.type == "concat":
+    return concat_nfa(treeToNFA(root.children[0]), treeToNFA(root.children[1]))
+  elif root.type == "union":
+    return union_nfa(treeToNFA(root.children[0]), treeToNFA(root.children[1]))
+  elif root.type == 'subexpr':
+    return group_nfa(treeToNFA(root.children[0]), root.value)
+  
+  return 
+def backtrack_path(visited: dict, cur: str, i: int) -> List[Tuple[str, str]]:
+  path = [] #(state, transition) pairs
+
+  #backtrack for path
+  while visited[(cur, i)][0]:
+    prev, prev_i, trans = visited[(cur, i)]
+    path.append((cur, trans))
+    cur, i = prev, prev_i #move back
+
+  path.reverse()
+  return path
+
+def match(M: NFA, w: str) -> Tuple[bool, List[Tuple[str, str]]]:
+  visited = set([(M.start, 0, str({}), str([]))]) # (state, i, groups, group_stack)
+  q = deque([(M.start, 0, {}, [])]) # (state, i, groups, group_stack)
+
+  # breadth first search
+  while q:
+    cur, i, groups, group_stack = q.popleft()
+    # print(cur,i,groups,group_stack)
+
+    #check if reached the end of word
+    if i == len(w) and cur in M.accept:
+      return (True, groups)
+
+    #check for rest of transitions
+    if i < len(w):
+      for state in M.transitions.get((cur, w[i]), []):
+        # update the groups accordingly, if inside a group
+        new_groups = {}
+        for key in groups:
+          new_groups[key] = groups[key][:]
+        for group in group_stack:
+          new_groups[group] += w[i]
+        # print(new_groups)
+        if (state, i + 1, str(new_groups), str(group_stack)) not in visited:
+          visited.add((state, i + 1, str(new_groups), str(group_stack)))
+          q.append((state, i + 1, new_groups, group_stack))
+
+    for state, trans in M.transitions.get((cur, 'copy'), []):
+      # print(state,trans,cur,i,groups,group_stack)
+      try:
+        group_to_add = groups[int(trans)]
+      except:
+        continue
+      if i + len(group_to_add) > len(w):
+        continue
+      # print(group_to_add, w[i:i+len(group_to_add)])
+      if group_to_add != w[i:i+len(group_to_add)]:
+        continue
+      # if not (state, i) in visited:
+      new_groups = {}
+      for key in groups:
+        new_groups[key] = groups[key][:]
+      for group in group_stack:
+        new_groups[group] += w[i]
+      if (state, i + len(group_to_add), str(new_groups), str(group_stack)) not in visited:
+        visited.add((state, i + len(group_to_add), str(new_groups), str(group_stack)))
+        q.append((state, i + len(group_to_add),new_groups, group_stack))
+
+    #check for any epsilon transitions
+    for state, trans in M.transitions.get((cur, '&&'), []):
+      # update the group stack, to see what should be changed. Always take the last group e.g. (d|e)* on 'de' takes 'e'
+      new_group_stack = group_stack[:]
+      new_groups = {}
+      for key in groups:
+        new_groups[key] = groups[key][:]
+      if trans[0] == 'o': 
+        # set group to nothing and add to stack.     
+        group = int(trans[5:-1])
+        new_groups[group] = ''
+        new_group_stack.append(group)
+      else:
+        # assuming the parser works correctly, the closed group should be implicitly at the top of the stack.
+        new_group_stack.pop()
+      if (state, i, str(new_groups), str(new_group_stack)) not in visited:
+        visited.add((state, i, str(new_groups), str(new_group_stack)))
+        q.append((state, i, new_groups, new_group_stack)) # don't increment i
+
+    
+    for state in M.transitions.get((cur, '&'), []):
+      if (state, i, str(groups), str(group_stack)) not in visited:
+        visited.add((state, i, str(groups), str(group_stack)))
+        q.append((state, i, groups, group_stack)) #don't increment i
+    
+  return (False, None)
+
+def main(): #constructs and reads line by line. It prints out the entire string it is correct 
+  if len(sys.argv) != 2:
+      sys.exit("Usage: bgrep REGEX")
+  regex = sys.argv[1]
+  root = parse_re(regex, 0)
+  # dfsprint(root)
+  # print()
+  builtNFA = treeToNFA(root)
+  # print(write_nfa(builtNFA))
+  for line in sys.stdin:
+      input = line.rstrip('\n')
+      # print(len(input))
+      result, path = match(builtNFA, input)
+      if result:
+        print(input)
+        # print(path)
+    
+if __name__ == "__main__":
+  main()

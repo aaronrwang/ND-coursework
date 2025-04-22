@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+import sys
+
+#parse .cnf file into a list of clauses
+def parse_cnf_file(filename):
+    """Parse a CNF file into a list of clauses."""
+    clauses = []
+    try:
+        with open(filename, 'r') as f:
+            for line in f:
+                line = line.strip()
+                literals = [int(x) for x in line.split()]
+                clauses.append(literals)
+    except Exception as e:
+        sys.exit(f"Error reading CNF file: {e}")
+    
+    return clauses
+
+
+#get set of all literals from clauses
+def get_literals(clauses):
+    literals = set()
+
+    for clause in clauses:
+        for literal in clause:
+            literals.add(abs(literal)) #get rid of negative
+
+    return literals
+
+
+def main(cnf_file, regexp_file, string_file):
+    #parse CNF file
+    clauses = parse_cnf_file(cnf_file)
+    literals = get_literals(clauses)
+
+    #construct regex in form '(1|)(1|)...1*-(\g<1>|\g<1>1|\g<2>)-(...)'
+    #construct string in form '11...-1-1...'
+    regex = '' 
+    string = ''
+    for _ in literals:
+        regex += '(1|)'
+        string += '1'
+
+    regex += '1*'
+
+    for clause in clauses:
+        regex += '-('
+        group = ''
+        for i in range(len(clause) - 1):
+            if clause[i] < 0:
+                group += f'\\g<{abs(clause[i])}>1|'
+            else:
+                group += f'\\g<{clause[i]}>|'
+
+        #add last
+        if clause[-1] < 0:
+            group += f'\\g<{abs(clause[-1])}>1'
+        else:
+            group += f'\\g<{clause[-1]}>'
+        
+        regex += f'{group})'
+        string += '-1'
+
+    #write to files
+    with open(regexp_file, 'w') as f:
+        f.write(regex)
+    
+    with open(string_file, 'w') as f:
+        f.write(string)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        sys.exit("Usage: sat_to_re cnf-file regexp-file string-file")
+    try:
+        main(sys.argv[1], sys.argv[2], sys.argv[3])
+    except Exception as e:
+        sys.exit(str(e))
+    

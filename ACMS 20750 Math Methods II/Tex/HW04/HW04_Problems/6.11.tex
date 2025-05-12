@@ -1,0 +1,30 @@
+\item [11.] $y''+2y'+10y=100\cos{4x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+1+3i)(D+1-3i)=0\\
+    \implies \text{root(s): } -1 \pm 3i\\
+    \text{General Solution: } y_c=e^{-x}(A\cos{3x}+B\sin{3x})
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $\cos$, we will use $Y=Ce^{4ix}=Y_R+iY_I$ s.t. $y_p=Y_R$. 
+\begin{gather*}
+    Y=Ce^{4ix}; Y'=C(4ie^{4ix});Y''=C(-16e^{4ix})\\
+    Y''+2Y'+10Y = C
+    \big(
+    (-16e^{4ix})
+    +2(4ie^{4ix})
+    +10(e^{4ix})
+    \big)\\
+    Y''+2Y'+10Y=(-6+8i)Ce^{4ix}=100e^{4ix}\\
+    \text{ so } C=\frac{50}{-3+4i}=\frac{-150-200i}{25}=-6-8i\\
+    Ce^{4ix}=(-6-8i)(\cos{4x}+i\sin{4x})\\
+    = -6\cos{4x}-6i\sin{4x}-8i\cos{4x}-8i^2\sin{4x}\\
+    = -6\cos{4x}+8\sin{4x}-8i\cos{4x}-6i\sin{4x}\\
+    = (-6\cos{4x}+8\sin{4x})+i(-8\cos{4x}-6\sin{4x})\\
+    y_p = Y_R = -6\cos{4x}+8\sin{4x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = e^{-x}(A\cos{3x}+B\sin{3x})-6\cos{4x}+8\sin{4x}}
+\end{gather*}

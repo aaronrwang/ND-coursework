@@ -1,0 +1,21 @@
+\answer{
+    Proof idea: Reduce the Universal decider to a decider for whether a TM $M$ ever attempts to move its head past the left end of the tape on input $w$.\newp
+    Proof:
+     \[\text{LEFT}_{TM} = \{\langle M, w \rangle | M \text{ attempts to moves head past the left on input } w\}\]
+     Suppose $\text{LEFT}_{TM}$ is decided by $R$. Construct the universal decider $S$.\newp
+    $S =$ ``on input $\langle M, w \rangle$
+    \begin{quote}
+        \begin{enumerate}
+            \item[1.] Construct $M' = $ ``on input $x$
+            \begin{enumerate}
+                \item [a.] Prepend $x$ with a $\str{\#}$.
+                \item [b.] Run $M$ on $x$ such that whenever the head is on $\str{\#}$, it move R.\footnote{With this modification, $M$ never attempts to move L past the end of the tape.}
+                \item [c.] If $M$ accepts, move L to the $\str{\#}$ and then move L one more time and \emph{accept}.
+                \item [d.]otherwise, halt.''
+            \end{enumerate}
+            \item[2.] Run $R$ on $\langle M', w \rangle$.
+            \item[3.] \emph{accept} or \emph{reject} according to $R$.''
+        \end{enumerate}
+    \end{quote}
+    Thus, as we have constructed the universal decider $S$, we have a contradiction $\lightning$. Consequently our original claim that $\text{LEFT}_{TM}$ is decidable is false. Therefore, it is undecidable whether a Turing machine $M$, on input $w$, ever attempts to move its head past the left end of the tape.
+}

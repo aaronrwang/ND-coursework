@@ -1,0 +1,17 @@
+\item [2.] By using $L2$, verify $L7$ and $L8$ in the Laplace transform table.
+\begin{enumerate}
+    \item [] $L7$
+    \begin{align*}
+    L\Bigg(\frac{e^{-at}-e^{-bt}}{b-a}\Bigg)& =\frac{L(e^{-at})-L(e^{-bt})}{b-a} && \text{ B/c $L$ is a linear transformation}\\
+    & = \frac{\frac{1}{p+a}-\frac{1}{p+b}}{b-a} && \text{ By } L2\\
+    & = \frac{p+b-p-a}{(p+a)(p+b)(b-a)} &&\text{ Algebra}\\
+    & = \frac{1}{(p+a)(p+b)} &&\text{ Algebra}\\
+    \end{align*}
+    \item [] $L7$
+    \begin{align*}
+    L\Bigg(\frac{ae^{-at}-be^{-bt}}{a-b}\Bigg)& =\frac{aL(e^{-at})-bL(e^{-bt})}{a-b} && \text{ B/c $L$ is a linear transformation}\\
+    & = \frac{\frac{a}{p+a}-\frac{b}{p+b}}{a-b} && \text{ By } L2\\
+    & = \frac{ap+ab-bp-ba}{(p+a)(p+b)(a-b)} &&\text{ Algebra}\\
+    & = \frac{p}{(p+a)(p+b)} &&\text{ Algebra}\\
+    \end{align*}
+\end{enumerate}

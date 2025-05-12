@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usetikzlibrary{automata, positioning, arrows}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+
+\title{Homework 02}
+\author{Aaron Wang}
+\date{January 31 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Divisibility tests.} Define, for all $k > 0$,
+    \[
+        D_k = \Big\{w \in \{\texttt{0}, . . . , \texttt{9}\}^*| w \text{ is the decimal representation of a multiple of } k \Big\}
+    \]
+    where $\e$ is considered to represent the number \texttt{0}. For example, the strings $\e$, \texttt{0}, \texttt{88}, and \texttt{088} all belong to $D_2$, but \texttt{99} and \texttt{099} do not.
+    \begin{enumerate}
+        \item Prove that $D_2$ is regular by writing a DFA for $D_2$.\newp
+        \input{HW02/1.a}
+        \item Prove that $D_3$ is regular by writing a DFA for $D_3$.\newp
+        \input{HW02/1.b}
+        \item Prove that $D_6$ is regular. An explicit DFA is not necessary.\newp
+        \input{HW02/1.c}
+
+% skipped optional alternative
+        % \item[(*)] Optional alternative: You can get full credit for all of the above if you can prove that for any $k > 0$, $D_k$ is regular, by describing how to write the formal description of a DFA $M = (Q, \{\texttt{0}, . . . , \texttt{9}\}, \delta, s, F)$ in terms of $k$.
+    \end{enumerate}
+    \item \textbf{Nondeterminism.} Consider the following NFA $N_2$ (same as in Figure 1.31), which accepts a string iff the third-to-last symbol is a 1:
+    \input{HW02/2.1}
+    \begin{enumerate}
+        \item Use the subset construction (Theorem 1.39) to convert $N_2$ to a DFA $M$. You may omit curly braces and commas when naming states; for example, instead of $\{1, 2, 3, 4\}$ you may write 1234. (Hint: the DFA should be equivalent to the one in Figure 1.32.)
+        \input{HW02/2.a}
+        \item  Why are the states in Figure 1.32 named $q_{abc}$ where $a, b, c \in\{\texttt{0}, \texttt{1}\}$?\newp
+        \input{HW02/2.b}
+        \item In Example 1.30, Sipser asks what happens if you modify $N_2$ into the following NFA - let’s call it $N'_2$:
+        \input{HW02/2.2}\newp
+        \input{HW02/2.c}
+        \item Use the subset construction (Theorem 1.39) to convert $N'_2$ to a DFA $M'$.
+        \input{HW02/2.d}
+    \end{enumerate}
+\newpage
+    \item \textbf{Procrustean closure properties.} Let $\s$ be an alphabet, and let $L_3 = \{\texttt{theory}, \texttt{of}, \texttt{computing}\}$ be an example language.
+    \begin{enumerate}
+%3a%
+        \item For any $w = w_1w_2 \cdots w_{n-1}w_n$, define
+        \[
+        \text{STRETCH}(w_1w_2 \cdots w_n) = w_1w_1w_2w_2 \cdots w_{n-1}w_{n-1}w_nw_n. 
+        \]
+        This induces an operation on languages,
+        \[
+        \text{STRETCH}(L) = \{\text{STRETCH}(w) | w \in L\}.  
+        \]
+        For example,
+        \[
+        \text{STRETCH}(L_3) = \{\texttt{tthheeoorryy}, \texttt{ooff}, \texttt{ccoommppuuttiinngg}\}.
+        \]
+        Prove that if $L$ is a regular language, then STRETCH$(L)$ is also regular.\newp
+        \input{HW02/3.a}
+\newpage
+%3b%
+        \item For any $w = w_1w_2\cdots w_{n-1}w_n$ with $n \geq 2$, define 
+        \[\text{CHOP}(w_1w_2\cdots w_{n-1}w_n) = w_2\cdots w_{n-1}.\] 
+        This induces an operation on languages,
+        \[\text{CHOP} = \{\text{CHOP}(w) | w \in L \text{ and } |w| \geq 2\}.\]
+        For example,
+        \[
+            \text{CHOP}(L_3) = \{\texttt{heor}, \e, \texttt{omputin}\}.
+        \]
+        Prove that if $L$ is a regular language, then CHOP$(L)$ is also regular.\newp
+        \input{HW02/3.b}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

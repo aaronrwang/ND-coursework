@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+import sys
+from typing import Tuple, List
+from collections import defaultdict, deque
+
+
+
+class NFA:
+  # Q: States: list
+  # A: Alphabet: 
+  # S: starting state
+  # F: Final states
+  # D: Transitions
+  def __init__(self, Q=[],A=[],S=None,F=[],D=defaultdict(list)):
+    self.Q = Q
+    self.A = A
+    self.S = S
+    self.F = F
+    self.D = D
+
+def read_nfa(filename: str):
+  M = NFA()
+  with open(filename,'r') as fp:
+      Q = set(fp.readline().strip().split(" "))
+      A = set(fp.readline().strip().split(" "))
+      S = fp.readline().strip()
+      F = set(fp.readline().strip().split(" "))
+      data = fp.readlines()
+      D = defaultdict(list)
+      for line in data:
+        q_0,t,q_1 = line.strip().split(" ")
+        D[(q_0,t)].append(q_1)
+  M = NFA(Q,A,S,F,D)
+  return M
+
+def write_nfa(n: NFA):
+  try:
+    string = ''
+    string += ' '.join(n.Q) + ' \n'
+    string += ' '.join(n.A) + ' \n'
+    string += n.S + '\n'
+    string += ' '.join(n.F) + ' \n'
+    for key in n.D:
+      for q in n.D[key]:
+        string +=' '.join(key)+' '+q+'\n'
+    print(string, end="")
+    return True
+  except:
+    return False
+  
+def epsilon_nfa() -> NFA:
+  M = NFA(['q0'],[],'q0',['q0'],defaultdict(list))
+  return M
+
+def symbol_nfa(symbol: str) -> NFA: 
+  M = NFA(['q0', 'q1'],[symbol],'q0',['q1'],defaultdict(list))
+  M.D[('q0',symbol)].append('q1')
+  return M
+
+def backtrack_path(visited: dict, cur: str, i: int) -> List[Tuple[str, str]]:
+  path = [] #(state, transition) pairs
+
+  #backtrack for path
+  while (cur, i) in visited:
+    prev, prev_i, trans = visited[(cur, i)]
+    path.append((cur, trans))
+    cur, i = prev, prev_i #move back
+
+  path.reverse()
+  return path
+
+def match(M: NFA, w: str) -> Tuple[bool, List[Tuple[str, str]]]:
+  visited = {} #(state, i): (prev_state, prev_i, transition)
+  q = deque([(M.S, 0)]) #(state, i) pairs
+
+  #breadth first search
+  while q:
+    cur, i = q.popleft()
+
+    #check if reached the end of word
+    if i == len(w) and cur in M.F:
+      return (True, backtrack_path(visited, cur, i))
+
+    #check for rest of transitions
+    if i < len(w):
+      for state in M.D.get((cur, w[i]), []):
+        if not (state, i + 1) in visited:
+          visited[(state, i + 1)] = (cur, i, w[i])
+          q.append((state, i + 1))
+
+    #check for any epsilon transitions
+    for state in M.D.get((cur, '&'), []):
+      if not (state, i) in visited:
+        visited[(state, i)] = (cur, i, '&')
+        q.append((state, i)) #don't increment i
+    
+  return (False, None)
+
+if __name__ == "__main__":
+  if len(sys.argv) != 3:
+    print("Usage: nfa_path <arg1> <arg2>")
+    sys.exit(1)
+  foundNFA = read_nfa(sys.argv[1])
+  flag, path = match(foundNFA, sys.argv[2])
+  if flag:
+    
+    print("accept")
+    prevState = foundNFA.S
+    for nextState, transition in path:
+      print(f'{prevState} {transition} {nextState}')
+      prevState = nextState
+
+  else:
+    print("reject")
+
+

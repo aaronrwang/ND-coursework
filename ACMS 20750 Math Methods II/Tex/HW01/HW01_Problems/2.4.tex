@@ -1,0 +1,36 @@
+\item $(1 + y^2) dx + xy dy = 0$, $y = 0$ when $x = 5$.
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+            (1 + y^2) dx + xy dy = 0 \\
+            (1 + y^2) dx = - xy dy \\
+            \frac{y}{1+y^2}dy = -\frac{1}{x}dx\\
+            \int\frac{y}{1+y^2}dy = -\int\frac{1}{x}dx\\
+            \frac{1}{2}\ln|1+y^2| = -\ln|x|+C \\
+            e^{\frac{1}{2}\ln|1+y^2|} = e^{-\ln|x|+C}\\
+            \sqrt{1+y^2}=\frac{C}{x}\\
+            \textcolor{red}{
+            1+y^2=\frac{C}{x^2}
+            }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Integration for LHS:\\
+        $u=1+y^2$; $du=2ydy$
+        \begin{gather*}
+            \int\frac{y}{1+y^2}dy = \frac{1}{2}\int\frac{1}{u}du \\
+            =\frac{1}{2}\ln|u|+C=\frac{1}{2}\ln|1+y^2|+C
+        \end{gather*}
+        Particular Solution:
+        \begin{gather*}
+            1+(0)^2=\frac{C}{(5)^2}\\
+            C=25\\
+            \textcolor{red}{
+            1+y^2=\frac{25}{x^2}
+            }
+        \end{gather*}
+    \end{minipage}
+}

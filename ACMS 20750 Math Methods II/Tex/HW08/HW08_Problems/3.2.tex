@@ -1,0 +1,27 @@
+\item [2.] $\displaystyle \frac{d^{10}}{dx^{10}} (xe^x)$
+\begin{align*}
+    \frac{d^{10}}{dx^{10}} (xe^x)
+    &= \sum_{k=0}^{10} \binom{10}{k}
+    \frac{d^{k}}{dx^{k}} (x)
+    \frac{d^{10-k}}{dx^{10-k}} (e^x)\\
+    &= 
+    \binom{10}{0}
+    \frac{d^{0}}{dx^{0}} (x)
+    \frac{d^{10-0}}{dx^{10-0}} (e^x)
+    +
+    \binom{10}{1}
+    \frac{d^{1}}{dx^{1}} (x)
+    \frac{d^{10-1}}{dx^{10-1}} (e^x)
+    +
+    \sum_{k=2}^{10} \binom{10}{k}
+    \frac{d^{k}}{dx^{k}} (x)
+    \frac{d^{10-k}}{dx^{10-k}} (e^x)\\
+    &= 
+    xe^x
+    +
+    10
+    e^x
+    +
+    0\\
+    &= \textcolor{red}{xe^x+10e^x}
+\end{align*}

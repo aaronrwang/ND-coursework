@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+import sys
+from typing import List, Dict
+from collections import defaultdict
+
+class NFA:
+  def __init__(self, states=[], alphabet=[], start=None, accept=[], transitions=defaultdict(list)):
+    self.states = states
+    self.alphabet = alphabet
+    self.start = start
+    self.accept = accept
+    self.transitions = transitions
+
+#print out nfa prints nfa
+def write_nfa(nfa: NFA):
+  try:
+    string = ''
+    string += ' '.join(nfa.states) + ' \n'
+    string += ' '.join(nfa.alphabet) + ' \n'
+    string += nfa.start + '\n'
+    string += ' '.join(nfa.accept) + ' \n'
+    for key in nfa.transitions:
+      for q in nfa.transitions[key]:
+        string +=' '.join(key)+' '+q+'\n'
+    print(string, end="")
+    return True
+  except:
+    return False
+
+#reads nfa from file
+def read_nfa(filename: str) -> NFA:
+  with open(filename,'r') as fp:
+      states = set(fp.readline().strip().split(" "))
+      alphabet = set(fp.readline().strip().split(" "))
+      start = fp.readline().strip()
+      accept = set(fp.readline().strip().split(" "))
+      data = fp.readlines()
+      transitions = defaultdict(list)
+      for line in data:
+        q_0,t,q_1 = line.strip().split(" ")
+        transitions[(q_0,t)].append(q_1)
+  nfa = NFA(states, alphabet, start, accept, transitions)
+  return nfa
+
+#returns dicts for {oldState: newState} of concatenated nfas
+def newStatesDict(states_1: List[str]) -> Dict[str, str]:
+  newStates_1 = defaultdict(str)
+  count = 1 #start at 1 for extra q0 start state
+  for state in states_1:
+    newStates_1[state] = 'q' + str(count)
+    count += 1
+
+  return newStates_1
+
+#create nfa recognizing Kleene star of nfa
+def star_nfa(nfa: NFA) -> NFA:
+  newStates = newStatesDict(nfa.states) #get new state names
+  states = ["q0"] + list(newStates.values())
+  alphabet = nfa.alphabet
+  start = "q0"
+  accept = ["q0"] + list(map(lambda q: newStates[q], nfa.accept))
+  transitions = defaultdict(list)
+
+  #add new state names to all transitions
+  for q0, t in nfa.transitions.keys():
+    transitions[(newStates[q0], t)] = list(map(lambda q1: newStates[q1], nfa.transitions[(q0, t)]))
+
+  #add transitions from accept of nfa to start of nfa
+  for q0 in nfa.accept:
+    transitions[(newStates[q0], '&')].append(newStates[nfa.start])
+
+  #add transition from new start state
+  transitions[(start, '&')] = [newStates[nfa.start]]
+  star_nfa = NFA(states, alphabet, start, accept, transitions)
+  return star_nfa
+
+if __name__ == "__main__":
+  try:
+    nfa = read_nfa(sys.argv[1])
+    starNfa = star_nfa(nfa)
+    write_nfa(starNfa)
+  except Exception as e:
+    sys.exit(str(e))  

@@ -1,0 +1,31 @@
+\textcolor{red}{
+    The intuition for the following CFG is this. We need to design a CFG that accepts only balanced strings and every balanced string. This CFG clearly only accepts balanced strings as it only adds \str{0} and \str{1} simultaneously. 
+    Now for the other half, a balanced string must fall into at least one of two categories. 
+    The first is that $w=\str{0}x\str{1}$ or $w=\str{1}x\str{0}$ s.t. $x$ is a balanced string (it is composed of a balanced substring wrapped by \str{0} and \str{1}). 
+    The other is $w=xy$ s.t. $x$, $y$ are balanced strings (It is a concatenation of two balanced substrings).
+    Both of these cases are covered by the following CFG.\newp
+    CFG for C with starting state $S$.
+    \begin{align*}
+    S &\rightarrow \str{0}S\str{1} \:|\: \str{1}S\str{0} \:|\: SS \:|\: \e
+    \end{align*}
+    The intuition for the following PDA is this. At each occurence of a character, we either pop the opposing character off the stack (if possible) or we add the current character onto the stack. This way, the stack will always be empty\footnote{airquotes because it will contain the \$ which signifies empty stack.} if and only if an equal amount of occurences of each character exist.\newp
+    \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+    \color{red}
+        \node[state, initial, accepting] (q0) {0};
+        \node[state, xshift=2.5cm] (q1) {1};
+        \node[state, xshift=5cm, accepting] (q2) {2};
+        \draw
+        (q0) edge[] node[above]{$\e$, $\e$ $\rightarrow$ \str{\$}} (q1)
+        (q1) edge[loop above] node[above, align=center]{
+            \str{0}, \str{1} $\rightarrow$ $\e$\\
+            \str{0}, $\e$ $\rightarrow$ \str{0}\\
+            \str{1}, \str{0} $\rightarrow$ $\e$\\
+            \str{1}, $\e$ $\rightarrow$ \str{1}
+        } (q1)
+        (q1) edge[] node[above]{$\e$, \str{\$} $\rightarrow$ $\e$} (q2)
+        ;
+    \end{tikzpicture}
+    \end{figure}
+}

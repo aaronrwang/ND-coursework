@@ -1,0 +1,24 @@
+\item [2.] Show that the functions $e^{in\pi x/l}$, $n = 0, \pm1, \pm2, \cdots,$ are a set of orthogonal functions on $(-l, l)$.
+\answer{
+\begin{quote}
+    $\displaystyle \int_{-l}^l f^*(x)g(x)dx = 0 \implies f \perp g$ on $(-l,l)$ where $f(x) = e^{in\pi x/l}$ and $g(x) = e^{-in\pi x/l}$
+\end{quote}
+\[
+    f^*(x) = [e^{in\pi x/l}]^* = \Big[\cos(n\pi x/l)+i\sin(n\pi x/l)\Big]^*=\cos(n\pi x/l)-i\sin(n\pi x/l) = e^{-in\pi x/l}
+\]
+\begin{align*}
+    \int_{-l}^l f^*(x)g(x)dx 
+    &= \int_{-l}^l e^{-in\pi x/l}e^{-in\pi x/l}dx\\
+    &=\int_{-l}^le^{-2in\pi x/l}dx\\
+    &= \frac{l}{-2in}e^{-2in\pi x/l}\Big|_{-l}^l\\
+    &= \frac{l}{-2in}e^{2in\pi}+\frac{l}{2in}e^{-2in\pi}\\
+    &= \frac{l}{2in}\big(e^{-2in\pi}-e^{2in\pi}\big)\\
+    &=\frac{l}{2in} (\cos{2n\pi}-\cos{2n\pi})\textsuperscript{\footnotemark}\\
+    &=\frac{l}{2in} (0)\\
+    &= 0
+\end{align*}
+Thus, we have shown that the functions are orthogonal on interval $(-l,l)$
+}
+\footnotetext{
+Observe: $e^{2in\pi} = \cos{(2n\pi)}+i\sin{(2n\pi)} = \cos{(2n\pi)}$ and $e^{-2in\pi} = \cos{(-2n\pi)}+i\sin{(-2n\pi)} = \cos{(2n\pi)}$ when $n$ is an integer.
+}

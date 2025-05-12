@@ -1,0 +1,19 @@
+\item [8.] $y''-16y=40e^{4x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-4)(D+4)=0 \implies \text{root(s): } \pm 4\\
+    \text{General Solution: } y_c=Ae^{-4x}+Be^{4x}
+\end{gather*}
+Now Find particular Solution:\\
+Because exponent on RHS is one of the roots of the auxiliary equation, particular solution in the form of $Cxe^{4x}$
+\begin{gather*}
+    y_p=Cxe^{4x};\:y_p'=C(e^{4x}+4xe^{4x});\:y_p''=C(8e^{4x}+16xe^{4x})\\
+    y_p''-16y_p=C\big((8e^{4x}+\cancel{16xe^{4x}})-\cancel{16(xe^{4x})}\big)\\
+    y_p''-16y_p=8Ce^{4x} = 40e^{4x} \text{ so } C=5\\
+    y_p = 5xe^{4x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = Ae^{-4x}+Be^{4x}+5xe^{4x}}
+\end{gather*}

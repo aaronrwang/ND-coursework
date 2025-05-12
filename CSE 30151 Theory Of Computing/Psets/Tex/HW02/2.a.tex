@@ -1,0 +1,40 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    % \node[state, initial] (q000) {$q_{000}$};
+    % \node[state, yshift=-2cm] (q001) {$q_{001}$};
+    % \node[state, xshift=4cm] (q010) {$q_{010}$};
+    % \node[state, yshift=-2cm, xshift=4cm] (q011) {$q_{011}$};
+    % \node[state, xshift=2cm, accepting] (q100) {$q_{100}$};
+    % \node[state, yshift=-2cm, xshift=2cm, accepting] (q101) {$q_{101}$};
+    % \node[state, xshift=6cm, accepting] (q110) {$q_{110}$};
+    % \node[state, yshift=-2cm, xshift=6cm, accepting] (q111) {$q_{111}$};
+    \node[state, initial] (q000) {1};
+    \node[state, yshift=-2cm] (q001) {12};
+    \node[state, xshift=4cm] (q010) {13};
+    \node[state, yshift=-2cm, xshift=4cm] (q011) {123};
+    \node[state, xshift=2cm, accepting] (q100) {14};
+    \node[state, yshift=-2cm, xshift=2cm, accepting] (q101) {124};
+    \node[state, xshift=6cm, accepting] (q110) {134};
+    \node[state, yshift=-2cm, xshift=6cm, accepting] (q111) {1234};
+    \draw 
+        (q000) edge[loop above] node[right, xshift=1mm]{\str{0}} (q000)
+        (q000) edge[] node[left]{\str{1}} (q001)
+        (q001) edge[] node[above]{\str{0}} (q010)
+        (q001) edge[bend right=25] node[below]{\str{1}} (q011)
+        (q100) edge[] node[above]{\str{0}} (q000)
+        (q100) edge[] node[above]{\str{1}} (q001)
+        (q101) edge[bend right=5] node[below]{\str{0}} (q010)
+        (q101) edge[] node[above]{\str{1}} (q011)
+        (q010) edge[] node[above]{\str{0}} (q100)
+        (q010) edge[bend right=5] node[above]{\str{1}} (q101)
+        (q011) edge[] node[above]{\str{0}} (q110)
+        (q011) edge[] node[above]{\str{1}} (q111)
+        (q110) edge[bend right=25] node[above]{\str{0}} (q100)
+        (q110) edge[] node[above]{\str{1}} (q101)
+        (q111) edge[] node[right]{\str{0}} (q110)
+        (q111) edge[loop below] node[right, xshift=1mm]{\str{1}} (q111)
+    ;
+\end{tikzpicture}
+\end{figure}

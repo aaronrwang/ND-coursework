@@ -1,0 +1,51 @@
+\textcolor{red}{The following is an NFA for $B$. The intuition is this. State 0 does not expect a carry in and state 1 expects a carry in. Thus, for state 0 if the next column would give a carry out, it automatically rejects. Likewise, for state 1, if the next column does not give a carry out, it automatically rejects. Further, if the addition of the top two matches the bottom, a carry out will not be expected for the next turn so it will transition to state 0; otherwise, it will transition to state 1.}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    \node[state, initial, accepting] (q0) {0};
+    \node[state, xshift=5cm] (q1) {1};    
+    \draw
+    (q0) edge[bend right] node[yshift=-1cm]{
+    $
+    \begin{bmatrix}
+    \str{0} \\ \str{0} \\ \str{1}
+    \end{bmatrix}
+    $
+    } (q1)
+    (q1) edge[bend right] node[yshift=1cm]{
+    $
+    \begin{bmatrix}
+    \str{1} \\ \str{1} \\ \str{0}
+    \end{bmatrix}
+    $
+    } (q0)
+    (q0) edge[loop above] node[xshift=-1.5cm,yshift=-.5cm]{
+    $
+    \begin{bmatrix}
+    \str{0} \\ \str{0} \\ \str{0}
+    \end{bmatrix},
+    \begin{bmatrix}
+    \str{0} \\ \str{1} \\ \str{1}
+    \end{bmatrix},
+    \begin{bmatrix}
+    \str{1} \\ \str{0} \\ \str{1}
+    \end{bmatrix}
+    $
+    } (q0)
+    (q1) edge[loop above] node[xshift=1.5cm,yshift=-.5cm]{
+    $
+    \begin{bmatrix}
+    \str{0} \\ \str{1} \\ \str{0}
+    \end{bmatrix},
+    \begin{bmatrix}
+    \str{1} \\ \str{0} \\ \str{0}
+    \end{bmatrix},
+    \begin{bmatrix}
+    \str{1} \\ \str{1} \\ \str{1}
+    \end{bmatrix}
+    $
+    } (q1)
+    ;
+\end{tikzpicture}
+\end{figure}

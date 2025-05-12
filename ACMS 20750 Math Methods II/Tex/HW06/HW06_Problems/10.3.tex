@@ -1,0 +1,29 @@
+\item[3.]$\frac{p}{p^2-1}=\frac{p}{p^2-1}\cdot\frac{1}{p^2-1}$
+\begin{equation*}
+    L^{-1}\Bigg(\frac{p}{p^2-1}\Bigg) 
+    = \cosh(t)
+    \tag{By \( L10 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{p^2-1}\Bigg) 
+    = \sinh(t)
+    \tag{By \( L9 \)}
+\end{equation*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{p}{p^2-1} \Bigg)
+    & = \int_0^t \cosh (t-\tau) \sinh (\tau) d\tau \\
+    & = \frac{1}{4}\int_0^t (e^{t-\tau}+e^{\tau-t}) (e^{\tau}-e^{-\tau}) d\tau\\
+    & = \frac{1}{4}\int_0^t e^{t-\tau}e^{\tau}+e^{\tau-t}e^{\tau}-e^{t-\tau}e^{-\tau}-e^{\tau-t}e^{-\tau}d\tau \\
+    & = \frac{1}{4}\int_0^t e^{t}+e^{2\tau-t}-e^{t-2\tau}-e^{-t}d\tau \\
+    & = \frac{1}{4}\int_0^t e^{t}-e^{-t}+e^{2\tau-t}-e^{t-2\tau}d\tau \\
+    & = \frac{1}{4}\Big(\tau e^{t}-\tau e^{-t}+\frac{e^{2\tau-t}}{2}+\frac{e^{t-2\tau}}{2}\Big)\Big|^t_0 \\
+    & = \frac{1}{4}\Bigg(
+    \Big(t e^{t}-t e^{-t}+\frac{e^{2t-t}}{2}+\frac{e^{t-2t}}{2}\Big)
+    -\Big(0-0+\frac{e^{2(0)-t}}{2}+\frac{e^{t-2(0)}}{2}\Big)
+    \Bigg) \\
+    & = \frac{1}{4}\Big(t e^{t}-t e^{-t}
+    \Big)\\
+    & = \frac{t}{4}\Big(e^{t}-e^{-t}
+    \Big)\\
+    & = \textcolor{red}{\frac{1}{2}t \sinh{(t)}}
+\end{align*}

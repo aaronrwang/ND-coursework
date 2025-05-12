@@ -1,0 +1,42 @@
+\item $y'=\frac{2xy^2 + x}{x^2y-y}$, $y=0$ when $x=\sqrt2$
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+            \frac{dy}{dx}=\frac{x(2y^2 + 1)}{y(x^2-1)}\\
+            \frac{y}{2y^2 + 1}dy=\frac{x}{x^2-1}dx\\
+            \int\frac{y}{2y^2 + 1}dy=\int\frac{x}{x^2-1}dx\\
+            \frac{1}{4}\ln|2y^2 + 1|=\frac{1}{2}\ln|x^2 - 1|+C\\
+            \ln|2y^2 + 1|=2\ln|x^2 - 1|+C\\
+            e^{\ln|2y^2 + 1|}=e^{2\ln|x^2 - 1|+C}\\
+            \textcolor{red}{
+                2y^2 + 1=C(x^2 - 1)^2
+            }
+        \end{gather*}
+        Particular Solution:
+        \begin{gather*}
+            2(0)^2 + 1=C((\sqrt2)^2 - 1)^2\\
+            1=C(2 - 1)^2\\
+            C = 1\\
+            \textcolor{red}{
+                2y^2 + 1=(x^2 - 1)^2
+            }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Integration for LHS:\\
+        $u=2y^2 + 1$; $du = 4ydy$
+        \begin{gather*}
+            \int\frac{y}{2y^2 + 1}dy = \frac{1}{4}\int\frac{1}{u}du\\
+            = \frac{1}{4}\ln|u|+C=\frac{1}{4}\ln|2y^2 + 1|+C
+        \end{gather*}
+        Integration for RHS:\\
+        $u=x^2 - 1$; $du = 2xdx$
+        \begin{gather*}
+            \int\frac{x}{x^2-1}dx = \frac{1}{2}\int\frac{1}{u}du\\
+            = \frac{1}{2}\ln|u|+C=\frac{1}{2}\ln|x^2 - 1|+C
+        \end{gather*}
+    \end{minipage}
+}

@@ -1,0 +1,8 @@
+\textcolor{red}{
+Let $f(l, \alpha) = w^1w^2 \cdots w^l$ s.t. $w^{(i)} = \alpha$.
+For any Unix regular expression that has quantifiers, we can convert it to a regular expression without quantifiers with this process.
+\[
+    \alpha^{\{m,n\}}=\bigcup_{m\leq l \leq n}\alpha^{\{l,l\}}=\bigcup_{m\leq l \leq n}f(l, \alpha)
+\]
+Thus, we have a Unix regular expressions that have quantifiers with an equivalent regular expression without quantifiers.
+}

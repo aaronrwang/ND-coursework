@@ -1,0 +1,26 @@
+\item [21.] $5y''+6y'+2y=x^2+6x$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (5D^2+6D+2)=0\\
+    \text{Quadratic Formula: }\frac{-6\pm\sqrt{6^2-4(5)(2)}}{2(5)}\\
+    \implies \text{root(s): } \frac{-3\pm i}{5}\\
+    \text{General Solution: } y_c=e^{-3x/5}(A\cos{(x/5)}+B\sin{(x/5)})
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $x^2+6x$, we will use $y_p=Ax^2+Bx+C$
+\begin{gather*}
+    y_p=Ax^2+Bx+C;\:y_p'=2Ax+B;\:y_p''=2A\\
+    5y_p''+6y_p'+2y_p=5(2A)+6(2Ax+B)+2(Ax^2+Bx+C)\\
+    5y_p''+6y_p'+2y_p=2Ax^2+12Ax+2Bx+10A+6B+2C=x^2+6x\\
+    x^2+6x=2Ax^2+12Ax+2Bx+10A+6B+2C\\
+    2A = 1 \text{ so } A = \frac{1}{2}\\
+    6x=6x+2Bx+5+6B+2C\\
+    6x=6x+2Bx \text{ so } B = 0\\
+    0=5+2C \text { so } C = -\frac{5}{2}\\
+    y_p = \frac{1}{2}x^2-\frac{5}{2}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y =e^{-3x/5}(A\cos{(x/5)}+B\sin{(x/5)})+\frac{1}{2}x^2-\frac{5}{2}}
+\end{gather*}

@@ -1,0 +1,21 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    \node[state, initial] (q0) {0};
+    \node[state, xshift=2cm, yshift=1cm] (q1) {1};
+    \node[state, xshift=4cm, yshift=1cm, accepting] (q2) {2};
+    \node[state, xshift=2cm, yshift=-1cm] (q11) {11};
+    \node[state, xshift=4cm, yshift=-1cm] (q12) {12};
+    \node[state, xshift=6cm, yshift=-1cm, accepting] (q13) {13};
+    
+    \draw
+    (q0) edge[] node[above]{\str{i}} (q1)
+    (q1) edge[] node[above]{\str{n}} (q2)
+
+    (q0) edge[] node[above]{\str{o}} (q11)
+    (q11) edge[] node[above]{\str{u}} (q12)
+    (q12) edge[] node[above]{\str{t}} (q13)
+    ;
+\end{tikzpicture}
+\end{figure}

@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+
+\title{Homework 01}
+\author{Aaron Wang}
+\date{January 24 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Proof Practice}
+    \begin{enumerate}
+        \item Convert this paragraph proof to a statement–reason proof. Please be sure to write which statement(s) each statement depends on.
+        \begin{quote}
+            To show: If $s$ is a string, every substring of a substring of $s$ is a substring of $s$.\\\vspace{1mm}\\
+            Proof: 
+            Let $y$ be a substring of $s$, that is, $s = xyz$ for some $x$, $z$; 
+            and let $v$ be a substring of $y$, that is, $y = uvw$ for some $u$, $w$. 
+            Then $s = xuvwz$, so $v$ is a substring of $s$. 
+        \end{quote}
+        \textcolor{red}{\begin{quote}
+        \begin{tabular}{l l}
+             1. $y$ is a substring of $s$ &  Given\\
+             2. $v$ is a substring of $y$ &  Given\\
+             3. $\exists x,z$ s.t. $s=xyz$ & (1) definition of substring\\
+             4. $\exists u,w$ s.t. $y=uvw$ & (2) definition of substring\\
+             5. $s=xuvwz$ & (3), (4), substitution\\
+             6. $v$ is a substring of s & (5) definition of substring
+        \end{tabular}
+        \end{quote}}
+
+        \item Convert this statement-reason proof to a paragraph proof.
+        \begin{quote}
+            To show: If $w$ is a string, every prefix of a suffix of $w$ is a suffix of a prefix of $w$.\newp
+            \begin{tabular}{l l}
+                1. $v$ is a suffix of $w$ & Given \\ 
+                2. $y$ is a prefix of $v$ & Given \\ 
+                3. $\exists x \text{ s.t. } xv = w$ & (1), definition of suffix \\ 
+                4. $\exists z \text{ s.t. } yz = v$ & (2), definition of prefix \\ 
+                5. $xyz = w$ & (3), (4), substitution \\ 
+                6. $xy$ is a prefix of $w$ & (5), definition of prefix \\ 
+                7. $y$ is a suffix of $xy$ & (6), definition of suffix \\ 
+            \end{tabular}
+        \end{quote}   
+        \textcolor{red}{\begin{quote}
+            Proof: 
+            Let $v$ be a suffix of $w$, that is, $w=xv$ for some x.
+            Let $y$ be a prefix of $v$, that is, $v=yz$ for some x.
+            Then $w=xyz$, so $xy$ is a prefix of $w$ and thus $y$ is a suffix of $xy$.
+        \end{quote}}
+    \end{enumerate}
+\newpage
+%q2%
+    \item \textbf{String homomorphisms.} If $\s$ and $\g$ are finite alphabets, define a \textit{string homomorphism} to be a function $f : \s^* \rightarrow \g^*$ that has the property that for any $u, v \in \s^*$,
+    \[f(uv)=f(u)f(v)\]
+    Prove that, in general, every string homomorphism operates by replacing each symbol with a (possibly empty) string. That is, prove that if $f$ is a string homomorphism, then for any $w = w_1... w_n$ (where $n \geq 0$ and, for $j = 1, . . . , n,w_j \in \s$), we have
+    \begin{equation}
+        f(w) = f(w_1)...f(w_n). \tag{*}
+    \end{equation}
+    Use induction on n.
+    \begin{enumerate}
+        \item State and prove the base case ($n = 0$).\newp
+        \textcolor{red}{
+            To show: if $f$ is a string homomorphism, then for $\e$, we have $f(\e) = \e$.\newp
+            Proof: Let $f(\e) = x$. By def. of \textit{string homomorphism}, $f(\e\e)=f(\e)f(\e)=xx$. Because $\e=\e\e$, $f(\e\e)=f(\e)=x$. Then $xx=x$ so $x=\e$ (see footnote)\footnote{$xx=x \so |xx|=|x| \so 2|x|=|x| \so |x|=0 \so x=\e$}. Thus, $f(\e) = \e$.
+        }
+        \item Assume that (*) is true for $n = i$ and prove (*) for $n = i + 1$.\newp
+        \textcolor{red}{
+        To show: if $f$ is a string homomorphism, then for $w \in \s^*$ and $w_{i+1} \in \s$, $f(w) = f(w_1)...f(w_i) \rightarrow f(ww_{i+1}) = f(w_1)...f(w_{i})f(w_{i+1})$.\newp
+        Proof: Let $w \in \s^*$ such that $f(w) = f(w_1)...f(w_i)$. Let $w_{i+1} \in \s$. By def. of \textit{string homomorphism}, $f(ww_{i+1})=f(w)f(w_{i+1})$. By I.H.\footnote{ Inductive Hypothesis: $f(w) = f(w_1)...f(w_i)$}, $f(w)f(w_{i+1})=f(w_1)...f(w_{i})f(w_{i+1})$. Thus, $f(ww_{i+1}) = f(w_1)...f(w_{i})f(w_{i+1})$
+        }
+    \end{enumerate}
+
+%q3%
+    \item \textbf{Finite and cofinite.} Let $\s = \{\str{a}, \str{b}\}$. Define \textsf{FINITE} to be the set of all finite languages over $\s$, and let co\textsf{FINITE} be the set of all languages over $\s$ whose \textit{complement} is finite:
+    \begin{center}
+        co\textsf{FINITE} $= \{L \subseteq \s^* | \overline{L} \in \textsf{FINITE}\}$
+    \end{center}
+    (where $\overline{L} = \s^* \:\backslash \: L$). For example, $\s^*$ is in  co\textsf{FINITE} because its complement is $\emptyset$, which is finite. (Please think carefully about this definition, and note that co\textsf{FINITE} isn’t the same thing as $\overline{\textsf{FINITE}}$.)
+    \begin{enumerate}
+        \item If $L \in \textsf{FINITE}$, what data structure could you use to represent $L$, and given a string $w$, how would you decide whether $w \in L$?\newp
+        \textcolor{red}{
+            I would use a Python set/dictionary/hashmap to represent $L$. To decided whether $w \in L$, I would check if $w$ is in the chosen data structure.\newp
+            Example: $L = \{ \e, \str{a}, \str{b} \}$ would be represented by 
+            \begin{quote}
+                L = set([`', `a', `b'])
+            \end{quote}
+            decide whether $w \in L$
+            \begin{quote}
+                w in L
+            \end{quote}
+        }
+        \item If $L \in \text{co}\textsf{FINITE}$, what data structure could you use to represent $L$, and given a string $w$, how would you decide whether $w \in L$?\newp
+        \textcolor{red}{
+            I would do the same as (a) but for $\overline{L}$ and check that $w$ is not in $\overline{L}$.\footnote{ In Class Professor Chiang clarified that $w \in \s^*$ so $w \in L$ or $w \in \overline{L}$}\newp
+            Example: $L = \big\{w \in \s^* | w \notin \{ \e, \str{a}, \str{b} \}\big\}$ a.k.a. $\overline{L} = \{ \e, \str{a}, \str{b} \}$ would be represented by 
+            \begin{quote}
+                L\_complement = set([`', `a', `b'])
+            \end{quote}
+            decide whether $w \in L$
+            \begin{quote}
+                w not in L\_complement
+            \end{quote}
+        }
+\newpage
+        \item Are there any languages in $\textsf{FINITE} \cap \text{co}\textsf{FINITE}$? Prove your answer.\newp
+        \textcolor{red}{
+            No there are not any languages in $\textsf{FINITE} \cap \text{co}\textsf{FINITE}$.\newp
+            To show: $ \forall L \subseteq \s^*(L \notin \textsf{FINITE} \cap \text{co}\textsf{FINITE}) $\newp
+            TAC, assume $\exists L \subseteq \s^*(L \in \textsf{FINITE} \cap \text{co}\textsf{FINITE})$. Let $L \subseteq \s^*$ s.t. $(L \in \textsf{FINITE} \cap \text{co}\textsf{FINITE})$. This means that $L \in \textsf{FINITE} \land L \in \text{co}\textsf{FINITE}$.
+            \begin{enumerate}
+                \item [] Observe that $L \in \textsf{FINITE} \implies |L| = n$ s.t. $n \in \mathbb{N}$.
+                \item []$L \in \text{co}\textsf{FINITE}$ means $\overline{L} \in \textsf{FINITE}\implies |\overline{L}| = m$ s.t. $m \in \mathbb{N}$.
+            \end{enumerate}
+            We know that $|\s^*|=|L \cup \overline{L}|=|L|+|\overline{L}|$ because $L$ and $\overline{L}$ are disjoint and both $L,\overline{L} \subseteq \s^*$.\footnote{This is derived from $\overline{L} = \s^* \:\backslash \: L$} From substitution, $|L|+|\overline{L}|=n+m$ s.t. $(n+m)\in \mathbb{N}$ so $\s^*$ is finite. $\lightning$. Thus, by contradiction we know that $ \forall L \subseteq \s^*(L \notin \textsf{FINITE} \cap \text{co}\textsf{FINITE}) $
+        }
+        \item Are there languages \textit{not} in $\textsf{FINITE} \cup \text{co}\textsf{FINITE}$? Prove your answer.\newp
+        \textcolor{red}{
+        Yes, there are languages not in \textit{not} in $\textsf{FINITE} \cup \text{co}\textsf{FINITE}$.\newp
+        To show: $ \exists L \subseteq \s^*(L \notin \textsf{FINITE} \cup \text{co}\textsf{FINITE}) $\newp
+        Let $L \defeq \{ w\in \s^*| w_1 = \texttt{a}\}$. Observe, $\overline{L} = \{ w\in \s^*| w=\e \lor w_1 = \texttt{b}\}$. By def. of $L$, $L$ is infinite.\footnote{ TA said this was sufficient and did not need to prove that $L$ is infinite.} By the same logic, $\overline{L}$ is also infinite. Since $L$ is infinite, $L \notin \textsf{FINITE}$. Since $\overline{L}$ is infinite, $\overline{L} \notin \textsf{FINTIE}$ so $L \notin \text{co}\textsf{FINITE}$ by definition of co\textsf{FINITE}. Since $L \notin \textsf{FINITE} \land L \notin \text{co}\textsf{FINITE}$, $L \notin \textsf{FINITE} \cup \text{co}\textsf{FINITE}$. Thus, we know that $ \exists L \subseteq \s^*(L \notin \textsf{FINITE} \cup \text{co}\textsf{FINITE}) $
+        }
+        
+    \end{enumerate}
+\end{enumerate}
+\end{document}

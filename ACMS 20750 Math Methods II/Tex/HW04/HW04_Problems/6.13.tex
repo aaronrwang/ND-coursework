@@ -1,0 +1,28 @@
+\item [13.] $(D^2-2D+1)y=2\cos{x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-1)^2=0\implies \text{root(s): } 1\\
+    \text{General Solution: } y_c=(Ax+B)e^x
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $\cos$, we will use $Y=Ce^{ix}=Y_R+iY_I$ s.t. $y_p=Y_R$. 
+\begin{gather*}
+    Y=Ce^{ix}; Y'=C(ie^{ix});Y''=C(-e^{ix})\\
+    Y''-2Y'+Y = C
+    \big(
+    (-e^{ix})
+    -2(ie^{ix})
+    +(e^{ix})
+    \big)\\
+    Y''-2Y'+Y=(-2i)Ce^{ix}=2e^{ix}\\
+    \text{ so } C=-\frac{1}{i}=i\\
+    Ce^{ix}=(i)(\cos{x}+i\sin{x})\\
+    =i\cos{x}+i^2\sin{x}\\
+    = (-\sin{x})+i(\cos{x})\\
+    y_p = Y_R = -\sin{x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = (Ax+B)e^x-\sin{x}}
+\end{gather*}

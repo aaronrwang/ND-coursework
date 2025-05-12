@@ -1,0 +1,19 @@
+\item [3.] Using either $L2$, or $L3$ and $L4$, verify $L9$ and $L10$.
+\begin{enumerate}
+    \item [] $L9$
+    \begin{align*}
+    L\big(\sinh(at)\big) &= L \Bigg(\frac{e^{at}-e^{-at}}{2}\Bigg) && \text{By definition of } \sinh\\
+    &= \frac{L(e^{-(-a)t})-L(e^{-at})}{2} && \text{B/c $L$ is a linear transformation}\\
+    &=\frac{\frac{1}{p-a}-\frac{1}{p+a}}{2} &&\text{ By } L2\\
+    &=\frac{p+a-p+a}{2(p-a)(p+a)} &&\text{algebra}\\
+    &=\frac{a}{p^2-a^2} &&\text{algebra}\\
+    \end{align*}
+    \item [] $L10$
+    \begin{align*}
+    L\big(\cosh(at)\big) &= L \Bigg(\frac{e^{at}+e^{-at}}{2}\Bigg) && \text{By definition of } \cosh\\
+    &= \frac{L(e^{-(-a)t})+L(e^{-at})}{2} && \text{B/c $L$ is a linear transformation}\\
+    &=\frac{\frac{1}{p-a}+\frac{1}{p+a}}{2} &&\text{ By } L2\\
+    &=\frac{p+a+p-a}{2(p-a)(p+a)} &&\text{algebra}\\
+    &=\frac{p}{p^2-a^2} &&\text{algebra}\\
+    \end{align*}
+\end{enumerate}

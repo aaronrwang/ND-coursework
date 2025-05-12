@@ -1,0 +1,19 @@
+\textcolor{red}{
+The following is an NFA for B. The Intuition is this. First let's consider $k=1$. In this case, all we need is a $w$ that contains one \str{1}. Now consider, what if we thought $k$ was 2 or $s=\str{1}^2w$. Let us rewrite it as $s=\str{1}w'$ s.t. $w'=\str{1}w$. Now we have the same case as before. For any $k > 1$, we could do this such that $s=\str{1}^kw=\str{1}^1w'$ s.t. $w' = \str{1}^{k-1}w$. In essence, we now realize that we are looking only for a string that starts with \str{1} and contains at least 2 \str{1}s.
+}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    \node[state, initial] (q0) {0};
+    \node[state, xshift=2cm] (q1) {1};
+    \node[state, xshift=4cm, accepting] (q2) {2};
+
+    \draw
+    (q0) edge[] node[above]{\str{1}} (q1)
+    (q1) edge[loop above] node[above]{\str{0}} (q1)
+    (q1) edge[] node[above]{\str{1}} (q2)
+    (q2) edge[loop above] node[above]{\str{0},\str{1}} (q2)
+    ;
+\end{tikzpicture}
+\end{figure}

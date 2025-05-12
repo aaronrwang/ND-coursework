@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+#This code was not done in a way that the direction suggested, but Chiang said it was ok. 
+#Also, we had issues importing files so we copy pasted all of the functions to each file
+import sys
+from typing import Tuple, List, Deque
+from collections import defaultdict, deque
+
+
+class Node:
+  def __init__(self, type, value=None, children=[]):
+    self.type = type # symbol, epsilon, union, concat, star
+    self.value = value # if symbol what value
+    self.children = children # if operator (union, concat, star), what does it operate on?
+
+# Debugging code.
+def dfsdebug(root: Node, tabs: int):
+  for i in range(tabs):
+    print(' ',end='')
+  print(root.type, root.value)
+  for node in root.children:
+    dfsdebug(node, tabs+1)
+
+#code for union
+def union(tree: Deque[Node]) -> Node:
+  left = tree.popleft()
+  while len(tree):
+    middle = tree.popleft()
+    if middle.type !='union':
+      raise Exception('Unexpected value in union')
+    right = tree.popleft()
+    node = Node('union',None,[left,right])
+    left = node
+  return left
+
+# code for concat
+def concat(tree: Deque[Node]) -> List[Node]:
+  new_tree = deque()
+  left = tree.popleft()
+  while len(tree):
+    right = tree.popleft()
+    if right.type == 'union':
+      new_tree.append(left)
+      new_tree.append(right)
+      left = Node('epsilon')
+      continue
+    if left.type == 'epsilon':
+      left = right
+      continue
+    node = Node('concat',None,[left,right])
+    left = node
+  new_tree.append(left)
+  return new_tree
+
+#code for star
+def star(tree: Deque[Node]) -> List[Node]:
+  new_tree = deque([tree.popleft()])
+  while len(tree):
+    right = tree.popleft()
+    if right.type == 'star':
+      if new_tree[-1].type == 'epsilon':
+        raise Exception('error: unexpected *')
+      right.children=[new_tree.pop()]
+      new_tree.append(right)
+    else:
+      new_tree.append(right)
+  return new_tree
+
+# first find all *s, then concat, then union
+def union_concat_star(tree: List[Node]) -> Node:
+  return union(concat(star(tree)))
+  
+def parse_re(regex: list, index: int, group:int = 0) -> Node:
+  prev = Node('epsilon')
+  tree = deque([prev])
+  group_count = group + 1
+  while index < len(regex):
+    #print(tree)
+    #print(regex[index])
+    c = regex[index]
+    node = None
+    if c =='(':
+      # open subexpression
+      node, index, group_count = parse_re(regex, index+1,group_count)
+    elif c == ')':
+      # close subexpression
+      if not group:
+        raise Exception('error: expected end of regular expression but found )')
+      node = Node('subexpr',group,[union_concat_star(tree)])
+      return node, index, group_count
+    elif c == '|':
+      # create union node
+      node = Node('union')
+    elif c == '*':
+      # create star node
+      node = Node('star')
+    elif c == '\\':
+      index += 1
+      if index == len(regex) and regex[index] != 'g':
+        raise Exception(f'error: expected g but found {regex[index]}')
+      index += 1
+      if index == len(regex) and regex[index] != '<':
+        raise Exception(f'error: expected < but found {regex[index]}')
+      num = ''
+      while True:
+        index += 1
+        if index == len(regex):
+          raise Exception(f'error: back reference not closed')
+        if regex[index] == '>':
+          break
+        num += regex[index]
+      try:
+        num = int(num)
+      except:
+        raise Exception(f'error: Number expected as back reference but got {num}')
+      node = Node('backref', num)
+    else:
+      # create symbol
+      node = Node('symbol', c)
+    tree.append(node)
+    index+=1
+  if group:
+    raise Exception('error: expected ) but found ⊣')
+
+  # close total expression
+  root = union_concat_star(tree)
+
+  return root
+
+def dfsprint(root: Node):
+  if root.type == 'symbol':
+    print(f'symbol[{root.value}]',end='')
+  elif root.type == 'backref':
+    print(f'backref[{root.value}]',end='')
+  elif root.type == 'epsilon':
+    print('epsilon',end='')
+  elif root.type == 'star':
+    print('star(',end='')
+    dfsprint(root.children[0])
+    print(')',end='')
+  elif root.type == 'subexpr':
+    print(f'group[{root.value}](',end='')
+    dfsprint(root.children[0])
+    print(')',end='')
+  else:
+    print(f'{root.type}(',end='')
+    dfsprint(root.children[0])
+    print(',',end='')
+    dfsprint(root.children[1])
+    print(')',end='')
+  
+  
+
+if __name__ == "__main__":
+  try:
+    root = parse_re(list(sys.argv[1]), 0)
+    dfsprint(root)
+    #print("\nParsed tree structure:\n")
+    #dfsdebug(root, 0)
+  except Exception as e:
+    sys.exit(str(e)) 

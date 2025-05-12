@@ -1,0 +1,40 @@
+\item [36.] $(D^2+1)y=2\sin x + 4x \cos x$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-i)(D+i)=0
+    \implies \text{root(s): } \pm i\\
+    \text{General Solution: } y_c=A\cos x + B \sin x
+\end{gather*}
+Solve $y_{p_1}''+y_{p_1}=2\sin x$. Use $Y=Cxe^{ix}$ where $Y=Y_R +iY_I$ and $y_{p_1}=Y_I$.
+\begin{gather*}
+    Y=Cxe^{ix};\:Y'=Ce^{ix}+iCxe^{ix};\:Y''=2iCe^{ix}-Cxe^{ix}\\
+    Y''+Y=2iCe^{ix}=2e^{ix} \implies C=-i\\
+    Y = -ix(\cos x+ i\sin x) = x \sin x +i(-x\cos x)\\
+    y_{p_2} = Y_I =  -x \cos x
+\end{gather*}
+Solve $y_{p_2}''+y_{p_2}=4x \cos x$. Use $Y=(Ax+B)xe^{ix}$ where $Y=Y_R +iY_I$ and $y_{p_2}=Y_R$.
+\begin{gather*}
+    Y = (Ax+B)xe^{ix}=(Ax^2+Bx)e^{ix}\\[5mm]
+    Y' = (2Ax+B)e^{ix}+i(Ax^2+Bx)e^{ix} = ((2Ax+B)+i(Ax^2+Bx))e^{ix}\\[5mm]
+    Y'' = (2Aix+2A+Bi)e^{ix}+i(Aix^2+2Ax+Bix+B)e^{ix}\\
+    Y'' = (2Aix+2A+Bi+Ai^2x^2+2Aix+Bi^2x+Bi)e^{ix}\\
+    Y'' = (-Ax^2+(4Ai-B)x+2(A+Bi))e^{ix}\\[5mm]
+    Y''+Y=(-\cancel{Ax^2}+(4A-\cancel{B})x+2(A+Bi)+\cancel{Ax^2}+\cancel{Bx})e^{ix}\\
+    Y''+Y=(4Ax+2(A+Bi))e^{ix}=4xe^{ix}\\[5mm]
+    (4Aix+2(A+Bi))=4x \implies 4Aix = 4x \implies A = -i\\
+    2(A+Bi) = 2(-i-Bi) = 0 \implies B = 1\\[5mm]
+    Y = (-ix^2+x)e^{ix}\\
+    Y = (-ix^2+x)(\cos(x)+i\sin(x))\\
+    Y = -ix^2\cos(x)+x\cos(x)-i^2x^2\sin(x)+xi\sin(x)\\
+    Y = x\cos(x)+x^2\sin(x)+i(-x^2\cos(x)+x\sin(x))\\[3mm]
+    y_p = Y_R = x\cos(x)+x^2\sin(x)
+\end{gather*}
+Combine:
+\begin{gather*}
+    y = y_c+y_{p_1}+y_{p_2}\\
+    y = 
+    A\cos x + B \sin x
+    -x \cos x
+    +x\cos(x)+x^2\sin(x)\\
+    \textcolor{red}{y = A\cos x + B \sin x+x^2\sin(x)}
+\end{gather*}

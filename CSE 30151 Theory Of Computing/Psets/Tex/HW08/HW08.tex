@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{automata, positioning, arrows, trees}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\answer}{\textcolor{red}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\spc}{\textvisiblespace}
+
+\title{Homework 08}
+\author{Aaron Wang}
+\date{April 29 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item Define a \emph{neural network} with $l$ inputs and $m$ hidden units to be a function that takes a sequence of inputs  $x_1, \ldots, x_l \in \{0, 1\}$ and computes
+    \begin{align*}
+        \displaystyle
+        h_j &= H\Big(\sum_{i=1}^lx_iu_{i,j}+a_j\Big) & j = 1,\ldots,m\\
+        y &= H\Big(\sum_{j=1}^mh_jv_j+b\Big)
+    \end{align*}
+    where
+    \[
+        H(x) = 
+        \begin{cases}
+            1 & \text{if } x > 0\\
+            0 & \text{otherwise}
+        \end{cases}
+    \]
+    The weights $u_{i,j}$ , $a_j$ , $v_j$ , and $b$ can be any rational numbers, and they don’t depend on $x_1, \ldots, x_l$. Let’s say that the size of the neural network is the number of units $(n = l + m + 1)$.
+    Prove that it is NP-complete to decide, given a neural network with $l$ inputs, whether there is any sequence of inputs $x_1, \ldots, x_l$ that makes $y = 1$.\newp
+    \input{HW08/1.tex}
+\newpage
+    \item In the game of Digits, you are given
+    \begin{itemize}
+        \item A target number $t$ (e.g., 56)
+        \item A multiset $S$ of source numbers (e.g. $\{2, 3, 4, 5, 10, 25\}$)
+        \item A set of $\mathcal{O}$ of operations ($\{+,-,\times,\div\}$)
+    \end{itemize}
+    and the goal is to write an expression involving the source numbers, operations, and parentheses that evaluates to the target number. You don’t have to use every number, but each number can only be used as many times as it occurs in $S$. If this possible, we say that ($t$, $S$, $\mathcal{O}$) is solvable. For example, ($56, \{2, 3, 4, 5, 10, 25\, \{+, -, \times, \div \}$) is solvable because
+    \[
+    2 \times 4 \times (10 - 3) = 56
+    \]
+    Prove that $\{+, \times \}$-DIGITS is NP-complete:
+    \[
+        \{+, \times \}\text{-DIGITS} = \{\langle t, S \rangle | (t, S, \{+, \times \}) \text{ is solvable} \}.
+    \]
+    Assume that the size of $\langle t, S\rangle$ is the total number of bits in $t$ and $S$.\newp
+    \input{HW08/2.tex}
+\newpage
+    \item You are at the entrance to a room whose floor is made entirely of trapdoors, and underneath the floor is a pool of lava. Each trapdoor is either open or closed.\newp
+    At the entrance to the room is a control panel that has buttons labeled with symbols. For any symbol $\sigma$, if you push the button labeled $\sigma$, then all the trapdoors labeled $\sigma$ that are closed become open, and all the trapdoors labeled $\sigma$ that are open become closed. \newp
+    In general, a room can be any size rectangle, with an entrance and exit anywhere around the perimeter, any initial pattern of open/closed trapdoors, and any number of labels/buttons.\newp
+    Prove that it is NP-complete to decide, given a room as defined above, whether there is a subset of buttons that you can push to make a safe path from the entrance to the exit.\newp
+    \input{HW08/3.tex}
+\end{enumerate}
+\end{document}

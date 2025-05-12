@@ -1,0 +1,54 @@
+\item [2.] A bar $10$ cm long with insulated sides is initially at $100$\textdegree . Starting at $t = 0$, the ends are held at $0$\textdegree. Find the temperature distribution in the bar at time $t$.\\[2mm]
+Define the boundary constraints.
+\begin{align*}
+    u(x,0) &=u_0(x) = 100\\
+    u(0,t) &=u(10,t) =0
+\end{align*}
+% Using the formulas:
+% \begin{align*}
+%     u(x,t) = F(x)T(x)\\
+%     % \frac{1}{\alpha^2}\frac{1}{T}\frac{dT}{dt}
+%     % &=
+%     % \frac{1}{F}\frac{d^2F}{dx^2}=-k^2 
+%     \frac{dT}{dt}=-k^2\alpha^2T\\
+%     \frac{d^2F}{dx^2}+k^2F=0
+% \end{align*}
+we know that 
+\begin{align*}
+    T(t) &= Ce^{-k^2\alpha^2t}\\
+    F(x) &= C_1\sin(kx)+C_2\cos(kx)
+\end{align*}
+Since 
+\[
+    u(0,t) =u(10,t) =0
+\]
+we know that 
+\[
+    F(0)=F(10)=0
+\]
+Thus
+\[
+F(x) = C_1\sin(kx) \text{ where }k=\frac{n\pi}{10}
+\]
+So
+\[
+    u=\sum_{n=1}^{\infty}b_ne^{-n^2\pi^2\alpha^2t/(10)^2}\sin(n\pi x/10)
+\]
+where
+\begin{align*}
+    b_n 
+    &= \frac{2}{10}\int_0^{10}100\sin(n \pi x / 10)dx\\
+    &= 20\int_0^{10}\sin(n \pi x / 10)dx\\
+    &= -\frac{200}{n \pi} \cos(n \pi x / 10)\Big|_0^{10}\\
+    &= -\frac{200}{n \pi} (\cos(n \pi) -\cos(0))\\
+    &= -\frac{200}{n \pi} ((-1)^n-1)\\
+    &=
+    \begin{cases}
+        \frac{400}{n \pi} (-1)^n & n\text{ is odd}\\
+        0 & n\text{ is even}
+    \end{cases}
+\end{align*}
+Finally
+\answer{\[
+    u = \frac{400}{\pi}\sum_{\substack{n = 1 \\ \text{odd } n}}^{\infty}\frac{1}{n}e^{-n^2\pi^2\alpha^2t/(10)^2}\sin(n\pi x/10)
+\]}

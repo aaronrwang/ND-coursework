@@ -1,0 +1,22 @@
+\answer{
+    Let $V$ be a verifier for $\{+, \times \}\text{-DIGITS}$.\newp
+    $V =$ ``On input $\langle t, S, c \rangle$ where $t$ and $S$ are as described above and $c$ is the certificate, a sequence (order matters) of 3-tuples representing ($n_1$, $n_2$, operation):
+    \begin{enumerate}
+        \item [1.] For each tuple in $c$
+        \begin{enumerate}
+            \item if $n_1$ and $n_2$ not both in $S$, \emph{reject}
+            \item remove $n_1$ and $n_2$ from $S$.
+            \item $n$ is the result from performing the operation\footnote{If the operation is not $+$ or $\times$ obviously \emph{reject}} on $n_1$ and $n_2$.
+            \item Add $n$ into $S$
+        \end{enumerate}
+        \item [2.] If $t \in S$, \emph{accept}; otherwise \emph{reject}
+    \end{enumerate}
+    $V$ is $\mathcal{O}(n)$ where $n = |S|$ since $|c| \leq |S|$. Since we have a deterministic polynomial time verifier, we know $\{+, \times \}\text{-DIGITS}$ is NP.\newp
+    Here are the details of a reduction from SUBSET-SUM\footnote{SUBSET-SUM where all numbers are in the positive naturals.} to $\{+, \times \}\text{-DIGITS}$ that operates in polynomial time. We will map  from $\langle t,S\rangle$, an instance of SUBSET-SUM to $\langle t',S'\rangle$ an instance of $\{+, \times \}\text{-DIGITS}$ .
+    \begin{enumerate}
+        \item [1.] Let $t'$ = $t \times (t+1)$
+        \item [2.] $S' = \{n \times (t+1) | n \in S\}$
+    \end{enumerate}
+    We multiplied each number by $t+1$ essentially to render multiplication useless. Observe, that there is no way to lower a number. In this new construction, if we ever use multiplication, the new number becomes useless because it is $> t$. Further, for any certificate $c'$ of $\langle t', S' \rangle$, there is a certificate $c = \{n/(t+1) | n \in c'\}$. Following this reduction, we have mapped an instance of SUBSET-SUM to a $\{+, \times \}\text{-DIGITS}$ that is satisfiable iff the the original problem is. Thus, we would only ever be able to use addition as imposed by subset sum. This is clearly $\mathcal{O}(n)$ reduction. Thus $\{+, \times \}\text{-DIGITS}$ is NP-hard.\newp
+    Since $\{+, \times \}\text{-DIGITS}$ is NP and NP-Hard, it is NP-complete.
+}

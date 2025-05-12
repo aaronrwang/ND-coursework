@@ -1,0 +1,46 @@
+\item [37.] $(D-1)^2y=4e^x+(1-x)(e^2x-1)$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-1)^2=0
+    \implies \text{root(s): } 1\\
+    \text{General Solution: } y_c=(Ax+B)e^x
+\end{gather*}
+Solve $y_{p_1}''-2y_{p_1}'+y_{p_1}=4e^x$. Because exponent on RHS is the same as both roots of the auxiliary equation, particular solution in the form of $Cx^2e^{x}$
+\begin{gather*}
+    y_{p_1}=Cx^2e^{x};\:y_{p_1}'=C(2xe^{x}+x^2e^{x});\:y_{p_1}''=C(2e^{x}+4xe^{x}+x^2e^{x})\\
+    y_{p_1}''-2y_{p_1}'+y_{p_1}=C\big(
+        (2e^{x}+\cancel{4xe^{x}}+\cancel{x^2e^{x}})
+        -\cancel{2(2xe^{x}+x^2e^{x})}
+        +\cancel{(x^2e^{x})}
+    \big)\\
+    =2Ce^{x} = 4e^{x} \text{ so } C=2\\
+    y_{p_1} = 2x^2e^{x}
+\end{gather*}
+Solve $y_{p_2}''-2y_{p_2}'+y_{p_2}=(1-x)e^2x$. Solution will be in the form $Q_1(x)e^{2x}$ where $Q_1(x)=a_1x+a_0$
+\begin{gather*}
+    y_{p_2}=(a_1x+a_0)e^{2x};\:y_{p_2}'=(a_1+2a_1x+2a_0)e^{2x};\:y_{p_2}''=4(a_1x+a_1+a_0)e^{2x}\\
+    y_{p_2}''-2y_{p_2}'+y_{p_2}=
+    4(\cancel{a_1x}+a_1+\cancel{a_0})e^{2x}
+    -2((\cancel{2a_1x}+a_1+\cancel{2a_0})e^{2x})
+    +(a_1x+a_0)e^{2x}\\
+    y_{p_2}''-2y_{p_2}'+y_{p_2}=(a_1x+2a_1+a_0)e^{2x}=(1-x)e^{2x}\\
+    (a_1x+2a_1+a_0)=(1-x) \implies a_1x=-x \implies a_1 = -1\\
+    (2(-1)+a_0)=1 \implies a_0=3\\
+    y_{p_2}=(3-x)e^{2x}
+\end{gather*}
+Solve $y_{p_3}''-2y_{p_3}'+y_{p_3}=x-1$. Solution will be in the form $Q_1(x)e^{0}$ where $Q_1(x)=a_1x+a_0$
+\begin{gather*}
+    y_{p_3}=a_1x+a_0;\:y_{p_3}'=a_1;\:y_{p_3}=0\\
+    y_{p_3}''-2y_{p_3}'+y_{p_3}=-2a_1+a_1x+a_0=x-1\\
+    a_1x-2a_1+a_0=x-1 \implies a_1x=x \implies a_1 = 1\\
+    -2(1)+a_0=-1 \implies a_0=1\\
+    y_{p_3}=x+1
+\end{gather*}
+Combine:
+\begin{gather*}
+    y = y_c+y_{p_1}+y_{p_2}+y_{p_3}\\
+    \textcolor{red}{y = (Ax+B)e^x
+    +2x^2e^{x}
+    +(3-x)e^{2x}
+    +x+1}
+\end{gather*}

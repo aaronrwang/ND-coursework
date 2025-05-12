@@ -1,0 +1,46 @@
+\item [5.] $\displaystyle \frac{d^{100}}{dx^{100}} (x^2 e^{-x})$
+\begin{align*}
+    \frac{d^{100}}{dx^{100}} (x^2 e^{-x})
+    &= \sum_{k=0}^{100} \binom{100}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{100-k}}{dx^{100-k}} (e^{-x})\\
+    &= 
+    \binom{100}{0}
+    \frac{d^{0}}{dx^{0}} (x^2)
+    \frac{d^{100-0}}{dx^{100-0}} (e^{-x})
+    +
+    \sum_{k=1}^{100} \binom{100}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{100-k}}{dx^{100-k}} (e^{-x})\\
+    &= 
+    x^2e^{-x}
+    +
+    \binom{100}{1}
+    \frac{d^{1}}{dx^{1}} (x^2)
+    \frac{d^{100-1}}{dx^{100-1}} (e^{-x})
+    +
+    \sum_{k=2}^{100} \binom{100}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{100-k}}{dx^{100-k}} (e^{-x})\\
+    &= 
+    x^2e^{-x}
+    -
+    200xe^{-x}
+    +
+    \binom{100}{2}
+    \frac{d^{2}}{dx^{2}} (x^2)
+    \frac{d^{100-2}}{dx^{100-2}} (e^{-x})
+    +
+    \sum_{k=3}^{100} \binom{100}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{100-k}}{dx^{100-k}} (e^{-x})\\
+    &= 
+    x^2e^{-x}
+    -
+    200xe^{-x}
+    +
+    9900e^{-x}
+    +
+    0\\
+    &= \textcolor{red}{x^2e^{-x} - 200xe^{-x} + 9900e^{-x}}
+\end{align*}

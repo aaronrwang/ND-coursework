@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{automata, positioning, arrows, trees}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\answer}{\textcolor{red}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\spc}{\textvisiblespace}
+
+\title{Homework 06}
+\author{Aaron Wang}
+\date{March 28 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Doubly infinite tapes} [Problem 3.11]. A Turing machine with a doubly infinite tape is like a TM as defined in the book, but with a tape that extends infinitely in both directions (not just to the right). Initially, the head is at the first symbol of the input string, as usual, but there are infinitely many blanks to the left. Show how, given a TM with doubly infinite tape, to construct an equivalent standard TM. An \textbf{implementation description} in the style of Proof 3.13 is fine, and it’s also fine to use any results proved in the book or in class. \newp
+    \input{HW06/1}
+%
+    \item \textbf{Two-stack PDAs}. A \emph{two-stack pushdown automaton} (2PDA) is a pushdown automaton with two stacks. Show that any Turing machine M can be converted into an equivalent 2PDA $P$.\newp
+    \input{HW06/2}
+    \newpage
+% Use the two stacks like a tape. one stack is the front half one stack is hte back half. And you are looking at the end of the front stack. It's where "the head" of your turing machine is.
+    \item Brain fun. This problem is about a programming language known as $P''$ in polite company. \newp
+    Describe how to compile any $\mathcal{P}''$ program $P$ into the formal description of a Turing machine $M_P$ equivalent to $P$. The input to $M_P$ would be a string $w \in \s^*$, and it should accept iff $P$ accepts w. It should be a standard single-tape TM, but you can use S (“stay”) actions.\newp
+        \input{HW06/3}
+
+\end{enumerate}
+\end{document}

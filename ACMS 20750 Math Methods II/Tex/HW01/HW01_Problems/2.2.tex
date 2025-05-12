@@ -1,0 +1,39 @@
+\item $x\sqrt{1-y^2}dx+y\sqrt{1-x^2}dy=0$, $y = \frac{1}{2}$ when $x = \frac{1}{2}$
+    
+    \textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+            x\sqrt{1-y^2}dx+y\sqrt{1-x^2}dy = 0 \\
+            y\sqrt{1-x^2}dy = -x\sqrt{1-y^2}dx \\
+            \frac{y}{\sqrt{1-y^2}}dy = -\frac{x}{\sqrt{1-x^2}}dx \\
+            \int\frac{y}{\sqrt{1-y^2}}dy = -\int\frac{x}{\sqrt{1-x^2}}dx \\
+            -\frac{1}{2}\sqrt{1-y^2} = \frac{1}{2}\sqrt{1-x^2}+C \\
+            \frac{1}{2}\sqrt{1-y^2} + \frac{1}{2}\sqrt{1-x^2} = C \\
+            \textcolor{red}{
+            \sqrt{1-y^2} + \sqrt{1-x^2} = C   
+            }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Integration:\\
+            $u = 1-t^2$; $du = -2tdt$; $dt = -\frac{1}{2t}du$      
+        \[
+            \int\frac{t}{\sqrt{1-t^2}}dt =\int\frac{t}{\sqrt{u}}\frac{-1}{2t}du
+        \]
+        \[
+            =-\frac{1}{2}\int\frac{1}{\sqrt{u}}du
+            = -\frac{1}{2}(\sqrt{u})+C
+        \]
+        \[= -\frac{1}{2}\sqrt{1-t^2}+C\]
+        Particular Solution:
+        \begin{gather*}
+            \sqrt{1-(1/2)^2} + \sqrt{1-(1/2)^2} = C \\
+            C = \sqrt{3/4}+\sqrt{3/4} = \sqrt3 \\
+            \textcolor{red}{
+            \sqrt{1-y^2} + \sqrt{1-x^2} = \sqrt3
+            }
+        \end{gather*}
+    \end{minipage}
+    }

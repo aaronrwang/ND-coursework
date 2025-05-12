@@ -1,0 +1,11 @@
+\item [2.] Prove  \( \displaystyle B(p,q)=\int_0^1 \frac{y^{p-1}dy}{(1+y)^{p+q}} \)\\
+\\[2mm] Let $ \displaystyle x=\frac{y}{1+y}$ and $\displaystyle dx = \frac{1}{(1+y)^2}dy$
+\begin{align*}
+    B(p,q)&=\int_0^1 x^{p-1}(1-x)^{q-1}dx\\
+    &=\int_0^1 \frac{y}{1+y}^{p-1}\Big(1-\frac{y}{1+y}\Big)^{q-1}\frac{1}{(1+y)^2}dy\\
+    &=\int_0^1 \frac{y}{1+y}^{p-1}\Big(\frac{1+y}{1+y}-\frac{y}{1+y}\Big)^{q-1}\frac{1}{(1+y)^2}dy\\
+    &=\int_0^1 \frac{y}{1+y}^{p-1}\Big(\frac{1}{1+y}\Big)^{q-1}\frac{1}{(1+y)^2}dy\\
+    &=\int_0^1 y^{p-1}\frac{1}{(1+y)^{p-1}}\frac{1}{(1+y)^{q-1}}\frac{1}{(1+y)^2}dy\\
+    &=\int_0^1 \frac{y^{p-1}dy}{(1+y)^{(p-1)+(q-1)+2}}\\
+    &=\answer{\int_0^1 \frac{y^{p-1}dy}{(1+y)^{p+q}}}
+\end{align*}

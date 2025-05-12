@@ -1,0 +1,65 @@
+\item [5.] For each transition of $M$ s.t. $a,b \in \s \cup \{$\spc$\}$ create transitions in $P$ such that first if we are reading (trailing spaces), \$ $\rightarrow$  \spc \: and then R transitions move right and L transitions move left if possible.
+\begin{enumerate}
+    \item R transitions.\\
+    For every transition of $M$ that looks like this\\
+    \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+    \color{red}
+        \node[state] (q_0) {$q$};
+        \node[state, xshift=2.5cm] (r_0) {$r$};
+    
+        \draw
+        (q_0) edge[] node[above]{$a \rightarrow b$, R}(r_0)
+        ;
+    \end{tikzpicture}
+    \end{figure}\\
+    Create transitions like this in $P$\\
+        \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+    \color{red}
+        \node[state] (q_1) {$q$};
+        \node[state, yshift=-2cm] (q) {$\hat{q}$};
+        \node[state, xshift=3cm] (r_1) {$r$};
+        \node[draw=none, xshift=5.5cm] (phantom) {};
+        \draw
+        (q_1) edge[] node[above]{$\e$, $\e$, $a \rightarrow b$, $\e$ }(r_1)
+        (q_1) edge[bend right] node[left]{$\e$, $\e$, $\$ \rightarrow \e$, $\$$ }(q)
+        (q) edge[bend right] node[right]{$\e$, $\e$, $\e \rightarrow \e$, \spc }(q_1)
+        ;
+    \end{tikzpicture}
+    \end{figure}
+    \item L transitions.\\
+    For every transition of $M$ that looks like this\\
+    \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+    \color{red}
+        \node[state] (q_0) {$q$};
+        \node[state, xshift=2.5cm] (r_0) {$r$};
+    
+        \draw
+        (q_0) edge[] node[above]{$a \rightarrow b$, L}(r_0)
+        ;
+    \end{tikzpicture}
+    \end{figure}\\
+    Create transitions like this in $P$ $\forall c \in \s \cup \{$\spc$\}$ 
+    \begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}
+    \color{red}
+        \node[state] (q_1) {$q$};
+        \node[state, yshift=-2cm] (q) {$\hat{q}$};
+        \node[state, xshift=3cm] (l) {$l$};
+        \node[state, xshift=6cm] (r) {$r$};
+        \draw
+        (q_1) edge[] node[above]{$\e$, $\e$, $a \rightarrow \e$, $b$ }(l)
+        (q_1) edge[bend right] node[left]{$\e$, $\e$, $\$ \rightarrow \e$, $\$$ }(q)
+        (q) edge[bend right] node[right]{$\e$, $\e$, $\e \rightarrow \e$, \spc }(q_1)
+        (l) edge[bend left] node[above]{$\e$, $c$, $\e \rightarrow \e$, $c$ }(r)
+        (l) edge[bend right] node[below]{$\e$, $\$$, $\e \rightarrow \$$, $\e$ }(r)
+        ;
+    \end{tikzpicture}
+    \end{figure}
+\end{enumerate}

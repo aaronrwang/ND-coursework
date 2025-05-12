@@ -1,0 +1,38 @@
+\answer{
+Let $P$ be a $\mathcal{P}''$ program. Let us use the follow construction to create a Turing Machine $M$ that compiles $P$ into a standard single-tape TM.
+\begin{quote}
+\begin{enumerate}
+    \item[i.] Initialize an empty stack to keep track of open loops.\footnote{At any point, if there is nothing to pop from this stack, $P$ was not a proper program. Additionally, if there are extra elements on the stack at the end, $P$ was not a proper program.}
+    \item[ii.] Go through every character of the code and parse it in this way, keeping track of a counter $i$ for every character.\footnote{$i$ starts at 0, increments by 1 every time and $i,j \in \mathbb{Z}$} In the following steps, every transition created is from $q_i$ to $q_{i+1}$\\[2mm]
+    \begin{tabular}{l l}
+    \str{<} & $\forall j \in [0,n-1]$ Create transitions $a_j \rightarrow a_j$, L\\[2mm]
+    \str{>} & $\forall j \in [0,n-1]$ Create transitions $a_j \rightarrow a_j$, R\\[2mm]
+    \str{+} & $\forall j \in [0,n-2]$ Create transitions $a_j \rightarrow a_{j+1}$, S\\
+    & Create transition $a_{n-1} \rightarrow a_0$, S\\[2mm]
+    \str{-} & $\forall j \in [1,n-1]$ Create transitions $a_j \rightarrow a_{j-1}$, S\\
+    & Create transition $a_{0} \rightarrow a_{n-1}$, S\\[2mm]
+    \str{[} & Add $i$ to stack of open bracket placement.\\
+    & $\forall j \in [1,n-1]$ Create transitions $a_{j} \rightarrow a_{j}$, S\\[2mm]
+    \str{]} & Let $j$ be popped value from the open bracket placement stack.\\
+    & Let $q_i$ = $q_j$ (create the looping state)\\
+    & Create transition $a_{0} \rightarrow a_{0}$, S\\[2mm]
+    \end{tabular}
+    \item[iii.] $\forall q \in Q$ create a transition \spc\:$\rightarrow a_0, S$ from $q$ to itself.
+    \item[iv.] Let $m$ be the length of the program $P$. $q_m$ is the final state that we have created so far. From $q_m$...
+    \begin{itemize}
+        \item $\forall j \in [1,n-1]$ create a transition $a_{j} \rightarrow a_{j}$, S to $q_{\text{\emph{accept}}}$.
+        \item create a transition from $a_0 \rightarrow a_0$, S to $q_{\text{\emph{reject}}}$.
+    \end{itemize}
+\end{enumerate}
+\end{quote}
+The formal description of $M = \{Q, \s, \g, \delta, q_0,q_{\text{\emph{accept}}}, q_{\text{\emph{reject}}}\}:$
+\begin{itemize}
+    \item $Q = \{q_0,q_1...q_m,q_{\text{\emph{accept}}}, q_{\text{\emph{reject}}}\}$.
+    \item $\s$ is a subset of $\g$ as defined by the directions without $a_0$ and \spc.
+    \item $\g = \{a_0,...,a_{n-1},\text{\spc}\}$
+    \item $\delta$ as defined above.
+    \item $q_0$ as defined above.
+    \item $q_{\text{\emph{accept}}}$ as defined above.
+    \item $q_{\text{\emph{reject}}}$ as defined above.
+\end{itemize}
+}

@@ -1,0 +1,29 @@
+\item[15.] $y'' + 3y'- 4y= e^{3t}, y_0 = y_0' = 0$
+\begin{gather*}
+    L(y'')=p^2Y-py_0-y_0';\:
+    L(y')=pY-y_0;\:
+    L(y)=Y;\:\\
+    L(y'' + 3y'- 4y)=(p^2Y-py_0-y_0')+3(pY-y_0)-4(Y)\\
+    L(y'' + 3y'- 4y)=p^2Y+3pY-4Y=(p+4)(p-1)Y\\
+    (p+4)(p-1)Y=L(e^{3t}) \implies Y=\frac{1}{(p+4)(p-1)}\cdot L(e^{3t})\\
+\end{gather*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{(p+4)(p-1)} \Bigg) 
+    = \frac{e^{-(-1)t}-e^{-(4)t}}{4-(-1)}=\frac{e^{t}-e^{-4t}}{5}
+    \tag{By \( L7 \)}
+\end{equation*}
+\begin{align*}
+    y 
+    & = \int^t_0 \frac{e^{\tau}-e^{-4\tau}}{5}e^{3(t-\tau)}d\tau\\
+    & = \frac{e^{3t}}{5}\int^t_0 (e^{\tau}-e^{-4\tau})e^{-3\tau}d\tau\\
+    & = \frac{e^{3t}}{5}\int^t_0 e^{-2\tau}-e^{-7\tau}d\tau\\
+    & = \frac{e^{3t}}{5}\Big( \frac{1}{7}e^{-7\tau}-\frac{1}{2}e^{-2\tau}\Big)\Big|^t_0\\
+    & = \frac{e^{3t}}{5}
+    \Bigg(
+    \Big( \frac{1}{7}e^{-7t}-\frac{1}{2}e^{-2t}\Big)
+    -\Big( \frac{1}{7}e^{-7(0)}-\frac{1}{2}e^{-2(0)}\Big)
+    \Bigg)\\
+    & = \frac{e^{3t}}{5}
+    \Big(\frac{1}{7}e^{-7t}-\frac{1}{2}e^{-2t} + \frac{5}{14}\Big)\\
+    & = \textcolor{red}{\frac{1}{35}e^{-4t}-\frac{1}{10}e^{t} + \frac{1}{14}e^{3t}}
+\end{align*}

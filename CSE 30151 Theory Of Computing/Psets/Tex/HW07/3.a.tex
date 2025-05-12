@@ -1,0 +1,20 @@
+\answer{
+    Proof idea: Show that it is decidable whether a DFA recognizes the empty set. Use that TM (the TM created in step 2) to decide if the symmetric difference of the two regular expressions is empty to make a TM to decide whether two regular expressions are equivalent.\newp
+    Proof:
+    \[
+    EQ_{REX} = \{\langle A, B\rangle \:|\: A \text{ and } B \text{ are regular expressions s.t. } L(A) = L(B)\}
+    \]\\
+    $F = $ ``On input $\langle A, B\rangle$, where $A$ and $B$ are regular expressions.
+    \begin{enumerate}
+        \item [1.] Let $L(C) = (L(A) \cap \overline{L(B)}) \cup (\overline{L(A)} \cap L(B))$. Construct DFA $C$ to recognize $L(C)$.
+        \item [2.] Create TM $T = $ ``On input $\langle D \rangle $ where $D$ is a DFA
+        \begin{enumerate}
+            \item [i.] Mark the initial state of $D$.
+            \item [ii.] Mark any state that has an incoming transition from a marked state.
+            \item [iii.] Repeat step ii. until no new states are marked.
+            \item [iv.] If no accept states are marked \emph{accept}; otherwise \emph{reject}.''
+        \end{enumerate}
+        \item [3.] Simulate $T$ on input $\langle C\rangle$.
+        \item [4.] \emph{accept} or \emph{reject} according to $T$.''
+    \end{enumerate}
+}

@@ -1,0 +1,30 @@
+\item [12.] $(D^2+4D+12)y=80\sin{2x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+2+\sqrt{8}i)(D+2-\sqrt{8}i)=0\\
+    \implies \text{root(s): } -2 \pm \sqrt{8}i\\
+    \text{General Solution: } y_c=e^{-2x}(A\cos{\sqrt{8}x}+B\sin{\sqrt{8}x})
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $\sin$, we will use $Y=Ce^{2ix}=Y_R+iY_I$ s.t. $y_p=Y_I$. 
+\begin{gather*}
+    Y=Ce^{2ix}; Y'=C(2ie^{2ix});Y''=C(-4e^{2ix})\\
+    Y''+4Y'+12Y = C
+    \big(
+    (-4e^{2ix})
+    +4(2ie^{2ix})
+    +12(e^{2ix})
+    \big)\\
+    Y''+2Y'+10Y=(8+8i)Ce^{2ix}=80e^{2ix}\\
+    \text{ so } C=\frac{10}{1+i}=\frac{10-10i}{2}=5-5i\\
+    Ce^{2ix}=(5-5i)(\cos{2x}+i\sin{2x})\\
+    = 5\cos{2x}+5i\sin{2x}-5i\cos{2x}-5i^2\sin{2x}\\
+    = 5\cos{2x}+5\sin{2x}-5i\cos{2x}+5i\sin{2x}\\
+    = (5\cos{2x}+5\sin{2x})+i(-5\cos{2x}+5\sin{2x})\\
+    y_p = Y_I = -5\cos{2x}+5\sin{2x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = e^{-2x}(A\cos{\sqrt{8}x}+B\sin{\sqrt{8}x})-5\cos{2x}+5\sin{2x}}
+\end{gather*}

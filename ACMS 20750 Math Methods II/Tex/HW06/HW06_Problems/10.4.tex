@@ -1,0 +1,35 @@
+\item[4.]$\frac{1}{(p+a)(p+b)^2}$
+\[
+    \frac{1}{(p+a)(p+b)^2} = \frac{1}{(p+a)}\cdot\frac{1}{(p+b)^2}
+\]
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{(p+a)}\Bigg) 
+    = e^{-at}
+    \tag{By \( L2 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{(p+b)^2}\Bigg) 
+    = te^{-bt}
+    \tag{By \( L6 \)}
+\end{equation*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{1}{(p+a)(p+b)^2} \Bigg)
+    & = \int_0^t e^{-a(t-\tau)} \tau e^{-b\tau}d\tau \\
+    & = \int_0^t \tau e^{-a(t-\tau)-b\tau}d\tau \\
+    & = \int_0^t \tau e^{-at+(a-b)\tau}d\tau \\
+    & = e^{-at}\int_0^t \tau e^{(a-b)\tau}d\tau \\
+    & = e^{-at}\Bigg(\Big(\frac{\tau e^{(a-b)\tau}}{(a-b)}
+    \Big)\Bigg|_0^t-\frac{1}{(a-b)} \int_0^t e^{(a-b)\tau}d\tau \Bigg)\\
+    & = e^{-at}\Bigg(\frac{\tau e^{(a-b)\tau}}{(a-b)}
+    -\frac{e^{(a-b)\tau}}{(a-b)^2}   \Bigg)\Bigg|_0^t\\
+    & = e^{-at}\Bigg(
+    \Big(\frac{t e^{(a-b)t}}{(a-b)}
+    -\frac{e^{(a-b)t}}{(a-b)^2}\Big)
+    -\Big(0
+    -\frac{e^{(a-b)0}}{(a-b)^2}\Big)
+    \Bigg)\\
+    & = e^{-at}\Bigg(
+    \frac{(a-b)t e^{(a-b)t}-e^{(a-b)t}+1}{(a-b)^2}
+    \Bigg)\\
+    & = \textcolor{red}{\frac{(a-b)t e^{-bt}-e^{-bt}+e^{-at}}{(a-b)^2}}\\
+\end{align*}

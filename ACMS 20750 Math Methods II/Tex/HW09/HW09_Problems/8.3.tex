@@ -1,0 +1,23 @@
+\item [3.] $xe^{-x/2}$ on $(0,\infty)$\vspace{-5mm}
+\begin{center}
+\begin{tabular}{c|c|c}
+Sign & \( u = x^2 \) (Derivative) & \( dv = e^{-x} \) (Integral) \\ 
+\hline
+\( + \) & \( x^2 \) & \( -e^{-x} \) \\
+\( - \) & \( 2x \) & \( e^{-x} \) \\
+\( + \) & \( 2 \) & \( -e^{-x} \)
+\end{tabular}
+\end{center}
+\begin{gather*}
+    \norm{xe^{-x/2}} 
+    = \sqrt{\innerproduct{xe^{-x/2}}{xe^{-x^2/2}}}
+    = \sqrt{\int_0^\infty (xe^{-x/2})^2dx}
+    = \sqrt{\int_0^\infty x^2e^{-x}dx}\\
+    = \sqrt{ -x^2e^{-x} - 2x^{-x}-2e^{-x} \Big|_0^\infty}
+    = \sqrt{(0 - 0 - 0)-(0 - 0 - 2)} 
+    = \answer{\sqrt{2}}
+\end{gather*}
+\begin{gather*}
+    \frac{xe^{-x/2}}{\norm{xe^{-x/2}}} 
+    = \answer{\frac{xe^{-x/2}}{\sqrt{2}}}
+\end{gather*}

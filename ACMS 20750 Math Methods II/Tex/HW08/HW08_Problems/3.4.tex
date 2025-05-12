@@ -1,0 +1,26 @@
+\item [4.] $\displaystyle \frac{d^{25}}{dx^{25}} (x\cos{x})$
+\begin{align*}
+    \frac{d^{25}}{dx^{25}} (x\cos{x})
+    &= \sum_{k=0}^{25} \binom{25}{k}
+    \frac{d^{k}}{dx^{k}} (x)
+    \frac{d^{25-k}}{dx^{25-k}} (e^x)\\
+    &= 
+    \binom{25}{0}
+    \frac{d^{0}}{dx^{0}} (x)
+    \frac{d^{25-0}}{dx^{25-0}} (\cos{x})
+    +
+    \binom{25}{1}
+    \frac{d^{1}}{dx^{1}} (x)
+    \frac{d^{25-1}}{dx^{25-1}} (\cos{x})
+    +
+    \sum_{k=2}^{25} \binom{25}{k}
+    \frac{d^{k}}{dx^{k}} (x)
+    \frac{d^{25-k}}{dx^{25-k}} (e^x)\\
+    &= 
+    -x\sin{x}
+    +
+    25\cos{x}
+    +
+    0\\
+    &= \textcolor{red}{-x\sin{x} + 25\cos{x}}
+\end{align*}

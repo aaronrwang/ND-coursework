@@ -1,0 +1,41 @@
+\textcolor{red}{Let $C$ be described by $M=(Q,\s, \Gamma, \delta, q_1,q_a,q_{\text{reject}})$ where $Q = \{q_1,q_2,q_\str{u},q_\str{r},q_\str{d},q_\str{l},q_a,q_{\text{reject}})\}$, $\s=\{\str{u},\str{r},\str{d},\str{l}\},\Gamma = \{\str{u},\str{r},\str{d},\str{l},\str{x},\text{\spc}\}$, and $\delta$ is shown below with the state diagram where every missing transition leads to a reject state. For completeness, the head moves right on every transition into the reject state. (E.g. $\delta(q_\str{u},\text{\spc})=(q_{\text{reject}},\text{\spc},\text{R})$).}
+\vspace{-4mm}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    \node[state, initial] (q1) {$q_1$};
+    \node[state, xshift=3cm, yshift=4cm] (qu) {$q_\str{u}$};
+    \node[state, xshift=3cm, yshift=2cm] (qr) {$q_\str{r}$};
+    \node[state, xshift=3cm, yshift=-2cm] (qd) {$q_\str{d}$};
+    \node[state, xshift=3cm, yshift=-4cm] (ql) {$q_\str{l}$};
+    \node[state, xshift=6cm] (q2) {$q_2$};
+    \node[state, accepting, yshift=-4cm] (qa) {$q_a$};
+    
+    \draw
+    %q1 to q...
+    (q1) edge[bend left=30] node[above, sloped]{\str{u} $\rightarrow$ \spc, R} (qu)
+    (q1) edge[bend left=10] node[above, sloped]{\str{r} $\rightarrow$ \spc, R} (qr)
+    (q1) edge[bend right=10] node[above, sloped]{\str{d} $\rightarrow$ \spc, R} (qd)
+    (q1) edge[bend right = 30] node[above, sloped]{\str{l} $\rightarrow$ \spc, R} (ql)
+    % q... self loop
+    (qu) edge[loop above] node[above]{\str{x},\str{u},\str{r},\str{l}, $\rightarrow$ R} (qu)
+    (qr) edge[loop above] node[above]{\str{x},\str{u},\str{r},\str{d}, $\rightarrow$ R} (qr)
+    (qd) edge[loop above] node[above]{\str{x},\str{r},\str{d},\str{l}, $\rightarrow$ R} (qd)
+    (ql) edge[loop above] node[above]{\str{x},\str{u},\str{d},\str{l}, $\rightarrow$ R} (ql)
+    % q... to q2
+    (qu) edge[bend left=30] node[above, sloped] {\str{d} $\rightarrow$ \str{x}, L} (q2)
+    (qr) edge[bend left=10] node[above, sloped] {\str{l} $\rightarrow$ \str{x}, L} (q2)
+    (qd) edge[bend right=10] node[above, sloped] {\str{u} $\rightarrow$ \str{x}, L} (q2)
+    (ql) edge[bend right=30] node[above, sloped] {\str{r} $\rightarrow$ \str{x}, L} (q2)
+    % q2 self loop
+    (q2) edge[loop right] node[above, xshift=0.7cm, yshift=0.2cm]{\str{x},\str{u},\str{r},\str{d},\str{l}, $\rightarrow$ L} (q2)
+    % q2 to q1
+    (q2) edge[] node[above]{\spc\: $\rightarrow$ R} (q1)
+    % q1 self loop
+    (q1) edge[out=120, in=150, loop] node[above]{\str{x} $\rightarrow$ \spc, R} (q1)
+    % q1 to qa
+    (q1) edge[] node[left]{\spc \:$\rightarrow$ R} (qa)
+    ;
+\end{tikzpicture}
+\end{figure}

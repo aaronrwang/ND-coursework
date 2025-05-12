@@ -1,0 +1,28 @@
+\item [17.] $y''+16y=16\cos{4x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+4i)(D-4i)=0\implies \text{root(s): } \pm 4i\\
+    \text{General Solution: } y_c=A\cos{4x}+B\sin{4x}
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $\cos$, and $4i$ is a root we will use $Y=Cxe^{4ix}=Y_R+iY_I$ s.t. $y_p=Y_R$.
+\begin{gather*}
+    Y=Cxe^{4ix}; Y'=C(e^{4ix}+4ixe^{4ix})\\
+    Y''=C(8ie^{4ix}-16xe^{4ix})\\
+    Y''+16Y = C
+    \big(
+    (8ie^{4ix}-\cancel{16xe^{4ix}})
+    +\cancel{16(xe^{4ix})}
+    \big)\\
+    Y''+16Y=(8i)Ce^{4ix}=16e^{4ix}\\
+    \text{ so } C=\frac{2}{i}=-2i\\
+    Cxe^{ix}=(-2i)x(\cos{4x}+i\sin{4x})\\
+    =-2ix\cos{4x}-2i^2x\sin{4x}\\
+    = (2x\sin{4x})+i(-2x\cos{4x})\\
+    y_p = Y_R = 2x\sin{4x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = A\cos{4x}+B\sin{4x}+2x\sin{4x}}
+\end{gather*}

@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+import sys
+from typing import Tuple, List, Dict
+from collections import defaultdict
+
+class NFA:
+  def __init__(self, states=[], alphabet=[], start=None, accept=[], transitions=defaultdict(list)):
+    self.states = states
+    self.alphabet = alphabet
+    self.start = start
+    self.accept = accept
+    self.transitions = transitions
+
+#print out nfa prints nfa
+def write_nfa(nfa: NFA):
+  try:
+    string = ''
+    string += ' '.join(nfa.states) + ' \n'
+    string += ' '.join(nfa.alphabet) + ' \n'
+    string += nfa.start + '\n'
+    string += ' '.join(nfa.accept) + ' \n'
+    for key in nfa.transitions:
+      for q in nfa.transitions[key]:
+        string +=' '.join(key)+' '+q+'\n'
+    print(string, end="")
+    return True
+  except:
+    return False
+
+#reads nfa from file
+def read_nfa(filename: str) -> NFA:
+  with open(filename,'r') as fp:
+      states = set(fp.readline().strip().split(" "))
+      alphabet = set(fp.readline().strip().split(" "))
+      start = fp.readline().strip()
+      accept = set(fp.readline().strip().split(" "))
+      data = fp.readlines()
+      transitions = defaultdict(list)
+      for line in data:
+        q_0,t,q_1 = line.strip().split(" ")
+        transitions[(q_0,t)].append(q_1)
+  nfa = NFA(states, alphabet, start, accept, transitions)
+  return nfa
+
+#returns dicts for {oldState: newState} of concatenated nfas
+def combinedStatesDicts(states_1: List[str], states_2: List[str]) -> Tuple[Dict[str, str], Dict[str, str]]:
+  newStates_1 = defaultdict(str)
+  newStates_2 = defaultdict(str)
+
+  count = 1
+  for state in states_1:
+    newStates_1[state] = 'q' + str(count)
+    count += 1
+  
+  for state in states_2:
+    newStates_2[state] = 'q' + str(count)
+    count += 1
+
+  return newStates_1, newStates_2
+
+#create nfa recognizing the concatenation of two nfas
+def concat_nfa(nfa_1: NFA, nfa_2: NFA) -> NFA:
+  states_1, states_2 = combinedStatesDicts(nfa_1.states, nfa_2.states) #get new state names
+  states = list(states_1.values()) + list(states_2.values())
+  alphabet = set(nfa_1.alphabet) | set(nfa_2.alphabet)
+  start = states_1[nfa_1.start]
+  accept = list(map(lambda q: states_2[q], nfa_2.accept))
+  transitions = defaultdict(list)
+
+  #add new state names to all transitions
+  for q0, t in nfa_1.transitions.keys():
+    transitions[(states_1[q0], t)] = list(map(lambda q1: states_1[q1], nfa_1.transitions[(q0, t)]))
+  
+  for q0, t in nfa_2.transitions.keys():
+    transitions[(states_2[q0], t)] = list(map(lambda q1: states_2[q1], nfa_2.transitions[(q0, t)]))
+
+  #add transitions from accept of nfa_1 to start of nfa_2
+  for q0 in nfa_1.accept:
+    transitions[(states_1[q0], '&')].append(states_2[nfa_2.start])
+  concat_nfa = NFA(states, alphabet, start, accept, transitions)
+  return concat_nfa
+
+if __name__ == "__main__":
+  try:
+    nfa_1 = read_nfa(sys.argv[1])
+    nfa_2 = read_nfa(sys.argv[2])
+    nfa = concat_nfa(nfa_1, nfa_2)
+    write_nfa(nfa)
+  except Exception as e:
+    sys.exit(str(e))  

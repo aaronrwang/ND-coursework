@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+import sys
+from collections import defaultdict
+
+class TM:
+  def __init__(self, states=[], alphabet=[], tape_alphabet = [], start=None, accept=None, reject=None, transitions=defaultdict(lambda: None)):
+    self.states = states
+    self.alphabet = alphabet
+    self.tape_alphabet = tape_alphabet
+    self.start = start
+    self.accept = accept
+    self.reject = reject
+    self.transitions = transitions
+
+#reads tm from file and creates TM object
+def read_tm(filename: str) -> TM:
+    with open(filename,'r') as fp:
+        states = set(fp.readline().strip().split(" "))
+        alphabet = set(fp.readline().strip().split(" "))
+        tape_alphabet = set(fp.readline().strip().split(" "))
+        start = fp.readline().strip()
+        accept = fp.readline().strip()
+        reject = fp.readline().strip()
+        data = fp.readlines()
+        transitions = defaultdict(lambda: None) #assumes deterministic TM
+        for line in data:
+            q, read, r, write, direction  = line.strip().split(" ")
+            transitions[(q, read)] = (r, write, direction)
+
+    tm = TM(states, alphabet, tape_alphabet, start, accept, reject, transitions)
+    return tm
+
+#transforms tm to file with msed instructions
+def tm_to_sed(tm:TM):
+    any_char = '|'.join(tm.tape_alphabet)
+    any_state = '|'.join(tm.states)
+    print(f"s/(({any_char})*)/!{tm.start}!\\g<1>/") #create header !<state>!
+    print(":loop") #create loop label
+
+    #create all transitions for all possible configs of the TM
+    for q in tm.states:
+        print(f"s/(({any_char})*)!{q}!/\\g<1>!{q}!_/")
+        if q == tm.reject:
+            #goto reject
+            print(f"/(({any_char})*)!{q}!(({any_char})*)/breject")
+            continue
+
+        if q == tm.accept:
+            #goto accept
+            print(f"/(({any_char})*)!{q}!(({any_char})*)/baccept")
+            continue
+        
+        for read in tm.tape_alphabet:
+            if tm.transitions[(q, read)]:
+                r, write, direction = tm.transitions[(q, read)]
+                #replace the current TM config with new config
+                if direction == 'R':
+                    print(f"s/(({any_char})*)!{q}!{read}(({any_char})*)/\\g<1>{write}!{r}!\\g<3>/")
+                if direction == 'L':
+                    print(f"s/(({any_char})*)({any_char}|)!{q}!{read}(({any_char})*)/\\g<1>!{r}!\\g<3>{write}\\g<4>/")
+            else: #create reject transition if no outgoing transitions
+                print(f"s/(({any_char})*)!{q}!{read}(({any_char})*)/\\g<1>!{tm.reject}!\\g<3>/")
+    
+    #goto loop
+    print(f"/({any_char})*!({any_state})!({any_char})*/bloop")
+
+    #accept with message
+    print(f":accept")
+    print(f"s/(({any_char})*)!{tm.accept}!(({any_char})*)/accept:\\g<1>\\g<3>/")
+    print(f"/({any_char})*!({any_state})!({any_char})*/bend") #skip reject
+    #reject with message
+    print(f":reject")
+    print(f"s/(({any_char})*)!{tm.reject}!(({any_char})*)/reject/")
+    print(":end")
+
+
+if __name__ == "__main__":
+    try:
+        tm = read_tm(sys.argv[1])
+        tm_to_sed(tm)
+    except Exception as e:
+        sys.exit(str(e))

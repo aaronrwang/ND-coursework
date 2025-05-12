@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{automata, positioning, arrows, trees}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\answer}{\textcolor{red}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\spc}{\textvisiblespace}
+
+\title{Homework 07}
+\author{Aaron Wang}
+\date{April 11 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Bounds Checking}
+    \begin{enumerate}
+        \item [(a)] [Problem 5.30 (US ed. 5.14)] Prove that it is undecidable whether a Turing machine $M$, on input $w$, ever attempts to move its head past the left end of the tape.\newp
+        \input{HW07/1.a}
+        \item [(b)]Prove that it is decidable whether a Turing machine $M$, on input $w$, ever attempts to move its head past the right end of the input string $w$. Your answer should be a high-level description of a TM.\newp
+        \input{HW07/1.b}
+    \end{enumerate}
+\newpage
+    \item \textbf{\emph{The Power of 10}} is a set of rules for writing mission-critical code developed
+at JPL.1 Let us call a Turing machine that complies with these rules \emph{10-compliant}. All that you need to know about 10-compliance is:
+    \begin{itemize}
+        \item A 10-compliant Turing machine always halts on every input
+        \item It is decidable whether a Turing machine is 10-compliant.
+    \end{itemize}
+    In this problem, we’ll show that any such set of rules will be incomplete in the sense that there is a language $L_2$ that is decidable, yet no TM that decides $L_2$ complies with the rules.\newp
+    Consider the language
+    \[
+        L_2 = \{\langle M \rangle | M\text{ is a 10-compliant TM that rejects } \langle M \rangle \}.
+    \]
+    \begin{enumerate}
+        \item Prove that $L_2$ is decidable.\newp
+        \input{HW07/2.a}
+        \item Prove that any TM that decides $L_2$ must not be 10-compliant.\newp
+        \input{HW07/2.b}
+        \item Where in your solution to (a) is the violation of 10-compliance?\newp
+        \input{HW07/2.c}
+    \end{enumerate}
+\newpage
+    \item \textbf{grep and sed}
+    \begin{enumerate}
+        \item [(a)] Prove that it is decidable whether two regular expressions are equivalent to each other. Hint: First prove that it is decidable whether a DFA recognizes the empty language. Then use closure properties.\newp
+        \input{HW07/3.a}
+        \item [(b)] Prove that it is undecidable whether two \str{sed} programs (as defined in CP3) are equivalent to each other. Hint: Use CP3 Part 3.\newp
+        \input{HW07/3.b}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

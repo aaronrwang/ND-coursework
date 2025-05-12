@@ -1,0 +1,34 @@
+\textcolor{red}{
+    If $L$ is regular, we have an NFA without $\e$ transitions $N$ for $L$ s.t. $N = (Q, \s, \delta, s, F)$.\footnote{This is important for edge cases in which random $\e$ transitions mess up construction of $N'$. We know such an $N$ without $\epsilon$ always exists b/c an equivalent DFA exists for N and an equivalent DFA is an equivalent NFA without $\e$ transitions}\\
+    Construct $N'= (Q', \s, \delta', s', F')$ to recognize CHOP$(L)$\\
+    \begin{enumerate}
+        \item [1.]$Q' = Q \cup \{s'\}$ is $Q$ with a new start state.
+        \item [2.] $\s$ does not change.
+        \item [3.] Define $\delta'$ as the same as before with the addition of $\e$ transitions from $s'$ to every state that $s$ originally went to and any other transition $a$ from $s'$ maps to $\emptyset$
+        \[
+        \delta'(q,a)=  
+        \begin{cases}
+        \delta(q,a) & q \neq s'\\
+        % \{q_i | \exists x \in \s_\e(q_i \in \delta(q,x))\} & q = s' \land a=\e \\
+        \cup_{x \in \s} \delta(s,x) & q = s' \land a=\e \\
+        \emptyset & q = s' \land a\neq\e
+        \end{cases}
+        \]
+        % \[
+        %     \delta' = \Big\{\big((q_i,a),q_j\big) \Big|\big((q_i,a),q_j\big) \in \delta \land q_i \neq s \land q_j \notin F \Big\}
+        % \]
+        % \[ 
+        %     \cup \Big\{\big((q_i,\e),q_j\big) \Big|\big((q_i,a),q_j\big) \in \delta \land q_i = s \Big\}
+        % \]
+        % \[
+        %     \cup \Big\{\big((q_i,\e),q_j\big) \Big|\big((q_i,a),q_j\big) \in \delta \land q_j \in F \Big\}
+        % \]
+        \item [4.] $s'$ is the new start state.
+        \item [5.] $F'= \{q|\exists q_{\text{f}} \in F (\exists a \in \s (q_{\text{f}} \in \delta(q,a) ))\}$ is the set of all states that were originally one transition away from the end.
+    \end{enumerate}
+    Let $L=\{\str{in},\str{out}\}$ as an example.\\
+    \input{HW02/3.ex.og}\\
+    CHOP$(L)$
+    \input{HW02/3.ex.b}\\
+    By proof of construction CHOP$(L)$ is regular.
+}

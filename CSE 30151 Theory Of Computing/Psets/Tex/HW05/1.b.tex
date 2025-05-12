@@ -1,0 +1,26 @@
+\textcolor{red}{
+    Let $A$ and $B$ be context-free languages. Observe that $A \cup B$ is context-free because context-free languages are closed under union. Towards a contradiction, assume that context-free languages are closed under complementation. Using this assumption $\overline{A}$ and $\overline{B}$ must also be context-free. Consequently, $\overline{A} \cup \overline{B}$ must be context-free. $\overline{\overline{A} \cup \overline{B}}$ must also be context-free, and by DeMorgan's law $\overline{\overline{A} \cup \overline{B}} = A \cap B$ is context-free. In (1a), we have shown an example, where this is not true. Thus, context-free languages are \emph{not} closed under complementation.
+}
+% \textcolor{red}{
+% \begin{center}
+% \begin{minipage}{0.42\textwidth}
+%     \[D =\{\str{a}^i\str{b}^j\str{c}^k|i\neq j \text{ or } j \neq k \text{ or } i \neq k\}\]
+%     \[E = \overline{\str{a}^*\str{b}^*\str{c}^*}\]
+%     Using $C$ from above, observe $\overline{C}=D \cup E$. $D$ is context-free as there exists a CFG that generates it. $\overline{E}$ is regular as shown by the regex. By complement (closure property for Regular langauges) $E$ is also regular. Under closure properties, $D \cup E = \overline{C}$ must be context-free. Since $\overline{C}$ is context-free and $C$ is non-context-free, context-free languages are \emph{not} closed under complementation.
+% \end{minipage}
+% \hfill
+% \begin{minipage}{0.42\textwidth}
+%     \begin{align*}
+%         S &\rightarrow AD \mid E \mid FC \\
+%         A &\rightarrow A\str{a} \mid \e \\
+%         B &\rightarrow B\str{b} \mid \e \\
+%         C &\rightarrow C\str{c} \mid \e \\
+%         D &\rightarrow \str{b}D\str{c} \mid C\str{c} \mid B\str{b} \\
+%         E &\rightarrow \str{a}E\str{c} \mid \str{a}AB \mid BC\str{c} \\
+%         F &\rightarrow \str{a}F\str{b} \mid A\str{a} \mid B\str{b} \\
+%     \end{align*}
+%     \centering
+%     \textbf{CFG for $D$ with start state $S$.}
+% \end{minipage}
+% \end{center}
+% }

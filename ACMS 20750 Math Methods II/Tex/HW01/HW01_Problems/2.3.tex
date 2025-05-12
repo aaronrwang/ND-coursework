@@ -1,0 +1,56 @@
+\item $y'\sin x = y\ln y$, $y=e$ when $x=\pi/3$
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+            \frac{dy}{dx}\sin x = y\ln y \\
+            \frac{dy}{y\ln y} = \csc x dx\\
+            \int \frac{dy}{y\ln y} = \int \csc x dx \\
+            \ln|\ln(y)| = \ln|\csc x - \cot x|+C \\
+            e^{\ln|\ln(y)|} = e^{\ln|\csc x - \cot x|+C} \\
+            \textcolor{red}{
+            \ln(y) = C(\csc x - \cot x)
+            }
+        \end{gather*}
+        Particular Solution:
+        \begin{gather*}
+            \ln(e)=C(\csc(\pi/3) - \cot(\pi/3))\\
+            1=C\Big(\frac{2}{\sqrt3} - \frac{1}{\sqrt3}\Big)\\
+            1=C\Big(\frac{1}{\sqrt3}\Big) \\
+            \sqrt3=C \\
+            \textcolor{red}{
+            \ln(y) = \sqrt3(\csc x - \cot x)
+            }
+        \end{gather*}
+    \end{minipage}
+    \hfill   
+    \begin{minipage}[t]{0.45\textwidth}
+        Integration for LHS:\\
+        $u = \ln(y)$; $du = \frac{1}{y}dy$; $dy = ydu$      
+        \[
+            \int \frac{dy}{y\ln y} = \int \frac{1}{u}du 
+        \]
+        \[
+            = \ln|u|+C=\ln|\ln(y)|+C
+        \]
+        Integration for RHS:\\
+        \[
+        \int \csc x dx 
+        \]
+        \[
+            = \int \csc x\Big(\frac{\csc x - \cot x}{\csc x - \cot x}\Big) dx
+        \]
+        \[
+            = \int\Big(\frac{\csc^2 x - \csc x \cot x}{\csc x - \cot x}\Big) dx
+        \]
+        $u = \csc x - \cot x$\\
+        $du = (\csc^2x-\csc x \cot x) dx$   
+        \[
+            = \int\frac{1}{u} du = \ln|u|+C
+        \]
+        \[
+            = \ln|\csc x - \cot x|+C
+        \]
+    \end{minipage}
+}

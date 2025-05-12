@@ -1,0 +1,48 @@
+\item[5.]$\frac{p}{(p+a)(p+b)^2}$
+\[
+    \frac{1}{(p+a)(p+b)^2} = \frac{1}{(p+b)}\cdot\frac{p}{(p+a)(p+b)}
+\]
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{(p+b)}\Bigg) 
+    = e^{-bt}
+    \tag{By \( L2 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{p}{(p+a)(p+b)}\Bigg) 
+    = \frac{ae^{-at}-be^{-bt}}{a-b}
+    \tag{By \( L8 \)}
+\end{equation*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{p}{(p+a)(p+b)^2} \Bigg)
+    & = \int_0^t e^{-b(t-\tau)} \frac{ae^{-a\tau}-be^{-b\tau}}{a-b}d\tau \\
+    & = \frac{e^{-bt}}{a-b}\int_0^te^{b\tau} (ae^{-a\tau}-be^{-b\tau})d\tau\\
+    & = \frac{e^{-bt}}{a-b}\int_0^t ae^{(b-a)\tau}-be^{(b-b)\tau}d\tau\\
+    & = \frac{e^{-bt}}{a-b}\int_0^t ae^{(b-a)\tau}-bd\tau\\
+    & = \frac{e^{-bt}}{a-b}\Big( \frac{ae^{(b-a)\tau}}{(b-a)}-b\tau\Big)\Big|_0^t\\
+    & = \frac{e^{-bt}}{a-b}\Bigg( 
+    \Big(\frac{ae^{(b-a)t}}{(b-a)}-bt\Big)
+    -\Big(\frac{ae^{(b-a)(0)}}{(b-a)}-b(0)\Big)
+    \Bigg)\\
+    & = \frac{e^{-bt}}{a-b}\Bigg( 
+    \frac{ae^{(b-a)t}}{(b-a)}-bt
+    -\frac{a}{(b-a)}
+    \Bigg)\\
+    & = \frac{e^{-bt}}{a-b}\Bigg( 
+    -\frac{ae^{(b-a)t}}{a-b}+\frac{(b-a)bt}{a-b}
+    +\frac{a}{a-b}
+    \Bigg)\\
+    & = \frac{e^{-bt}}{(a-b)^2}\Bigg( 
+    -ae^{(b-a)t}+(b-a)bt
+    +a
+    \Bigg)\\
+    & = \frac{1}{(a-b)^2}\Bigg( 
+    -ae^{-bt}e^{(b-a)t}+(b-a)bte^{-bt}
+    +ae^{-bt}
+    \Bigg)\\
+    & = \frac{1}{(a-b)^2}\Bigg( 
+    -ae^{-at}+(b-a)bte^{-bt}
+    +ae^{-bt}
+    \Bigg)\\
+    & = \textcolor{red}{\frac{-ae^{-at}+(b-a)bte^{-bt}
+    +ae^{-bt}}{(a-b)^2}}
+\end{align*}

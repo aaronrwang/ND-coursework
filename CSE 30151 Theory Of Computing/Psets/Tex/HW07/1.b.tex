@@ -1,0 +1,14 @@
+\answer{
+    Proof idea: Use the property that there is a finite amount of different configurations if the head never moves past the end of the input. With that principle, if we ever go that amount of steps without going to the right of the input, none of the subsequent loops will either.\newp
+    Proof:
+    \[
+        \text{RIGHT}_{TM} = \{\langle M, w \rangle | M \text{ moves head past the right end of the input } w\}
+    \]
+    Create a TM $L$ that decides $\text{RIGHT}_{TM}$.\newp
+    $L = $ ``on input $\langle M, w \rangle$
+    \begin{enumerate}
+        \item Simulate $M$ on input $w$ for $qng^n+1$ steps\footnote{Lemma 5.8 from Sipser. Maximum size of a loop in which the head never goes past the right end of the input.} such that $n = |w|$, $q = |Q|$ and $g = |\Gamma|$ or until it halts such that only fake blanks are written.\footnote{In class we did an example like this. For all transitions that write a \spc\: write a \str{X} instead and for all transitions that read a \spc, make an equivalent transition that reads the \str{X}}
+        \item If $M$ at any point during this simulation reads \spc, \emph{reject}.
+        \item Otherwise \emph{accept}.''
+    \end{enumerate}
+}

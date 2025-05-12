@@ -1,0 +1,31 @@
+\item $y'-xy=x$, $y=1$ when $x=0$
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+        \frac{dy}{dx}-xy=x\\
+        \frac{dy}{dx}=xy+x\\
+        \frac{dy}{dx}=x(y+1)\\
+        \frac{dy}{y+1}=xdx\\
+        \int\frac{dy}{y+1}=\int xdx\\
+        \ln|y+1|=\frac{x^2}{2}+C\\
+        e^{\ln|y+1|}=e^{x^2/2+C}\\
+        y+1=Ce^{x^2/2}\\
+        \textcolor{red}{
+            y=Ce^{x^2/2}-1
+        }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Particular Solution:
+        \begin{gather*}
+        (1)=Ce^{(0)^2/2}-1\\
+        C=2\\
+        \textcolor{red}{
+            y=2e^{x^2/2}-1
+        }
+        \end{gather*}
+    \end{minipage}
+}

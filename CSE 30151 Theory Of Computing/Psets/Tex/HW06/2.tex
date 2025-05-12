@@ -1,0 +1,27 @@
+\answer{
+The intuition for the following conversion is this. Use the 2 stacks in the same way as the tape would be used where the first stack is used to hold everything preceding the head and the other stack holds everything following and where the head is currently looking at the top element on the second stack. The head moves right by moving one element from the second stack to the first stack, and moves left by moving an element from the first stack to the second. 
+To consider the edge case of moving left when all the way at the left already, you check for a $\$$ and in that case, you move back right.
+To consider the edge case, where we extend pass the starting string (go to trailing spaces), we would
+Let $M$ be a TM.\newp
+Let $P = \{Q,\s,\g, \delta, s, F\}$ be the 2PDA such that
+\begin{quote}
+\begin{enumerate}
+    \item [1.] The string ($\s$) alphabet is the same as that of $M$.
+    \item [2.] $\g = \s \cup \{\text{\spc, \str{\$}}\}$. The stack alphabet is string alphabet with \spc \:and \str{\$}. 
+    \item [3.] Have pre-processing states to read the input onto the stack and add \str{\$} to demarcate the end and beginning. $\forall a \in \s$.\footnote{The outgoing transition from $s_2$ will be $\e$, $\e$, $\e \rightarrow \e$, $\e$ into the original start state }
+    \input{HW06/2/start}
+    \item [4.] For each state $q$ of $M$, the same state $q$ in $P$.
+    \begin{enumerate}
+        \item $F = \{ q_{\text{\emph{accept}}}\}$.
+        \item Additionally, to ensure rejection, make sure that there are no outgoing transitions from $q_{\text{\emph{reject}}}$.
+    \end{enumerate}
+    \input{HW06/2/transition}
+    \item [6.] $Q$ is the set of all the states we created.
+    \begin{enumerate}
+        \item The states from pre-processing $s$, $s_0$, $s_1$ and $s_2$.
+        \item The states copied from the $M$.
+        \item The new states $\hat{q}$ and $l$ defined by the transitions (for every transition).
+    \end{enumerate}
+\end{enumerate}
+\end{quote}
+}

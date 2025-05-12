@@ -1,0 +1,29 @@
+\item [3.] Show that the functions $x^2$ and $\sin (x)$ are orthogonal on $(-1, 1)$.
+\answer{
+\begin{quote}
+    $\displaystyle \int_{-1}^1 x^2\sin(x) = 0 \implies x^2 \perp \sin(x)$ on $(-1,1)$.
+\end{quote}
+}
+\begin{center}
+\answer{
+\begin{tabular}{c|c|c}
+Sign & \( u = x^2 \) (Derivative) & \( dv = \sin x \) (Integral) \\ 
+\hline
+\( + \) & \( x^2 \) & \( -\cos x \) \\
+\( - \) & \( 2x \) & \( -\sin x \) \\
+\( + \) & \( 2 \) & \( \cos x \) \\
+\( - \) & \( 0 \) &  
+\end{tabular}
+}
+\end{center}
+\answer{
+\begin{align*} 
+    \int_{-1}^1 x^2\sin(x) 
+    &= x^2\cos(x)+2x\sin(x)+2\cos(x)\big|_{-1}^1\\
+    &= \big((1)^2\cos(1)+2(1)\sin(1)+2\cos(1)\big) - \big((-1)^2\cos(-1)+2(-1)\sin(-1)+2\cos(-1)\big)\\
+    &= \cos(1)+2\sin(1)+2\cos(1) - \cos(-1) + 2\sin(-1) - 2\cos(-1)\\
+    &= \cos(1)+2\sin(1)+2\cos(1) - \cos(1) - 2\sin(1) - 2\cos(1)\\
+    &= 0
+\end{align*}
+Thus, we have shown that the $x^2 \perp \sin(x)$ on interval $(-1,1)$
+}

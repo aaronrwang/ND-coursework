@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{automata, positioning, arrows, trees}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\spc}{\textvisiblespace}
+
+\title{Homework 05}
+\author{Aaron Wang}
+\date{March 21 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Non-closure properties of CFLs}
+    \begin{enumerate}
+        \item [(a)][Exercise 2.2a] Use the languages
+        \[
+            A=\{\str{a}^m\str{b}^n\str{c}^n|m,n \geq 0\}
+        \]
+        \[
+            B=\{\str{a}^n\str{b}^n\str{c}^m|m,n \geq 0\}
+        \]
+        to prove that context-free languages are not closed under intersection. \newp
+        \input{HW05/1.a}
+        \item [(b)][Exercise 2.2b] Use Problem 1a and DeMorgan’s law to prove that context-free languages are \textit{not} closed under complementation. \newp
+        \input{HW05/1.b}
+    \end{enumerate}
+\newpage
+    \item \textbf{There and back again.} Imagine a robot turtle that you can give instructions \str{u} (go up 1 cm), \str{d} (go down 1 cm), \str{l} (go left 1 cm), \str{r} (go right 1 cm). A program is a string of instructions.\newp
+    Let $C$ be the set of programs that make the turtle return to its starting point. For example, \str{uurdrdll} is in $C$, as shown in this picture:
+    \input{HW05/2.figure}
+    \vspace{-10mm}
+    \begin{enumerate}
+        \item Prove that $C$ is not context-free.\newp
+        \input{HW05/2.a}
+        \item Write a \textbf{formal description} of a Turing machine that decides $C$.\newp
+        \input{HW05/2.b}
+    \end{enumerate}
+\newpage
+    \item \textbf{Turing closure properties.} Let $\s = \{\str{0}, \str{1}\}$. Recall in HW2 we defined
+        \[
+        \text{STRETCH}(w_1w_2 \cdots w_n) = w_1w_1w_2w_2 \cdots w_{n-1}w_{n-1}w_nw_n. 
+        \]
+        for any string $w_1w_2 \cdots w_n \in \s^*$ This induces an operation on languages,
+        \[
+        \text{STRETCH}(L) = \{\text{STRETCH}(w) | w \in L\}.  
+        \]
+
+    \begin{enumerate}
+        \item Write an \textbf{implementation-level} description of a Turing machine $S$ that, on input $v \in \s^*$, decides whether $v = \text{STRETCH}(u)$ for some $u$. Moreover, if $S$ accepts $v$, then when it halts, the contents of the tape should be $u$. For example, if the input is \str{001100}, $S$ should accept and the final contents of the tape should be \str{010}. But if the input is \str{001101}, $S$ should reject.\newp
+        \input{HW05/3.a.tex}
+        \item Prove that if $L$ is a Turing-decidable language over $\s$, then STRETCH$(L)$ is also Turing-decidable. You should let $M$ be a Turing machine that decides $L$, then use your answer to 3a to give an \textbf{implementation-level} description of a Turing machine that decides STRETCH$(L)$. One of the lines of your description can be ``Simulate $M$.''\newp
+        \input{HW05/3.b.tex}
+        \item Prove that if $L$ is a Turing-recognizable language, then STRETCH$(L)$ is also Turing-recognizable.\newp
+        \input{HW05/3.c.tex}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

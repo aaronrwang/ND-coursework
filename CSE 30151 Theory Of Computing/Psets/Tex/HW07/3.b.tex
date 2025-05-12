@@ -1,0 +1,31 @@
+\answer{
+    Proof idea: Reduce the universal decider to a decider for \str{sed} programs that reject all strings. Reduce this new decider to a decider for whether two \str{sed} programs are equivalent. By reduction, it is undecidable whether two \str{sed} programs are equivalent.\newp
+    Proof:
+    \[
+    E_{\str{sed}} = \{\langle P \rangle \:|\: P \text{ is a \str{sed} program as defined in CP3 s.t. } L(P) = \emptyset \}
+    \]\\
+    Towards a contradiction, assume that $R_{E}$ decides $E_{\str{sed}}$.
+    Construct $S$, the universal decider.\newp
+    $S =$ ``On input $\langle M, w \rangle$
+    \begin{enumerate}
+        \item[1.] Construct $M' =$ ``On input $x$
+        \begin{enumerate}
+            \item [i.] if $x \neq w$, \emph{reject}.
+            \item [ii.]if $x = w$, run $M$ on $w$ and \emph{accept} or \emph{reject} according to $M$.''
+        \end{enumerate}
+        \item [2.] Run $R_{E}$ on $\langle M' \rangle$.
+        \item [3.] If $R_{E}$ accepts, \emph{reject}; if $R_{E}$ rejects, \emph{accept}.''
+    \end{enumerate}
+    Thus, as we have constructed the universal decider $S$, we have a contradiction $\lightning$. Consequently our original claim that $E_{\str{sed}}$ is decidable is false.\newp
+    Let us now look at $EQ_{\str{sed}}$ as defined below.
+    \[
+    EQ_{\str{sed}} = \{\langle P_1, P_2\rangle \:|\: P_1 \text{ and } P_2 \text{ are \str{sed} programs as defined in CP3 s.t. } L(P_1) = L(P_2)\}
+    \]\\
+    Towards a contradiction that $R_{EQ}$ decides $EQ_{\str{sed}}$. Construct $R_E$ the decider for $E_{\str{sed}}$\newp
+    $R_{E} = $ ``On input $\langle P \rangle$ where $P$ is a \str{sed} program.
+    \begin{enumerate}
+        \item Run $R_{EQ}$ on $\langle P, P_0 \rangle$ where $P_0$ is a \str{sed} program s.t. $L(P) = \emptyset$.
+        \item \emph{accept} or \emph{reject} according to $R_{EQ}$.''
+    \end{enumerate}
+    Thus, as we have constructed the $R_E$, we have a contradiction $\lightning$. Consequently our original claim that $EQ_{\str{sed}}$ is decidable is false. Therefore it is undecidable whether two \str{sed} programs are equivalent to each other.
+}

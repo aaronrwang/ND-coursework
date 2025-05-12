@@ -1,0 +1,31 @@
+\item [3.] $y''+y'-2y=e^{2x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    y_c''+y_c'-2y_c=0 \implies (D^2+D-2)y_c=0\\
+    \text{Auxiliary Equation: }(D^2+D-2)=0\\
+    \implies (D+2)(D-1)=0 \implies \text{root(s): } -2,1\\
+    \text{General Solution: } y_c=Ae^{-2x}+Be^{x}
+\end{gather*}
+Now Find particular Solution:
+Using a simple way to solve for the particular solution we know $y_p=Ce^{2x}$
+% \begin{gather*}
+%     y_p''+y_p'-2y_p=e^{2x} \implies (D^2+1-2)y_2=e^{2x}\\
+%     \implies (D+2)(D-1)y_p = e^{2x} \text{; Let }u = (D-1)y_p\\
+%     (D+2)u = e^{2x} \implies u' + 2u = e^{2x}\\
+%     I(x) = \int 2dx = 2x \text{ and } Q(x) = e^{2x}\\
+%     u = e^{-2x}\int e^{2x}e^{2x}dx = \frac{1}{4}e^{2x}\\
+%     y_p'-y_p=\frac{1}{4}e^{2x}\\
+%     I(x) = \int -dx = -x \text{ and } Q(x) = \frac{1}{4}e^{2x}\\
+%     y_p = e^{x}\int e^{-x}\frac{1}{4}e^{2x}dx = \frac{1}{4}e^{2x}\\
+% \end{gather*}
+\begin{gather*}
+    y_p=Ce^{2x};\:y_p'=C2e^{2x};\:y_p''=C4e^{2x}\\
+    y_p''+y_p'-2y_p=C\big((4e^{2x})+(2e^{2x})-2(e^{2x})\big)\\
+    y_p''-y_p'-2y_p=4Ce^{2x} = e^{2x} \text{ so } C=\frac{1}{4}\\
+    y_p = \frac{1}{4}e^{2x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = Ae^{-2x}+Be^{x}+\frac{1}{4}e^{2x}}
+\end{gather*}

@@ -1,0 +1,59 @@
+\item [3.] $f(x)= P_3'(x)$
+\[
+    P_3'(x) = (\frac{5}{2}x^3 - \frac{3}{2}x)' = \frac{15}{2}x^2 - \frac{3}{2}
+\]
+Observe that
+\[
+    \int_{-1}^1f(x)P_l(x)dx =
+    \begin{cases}
+        0, & l \text{ is odd}\\
+        2 \int_{0}^1 (\frac{15}{2}x^2 - \frac{3}{2})P_l(x)dx, & l \text{ is even}
+    \end{cases}
+\]
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_0(x)dx =C_0\cdot \frac{2}{2(0)+1} = 2C_0\\
+    \int_{-1}^{1}f(x)P_0(x)dx 
+    = 2 \int_0^1 \frac{15}{2}x^2 - \frac{3}{2} dx 
+    = 5x^3 - 3x\Big|_0^1 
+    = 2\\
+    2C_0 = 2 \implies \answer{C_0 = 1}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_1(x)dx =C_1\cdot \frac{2}{2(1)+1} = \frac{2}{3}C_1\\
+    \int_{-1}^{1}f(x)P_1(x)dx = 0\\
+    \frac{2}{3}C_1 = 0 \implies \answer{C_1 = 0}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_2(x)dx =C_2\cdot \frac{2}{2(2)+1} = \frac{2}{5}C_2\\
+    \int_{-1}^{1}f(x)P_2(x)dx
+    = 2 \int_0^1 \Big(\frac{15}{2}x^2 - \frac{3}{2}\Big)
+    \Big(\frac{3}{2}x^2 - \frac{1}{2}\Big)dx \\
+    = \int_0^1 \frac{45}{2}x^4-12x^2+\frac{3}{2}dx
+    = \frac{9}{2}x^5-4x^3+\frac{3}{2}x\Big|_0^1 
+    = 2\\
+    \frac{2}{5}C_2 = 2 \implies \answer{C_2 = 5}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_3(x)dx =C_0\cdot \frac{2}{2(3)+1} = \frac{2}{7}C_3\\
+    \int_{-1}^{1}f(x)P_3(x)dx 
+    = 0\\
+    \frac{2}{7}C_3 = 0 \implies \answer{C_3 = 0}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_4(x)dx =C_4\cdot \frac{2}{2(4)+1} = \frac{2}{9}C_4\\
+    \int_{-1}^{1}f(x)P_4(x)dx
+    = 2 \int_0^1 \Big(\frac{15}{2}x^2 - \frac{3}{2}\Big)
+    \Big(\frac{35}{8}x^4 - \frac{30}{8}x^2 + \frac{3}{8}\Big)dx \\
+    = \frac{1}{8}\int_0^1 525x^6-555x^4+135x^2-9 dx 
+    = \frac{1}{8}\Big(75x^7-111x^5+45x^3-9\Big)\Big|_0^1 
+    = 0\\
+    \frac{2}{9}C_4 = 0 \implies \answer{C_4 = 0}
+\end{gather*}
+The Legendre series for this function is:
+\answer{
+\[
+    P_0(x)+
+    5P_2(x)+
+    ...
+\]
+}

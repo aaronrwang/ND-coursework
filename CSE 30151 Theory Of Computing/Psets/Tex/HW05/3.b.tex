@@ -1,0 +1,12 @@
+\textcolor{red}{
+Let $M'$ be the Turing machine that describes STRETCH$(L)$\newp
+$M' = $ ``On input string $w$''
+\begin{quote}
+\begin{enumerate}
+    \item[1.] Simulate S
+    \item[2.] If $S$ rejects $w$: \emph{reject}.
+    \item[3.] If $S$ accepts $w$: Move head to start of tape\footnote{In the case that this is too high level, what one could do is add a preprocessing step, Mark the first two symbols, Run S, and then at this point rewind to marked symbol, unmark it and continue.} and simulate M on the current tape.
+    \item[4.] \emph{accept} or \emph{reject} as $M$ would.
+\end{enumerate}
+\end{quote}
+}

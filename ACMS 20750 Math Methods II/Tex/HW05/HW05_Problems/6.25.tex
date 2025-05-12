@@ -1,0 +1,42 @@
+\item [25.] $(D-3)(D+1)y=16x^2e^{-x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-3)(D+1)=0\\
+    \implies \text{root(s): } -1, 3\\
+    \text{General Solution: } y_c=Ae^{-x}+Be^{3x}
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $16x^2e^{-x}$ and one of the roots are the same, we know solution will be in the form of $Q_2(x)xe^{-x}$ where $Q_2(x) = a_2x^2+a_1x+a_0$
+\begin{gather*}
+    y_p = (a_2x^2+a_1x+a_0)xe^{-x}\\
+    y_p = (a_2x^3+a_1x^2+a_0x)e^{-x}\\[2mm]
+    y_p' = (3a_2x^2+2a_1x+a_0)e^{-x}-(a_2x^3+a_1x^2+a_0x)e^{-x}\\
+    y_p' = (-a_2x^3+(3a_2-a_1)x^2+(2a_1-a_0)x+a_0)e^{-x}\\[2mm]
+    y_p'' = (-3a_2x^2+2(3a_2-a_1)x+(2a_1-a_0))e^{-x}\\
+    -(-a_2x^3+(3a_2-a_1)x^2+(2a_1-a_0)x+a_0)e^{-x}\\
+    y_p'' = (a_2x^3+(-6a_2+a_1)x^2+(6a_2-4a_1+a_0)x+(2a_1-2a_0))e^{-x}\\[2mm]
+    y_p''-2y_p'-3y_p=\Big(
+    (\cancel{a_2x^3}+(-6a_2+\cancel{a_1})x^2+(6a_2-4a_1+\cancel{a_0})x+(2a_1-2a_0))\\
+    -2(\cancel{-a_2x^3}+(3a_2-\cancel{a_1})x^2+(2a_1-\cancel{a_0})x+a_0)
+    -3(\cancel{a_2x^3}+\cancel{a_1x^2}+\cancel{a_0x})\Big)e^{-x}\\
+    =(-12a_2x^2+(6a_2-8a_1)x+2a_1-4a_0)e^{-x}=16x^2e^{-x}\\
+    -12a_2x^2+(6a_2-8a_1)x+2a_1-4a_0=16x^2\\
+    -12a_2x^2=16x^2 \implies a_2=-4/3\\
+    (6(-4/3)-8a_1)x+2a_1-4a_0=0\\
+    (6(-4/3)-8a_1)x=0 \implies a_1 = -1\\
+    2(-1)-4a_0=0\\
+    2(-1)-4a_0=0 \implies a_0 = -1/2
+\end{gather*}
+Finally we know $a_2 = -4/3$, $a_1 = -1$, and $a_0 = -1/2$ so 
+\begin{gather*}
+    y_p = ((-4/3)x^3+(-1)x^2+(-1/2)x)e^{-x}\\
+    y_p = (-\frac{4}{3}x^3-x^2-\frac{1}{2}x)e^{-x}
+\end{gather*}
+
+
+
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = (-\frac{4}{3}x^3-x^2-\frac{1}{2}x+A)e^{-x}+Be^{3x}}
+\end{gather*}

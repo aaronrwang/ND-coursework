@@ -1,0 +1,7 @@
+\textcolor{red}{
+    From the DFA of $D_2$ and $D_3$, we know that they are regular. Notice that for any number $w$, $w$ is a multiple of 6 if and only if $w$ is a multiple of 2 and 3. Thus, we can represent $D_6$ as:
+    \[
+        D_6 = \Big\{w \in \{\texttt{0}, . . . , \texttt{9}\}^*| w \text{ is the decimal representation of a multiple of } 2 \text{ and } 3 \Big\} = D_2 \cap D_3
+    \]
+    Thus $D_6$ is regular as it is the intersection of $D_2$ and $D_3$.\footnote{Theorem from class: If  $A$  and  $B$  are regular languages, then  $A \cap B$  is also regular.}
+}

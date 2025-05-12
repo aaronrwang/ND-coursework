@@ -1,0 +1,30 @@
+\item [18.] $(D^2+2D+17)y=60e^{-4x}\sin{5x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+1+4i)(D+1-4i)=0\\
+    \implies \text{root(s): } -1\pm 4i\\
+    \text{General Solution: } y_c=e^{-x}(A\cos{4x}+B\sin{4x})
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $e^{-4x}\sin{5x}$, we will use $Y=Ce^{(-4+5i)x}=Y_R+iY_I$ s.t. $y_p=Y_I$.
+\begin{gather*}
+    Y=Ce^{(-4+5i)x}; Y'=C(-4+5i)e^{(-4+5i)x}\\
+    Y''=C(-40i-9)e^{(-4+5i)x}\\
+    Y''+2Y'+17Y =\\ C
+    \big(
+    (-40i-\cancel{9})e^{(-4+5i)x}
+    +2(\cancel{-4}+5i)e^{(-4+5i)x}
+    +\cancel{17e^{(-4+5i)x}}
+    \big)\\
+    Y''+2Y'+17Y=-30iCe^{(-4+5i)x}=60e^{(-4+5i)x}\\
+    \text{ so } C=-\frac{2}{i}=2i\\
+    Ce^{(-4+5i)x}=(2i)e^{-4x}(\cos{5x}+i\sin{5x})\\
+    =e^{-4x}(2i\cos{5x}+2i^2\sin{5x})\\
+    =-(2e^{-4x}\sin{5x})+i(2e^{-4x}\cos{5x})\\
+    y_p = Y_I = 2e^{-4x}\cos{5x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = e^{-x}(A\cos{4x}+B\sin{4x})+2e^{-4x}\cos{5x}}
+\end{gather*}

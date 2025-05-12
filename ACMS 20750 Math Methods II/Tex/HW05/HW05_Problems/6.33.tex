@@ -1,0 +1,46 @@
+\item [33.] $y'' + y = [x^3 - 1] + [2 \cos x] + [(2- 4x)e^x]$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D^2+1)=(D+i)(D-i)=0
+    \implies \text{root(s): } \pm i\\
+    \text{General Solution: } y_c=A\cos (x)+B\sin (x) 
+\end{gather*}
+Solve $y_{p_1}''+y_{p_1}=x^3-1$. Solution will be in form $Q_3(x)e^{0}$ where $Q_3(x) = a_3x^3+a_2x^2+a_1x+a_0$
+\begin{gather*}
+    y_{p_1} = a_3x^3+a_2x^2+a_1x+a_0;\:
+    y_{p_1}' = 3a_3x^2+2a_2x+a_1;\:
+    y_{p_1}'' = 6a_3x+2a_2\\
+    y_{p_1}''+y_{p_1} = 6a_3x+2a_2+a_3x^3+a_2x^2+a_1x+a_0\\
+    y_{p_1}''+y_{p_1} = a_3x^3+a_2x^2+(6a_3+a_1)x+(2a_2+a_0) = x^3-1 \implies 
+    a_3x^3 = x^3 \implies a_3 = 1\\
+    a_2x^2+(6(1)+a_1)x+(2a_2+a_0) = -1\implies
+    a_2x^2 = 0 \implies a_2 = 0\\
+    (6(1)+a_1)x+(2(0)+a_0) = -1 \implies
+    (6(1)+a_1)x = 0 \implies a_1 = -6\\
+    (2(0)+a_0) = -1 \implies a_0 = -1\\
+    y_{p_1} = x^3-6x-1  
+\end{gather*}
+Solve $y_{p_2}''+y_{p_2}=2\cos x$. Use $Y=Cxe^{ix}=Y_R + iY_I$ s.t. $y_{p_2} = Y_R$.
+\begin{gather*}
+    Y=Cxe^{ix};\:Y'=Ce^{ix}+iCxe^{ix};\:Y''=2iCe^{ix}-Cxe^{ix}\\
+    Y''+Y=2iCe^{ix}=2e^{ix} \implies C=-i\\
+    Y = -ix(\cos x+ i\sin x) = x \sin x +i(-x\cos x)\\
+    y_{p_2} = Y_R =  x \sin x
+\end{gather*}
+Solve $y_{p_3}''+y_{p_3}=(2-4x)e^x$. Solution will be in the form of  $y_{p_3}=Q_1(x)e^x$ where $Q_1(x) = a_1x+a_0$
+\begin{gather*}
+    y_{p_3} = (a_1x+a_0)e^x;\:y_{p_3}' = a_1e^x+(a_1x+a_0)e^x;\:y_{p_3}'' = 2a_1e^x+(a_1x+a_0)e^x\\
+    y_{p_3}''+y_{p_3} = 2a_1e^x+(a_1x+a_0)e^x+(a_1x+a_0)e^x\\
+    =2(a_1x+a_1+a_0)e^x = (2-4x)e^x\\ 2(a_1x+a_1+a_0) = (2-4x) \implies 2a_1x=-4x \implies a_1=-2\\
+    2((-2)+a_0) = 2 \implies a_0 = 3\\
+    y_{p_3}=(-2x+3)e^x
+\end{gather*}
+Combine:
+\begin{gather*}
+    y = y_c+y_{p_1}+y_{p_2}+y_{p_3}\\
+    \textcolor{red}{y = 
+    A\cos (x)+B\sin (x) 
+    +x^3-6x-1  
+    +x \sin x
+    +(-2x+3)e^x}
+\end{gather*}

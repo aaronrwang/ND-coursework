@@ -1,0 +1,28 @@
+\item $(1 + y)y'=y$, $y=1$ when $x=1$
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+        (1 + y)\frac{dy}{dx}=y\\
+        \Big(\frac{1}{y}+1\Big)dy=dx\\
+        \int\Big(\frac{1}{y}+1\Big)dy=\int dx\\
+        \ln|y|+y=x+C\\
+        e^{\ln|y|+y}=e^{x+C}\\
+        \textcolor{red}{
+        ye^y=Ce^x
+        }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Particular Solution:
+        \begin{gather*}
+        (1)e^(1)=Ce^(1)\\
+        C=1\\
+        \textcolor{red}{
+        ye^y=e^x
+        }
+        \end{gather*}
+    \end{minipage}
+}

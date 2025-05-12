@@ -1,0 +1,19 @@
+\answer{
+The intuition for this construction is that the whenever we need to go left, but have reached the left end of the tape, we add a space and move onto that space. This is done by shifting the rest of the tape over to the right by 1 unit and writing a space at the new extra space.\newp
+Let $M$ be a TM with a doubly infinite tape. Define $M'$ to be a standard TM. \newp
+$M' = $ ``On input string $w$''\\[-0.6cm]
+\begin{quote}
+\begin{enumerate}
+    \item[1.] Initialize tape by 
+    \begin{itemize}
+        \item[-] Insert a \str{\#} at the beginning.
+    \end{itemize}
+    \item[2.] Do what $M$ would do 
+    \begin{itemize}
+        \item[-] The head starts at the $w_1$ (one after the \str{\#}).
+        \item[-] If the head ever ends up on \str{\#}, insert a space right after and move the head there.
+        \item[-] \emph{accept}, \emph{loop}, or \emph{reject} based on how $M$ would.
+    \end{itemize}
+\end{enumerate}
+\end{quote}
+}

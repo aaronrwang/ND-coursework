@@ -1,0 +1,8 @@
+\textcolor{red}{
+    Observe $C\{\{\str{u},\str{r},\str{l},\str{d}\}|\str{\#u}=\str{\#d} \text{ and } \str{\#l}=\str{\#r}\}$. Towards a contradiction, assume that $C$ is a context-free language. Let $p$ be the pumping length given by the pumping lemma for context-free languages. Let $s=\str{u}^p\str{r}^p\str{d}^p\str{l}^p$ and $s=uvxyz$ such that $|uv|>0$ and $|vxy|\leq p$. The pumping lemma says that $s' = uv^2xy^2z \in C$. Since $|vxy|\leq p$, $v$ and $y$ can only contain (1) the same symbol, or (2) two adjacent symbols.
+    \begin{itemize}
+        \item [] Case 1: $v$ and $y$ contain only one type of character. In this case, only one character will be pumped and $s'$ will have more of that one character than its counter part, leading to the turtle being too far in that one direction, thus $s' \notin C$.
+        \item [] Case 2: $v$ and $y$ contain two adjacent symbols. In this case, the characters being pumped will be: \str{u} and \str{r}, \str{r} and \str{d}, or \str{d} and \str{l}. Since none of these pairs are complements, $s'$ will not lead the robot turtle back to the starting point
+    \end{itemize}
+    In both cases, $s' \notin C$. Thus by the Pumping Lemma for context-free languages, $C$ is not context free.
+}

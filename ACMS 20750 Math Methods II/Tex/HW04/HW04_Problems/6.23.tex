@@ -1,0 +1,25 @@
+\item [23.] $y''+y=2xe^x$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+i)(D-i)=0\\
+    \implies \text{root(s): } \pm i\\
+    \text{General Solution: } y_c=A\cos{(x)}+B\sin{(x)}
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $2xe^x$, we know solution will be in the form of $Q_1(x)e^x$ where $Q_1(x) = a_1x+a_0$
+\begin{gather*}
+    y_p = (a_1x+a_0)e^x\\
+    y_p' = (a_1)e^x+(a_1x+a_0)e^x\\
+    y_p'' = 2(a_1)e^x+(a_1x+a_0)e^x\\
+    y_p''+y_p=2(a_1)e^x+(a_1x+a_0)e^x+(a_1x+a_0)e^x\\
+    y_p''+y_p=2a_1xe^x+2(a_1+a_0)e^x\\
+    2xe^x=2a_1xe^x+2(a_1+a_0)e^x \text{ so }a_1 = 1\\
+    0=2(1+a_0)e^x\\
+    0=(1+a_0) \text{ so }a_0 = -1\\
+    y_p = (x-1)e^x
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = A\cos{(x)}+B\sin{(x)}+(x-1)e^x}
+\end{gather*}

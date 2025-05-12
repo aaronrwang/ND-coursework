@@ -1,0 +1,33 @@
+\textcolor{red}{
+Observe that $A$ and $B$ are context-free languages as there are CFGs that generate them.
+\begin{center}
+    \begin{minipage}{0.4\textwidth}
+        \begin{align*}
+            S &\rightarrow AB \\
+            A &\rightarrow Aa \mid \varepsilon \\
+            B &\rightarrow bBc \mid \varepsilon
+        \end{align*}
+        \centering
+        \textbf{CFG for $A$ with start state $S$.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        \begin{align*}
+            S &\rightarrow AC \\
+            A &\rightarrow aAb \mid \varepsilon \\
+            C &\rightarrow Cc \mid \varepsilon
+        \end{align*}
+        \centering
+        \textbf{CFG for $B$ with start state $S$.}
+    \end{minipage}
+\end{center}
+Towards a contradiction, assume that context-free languages are closed under intersection. This means that $C = A \cap B$ is a context-free language.\newp
+Now observe that $C = A \cap B = \{\str{a}^n\str{b}^n\str{c}^n|n \geq 0\}$. Suppose $C$ is a context-free language. Let $p$ be the pumping length given by the pumping lemma for context-free languages. Let $s=a^pb^pc^p$ and $s=uvxyz$ such that $|vy|>0$ and $|vxy| \leq p$. The pumping lemma says that $s'=uv^2xy^2z \in C$.
+\begin{itemize}
+    \item [] Case 1: $v$ contains one type of symbol and $y$ contains one type of symbol.\\
+    In this case, $s' \notin C$ because if $v$ and $y$ contain the same type of symbol, then that symbol occurs more times than the other two and if they contain different symbols, the symbol not contained in $v$ or $y$ occurs less times than the types of symbols in $v$ and $y$.
+    \item [] Case 2: $v$ or $y$ contains more than one type of symbol.\\
+    In this case, $s'$ is no longer in the form $\str{a}^i\str{b}^j\str{c}^k$ as the string will be scrambled so $s' \notin C$.
+\end{itemize}
+Thus, by the Pumping Lemma for context-free languages, $C$ is not context-free. Consequently, context-free languages are not closed under intersection.
+}

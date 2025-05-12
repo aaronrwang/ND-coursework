@@ -1,0 +1,201 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools,textcomp, xcolor}
+
+
+\title{Homework 01}
+\author{Aaron Wang}
+\date{January 21 2025}
+
+\begin{document}
+\maketitle
+\section{Monday 1/13}
+\begin{enumerate}
+%q1%
+    \item Verify the statement of Example 2. Also verify that $y = \cosh(x)$ and $y = \sinh(x)x$ are solutions of $y''=y$.
+    \begin{enumerate}
+        \item $e^x$
+        \textcolor{red}{
+        \begin{center}
+            $y=e^x$; $y'=e^x$; $y''=e^x$ so $y=y''$
+        \end{center}
+        }
+        
+        \item $e^{-x}$
+        \textcolor{red}{
+        \begin{center}
+            $y=e^{-x}$; $y'=-e^{-x}$; $y''=e^{-x}$ so $y=y''$
+        \end{center}
+        }
+        
+        \item $Ae^x+Be^{-x}$
+        \textcolor{red}{
+        \begin{center}
+            $y=Ae^x+Be^{-x}$; $y'=Ae^x-Be^{-x}$; $y''=Ae^x+Be^{-x}$ so $y=y''$
+        \end{center}
+        }
+        
+        \item $\cosh(x)$
+        \textcolor{red}{
+        \begin{center}
+            $y=\cosh(x)$; $y'=\sinh(x)$; $y''=\cosh(x)$ so $y=y''$
+        \end{center}
+        }
+        
+        \item $\sinh(x)$
+        \textcolor{red}{
+        \begin{center}
+            $y=\sinh(x)$; $y'=\cosh(x)$; $y''=\sinh(x)$ so $y=y''$
+        \end{center}
+        }
+        
+    \end{enumerate}
+%q2%
+    \item Find the solution of $y''=y$ which passes through the origin and through the point $(\ln2,\frac{3}{4})$.
+    \vspace{5mm}\\
+    The general solution of the differential equation is
+    \[
+    y = a \sinh x + b \cosh x
+    \]
+    \textcolor{red}{
+    \[
+        0 = a \sinh 0 + b \cosh 0 = a (0) + b(1) = b
+    \]
+    \[
+        b = 0
+    \]
+    \[
+        \frac{3}{4} = a \sinh (\ln2) + b \cosh (\ln2) = a (\frac{3}{4}) + b(\frac{5}{4}) = \frac{3}{4} a
+    \]
+    \[
+        a = 1
+    \]
+    The desired particular solution is
+    \[
+        y = \sinh x
+    \]
+    }
+\pagebreak
+%q3%
+    \item Verify that $y = \sin x$, $y = \cos x$, $y= e^{ix}$, and $y= e^{-ix}$ are all solutions of $y''=-y$.
+    \begin{enumerate}
+        \item $y = \sin x$
+        \textcolor{red}{
+        \begin{center}
+            $y=\sin x$; $y'=\cos x$; $y''= - \sin x$ so $y''=-y$
+        \end{center}
+        }
+
+        \item $y = \cos x$
+        \textcolor{red}{
+        \begin{center}
+            $y=\cos x$; $y'= - \sin x$; $y''= - \cos x$ so $y''=-y$
+        \end{center}
+        }
+
+        \item $e^{ix}$
+        \textcolor{red}{
+        \begin{center}
+            $y=e^{ix}$; $y'=ie^{ix}$; $y''=i^2e^{-x}=-e^{ix}$ so $y=y''$
+        \end{center}
+        }
+
+        \item $e^{-ix}$
+        \textcolor{red}{
+        \begin{center}
+            $y=e^{-ix}$; $y'=-ie^{-ix}$; $y''=i^2e^{-x}=-e^{-ix}$ so $y=y''$
+        \end{center}
+        }
+        
+    \end{enumerate}
+%q4%
+    \item Find the distance which an object moves in time $t$ if it starts from rest and has an acceleration $\frac{d^2x}{dt^2} = ge^{-kt}$.
+    \textcolor{red}{
+    \[
+    \frac{dx}{dt} = \int \frac{d^2x}{dt^2} dt= \int ge^{-kt} dt = -\frac{g}{k}e^{-kt}+C_1
+    \]
+    \[
+    \frac{dx}{dt}\Big|_{x=0} = -\frac{g}{k}e^{-k(0)}+C_1 = 0 \text{ so } C_1 = \frac{g}{k}e^{-k(0)} = \frac{g}{k}
+    \]
+    \[
+    x = \int \frac{dx}{dt} dt= \int -\frac{g}{k}e^{-kt}+C_1 dt = \frac{g}{k^2}e^{-kt}+C_1t+C_2
+    \]
+    \[
+    x(0)= \frac{g}{k^2}e^{-k(0)}+C_1(0)+C_2 = 0 \text{ so } C_2 = -\Big(\frac{g}{k^2}e^{-k(0)}+C_1(0)\Big) = -\frac{g}{k^2}
+    \]
+    \[
+    x(t) = \frac{g}{k^2}e^{-kt}+\frac{g}{k}t-\frac{g}{k^2}
+    \]
+    }
+    Show that for small $t$ the result is approximately $(1.10)$($x=\frac{1}{2}gt^2$) 
+    \textcolor{red}{ 
+    % \[
+    % x(t) = gk^2e^{-kt}+\frac{g}{k}t-\frac{g}{k^2} = \frac{g}{k^2}(e^{-kt}-1+kt)
+    % \]
+    % Observe:
+    % \[
+    % e^{-kt} = 1 + (-kt)+\frac{(-kt)^2}{2!}+\frac{(-kt)^3}{3!}+...
+    % \]
+    % Thus:
+    % \[
+    % x(t) = \frac{g}{k^2}\Bigg(\Big(1 + (-kt)+\frac{(-kt)^2}{2!}+\frac{(-kt)^3}{3!}+...\Big)-1+kt\Bigg) = \frac{g}{k^2}\Big(\frac{(-kt)^2}{2!}+\frac{(-kt)^3}{3!}+...\Big)
+    % \]
+    % For small $t$, higher order terms are negligible.
+    % \[
+    %     x(t) \approx\frac{g}{k^2}\Big(\frac{(-kt)^2}{2!}\Big) =\frac{1}{2}gt^2
+    \[
+        \lim_{t\rightarrow0} a = \lim_{t\rightarrow0} ge^{-kt} = g.
+    \]
+    Thus, when $t$ is small:
+    \[
+        v(t) \approx \int g = gt+C \text{ where } C = 0 \text{ because }v(0) = 0
+    \]
+    \[
+        x(t) \approx \int gt = \frac{1}{2}gt^2+C \text{ where } C = 0 \text{ because }x(0) = 0
+    \]
+    Thus, 
+    \[
+        x(t) \approx  \frac{1}{2}gt^2 \text { for small t}
+    \]
+    % \]
+    }
+    Show for very large $t$, the speed $\frac{dx}{dt}$ is approximately constant.
+    \textcolor{red}{
+    \[
+    \lim_{t \rightarrow \infty}\frac{dx}{dt} = \lim_{t \rightarrow \infty} \Big(-\frac{g}{k}e^{-kt}+\frac{g}{k}\Big) = \frac{g}{k}
+    \]
+    }
+\pagebreak
+%q5%
+    \item Find the position $x$ of a particle at time $t$ if its acceleration is $\frac{d^2x}{dt^2} = A \sin (\omega t)$.
+    \textcolor{red}{
+    \[
+    \frac{dx}{dt}=\int\frac{d^2x}{dt^2}dt = \int A \sin (\omega t)dt=-A\omega^{-1} \cos (\omega t) + C_1
+    \]
+    \[
+    x=\int\frac{dx}{dt}dt = -\int A\omega \cos (\omega t) + C_1 dt = -A\omega^{-2} \sin (\omega t) + C_1t+C_2
+    \]
+    }
+\end{enumerate}
+\section{Wednesday 1/15}
+For each of the following differential equations, separate variables and find a solution
+containing one arbitrary constant. Then find the value of the constant to give a particular solution satisfying the given boundary condition.
+\begin{enumerate}
+    \input{HW01_Problems/2.1}
+    \input{HW01_Problems/2.2}
+    \input{HW01_Problems/2.3}
+    \input{HW01_Problems/2.4}
+\pagebreak
+    \input{HW01_Problems/2.5}
+    \input{HW01_Problems/2.6}
+\pagebreak
+    \input{HW01_Problems/2.7}
+    \input{HW01_Problems/2.8}
+\pagebreak
+    \input{HW01_Problems/2.9}
+    \input{HW01_Problems/2.10}
+\pagebreak
+    \input{HW01_Problems/2.11}
+    \input{HW01_Problems/2.12}    
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,30 @@
+\item $xy' - xy = y$, $y = 1$ when $x = 1$
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+        x\frac{dy}{dx} - xy = y\\
+        x\frac{dy}{dx}  = y+xy\\
+        x\frac{dy}{dx}  = y(1+x)\\
+        \frac{dy}{y}  = (\frac{1}{x}+1)dx\\
+        \int\frac{dy}{y}  = \int(\frac{1}{x}+1)dx\\
+        \ln|y| = \ln|x|+x+C \\
+        e^{\ln|y|} = e^{\ln|x|+x+C}\\
+        \textcolor{red}{
+        y=Cxe^x
+        }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Particular Solution:
+        \begin{gather*}
+            (1)=C(1)e^{(1)}\\
+            C=\frac{1}{e}\\
+            \textcolor{red}{
+            y=\frac{1}{e}xe^x
+            }
+        \end{gather*}
+    \end{minipage}
+}

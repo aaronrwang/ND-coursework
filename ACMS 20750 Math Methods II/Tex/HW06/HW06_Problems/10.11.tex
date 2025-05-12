@@ -1,0 +1,34 @@
+\item[11.]$\frac{p}{(p^2+a^2)(p^2+b^2)}$
+\[
+    \frac{p}{(p^2+a^2)(p^2+b^2)} = \frac{1}{a}\cdot\frac{a}{p^2+a^2}\cdot\frac{p}{p^2+b^2}
+\]
+\begin{equation*}
+    L^{-1}\Bigg(\frac{a}{p^2+a^2}\Bigg) 
+    = \sin(at)
+    \tag{By \( L3 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{p}{p^2+b^2}\Bigg) 
+    = \cos(bt)
+    \tag{By \( L4 \)}
+\end{equation*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{p}{(p^2+a^2)(p^2+b^2)} \Bigg)
+    & = \frac{1}{a}\int_0^t \sin(a\tau)\cos(b(t-\tau))d\tau\\
+     & = \frac{1}{a}\int_0^t \sin(a\tau)\cos(bt-b\tau))d\tau\\
+    & = \frac{1}{a}\int_0^t \frac{1}{2}\Bigg[ \sin(a\tau+(bt-b\tau))+\sin(a\tau-(bt-b\tau))
+    \Bigg]d\tau\\
+    & = \frac{1}{2a} \int_0^t \sin((a-b)\tau+bt)+\sin((a+b)\tau-bt)d\tau\\
+    & = \frac{1}{2a} \Bigg( \frac{-\cos((a-b)\tau+bt)}{a-b}+\frac{-\cos((a+b)\tau-bt)}{a+b}\Bigg)\Bigg|^t_0\\
+    & =\Bigg(\frac{\cos((a-b)\tau+bt)}{2a(b-a)}-\frac{\cos((a+b)\tau-bt)}{2a(a+b)}\Bigg)\Bigg|^t_0\\
+    & =\Bigg(\frac{\cos((a-b)t+bt)}{2a(b-a)}-\frac{\cos((a+b)t-bt)}{2a(a+b)}\Bigg)\\
+    & -\Bigg(\frac{\cos((a-b)0+bt)}{2a(b-a)}-\frac{\cos((a+b)0-bt)}{2a(a+b)}\Bigg)\\
+    & =\Bigg(\frac{\cos(at)}{2a(b-a)}-\frac{\cos(at)}{2a(a+b)}\Bigg)
+    -\Bigg(\frac{\cos(bt)}{2a(b-a)}-\frac{\cos(bt)}{2a(a+b)}\Bigg)\\
+    & = \frac{((a+b)-(b-a))\cos(at)}{2a(b-a)(a+b)}-\Bigg(\frac{\cos(bt)}{2a(b-a)}-\frac{\cos(bt)}{2a(a+b)}\Bigg)\\
+    & = \frac{2a\cos(at)}{2a(b-a)(a+b)}-\Bigg(\frac{\cos(bt)}{2a(b-a)}-\frac{\cos(bt)}{2a(a+b)}\Bigg)\\
+    & = \frac{2a\cos(at)}{2a(b-a)(a+b)}-\frac{((a+b)-(b-a))\cos(bt)}{2a(b-a)(a+b)}\\
+    & = \frac{2a\cos(at)}{2a(b-a)(a+b)}-\frac{2a\cos(bt)}{2a(b-a)(a+b)}\\
+    & = \frac{\cos(at)}{(b-a)(a+b)}-\frac{\cos(bt)}{(b-a)(a+b)}\\
+    & = \textcolor{red}{\frac{\cos(at)}{b^2-a^2}-\frac{\cos(bt)}{b^2-a^2}}\\
+\end{align*}

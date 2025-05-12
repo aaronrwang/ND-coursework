@@ -1,0 +1,49 @@
+\item [1.] $\displaystyle f(x) = 
+\begin{cases}
+    -1, & -1 < x < 0\\
+    \:\:\,\,1, & \:\:\,\,0 < x < 1\\
+\end{cases}$\\[5mm]
+Observe that
+\[
+    \int_{-1}^1f(x)P_l(x)dx =
+    \begin{cases}
+        0, & l \text{ is even}\\
+        2 \int_0^1 P_l(x)dx, & l \text{ is odd}
+    \end{cases}
+\]
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_0(x)dx =C_0\cdot \frac{2}{2(0)+1} = 2C_0\\
+    \int_{-1}^{1}f(x)P_0(x)dx = 0\\
+    2C_0 = 0 \implies \answer{C_0 = 0}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_1(x)dx =C_1\cdot \frac{2}{2(1)+1} = \frac{2}{3}C_1\\
+    \int_{-1}^{1}f(x)P_1(x)dx 
+    = 2\int_0^1 x dx = x^2\big|_0^1 = 1\\
+    \frac{2}{3}C_1 = 1 \implies \answer{C_1 = \frac{3}{2}}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_2(x)dx =C_2\cdot \frac{2}{2(2)+1} = \frac{2}{5}C_2\\
+    \int_{-1}^{1}f(x)P_2(x)dx = 0\\
+    \frac{2}{5}C_2 = 0 \implies \answer{C_2 = 0}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_3(x)dx =C_0\cdot \frac{2}{2(3)+1} = \frac{2}{7}C_3\\
+    \int_{-1}^{1}f(x)P_3(x)dx 
+    = 2\int_0^1 \frac{1}{2}(5x^3-3x) dx 
+    = \int_0^1 (5x^3-3x) dx
+    = \frac{5}{4}x^4-\frac{3}{2}x^2\big|_0^1 
+    = -\frac{1}{4}\\
+    \frac{2}{7}C_3 = -\frac{1}{4} \implies \answer{C_3 = -\frac{7}{8}}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_4(x)dx =C_4\cdot \frac{2}{2(4)+1} = \frac{2}{9}C_4\\
+    \int_{-1}^{1}f(x)P_4(x)dx = 0\\
+    \frac{2}{9}C_4 = 0 \implies \answer{C_4 = 0}
+\end{gather*}
+The Legendre series for this function is:
+\answer{
+\[
+    \frac{3}{2}P_1(x)-\frac{7}{8}P_3(x)+...
+\]
+}

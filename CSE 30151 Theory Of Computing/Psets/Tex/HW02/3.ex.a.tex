@@ -1,0 +1,32 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    \node[state, initial] (q0) {0};
+    \node[state, xshift=2cm, yshift=1cm] (q1) {$\{\str{i},\{1\}\}$};
+    \node[state, xshift=4cm, yshift=2cm] (q2) {1};
+    \node[state, xshift=6cm, yshift=2cm] (q3) {$\{\str{n},\{2\}\}$};
+    \node[state, xshift=8cm, yshift=2cm, accepting] (q4) {2};
+    
+    \node[state, xshift=2cm, yshift=-1cm] (q11) {$\{\str{o},\{11\}\}$};
+    \node[state, xshift=4cm, yshift=-2cm] (q12) {11};
+    \node[state, xshift=6cm, yshift=-2cm] (q13) {$\{\str{u},\{12\}\}$};
+    \node[state, xshift=8cm, yshift=-2cm] (q14) {12};
+    \node[state, xshift=10cm, yshift=-2cm] (q15) {$\{\str{t},\{13\}\}$};
+    \node[state, xshift=12cm, yshift=-2cm, accepting] (q16) {13};
+    
+    \draw
+    (q0) edge[] node[above]{\str{i}} (q1)
+    (q1) edge[] node[above]{\str{i}} (q2)
+    (q2) edge[] node[above]{\str{n}} (q3)
+    (q3) edge[] node[above]{\str{n}} (q4)
+
+    (q0) edge[] node[above]{\str{o}} (q11)
+    (q11) edge[] node[above]{\str{o}} (q12)
+    (q12) edge[] node[above]{\str{u}} (q13)
+    (q13) edge[] node[above]{\str{u}} (q14)
+    (q14) edge[] node[above]{\str{t}} (q15)
+    (q15) edge[] node[above]{\str{t}} (q16)
+    ;
+\end{tikzpicture}
+\end{figure}

@@ -1,0 +1,26 @@
+\item [2.]$y'-y=2e^t$, $y_0=3$
+\begin{gather*}
+    L(y')=pY-y_0;\: L(y)=Y;\: L(2e^t)=\frac{2}{p-1}\\
+    y'-y=pY-y_0-Y=pY-3-Y = (p-1)Y-3=\frac{2}{p-1}\\
+    Y = \frac{2}{(p-1)^2}+\frac{3}{p-1}
+\end{gather*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{2}{(p-1)^2}\Bigg) 
+    = 2L^{-1}\Bigg(\frac{(1)!}{(p+(-1))^{(1)+1}}\Bigg)
+    =2t^{(1)}e^{-(-1)t}=2te^t
+    \tag{By \( L6 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{3}{p-1}\Bigg)
+    = 3L^{-1}\Bigg(\frac{1}{p+(-1)}\Bigg)
+    =3e^{-(-1)t}=3e^t 
+    \tag{By \( L2 \)}
+\end{equation*}
+
+\begin{gather*}
+    y=L^{-1}(Y)=L^{-1}
+    \Bigg(
+    \frac{2}{(p-1)^2}+\frac{3}{p-1}
+    \Bigg)=\textcolor{red}{2te^t+3e^t}
+\end{gather*}
+

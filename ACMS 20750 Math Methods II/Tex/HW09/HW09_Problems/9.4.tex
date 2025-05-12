@@ -1,0 +1,67 @@
+\item [5.] $
+\displaystyle f(x)= \begin{cases}
+    x+1 & -1< x < 0\\
+    -x+1 & \:\:\,\,0< x < 1
+\end{cases}$\\[5mm]
+Observe:
+\begin{align*}
+    \int_{-1}^{1}f(x)P_l(x)dx 
+    &= \int_{-1}^{0}(x+1)P_l(x)dx + \int_{0}^{1}(-x+1)P_l(x)dx\\ 
+    &= \int_{-1}^{0}xP_l(x)dx - \int_{0}^{1}xP_l(x)dx + \int_{-1}^{1}P_l(x)dx \\
+    &= \int_{-1}^{0}xP_l(x)dx + \int_{1}^{0}xP_l(x)dx + \int_{-1}^{1}P_l(x)dx 
+\end{align*}
+Observe: when $l \neq 0$
+\[
+    \int_{-1}^{1}P_l(x)dx 
+    = \int_{-1}^{1}P_0(x)P_l(x)dx = 0
+\]
+and when $l$ is even
+\[
+    \int_{-1}^{0}xP_l(x)dx + \int_{1}^{0}xP_l(x)dx = 0
+\]
+and when $l$ is odd
+\[
+    \int_{-1}^{0}xP_l(x)dx + \int_{1}^{0}xP_l(x)dx = 
+    2\int_{-1}^{0}xP_l(x)dx
+\]
+so for $l > 0$
+\[
+    \int_{-1}^1f(x)P_l(x)dx =
+    \begin{cases}
+        0, & l \text{ is odd}\\
+        2 \int_{-1}^0 xP_l(x)dx, & l \text{ is even}
+    \end{cases}
+\]
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_0(x)dx =C_0\cdot \frac{2}{2(0)+1} = 2C_0\\
+    \int_{-1}^{1}f(x)P_0(x)dx 
+    = 2\int_{-1}^{0}xdx + \int_{-1}^{1}dx 
+    = -1+2
+    = 1\\
+    2C_0 = 1 \implies \answer{C_0 = \frac{1}{2}}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_2(x)dx =C_2\cdot \frac{2}{2(2)+1} = \frac{2}{5}C_2\\
+    \int_{-1}^{1}f(x)P_2(x)dx
+    = 2 \int_{-1}^{0}\frac{3}{2}x^3-\frac{1}{2}xdx
+    = \frac{3}{4}x^4-\frac{1}{2}x^2\Big|_{-1}^0dx
+    = -\frac{1}{4}\\
+    \frac{2}{5}C_2 = -\frac{1}{4} \implies \answer{C_2 = -\frac{5}{8}}
+\end{gather*}
+\begin{gather*}
+    \int_{-1}^{1}f(x)P_4(x)dx =C_4\cdot \frac{2}{2(4)+1} = \frac{2}{9}C_4\\
+    \int_{-1}^{1}f(x)P_4(x)dx
+    = 2 \int_{-1}^{0}\frac{35}{8}x^5 - \frac{30}{8}x^3 + \frac{3}{8}xdx
+    = \frac{35}{24}x^6 - \frac{15}{8}x^4 + \frac{3}{8}x^2\Big|x_{-1}^0
+    = \frac{1}{24}\\
+    \frac{2}{9}C_4 = \frac{1}{24} \implies \answer{C_4 = \frac{3}{16}}
+\end{gather*}
+The Legendre series for this function\footnote{$C_1, C_3 = 0$ because when $l$ is odd, the above integral is 0} is:
+\answer{
+\[
+    \frac{1}{2}P_0(x)-
+    \frac{5}{8}P_2(x)+
+    \frac{3}{16}P_4(x)+
+    ...
+\]
+}

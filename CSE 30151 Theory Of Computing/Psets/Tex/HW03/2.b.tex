@@ -1,0 +1,3 @@
+\textcolor{red}{
+    Proof: Assume $ADD$ is a regular language. Let $p$ be the pumping length from the Pumping Lemma. Let $s = \str{1}^p\str{=1}^p\str{+0}$. Observe that $s \in ADD$. The Pumping Lemma says that for some $xyz$, $s=xyz$, $|y| > 0$, $|xy| \leq p$ and $xyyz \in ADD$. Let $s' = xyyz$. Since $|xy| \leq p$, we know that $y$ contains all \str{1}s so $s' = \str{1}^r\str{=1}^p\str{+0}$ s.t. $r > p$. $s'$ is not true as  a number + 0 should be itself but it is not in this expression. Since $s'$ is not a true expression, $s' \notin ADD$ $\lightning$. Thus, by contradiction we have shown that $ADD$ can not be a regular language.
+}

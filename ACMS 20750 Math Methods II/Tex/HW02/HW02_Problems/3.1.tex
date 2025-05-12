@@ -1,0 +1,14 @@
+\item [1.] $y'+y=e^x$
+
+\textcolor{blue}{
+    \begin{gather*}
+        P(x)=1; \quad Q(x)=e^x\\
+        I(x)=\int P(x)dx = \int 1dx=x\\
+        e^{-I(x)}=e^{-x}\\
+        \int e^{I(x)}Q(x)dx=\int e^xe^x=\int e^{2x}=\frac{1}{2}e^{2x}+C\\
+        y=e^{-I(x)}\int e^{I(x)}Q(x)dx=e^{-x}(\frac{1}{2}e^{2x}+C)\\
+        \textcolor{red}{
+        y=\frac{e^x}{2}+\frac{C}{e^x}   
+        }
+    \end{gather*}
+}

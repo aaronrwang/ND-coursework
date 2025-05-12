@@ -1,0 +1,53 @@
+\textcolor{red}{
+    The intuition for the following CFG is this. The language $L_3$ accepts $\str{0}^m\str{1}^n$ s.t. $m \neq n$ and any string that contains a $1$ before a $0$.
+    For the first half of this (Rules $A$, $B$, $C$ starting with $A$), we will set the rules for the CFG such that we will create a string with equal \str{0}s and \str{1}s with a terminal in the middle. At the point when the min($m$,$n$) is reached, we will then transfer to a non-terminal $B$ that must add a \str{0} and can only add \str{0}s if $n$ is reached. The same applies for \str{1}s with non-terminal $C$ if $m$ is reached.
+    Now for the other half (Rules $D$, $E$ starting with $D$), we will have a starting state which must build a string that requires a \str{1} to come before a \str{0}. After that we can add whatever characters we want however.
+    Now union these two grammars to encapsulate $L_3$. The following CFG with start state $S$ recognizes $L_3$
+    \begin{align*}
+    S & \rightarrow A \:|\: D \\
+    A & \rightarrow \str{0}A\str{1} \:|\: B \:|\: C \\
+    B & \rightarrow \str{0}B \:|\: \str{0} \\
+    C & \rightarrow \str{1}C \:|\: \str{1} \\
+    D & \rightarrow E\str{1}E\str{0}E\\
+    E & \rightarrow \str{0}E \:|\: \str{1}E \:|\: \e \\
+    \end{align*}
+    The intuition for the following PDA is this. The top half will recognize any string in which a \str{1} comes before \str{0} exactly as an NFA would. The bottom half works by creating a stack to push all the \str{0}s onto. It then uses all the \str{1}s to pop \str{0}s off the stack until there are no more \str{1}s or the stack only contains $\$$.\footnote{The case of any strings not in the form $\str{0}^m\str{1}^n$ are also accounted for. if a \str{0} ever comes after a \str{1} it will automatically reject.} In the first case, this PDA uses an $\e$ symbol and eats a \str{0} off the stack to ensure that the stack was not empty, meaning $m > n$. In the second case, a \str{1} eats the $\$$ off the stack (meaning $n > m$) and goes through the remaining \str{1}s in the string.
+    \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+    \color{red}
+        \node[state, initial, accepting] (q0) {0};
+        \node[state, xshift=3cm, yshift=2cm] (q1) {1};
+        \node[state, xshift=6cm, yshift=2cm] (q2) {2};
+        \node[state, xshift=9cm, yshift=2cm, accepting] (q3) {3};
+        \node[state, xshift=3cm, yshift=-2cm] (q4) {4};
+        \node[state, xshift=6cm, yshift=-2cm] (q5) {5};
+        \node[state, xshift=9cm, yshift=-1cm, accepting] (q6) {6};
+        \node[state, xshift=9cm, yshift=-3cm, accepting] (q7) {7};
+        \draw
+        (q0) edge[] node[below, xshift=5mm]{$\e$, $\e$ $\rightarrow$ $\e$} (q1)
+        (q1) edge[loop above] node[above, align=center]{
+            \str{0}, $\e$ $\rightarrow$ $\e$\\
+            \str{1}, $\e$ $\rightarrow$ $\e$
+        } (q1)
+        (q1) edge[] node[above]{\str{1}, $\e$ $\rightarrow$ $\e$} (q2)
+        (q2) edge[loop above] node[above, align=center]{
+            \str{0}, $\e$ $\rightarrow$ $\e$\\
+            \str{1}, $\e$ $\rightarrow$ $\e$
+        } (q2)
+        (q2) edge[] node[above]{\str{0}, $\e$ $\rightarrow$ $\e$} (q3)
+        (q3) edge[loop above] node[above, align=center]{
+            \str{0}, $\e$ $\rightarrow$ $\e$\\
+            \str{1}, $\e$ $\rightarrow$ $\e$
+        } (q3)
+        (q0) edge[] node[above, xshift=5mm]{$\e$, $\e$ $\rightarrow$ $\str{\$}$} (q4)
+        (q4) edge[loop below] node[below, align=center]{\str{0}, $\e$ $\rightarrow$ \str{0}} (q4)
+        (q4) edge[] node[above]{$\e$, $\e$ $\rightarrow$ $\e$} (q5)
+        (q5) edge[loop below] node[below, align=center]{\str{1}, \str{0} $\rightarrow$ $\e$} (q5)
+        (q5) edge[] node[above, above=1mm]{$\e$, \str{0} $\rightarrow$ $\e$} (q6)
+        (q5) edge[] node[below, below=1mm]{\str{1}, \str{\$} $\rightarrow$ $\e$} (q7)
+        (q7) edge[loop below] node[below, align=center]{\str{1}, $\e$ $\rightarrow$ $\e$} (q7)
+        ;
+    \end{tikzpicture}
+    \end{figure}
+}

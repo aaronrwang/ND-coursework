@@ -1,0 +1,15 @@
+\item [4.] $2xy' + y = 2x^{5/2}$
+
+\textcolor{blue}{
+    \begin{gather*}
+        y'+\frac{y}{2x}=x^{3/2}\\
+        P(x)=\frac{1}{2x}; \quad Q(x)=x^{3/2}\\
+        I(x)=\int P(x)dx = \int 2\frac{1}{2x}dx=\frac{1}{2}\ln|x|\\
+        e^{-I(x)}=e^{-\frac{1}{2}\ln|x|}=x^{-1/2}\\
+        \int e^{I(x)}Q(x)dx=\int e^{\frac{1}{2}\ln|x|}x^{3/2}dx=\int x^2dx=\frac{1}{3}x^3+C\\
+        y=e^{-I(x)}\int e^{I(x)}Q(x)dx=x^{-1/2}(\frac{1}{3}x^3+C)\\
+        \textcolor{red}{
+        y=\frac{1}{3}x^{5/2}+\frac{C}{x^{1/2}}
+        }
+    \end{gather*}
+}

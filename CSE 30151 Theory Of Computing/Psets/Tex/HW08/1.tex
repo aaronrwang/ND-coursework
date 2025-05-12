@@ -1,0 +1,31 @@
+\answer{
+    Let NEURAL$ = \{ \langle N \rangle \:|\: N$ is a \emph{neural network} and there exists inputs $x_1,...,x_l$ that make $y = 1\}$.\newp
+    % To prove NEURAL is NP-complete, we must show it is both NP and NP-hard.\newp
+    Let $V$ be a verifier for NEURAL.\newp
+    $V =$ ``On input $\langle N, X \rangle$ where $N$ is a neural network and $X$ is the sequence of inputs $x_1,...,x_l$:
+    \begin{enumerate}
+        \item [1.] $\forall j$ solve $h_j$.
+        \item [2.] Solve $y$.
+        \item [3.] If $y = 1$, \emph{accept}; otherwise, \emph{reject}.
+    \end{enumerate}
+    Step 1 is $\mathcal{O}(l*m)$ and step 2 is $\mathcal{O}(m)$. Consequently, $V$ is definitely $\mathcal{O}(n^2)$. Since we have a deterministic polynomial time verifier, we know NEURAL is NP.\newp
+    Here are the details of a reduction from 3SAT to NEURAL that operates in polynomial time.
+    \begin{enumerate}
+        \item [1.] Initialize nodes for $x_i$ and $\overline{x_i}$ s.t. they must be opposites. For each variable $x_i$:
+        \begin{itemize}
+            \item Create nodes $x_i$ and $x_{-i}$
+            \item Create node $h_{x_i} = H(x_i+x_{-i})$
+            \item Create node $h_{x_{-i}} = H(-x_i-x_{-i}+2)$
+        \end{itemize}
+        \item [2.] Translate all the clauses into the neural network. For each clause $j$: create $h_j$ s.t. 
+        \begin{itemize}
+            \item if $x_i$ is in the clause, $u_{i,j} = 1$
+            \item if $\overline{x_i}$ is in the clause, $u_{-i,j} = 1$
+            \item otherwise $u_{i,j} = 0$
+        \end{itemize}
+        \item [3.] And every clause (step 2) and restriction (step 1) together. $\displaystyle y = H(\sum_{j=1}^mh_j - m + 1)$
+    \end{enumerate}
+    Following this reduction, we have mapped each boolean expression to a neural network that is satisfiable iff the boolean expression is. Every $N$ that is made from this reduction will only be satisfiable, if there is a series of inputs that make every $h = 1$ or all clauses and restrictions are satisfied 
+    Step 1 is $\mathcal{O}(n)$, 2 is $\mathcal{O}(n^2)$, and 3 is $\mathcal{O}(n)$. This is clearly a $\mathcal{O}(n^2)$ reduction so NEURAL is NP-Hard.\newp
+    Since NEURAL is NP and NP-Hard, it is NP-complete.
+}

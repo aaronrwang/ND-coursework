@@ -1,0 +1,15 @@
+\item [3.] $dy + (2xy - xe^{-x^2}) dx = 0$
+
+\textcolor{blue}{
+    \begin{gather*}
+        y'+2xy=xe^{-x^2}\\
+        P(x)=2x; \quad Q(x)=xe^{-x^2}\\
+        I(x)=\int P(x)dx = \int 2xdx=x^2\\
+        e^{-I(x)}=e^{-x^2}=e^{-x^2}\\
+        \int e^{I(x)}Q(x)dx=\int e^{x^2}xe^{-x^2}dx=\int xdx=\frac{1}{2}x^2+C\\
+        y=e^{-I(x)}\int e^{I(x)}Q(x)dx=e^{-x^2}(\frac{1}{2}x^2+C)\\
+        \textcolor{red}{
+        y=\frac{x^2}{2e^{x^2}}+\frac{C}{e^{x^2}}  
+        }
+    \end{gather*}
+}

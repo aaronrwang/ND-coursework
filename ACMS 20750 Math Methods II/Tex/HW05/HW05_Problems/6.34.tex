@@ -1,0 +1,31 @@
+\item [34.] $y'' -5y'+ 6y = 2e^x+6x-5$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D^2-5D+6)=(D-3)(D-2)=0
+    \implies \text{root(s): } 2,3\\
+    \text{General Solution: } y_c=Ae^{2x}+Be^{3x}
+\end{gather*}
+Solve $y_{p_1}''-5y_{p_1}'+6y_{p_1}=2e^x$. Solution will be in the form $Ce^x$.
+\begin{gather*}
+    y_{p_1} = Ce^x;\:
+    y_{p_1}' = Ce^x;\:
+    y_{p_1}'' = Ce^x\\
+    y_{p_1}''-5y_{p_1}'+6y_{p_1} = Ce^x-5(Ce^x)+6(Ce^x)=2Ce^x=2e^x \implies C = 1\\
+    y_{p_1}=e^x
+\end{gather*}
+Solve $y_{p_2}''-5y_{p_2}'+6y_{p_2}=6x-5$. Solution will be in the form $Q_1(x)e^0$ s.t. $Q_1(x)=a_1x+a_0$
+\begin{gather*}
+    y_{p_2}=a_1x+a_0; y_{p_2}'=a_1; y_{p_2}''=0\\
+    y_{p_2}''-5y_{p_2}'+6y_{p_2} =-5(a_1)+6(a_1x+a_0)=6x-5
+    \implies 6a_1x = 6x \implies a_1 = 1\\
+    -5(1)+6a_0 = -5 \implies a_0 = 0\\
+    y_{p_2}=x
+\end{gather*}
+Combine:
+\begin{gather*}
+    y = y_c+y_{p_1}+y_{p_2}\\
+    \textcolor{red}{y = 
+    Ae^{2x}+Be^{3x}
+    +e^x
+    +x}
+\end{gather*}

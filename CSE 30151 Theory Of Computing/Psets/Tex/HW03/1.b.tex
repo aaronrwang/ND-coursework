@@ -1,0 +1,5 @@
+\textcolor{red}{
+    An example of a Unix Regular Expression that uses backreferences: ([01]*)$\backslash$1\newp
+    Let this language be represented as $L = \big\{ww|w \in \{\str{0},\str{1}\}^*\big\}$\newp
+    Proof: Assume $L$ is a regular language. Let $p$ be the pumping length from the Pumping Lemma. Let $s = \str{1}^p\str{01}^p\str{0}$. Observe that $s \in L$. The Pumping Lemma says that for some $xyz$, $s=xyz$, $|y| > 0$, $|xy| \leq p$ and $xyyz \in L$. Let $s' = xyyz$. Since $|xy| \leq p$, we know that $y$ contains all \str{1}s so $s' = \str{1}^r\str{01}^p\str{0}$ s.t. $r > p$ which means that $s' \notin L$ $\lightning$. Thus, by contradiction we have shown that $L$ can not be a regular language.
+}

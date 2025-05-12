@@ -1,0 +1,38 @@
+\item $y dy + (xy^2 - 8x) dx = 0$, $y=3$ when $x=1$
+
+\textcolor{blue}{
+    \begin{minipage}[t]{0.45\textwidth}
+        General Solution:
+        \begin{gather*}
+            y dy + (xy^2 - 8x) dx = 0\\
+            -y dy = (xy^2 - 8x) dx\\
+            -y dy = x(y^2-8) dx\\
+            -\frac{y}{y^2-8} dy = x dx\\
+            -\int\frac{y}{y^2-8} dy = \int x dx\\
+            -\frac{1}{2}\ln|y^2-8|=\frac{x^2}{2}+C\\
+            \ln|y^2-8|=-x^2+C\\
+            e^{\ln|y^2-8|}=e^{-x^2+C}\\
+            \textcolor{red}{
+            y^2-8=Ce^{-x^2}
+            }
+        \end{gather*}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        Integration for LHS:\\
+        $u=y^2-8$; $du=2ydy$
+        \begin{gather*}
+            \int\frac{y}{y^2-8} dy = \frac{1}{2}\int\frac{1}{u} dy\\
+            \frac{1}{2}\ln|u|+C=\frac{1}{2}\ln|y^2-8|+C
+        \end{gather*}
+        Particular Solution:
+        \begin{gather*}
+            (3)^2-8=Ce^{-(1)^2}\\
+            9-8=C/e\\
+            C=e\\
+            \textcolor{red}{
+                y^2-8=e \cdot e^{-x^2}
+            }
+        \end{gather*}
+    \end{minipage}
+}

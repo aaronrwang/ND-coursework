@@ -1,0 +1,18 @@
+\item [2.] $y' + \frac{1}{x}y = 2x^{3/2}y^{1/2}$
+
+\textcolor{blue}{
+    \begin{gather*}
+        n = \frac{1}{2}; \quad z=y^{1-n}=y^{1/2};\quad z' = \frac{1}{2}y^{-1/2}y'\\
+        \frac{1}{2}y^{-1/2}y' + \frac{1}{2x}y^{1/2} = x^{3/2}\\
+        z'+\frac{1}{2x}z=x^{3/2}\\
+        P(x)=\frac{1}{2x}; \quad Q(x)=x^{3/2}\\
+        I(x)=\int P(x)dx = \int \frac{1}{2x}dx=\frac{1}{2}\ln|x|\\
+        e^{-I(x)}=e^{-\ln|x|/2}=x^{-1/2}\\
+        \int e^{I(x)}Q(x)dx=\int x^{1/2}x^{3/2}dx=\int x^2dx=\frac{x^3}{3}+C\\
+        z=e^{-I(x)}\int e^{I(x)}Q(x)dx=x^{-1/2}(\frac{x^3}{3}+C)\\
+        z=\frac{x^{5/2}}{3}+\frac{C}{x^{1/2}}\\
+        \textcolor{red}{
+        y=\Bigg(\frac{x^{5/2}}{3}+\frac{C}{x^{1/2}}\Bigg)^2
+        }
+    \end{gather*}
+}

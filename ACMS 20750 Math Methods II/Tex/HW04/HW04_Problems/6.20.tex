@@ -1,0 +1,31 @@
+\item [20.] $y''+4y'+8y=30e^{-x/2}\cos{(5x/2)}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+2+2i)(D+2-2i)=0\\
+    \implies \text{root(s): } -2\pm 2i\\
+    \text{General Solution: } y_c=e^{-2x}(A\cos{2x}+B\sin{2x})
+\end{gather*}
+Now Find particular Solution:\\
+Because RHS is $e^{-x/2}\cos{(5x/2)}$, we will use $Y=Ce^{(-1/2+5i/2)x}=Y_R+iY_I$ s.t. $y_p=Y_R$.
+\begin{gather*}
+    Y=Ce^{(-1/2+5i/2)x}\\
+    Y'=C(-1/2+5i/2)e^{(-1/2+5i/2)x}\\
+    Y''=C(-6-5i/2)e^{(-1/2+5i/2)x}\\\:\\
+    Y''+4Y'+8Y = C
+    \big(
+    ((\cancel{-6}-5i/2)e^{(-1/2+5i/2)x})\\
+    +4((\cancel{-1/2}+5i/2)e^{(-1/2+5i/2)x})
+    +\cancel{8e^{(-1/2+5i/2)x}}
+    \big)\\
+    Y''+2Y'+17Y=\frac{15}{2}iCe^{(-1/2+5i/2)x}=30e^{(-1/2+5i/2)x}\\
+    \text{ so } C=\frac{60}{15i}=-4i\\\:\\
+    Ce^{(-1/2+5i/2)x}=(-4i)e^{-x/2}(\cos{(5x/2)}+i\sin{(5x/2)})\\
+    =e^{-x/2}(-4i\cos{(5x/2)}-4i^2\sin{(5x/2)})\\
+    =(4e^{-x/2}\sin{(5x/2)})-i(4e^{-x/2}\cos{(5x/2)})\\
+    y_p = Y_R = 4e^{-x/2}\sin{(5x/2)}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = e^{-2x}(A\cos{2x}+B\sin{2x})+4e^{-x/2}\sin{(5x/2)}}
+\end{gather*}

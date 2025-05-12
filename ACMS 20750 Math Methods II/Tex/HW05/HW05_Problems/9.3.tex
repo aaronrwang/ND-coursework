@@ -1,0 +1,38 @@
+\item [3.] $y''+4y'+4y=e^{-2t}$, $y_0=0$, $y_0'=4$
+\begin{gather*}
+    L(y'')=p^2Y-py_0-y_0';\:
+    L(y')=pY-y_0;\:
+    L(y)=Y;\:
+    L(e^{-2t})=\frac{1}{p+2}
+\end{gather*}
+\begin{align*}
+    y''+4y'+4y
+    &=p^2Y-py_0-y_0'+4(pY-y_0)+4Y\\
+    &=p^2Y-p(0)-(4)+4(pY-(0))+4Y\\
+    &=p^2Y+4pY+4Y-4\\
+    &=(p+2)^2Y-4
+\end{align*}
+\begin{gather*}
+    (p+2)^2Y-4=\frac{1}{p+2}\\
+    Y=\frac{1}{(p+2)^3}+\frac{4}{(p+2)^2}
+\end{gather*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{(p+2)^3}\Bigg) 
+    = \frac{1}{2}L^{-1}\Bigg(\frac{(2)!}{(p+(2))^{(2)+1}}\Bigg) 
+    =\frac{1}{2}t^{(2)}e^{-(2)t}
+    =\frac{1}{2}t^2e^{-2t}
+    \tag{By \( L6 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{4}{(p+2)^2}\Bigg) 
+    = 4L^{-1}\Bigg(\frac{(1)!}{(p+(2))^{(1)+1}}\Bigg)
+    =4t^{(1)}e^{-(2)t}
+    =4te^{-2t}
+    \tag{By \( L6 \)}
+\end{equation*}
+\begin{gather*}
+    y=L^{-1}(Y)=L^{-1}
+    \Bigg(
+    \frac{1}{(p+2)^3}+\frac{4}{(p+2)^2}
+    \Bigg)=\textcolor{red}{\frac{1}{2}t^2e^{-2t}+4te^{-2t}}
+\end{gather*}

@@ -1,0 +1,3 @@
+\textcolor{red}{
+    Proof: Assume $C$ is a regular language. Let $p$ be the pumping length from the Pumping Lemma. Let $s = \str{1}^p\str{01}^p$. Observe that $s \in C$. The Pumping Lemma says that for some $xyz$, $s=xyz$, $|y| > 0$, $|xy| \leq p$ and $xz \in C$. Let $s' = xz$. Since $|xy| \leq p$, we know that $y$ contains all \str{1}s so $s' = \str{1}^r\str{01}^p$ s.t. $r < p$. Thus $k \leq r$ and $w$ contains more than $p-1=r$ \str{1}s so $s' \notin L$ $\lightning$. Thus, by contradiction we have shown that $C$ can not be a regular language.
+}

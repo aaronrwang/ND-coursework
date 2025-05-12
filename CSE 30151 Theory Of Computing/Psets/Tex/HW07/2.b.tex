@@ -1,0 +1,8 @@
+\answer{
+    Run $TM_{L2}$ on $\langle TM_{L2} \rangle$. Assume towards a contradiction that $TM_{L2}$ is 10-compliant. Thus we will be at step 4 and simulate $TM_{L2}$ on $\langle TM_{L2} \rangle$. This should either accept or reject.
+    \begin{itemize}
+        \item [] If $TM_{L2}$ accepts $\langle TM_{L2} \rangle$, then we must reject $\lightning$. 
+        \item [] If $TM_{L2}$ rejects $\langle TM_{L2} \rangle$, then we must accept $\lightning$.
+    \end{itemize}
+    Since we have a contradiction, $TM_{L2}$ must not be 10-compliant.
+}

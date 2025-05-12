@@ -1,0 +1,28 @@
+\item [6.] $y''+6y'+9y=12e^{-x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+3)^2=0 \implies \text{root(s): } -3\\
+    \text{General Solution: } y_c=(Ax+B)e^{-3x}
+\end{gather*}
+Now Find particular Solution:
+Using a simple way to solve for the particular solution we know $y_p=Ce^{-x}$
+% \begin{gather*}
+%     (D+3)^2y_p = 12e^{-x} \text{; Let }u = (D+3)y_p\\
+%     (D+3)u = 12e^{-x} \implies u' + 3u = 12e^{-x}\\
+%     I(x) = \int 3dx = 3x \text{ and } Q(x) = 12e^{-x}\\
+%     u = e^{-3x}\int e^{3x}12e^{-x}dx = 6e^{-x}\\
+%     y_p'+3y_p=6e^{-x}\\
+%     I(x) = \int 3dx = 3x \text{ and } Q(x) = 6e^{-x}\\
+%     y_p = e^{-3x}\int e^{3x}6e^{-x}dx = 3e^{-x}\\
+% \end{gather*}
+\begin{gather*}
+    y_p=Ce^{-x};\:y_p'=-Ce^{-x};\:y_p''=Ce^{-x}\\
+    y_p''+6y_p'+9y_p=C\big((e^{-x})+6(-e^{-x})+9(e^{x})\big)\\
+    y_p''+6y_p'+9y_p=4Ce^{-x} = 12e^{-x} \text{ so } C=3\\
+    y_p = 3e^{-x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = (Ax+B)e^{-3x}+3e^{-x}}
+\end{gather*}

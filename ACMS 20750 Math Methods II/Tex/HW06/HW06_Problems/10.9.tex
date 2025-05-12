@@ -1,0 +1,32 @@
+\item[9.]$\frac{2}{p^3(p+2)}$
+\[
+    \frac{2}{p^3(p+2)} = \frac{2}{p^3}\cdot\frac{1}{p+2}
+\]
+\begin{equation*}
+    L^{-1}\Bigg(\frac{2}{p^3}\Bigg) 
+    = t^2
+    \tag{By \( L5 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{p+2}\Bigg) 
+    = e^{-2t}
+    \tag{By \( L2 \)}
+\end{equation*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{2}{p^3(p+2)} \Bigg)
+    & = \int_0^t \tau^2e^{-2(t-\tau)} d\tau \\
+    & =e^{-2t} \int_0^t \tau^2e^{2\tau} d\tau \\
+    & =e^{-2t}\Bigg(\frac{\tau^2e^{2\tau}}{2}\Big|^t_0 -\int_0^t \tau e^{2\tau} d\tau \Bigg)\\
+    & =e^{-2t}\Bigg(\Big(\frac{\tau^2e^{2\tau}}{2}-\frac{\tau e^{2\tau}}{2}\Big)\Big|^t_0 +\frac{1}{2}\int_0^t e^{2\tau} d\tau \Bigg)\\
+    & =e^{-2t}\Bigg(\frac{\tau^2e^{2\tau}}{2}-\frac{\tau e^{2\tau}}{2} +\frac{e^{2\tau}}{4} \Bigg)\Bigg|^t_0\\
+    & =e^{-2t}\Bigg(
+    \Big(\frac{t^2e^{2t}}{2}-\frac{t e^{2t}}{2} +\frac{e^{2t}}{4} \Big)
+    -\Big(\frac{(0)^2e^{2(0)}}{2}-\frac{(0) e^{2(0)}}{2} +\frac{e^{2(0)}}{4} \Big)
+    \Bigg)\\
+    & =e^{-2t}\Bigg(
+    \frac{t^2e^{2t}}{2}-\frac{t e^{2t}}{2} +\frac{e^{2t}}{4} 
+    -\frac{1}{4} \Bigg)\\
+    & =\textcolor{red}{
+    \frac{t^2}{2}-\frac{t}{2} +\frac{1}{4} 
+    -\frac{e^{-2t}}{4}}
+\end{align*}

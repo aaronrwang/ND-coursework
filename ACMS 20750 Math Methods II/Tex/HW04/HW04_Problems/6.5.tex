@@ -1,0 +1,28 @@
+\item [5.] $(D^2+1)y=2e^{x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D+i)(D-i)=0 \implies \text{root(s): } \pm i\\
+    \text{General Solution: } y_c=Ae^{-ix}+Be^{ix}
+\end{gather*}
+Now Find particular Solution:
+Using a simple way to solve for the particular solution we know $y_p=Ce^{x}$
+% \begin{gather*}
+%     (D+i)(D-i)y_p = 2e^{x} \text{; Let }u = (D-i)y_p\\
+%     (D+i)u = 2e^{x} \implies u' + iu = 2e^{x}\\
+%     I(x) = \int idx = ix \text{ and } Q(x) = 2e^{x}\\
+%     u = e^{-ix}\int e^{ix}2e^{x}dx = \frac{2}{(1+i)}e^{x}\\
+%     y_p'-3y_p=\frac{2}{(1+i)}e^{x}\\
+%     I(x) = \int -idx = -ix \text{ and } Q(x) = \frac{2}{(1+i)}e^{x}\\
+%     y_p = e^{ix}\int e^{-ix}\frac{2}{(1+i)}e^{x}dx = \frac{2}{(1+i)(1-i)}e^{x}=e^x\\
+% \end{gather*}
+\begin{gather*}
+    y_p=Ce^{x};\:y_p'=Ce^{x};\:y_p''=Ce^{x}\\
+    y_p''+y_p=C\big((e^{x})+(e^{x})\big)\\
+    y_p''+y_p=2Ce^{x} = 2e^{x} \text{ so } C=1\\
+    y_p = e^{x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = Ae^{-ix}+Be^{ix}+e^x}
+\end{gather*}

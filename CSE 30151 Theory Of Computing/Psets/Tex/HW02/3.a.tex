@@ -1,0 +1,24 @@
+\textcolor{red}{
+    If $L$ is regular, we have an NFA without $\e$ transitions $N$ for $L$ s.t. $N = (Q, \s, \delta, s, F)$.\\
+    Construct $N'= (Q', \s, \delta', s, F)$ to recognize STRETCH$(L)$\\
+    \begin{enumerate}
+        \item [1.]$Q'= Q \cup (\s_\e \times Q)$. This way we have the regular states and a state for every transition.
+        \item [2.] $\s$ does not change.
+        \item [3.] Define $\delta'$ so if $q$ is an original state ($q \in Q$), it will give transition state(s) and vice versa.
+        \[
+        \delta'\Big(q,a\Big)=  
+        \begin{cases}
+         (a,\delta(q,a)) & q \in Q  \\
+         q_{\text{next(s)}}  & \text{s.t. } (a,q_{\text{next(s)}}) = q\\
+         \emptyset & \text{otherwise}
+        \end{cases}
+        \]
+        \item [4.] $s$ does not change.
+        \item [5.] $F$ does not change.
+    \end{enumerate}
+    Let $L=\{\str{in},\str{out}\}$ as an example.\footnote{States without transitions were ommited from drawing}\\
+    \input{HW02/3.ex.og}\\
+    STRETCH$(L)$
+    \input{HW02/3.ex.a}\\
+    By proof of construction STRETCH$(L)$ is regular.
+}

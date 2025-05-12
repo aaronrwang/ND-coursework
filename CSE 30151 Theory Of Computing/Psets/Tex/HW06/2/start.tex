@@ -1,0 +1,20 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\color{red}
+    \node[state, initial] (q0) {$s$};
+    \node[state, xshift=3.5cm] (q1) {$s_0$};
+    \node[state, xshift=7cm] (q2) {$s_1$};
+    \node[state, xshift=10.5cm] (q3) {$s_2$};
+    \node[draw=none, xshift=11.5cm] (phantom) {};
+
+    \draw
+    (q0) edge[] node[above]{$\e$, $\e$, $\e \rightarrow$ \str{\$}, \str{\$}}(q1)
+    (q1) edge[loop above] node[above]{$a$, $\e$, $\e \rightarrow$ $a$, $\e$} (q1)
+    (q1) edge[] node[above]{$\e$, $\e$, $\e \rightarrow \e$, $\e$}(q2)
+    (q2) edge[loop above] node[above]{$\e$, $a$, $\e \rightarrow$ $\e$, $a$} (q2)
+    (q2) edge[] node[above]{$\e$, \str{\$}, $\e \rightarrow$ \str{\$}, $\e$}(q3)
+    (q3) edge[] node[above]{\:} (phantom)
+    ;
+\end{tikzpicture}
+\end{figure}

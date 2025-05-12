@@ -1,0 +1,29 @@
+\textcolor{red}{
+% \begin{quote}
+% \begin{enumerate}
+%     \item[1.] If this symbol is \spc: go to step 5.
+%     \item[2.] Check the symbol, move R, check the symbol.
+%     \item[3.] If the symbols in stage 1 are different: \emph{reject}. 
+%     \item[4.] If they are the same: write \str{X}, move R, go to step 1.
+%     \item[5.] Shift all \str{0}s and \str{1}s all the way to the left in order.
+%     \item[6.] \emph{accept}
+% \end{enumerate}
+% \end{quote}
+Intuition behind $S$ is this.\\ 
+Steps 1 is base case, we have reached the end of string.\\
+Steps 2-4: Check if the next two characters are the same.\\
+Steps 5-6: Shift the remaining string to the left by 1 character until you reach space.\\
+Step 7: Rewind to where we were before and continue.\newp
+$S = $ ``On input string $w$''
+\begin{quote}
+\begin{enumerate}
+    \item[1.] If this symbol is \spc: \emph{accept}
+    \item[2.] Check the symbol, move R, check the symbol.
+    \item[3.] If the symbols in stage 1 are different: \emph{reject}. 
+    \item[4.] If they are the same:  move L, mark the symbol, move R
+    \item[5.] If symbol is \spc: go to step 7
+    \item[6.] Copy symbol one to the right to this spot, move R, go to step 5
+    \item[7.] move L until the you reach the marked symbol, unmark it, move R, go to step 1
+\end{enumerate}
+\end{quote}
+}

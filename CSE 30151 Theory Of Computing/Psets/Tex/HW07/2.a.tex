@@ -1,0 +1,11 @@
+\answer{
+    Create a TM $TM_{L2}$ that decides $L_2$.\newp
+    $TM_{L2} = $ ``on input $\langle M \rangle$
+    \begin{enumerate}
+        \item [1.] Let $D$ be the TM that decides whether a TM is 10-compliant
+        \item [2.] Run $D$ on $\langle M \rangle$.
+        \item [3.] If $D$ rejects, \emph{reject}, otherwise continue
+        \item [4.] Simulate $M$ on $\langle M \rangle$
+        \item [5.] If $M$ accepts, \emph{reject}; if $M$ rejects, \emph{accept}. (Never loops because 10-compliant)''
+    \end{enumerate}
+}

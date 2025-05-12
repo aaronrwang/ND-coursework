@@ -1,0 +1,86 @@
+\item [4.] Solve the semi-infinite plate problem if the bottom edge of width 30 is held at
+\[
+T = 
+\begin{cases}
+    x, & 0 < x < 15\\
+    30 - x, & 15 < x < 30 
+\end{cases}
+\]
+and the other sides are at 0\textdegree.
+Define the boundary constraints
+\begin{align*}
+    T(x,y=0)&=
+    \begin{cases}
+        x, & 0 < x < 15\\
+        30 - x, & 15 < x < 30 
+    \end{cases}\\
+    T(x,y=\infty)&=0\\
+    T(x=0,y)&=0\\
+    T(x=30,y)&=0
+\end{align*}
+Use $X(x)''+k^2X(x) = 0$ to get $X(x) = C_1\sin(kx)+C_2\cos(kx)$. Using the boundary constraints of $X(0) = 0$, $C_2 = 0$. Further from the constraint $X(30) = 0$, $k = \frac{n\pi}{30}$ for all positive integers $n$ so 
+\[\displaystyle X(x) = \sum_{n=1}^{\infty} C_n \sin\left(\frac{n\pi}{30}x\right)\]
+Next, use $Y(y)''-k^2Y(y)=0$ to get $Y(y) = Ae^{-ky}+Be^{ky}$. Because of the boundary constraint that as $y \rightarrow \infty$, $Y(y) = 0$, we know that $B = 0$ so $Y(y) = Ce^{-ky} = Ce^{-\frac{n\pi}{30}y}$.\\[2mm]
+Thus, as $T(x,y) = X(x)Y(y)$ we now have $\displaystyle T(x,y) = \sum_{n=1}^{\infty} C_n \sin\left(\frac{n\pi}{30} x\right) e^{-\frac{n\pi}{30}y}$\\[2mm]
+To solve for $C_n$, we use \begin{align*}
+    C_n &= \frac{2}{30} \int_0^{30} f(x)\sin\left(\frac{n\pi}{30} x\right) dx \\
+    &=\frac{2}{30} 
+    \left[
+    \int_{0}^{15} x\sin\left(\frac{n\pi}{30} x\right) dx  + 
+    \int_{15}^{30} (30 - x) \sin\left(\frac{n\pi}{30} x\right) dx
+    \right]\\
+    &=60
+    \left[
+    \int_{0}^{1/2} u\sin\left(n\pi u\right) du  + 
+    \int_{1/2}^{1} (1 - u) \sin\left(n\pi u\right) du
+    \right]\\
+    &=60
+    \left[
+    \int_{0}^{1/2} u\sin\left(n\pi u\right) du  + 
+    \int_{1/2}^{1} \sin\left(n\pi u\right) du +
+    \int_{1}^{1/2} u\sin\left(n\pi u\right) du
+    \right]\\
+\end{align*}
+Solve the first integral. $\displaystyle \int_{0}^{1/2} u\sin\left(n\pi u\right) du$
+\begin{align*}
+    \int_{0}^{1/2} u\sin\left(n\pi u\right) du
+    &= \left(
+    \frac{-x\cos(\pi n x)}{\pi n} + 
+    \frac{\sin(\pi n x)}{\pi^2 n^2}
+    \right)\Bigg|_0^{1/2}\\
+    &= \frac{-(1/2)\cos(\pi n (1/2))}{\pi n } + 
+    \frac{\sin(\pi n (1/2))}{\pi^2 n^2} - \frac{-(0)\cos(\pi n (0))}{\pi n} - \frac{\sin(\pi n (0))}{\pi^2 n^2} \\
+    &= \frac{\sin(\pi n (1/2))}{\pi^2 n^2} \\
+\end{align*}
+Solve the next integral. $\displaystyle \int_{1/2}^{1} \sin\left(n\pi u\right) du$
+\begin{align*}
+    \int_{1/2}^{1} \sin\left(n\pi u\right) du
+    &= \frac{-\cos(\pi n x)}{\pi n}\Bigg|_{1/2}^{1}\\
+    &= \frac{-\cos(\pi n (1))}{\pi n} - \frac{-\cos(\pi n (1/2))}{\pi n} \\
+    &= \frac{-\cos(\pi n)}{\pi n}
+\end{align*}
+Solve the final integral. $\displaystyle \int_{1}^{1/2} u\sin\left(n\pi u\right) du$
+\begin{align*}
+    \int_{1}^{1/2} u\sin\left(n\pi u\right) du
+    &= \left(
+    \frac{-x\cos(\pi n x)}{\pi n} + 
+    \frac{\sin(\pi n x)}{\pi^2 n^2}
+    \right)\Bigg|_1^{1/2}\\
+    &= \frac{-(1/2)\cos(\pi n (1/2))}{\pi n} + 
+    \frac{\sin(\pi n (1/2))}{\pi^2 n^2} - \frac{-(1)\cos(\pi n (1))}{\pi n} - \frac{\sin(\pi n (1))}{\pi^2 n^2} \\
+    &= \frac{\sin(\pi n (1/2))}{\pi^2 n^2} + \frac{\cos(\pi n)}{\pi n}\\
+\end{align*}
+Continuing from before for $C_n$
+\begin{align*}
+    C_n
+    &= 60
+    \left[
+    \frac{\sin(\pi n (1/2))}{\pi^2 n^2} +\frac{-\cos(\pi n)}{\pi n} +\frac{\sin(\pi n (1/2))}{\pi^2 n^2} + \frac{\cos(\pi n)}{\pi n}
+    \right]\\
+    &= \frac{120\sin(\pi n (1/2))}{\pi^2 n^2}
+\end{align*}
+Thus, when $n$ is even $C_n = 0$ and when $n$ is odd $C_n = \frac{120(-1)^{(n-1)/2}}{\pi^2 n^2}$.
+Substituting this in we have
+\answer{\[
+    T(x,y) = \frac{120}{\pi^2}\sum_{\substack{n = 1 \\ \text{odd } n}}^{\infty} \frac{(-1)^{(n-1)/2}}{n^2} \sin\left(\frac{n\pi}{30} x\right) e^{-\frac{n\pi}{30}y}
+\]}

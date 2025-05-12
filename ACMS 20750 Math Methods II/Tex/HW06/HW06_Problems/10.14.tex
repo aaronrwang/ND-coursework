@@ -1,0 +1,24 @@
+\item[14.] $y'' + 5y'+ 6y= e^{-2t}, y_0 = y_0' = 0$
+\begin{gather*}
+    L(y'')=p^2Y-py_0-y_0';\:
+    L(y')=pY-y_0;\:
+    L(y)=Y;\:\\
+    L(y'' + 5y'+ 6y)=(p^2Y-py_0-y_0')+5(pY-y_0)+6(Y)\\
+    L(y'' + 5y'+ 6y)=p^2Y+5pY+6Y=(p+2)(p+3)Y\\
+    (p+2)(p+3)Y=L(e^{2t}) \implies Y=\frac{1}{(p+2)(p+3)}\cdot L(e^{2t})\\
+\end{gather*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{(p+2)(p+3)} \Bigg) 
+    = \frac{e^{-(3)t}-e^{-(2)t}}{2-(3)}=e^{-2t}-e^{-3t}
+    \tag{By \( L7 \)}
+\end{equation*}
+\begin{align*}
+    y 
+    & = \int^t_0 (e^{-2\tau}-e^{-3\tau})e^{-2(t-\tau)}d\tau\\
+    & = e^{-2t}\int^t_0 (e^{-2\tau}-e^{-3\tau})e^{2\tau}d\tau\\
+    & = e^{-2t}\int^t_0 1-e^{-\tau}d\tau\\
+    & = e^{-2t}(\tau+e^{-\tau})\Big|^t_0\\
+    & = e^{-2t}\Big((t+e^{-t})-(0+e^{-0}\Big)\\
+    & = e^{-2t}(t+e^{-t}-1)\\
+    & = \textcolor{red}{te^{-2t}+e^{-3t}-e^{-2t}}\\
+\end{align*}

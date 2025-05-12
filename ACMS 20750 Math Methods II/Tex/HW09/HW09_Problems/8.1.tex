@@ -1,0 +1,28 @@
+\item [1.] $\cos{nx}$ on $(0,\pi)$\vspace{-5mm}
+\begin{gather*}
+    \norm{\cos{nx}} 
+    = \sqrt{\innerproduct{\cos{nx}}{\cos{nx}}}
+    = \sqrt{\int_0^\pi \cos^2{nx}dx}
+    = \sqrt{\frac{1}{2}\int_0^\pi 1+\cos{2nx}dx}
+    = \sqrt{\frac{1}{2} \Big(x+\frac{1}{2n}\sin{2nx}\Big)\Big|_0^\pi}\\
+    = \sqrt{\frac{1}{2} 
+    \Big[
+    \Big(\pi+\frac{1}{2n}\sin{(2n\pi)}\Big)
+    -
+    \Big(0+\frac{1}{2n}\sin{(2n(0))}\Big)
+    \Big]
+    }
+    = \sqrt{\frac{1}{2} 
+    \Big[
+    \Big(\pi+0\Big)
+    -
+    \Big(0+0\Big)
+    \Big]
+    }
+    = \answer{\sqrt{\frac{\pi}{2}}}
+\end{gather*}
+\begin{gather*}
+    \frac{\cos{nx}}{\norm{\cos{nx}}} 
+    = \frac{\cos{nx}}{\sqrt{\pi/2}}
+    = \answer{\sqrt{\frac{2}{\pi}}\cdot\cos{nx}}
+\end{gather*}

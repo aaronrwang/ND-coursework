@@ -1,0 +1,42 @@
+\item [38.] $y''-2y'=9xe^{-x}-6x^2+4e^{2x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-2)D=0
+    \implies \text{root(s): } 0,2\\
+    \text{General Solution: } y_c=A+Be^{2x}
+\end{gather*}
+Solve $y_{p_1}''-2y_{p_1}'=9xe^{-x}$. Solution will be in the form $Q_1(x)e^{-x}$ where $Q_1(x)=a_1x+a_0$
+\begin{gather*}
+    y_{p_1}=(a_1x+a_0)e^{-x};\:y_{p_1}'=(-a_1x+a_1-a_0)e^{-x};\:y_{p_1}''=(a_1x-2a_1+a_0)e^{-x}\\
+    y_{p_1}''-2y_{p_1}'=
+    (a_1x-2a_1+a_0)e^{-x}
+    -2(-a_1x+a_1-a_0)e^{-x}\\
+    =(3a_1x-4a_1+3a_0)e^{-x}=9xe^{-x}\\
+    3a_1x-4a_1+3a_0=9x \implies 3a_1x=9x \implies a_1 = 3\\
+    -4(3)+3a_0=0 \implies a_0=4\\
+    y_{p_1}=(3x+4)e^{-x}
+\end{gather*}
+Solve $y_{p_2}''-2y_{p_2}'=-6x^2$. Solution will be in the form of $Q_2(x)xe^{0x}$ where $Q_2(x)=a_2x^2+a_1x+a_0$
+\begin{gather*}
+    y_{p_2}=a_2x^3+a_1x^2+a_0x;\:y_{p_2}'=3a_2x^2+2a_1x+a_0;\:y_{p_2}''=6a_2x+2a_1\\
+    y_{p_2}''-2y_{p_2}'=6a_2x+2a_1-2(3a_2x^2+2a_1x+a_0)\\
+    =-6a_2x^2+6a_2x-4a_1x+2a_1-2a_0=-6x^2 \implies -6a_2x^2=-6x^2 \implies a_2 = 1\\
+    6(1)x-4a_1x+2a_1-2a_0=0 \implies 6(1)x-4a_1x=0 \implies a_1 = 3/2\\
+    2(3/2)-2a_0=0 \implies a_0 = 3/2\\
+    y_{p_2}=x^3+\frac{3}{2}x^2+\frac{3}{2}x
+\end{gather*}
+Solve $y_{p_3}''-2y_{p_3}'=4e^{2x}$. Solution will be in the form $Cxe^{2x}$.
+\begin{gather*}
+    y_{p_3}=Cxe^{2x};\:y_{p_3}'=Ce^{2x}+C2xe^{2x};\:y_{p_3}=C4e^{2x}+C4xe^{2x}\\
+    y_{p_3}''-2y_{p_3}'+y_{p_3}=C4e^{2x}+C4xe^{2x}-2(Ce^{2x}+C2xe^{2x})\\
+    C2e^{2x}=4e^{2x} \implies C=2\\
+    y_{p_3}=2xe^{2x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y = y_c+y_{p_1}+y_{p_2}+y_{p_3}\\
+    \textcolor{red}{y = A+Be^{2x}
+    +(3x+4)e^{-x}
+    +x^3+\frac{3}{2}x^2+\frac{3}{2}x
+    +2xe^{2x}}
+\end{gather*}

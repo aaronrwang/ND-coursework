@@ -1,0 +1,23 @@
+\item [10.] $(D-3)^2y=6e^{3x}$\\[2mm]
+First Find General Solution to homogeneous equation:
+\begin{gather*}
+    \text{Auxiliary Equation: } (D-3)^2=0 \implies \text{root(s): } 3\\
+    \text{General Solution: } y_c=(Ax+B)e^{3x}
+\end{gather*}
+Now Find particular Solution:\\
+Because exponent on RHS is the same as both roots of the auxiliary equation, particular solution in the form of $Cx^2e^{3x}$
+\begin{gather*}
+    y_p=Cx^2e^{3x};\:y_p'=C(2xe^{3x}+3x^2e^{3x});\:y_p''=C(2e^{3x}+12xe^{3x}+9x^2e^{3x})\\
+    y_p''-6y_p'+9y_p\\=C\big(
+        (2e^{3x}+\cancel{12xe^{3x}}+\cancel{9x^2e^{3x}})
+        -\cancel{6(2xe^{3x}+3x^2e^{3x})}
+        +\cancel{9(x^2e^{3x})}
+    \big)\\
+    =2Ce^{3x} = 6e^{3x} \text{ so } C=3\\
+    y_p = 3x^2e^{3x}
+\end{gather*}
+Combine:
+\begin{gather*}
+    y=y_c+y_p\\
+    \textcolor{red}{y = (Ax+B+3x^2)e^{3x}}
+\end{gather*}

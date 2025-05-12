@@ -1,0 +1,21 @@
+\item [1.] $y' + y = xy^{2/3}$
+
+\textcolor{blue}{
+    \begin{gather*}
+        n = \frac{2}{3}; \quad z=y^{1-n}=y^{1/3};\quad z' = \frac{1}{3}y^{-2/3}y'\\
+        \frac{1}{3}y^{-2/3}y' + \frac{1}{3}y^{1/3} = \frac{1}{3}x\\
+        z'+\frac{1}{3}z=\frac{1}{3}x\\
+        P(x)=\frac{1}{3}; \quad Q(x)=\frac{1}{3}x\\
+        I(x)=\int P(x)dx dx= \int \frac{1}{3}dx=\frac{1}{3}x\\
+        e^{-I(x)}=e^{-x/3}\\
+        \int e^{I(x)}Q(x)=\int e^{x/3}\frac{1}{3}xdx=\int xe^{x/3}\frac{1}{3}dx\\
+        \text{Let } u=\frac{x}{3};\quad du=\frac{1}{3}dx\\
+        \int ue^udu = ue^u-\int e^udu = ue^u-e^u+C\\
+        \int xe^{x/3}\frac{1}{3}dx=3\int ue^udu=xe^{x/3}-3e^{x/3}+C\\
+        z=e^{-I(x)}\int e^{I(x)}Q(x) dx=e^{-x/3}(xe^{x/3}-3e^{x/3}+C)\\
+        z=x-3+\frac{C}{e^{x/3}}\\
+        \textcolor{red}{
+        y=\Bigg(x-3+\frac{C}{e^{x/3}}\Bigg)^3
+        }
+    \end{gather*}
+}

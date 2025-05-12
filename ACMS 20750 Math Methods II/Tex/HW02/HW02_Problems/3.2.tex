@@ -1,0 +1,15 @@
+\item [2.] $x^2y'+3xy=1$
+
+\textcolor{blue}{
+    \begin{gather*}
+        y'+3x^{-1}y=x^{-2}\\
+        P(x)=3x^{-1}; \quad Q(x)=x^{-2}\\
+        I(x)=\int P(x)dx = \int 3x^{-1}dx=3\ln|x|\\
+        e^{-I(x)}=e^{-3\ln|x|}=x^{-3}\\
+        \int e^{I(x)}Q(x)dx=\int e^{3\ln|x|}x^{-2}dx=\int xdx=\frac{1}{2}x^2+C\\
+        y=e^{-I(x)}\int e^{I(x)}Q(x)dx=x^{-3}(\frac{1}{2}x^2+C)\\
+        \textcolor{red}{
+        y=\frac{1}{2x}+\frac{C}{x^3}   
+        }
+    \end{gather*}
+}

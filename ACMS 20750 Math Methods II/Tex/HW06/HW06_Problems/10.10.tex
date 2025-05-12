@@ -1,0 +1,49 @@
+\item[10.]$\frac{1}{p(p^2+a^2)^2}$
+\[
+    \frac{1}{p(p^2+a^2)^2} = \frac{1}{a^3} \cdot \frac{a^2}{p(p^2+a^2)} \cdot \frac{a}{p^2+a^2}
+\]
+\begin{equation*}
+    L^{-1}\Bigg(\frac{a^2}{p(p^2+a^2)} \Bigg) 
+    = 1-\cos(at)
+    \tag{By \( L15 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{a}{p^2+a^2}\Bigg) 
+    = \sin(at)
+    \tag{By \( L3 \)}
+\end{equation*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{1}{p(p^2+a^2)^2} \Bigg)
+    & = \frac{1}{a^3}\int_0^t \big(1-\cos(a(t-\tau))\big)\sin(a\tau)d\tau \\
+    & = \frac{1}{a^3}\int_0^t \sin(a\tau)-\sin(a\tau)\cos(at-a\tau)d\tau \\
+    & = \frac{1}{a^3}\Bigg(\int_0^t \sin(a\tau)d\tau-\int_0^t\sin(a\tau)\cos(at-a\tau)d\tau\Bigg) \\
+\end{align*}
+\[
+    \int_0^t \sin(a\tau)d\tau =-\frac{\cos(a\tau)}{a}\Big|^t_0=-\Big(\frac{\cos(at)}{a}-\frac{\cos(a(0))}{a}\Big)=\frac{1}{a}-\frac{\cos(at)}{a}
+\]
+\begin{align*}
+   \int_0^t\sin(a\tau)\cos(at-a\tau)d\tau
+   & = \int_0^t \frac{1}{2}
+   \Bigg[
+   \sin\Big(a\tau+(at-a\tau)\Big)
+   + \sin\Big(a\tau-(at-a\tau)\Big)
+   \Bigg] d\tau\\
+   & = \frac{1}{2}\int_0^t 
+   \sin(at)
+   + \sin(2a\tau-at) d\tau\\
+   & = \frac{1}{2}\Big(
+   \tau\sin(at)- \frac{1}{2a}\cos(2a\tau-at)
+   \Big)\Big|^t_0\\
+   & = \frac{1}{2}\tau\sin(at)- \frac{1}{4a}\cos(2a\tau-at)\Big|^t_0\\
+   & = \Big(\frac{1}{2}t\sin(at)- \frac{1}{4a}\cos(2at-at)\Big)
+   -\Big(\frac{1}{2}(0)\sin(at)- \frac{1}{4a}\cos(2a(0)-at)\Big)\\
+   & = \frac{1}{2}t\sin(at)- \frac{1}{4a}\cos(at)
+   -0+ \frac{1}{4a}\cos(-at)\\
+   & = \frac{1}{2}t\sin(at)- \frac{1}{4a}\cos(at) + \frac{1}{4a}\cos(at)\\
+   & = \frac{1}{2}t\sin(at)\\
+\end{align*}
+\begin{align*}
+    L^{-1}\Bigg( \frac{1}{p(p^2+a^2)^2} \Bigg)
+    & = \frac{1}{a^3}\Bigg(\frac{1}{a}-\frac{\cos(at)}{a}-\frac{t\sin(at)}{2}\Bigg) \\
+    & = \textcolor{red}{\frac{1}{a^4}-\frac{\cos(at)}{a^4}-\frac{t\sin(at)}{2a^3}} \\
+\end{align*}

@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{automata, positioning, arrows, trees}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+
+\title{Homework 04}
+\author{Aaron Wang}
+\date{February 21 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Arithmetic expressions}. Consider the grammar $G_4$ (page 105) for arithmetic expressions, with start symbol $E$:
+    \begin{align*}
+        & E \rightarrow E \: \str{+} \: T \: | \: T\\
+        & T \rightarrow T \: \str{*} \: F \: | \: F\\
+        & F \rightarrow \str{(}E\str{)} \: | \: \str{a} \: | \: \str{b} \: | \: \str{c}
+    \end{align*}
+    \begin{enumerate}
+        \item [(a)][cf. Exercise 2.1] Give derivations for the following strings. You may write them either as a sequence of rewrites $(E \implies \cdots)$ or as a tree.
+        \begin{enumerate}
+            \item \str{a + b + c}
+            \item \str{a * b + c}
+            \item \str{a * (b + c)}
+        \end{enumerate}
+        \input{HW04/1.a}
+        \item [(b)]Modify $G_4$ to allow an exponentiation operator $\uparrow$.
+        \begin{itemize}
+            \item It should have \textit{higher precedence} than multiplication; that is, in the derivation of the string \str{a * b} $\uparrow$ \str{c}, there should be a nonterminal that rewrites to \str{b} $\uparrow$ \str{c}, and there should not be a nonterminal that rewrites to \str{a * b}.
+            \item It should be (unlike \str{*} and \str{+}) \textit{right-associative}; that is, in the derivation of the string\\ \str{a} $\uparrow$ \str{b} $\uparrow$ \str{c}, there should be a nonterminal that rewrites to \str{b} $\uparrow$ \str{c}, and there should not be a nonterminal that rewrites to \str{a} $\uparrow$ \str{b}.
+        \end{itemize}
+        \input{HW04/1.b}
+    \end{enumerate}
+    \item Write both a PDA and a CFG for the language (page 80):
+    \[
+    C = \big\{w \in \{0, 1\}^* | w\text{ has an equal number of \str{0}s and \str{1}s}\big\}.
+    \]
+    Please include a brief explanation of why they work. (If you design a PDA and then convert it to a CFG, your explanation for the CFG can simply be, ``I converted my PDA to a CFG,'' and similarly if you convert a CFG to a PDA.)\newp
+    \input{HW04/2}
+\newpage
+    \item [3.] [Exercise 2.6b] Write both a PDA and a CFG for the language
+    \[
+    L_3 = \overline{\{0^n1^n | n \geq 0\}}.
+    \]
+    For example, \str{000111} $\notin L_3$. Please include a brief explanation of why they work. (If you design a PDA and then convert it to a CFG, your explanation for the CFG can simply be, ``I converted my PDA to a CFG,'' and similarly if you convert a CFG to a PDA.)\newp
+    Hint: First prove that this is equal to $\{0^m1^n| m \neq n\} \cup \overline{0^*1^*}$.\newp
+    \input{HW04/3}
+\end{enumerate}
+\end{document}

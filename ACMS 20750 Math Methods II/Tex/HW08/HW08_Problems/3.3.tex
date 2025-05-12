@@ -1,0 +1,46 @@
+\item [3.] $\displaystyle \frac{d^{6}}{dx^{6}} (x^2 \sin{x})$
+\begin{align*}
+    \frac{d^{6}}{dx^{6}} (x^2 \sin{x})
+    &= \sum_{k=0}^{6} \binom{6}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{6-k}}{dx^{6-k}} (\sin{x})\\
+    &= 
+    \binom{6}{0}
+    \frac{d^{0}}{dx^{0}} (x^2)
+    \frac{d^{6-0}}{dx^{6-0}} (\sin{x})
+    +
+    \sum_{k=1}^{6} \binom{6}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{6-k}}{dx^{6-k}} (\sin{x})\\
+    &= 
+    -x^2\sin{x}
+    +
+    \binom{6}{1}
+    \frac{d^{1}}{dx^{1}} (x^2)
+    \frac{d^{6-1}}{dx^{6-1}} (\sin{x})
+    +
+    \sum_{k=2}^{6} \binom{6}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{6-k}}{dx^{6-k}} (\sin{x})\\
+    &= 
+    -x^2\sin{x}
+    +
+    12x\cos{x}
+    +
+    \binom{6}{2}
+    \frac{d^{2}}{dx^{2}} (x^2)
+    \frac{d^{6-2}}{dx^{6-2}} (\sin{x})
+    +
+    \sum_{k=3}^{6} \binom{6}{k}
+    \frac{d^{k}}{dx^{k}} (x^2)
+    \frac{d^{6-k}}{dx^{6-k}} (\sin{x})\\
+    &= 
+    -x^2\sin{x}
+    +
+    12x\cos{x}
+    +
+    30\sin{x}
+    +
+    0\\
+    &= \textcolor{red}{-x^2\sin{x} + 12x\cos{x} + 30\sin{x}}
+\end{align*}

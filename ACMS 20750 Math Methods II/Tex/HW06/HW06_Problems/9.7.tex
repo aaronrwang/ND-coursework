@@ -1,0 +1,41 @@
+\item [7.] $y''- 4y' + 4y= 4$, $y_0=0$, $y_0'=-2$
+\begin{gather*}
+    L(y'')=p^2Y-py_0-y_0';\:
+    L(y')=pY-y_0;\:
+    L(y)=Y;\:
+    L(4)=4/p
+\end{gather*}
+\begin{align*}
+    y''- 4y' + 4y
+    &=p^2Y-py_0-y_0'-4(pY-y_0)+4(Y)\\
+    &=p^2Y-p(0)-(-2)-4(pY-(0))+4Y\\
+    &=p^2Y+2-4pY+4Y\\
+    &=p^2Y-4pY+4Y+2\\
+    &=(p-2)^2Y+2
+\end{align*}
+\begin{gather*}
+    (p-2)^2Y+2=\frac{4}{p}\\
+    Y=\frac{4-2p}{p(p-2)^2}=\frac{-2}{p(p-2)}
+\end{gather*}
+Using partial fraction decomposition
+\begin{gather*}
+    Y=\frac{A}{p}+\frac{B}{p-2} \text{ s.t. } A(p-2)+Bp =  -2\\
+    \implies (A+B)p-2A = -2 \text{ so } A  = 1\\
+    \implies (1+B)p = 0 \text{ so } B  = -1\\
+    Y=\frac{1}{p}-\frac{1}{p-2}
+\end{gather*}
+\begin{equation*}
+    L^{-1}\Bigg(\frac{1}{p}\Bigg) 
+    =1
+    \tag{By \( L1 \)}
+\end{equation*}
+\begin{equation*}
+    L^{-1}\Bigg(-\frac{1}{p-2}\Bigg) 
+    = -L^{-1}\Bigg(\frac{1}{p+(-2)}\Bigg) 
+    =-e^{-(-2)t}
+    =-e^{2t}
+    \tag{By \( L2 \)}\\
+\end{equation*}
+\textcolor{red}{\[
+   y= 1-e^{2t}
+\]}

@@ -1,0 +1,32 @@
+\answer{
+    Let SAFEROOM $= \{\langle R\rangle \:|\: R$ is a room that can have a safe path$\}$\newp
+    Let $V$ be a verifier for SAFEROOM.\newp
+    $V =$ ``On input $\langle R, c \rangle$ where $R$ is as described above and $c$ is the certificate, a set of toggled buttons:
+    \begin{enumerate}
+        \item [1.] For each tile in the grid $T_{i,j}$, decide if it is closed or open
+        \begin{enumerate}
+            \item [i.] If $R_{i,j}$ has letter $\sigma$ and $\sigma \in c$, $T_{i,j}$ is the inverse of $R_{i,j}$'s initial state.
+            \item [ii.] $T_{i,j}$ is $R_{i,j}$'s initial state otherwise.
+        \end{enumerate}
+        \item [2.] If the entrance tile is open, \emph{reject}
+        \item [3.] Mark every tile that is  adjacent to a closed, marked tile and is also closed.
+        \item [4.] Repeat step 3 until no new tiles are marked.
+        \item [5.] If the exit tile is marked, \emph{accept}; otherwise \emph{reject}.
+    \end{enumerate}
+    This essentially figures out of each tile is open or closed based on the initial state and whether it has been toggled. It then runs a bfs and accepts if there is a path. $V$ is polynomial time bounded by the size of the rectangle. Since we have a deterministic polynomial time verifier, we know SAFEROOM is NP.\newp
+    Here are the details of a reduction from 3SAT to SAFEROOM that operates in polynomial time. We will map from a boolean expression to $\langle R \rangle$ an instance of SAFEROOM .
+    \begin{enumerate}
+        \item [1.] Let $R$ be a room that is 3 rows by $2m+1$ columns where $m =$ the number of clauses.
+        \item [2.] Set the start tile to $T_{1,1}$ where we are using a 1-based indexing.
+        \item [3.] For every tile in an odd column, set the initial state to closed and do not attach a letter to it.
+        \item [4.] For every clause $c_j$ that looks like $a \lor b \lor c$
+        \begin{enumerate}
+            \item $T_{1,2j}$ is open if $a$ is a negated variable; it is closed otherwise. Additionally, $T_{1,2j}$ has symbol of the variable.
+            \item Same for $T_{2,2j}$ and $b$.
+            \item Same for $T_{3,2j}$ and $c$.
+        \end{enumerate}
+        \item [5.] Set the exit tile to $T_{1,2j+1}$.
+    \end{enumerate}
+    Essentially, we have created a buffer between every clause in which you can choose which ``gate'' to go through next. We then transform the clauses into a wall of gates, which can all be crossed iff the corresponding clause was satisfiable. Further, for any certificate that solves the SAFEROOM instance, we can create certificate for 3-SAT by setting all the variables in that original certificate to false. Following this reduction, we have mapped an instance of 3SAT to SAFEROOM that is satisfiable iff the the original problem is.  This is clearly $\mathcal{O}(n)$ reduction where $n$ is the number of clauses. Thus SAFEROOM is NP-hard.\newp
+    Since SAFEROOM is NP and NP-Hard, it is NP-complete.
+}

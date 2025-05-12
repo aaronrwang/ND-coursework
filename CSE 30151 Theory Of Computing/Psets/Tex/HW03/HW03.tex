@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amstext, mathtools, stmaryrd, textcomp, xcolor, graphicx, tikz}
+\usepackage[hidelinks]{hyperref}
+\usetikzlibrary{automata, positioning, arrows}
+\tikzset{->,>=stealth,
+every state/.style={thick, fill=gray!10}, 
+initial text=$ $,
+}
+\newcommand{\e}{\varepsilon}
+\newcommand{\s}{\Sigma}
+\newcommand{\g}{\Gamma}
+\newcommand{\so}{\rightarrow}
+\newcommand{\str}{\texttt}
+\newcommand{\newp}{\\[2mm]}
+\newcommand{\defeq}{\coloneqq}
+
+\title{Homework 03}
+\author{Aaron Wang}
+\date{February 17 2025}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item \textbf{Regular expressions vs. Unix regular expressions.} Regular expressions and Unix regular expressions have some superficial differences, but also some deeper ones that affect the class of languages recognized.
+    \begin{enumerate}
+        \item Unix regular expressions have quantifiers: if $\alpha$ is a regular expression, $\alpha^{\{m,n\}}$ is a regular expression that matches at least $m$ and no more than $n$ strings that match $\alpha$. More formally, it matches all strings $w^{(1)}\cdots w^{(l)}$ where $m \leq l \leq n$, and for all $i$ such that $1 \leq i \leq l$, $w^{(i)}$ matches $\alpha$. Prove that for any regular expression with quantifiers, there is an equivalent regular expression without quantifiers.\newp
+        \input{HW03/1.a}
+        \item Unix regular expressions have backreferences: for an explanation, please see 
+        \begin{center}
+            \url{http://www.regular-expressions.info/backref.html}.
+        \end{center} Give an example of a Unix regular expression that uses backreferences to describe a nonregular language, and prove that this language is not regular. We want you to get practice writing a non-regularity proof, so although you may use Examples 1.73–77, do not simply cite one of them; please write out a full proof. \newp
+        \input{HW03/1.b}
+    \end{enumerate}
+\newpage
+    \item \textbf{Binary addition.} This problem is about two ways of representating addition of binary natural numbers. We consider 0 to be a natural number. We allow binary representations of natural numbers to have leading 0s, and we consider $\e$ to be a binary representation of 0. When adding numbers, we do not allow overflow, so, for example, $1111 + 0001 = 0000$ is false.
+    \begin{enumerate}
+        \item [(a)] [Problem 1.32] Let
+        \[
+        \Sigma_3 = \left\{
+        \begin{bmatrix}
+        \str{0} \\ \str{0} \\ \str{0}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{0} \\ \str{0} \\ \str{1}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{0} \\ \str{1} \\ \str{0}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{0} \\ \str{1} \\ \str{1}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{1} \\ \str{0} \\ \str{0}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{1} \\ \str{0} \\ \str{1}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{1} \\ \str{1} \\ \str{0}
+        \end{bmatrix},
+        \begin{bmatrix}
+        \str{1} \\ \str{1} \\ \str{1}
+        \end{bmatrix}
+        \right\},
+        \]
+        that is, an alphabet of eight symbols, each of which is a column of three bits. Thus, a string over $\s_3$ gives three rows of bits. Show that the following is regular: 
+        \[
+            B = \{w \in \s_3^* | \text{ the bottom row of w is the sum of the top two rows} \}.
+        \]
+        For example, because 011+001 = 100,
+        \[
+        \begin{bmatrix}
+        \str{0} \\ \str{0} \\ \str{1}
+        \end{bmatrix}
+        \begin{bmatrix}
+        \str{1} \\ \str{0} \\ \str{0}
+        \end{bmatrix}
+        \begin{bmatrix}
+        \str{1} \\ \str{1} \\ \str{0}
+        \end{bmatrix}
+        \in B
+        \]
+        Hint: Since it’s easier to think about addition from right to left, design an automaton for $B^R$ first, then convert it into an automaton for $B$.\newp
+        \input{HW03/2.a}
+        \item [(b)][Problem 1.53] Let $\s = \{\str{0}, \str{1}, +, =\}$, and prove that the following is not regular:
+        \[
+         ADD = \{x = y+z | x,y,z \in \{\str{0},\str{1}\}^*\text{ and } x=y+z \text{ is true }\}.
+        \]
+        \input{HW03/2.b}
+    \end{enumerate}
+\newpage
+    \item \textbf{Similar but different} [Problem 1.49].
+    \begin{enumerate}
+        \item Let $B = \{\str{1}^kw | w \in\{\str{0}, \str{1}\}^* \text{ and $w$ contains at least $k$ 1s, for } k \geq 1 \}$. Show that $B$ is a regular language. Hint: Try out some strings to see what does and doesn’t belong to $B$, in order to find another simpler way of thinking about $B$.\newp
+        \input{HW03/3.a}
+        \item Let $C = \{\str{1}^kw | w \in\{\str{0}, \str{1}\}^* \text{ and $w$ contains at most $k$ 1s, for } k \geq 1 \}$. Prove that $C$ is not a regular language.\newp
+        \input{HW03/3.b}
+    \end{enumerate}
+\end{enumerate}
+\end{document}

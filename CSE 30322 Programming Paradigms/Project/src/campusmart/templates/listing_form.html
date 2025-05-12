@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+<!--This page allows a user to create or update a listing and uses Javascript-->
+{% block content %}
+<div class="container mt-5">
+    <div class="row mt-2 mb-4">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{% if is_creating %}Create New Listing{% else %}Update Listing{% endif %}</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if is_creating %}
+                        <p>Daily Listings left: {{daily}}</p>
+                        <p>Purchased Listings left: {{purchased}}</p>
+                        {% endif %}
+                        
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        
+                        <div class="form-group mb-3">
+                            <label for="{{ form.title.id_for_label }}">Title:</label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                                <div class="text-danger">{{ form.title.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="{{ form.description.id_for_label }}">Description:</label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="{{ form.price.id_for_label }}">Price ($):</label>
+                            {{ form.price }}
+                            {% if form.price.errors %}
+                                <div class="text-danger">{{ form.price.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="{{ form.condition.id_for_label }}">Condition:</label>
+                            {{ form.condition }}
+                            {% if form.condition.errors %}
+                                <div class="text-danger">{{ form.condition.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <h4 class="mt-4">Product Images</h4>
+                        <p class="text-muted">Upload at least one image of your product</p>
+                        {% if image_error %}
+                        <p>You must upload 1 image</p>
+                        {% endif %}
+                        {{ formset.management_form }}
+                        <div id="image-formset">
+                            {% for form in formset %}
+                                <div class="image-form mb-3">
+                                    {{ form.id }}
+                                    <div class="row">
+                                        <div class="col-9">
+                                            {{ form.image }}
+                                            {% if form.image.errors %}
+                                                <div class="text-danger">{{ form.image.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-3">
+                                            {% if not forloop.first or not is_creating %}
+                                                {{ form.DELETE }}
+                                                <label for="{{ form.DELETE.id_for_label }}">Delete</label>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <button type="button" id="add-image" class="btn btn-secondary mb-3">Add Another Image</button>
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                {% if is_creating %}Create Listing{% else %}Update Listing{% endif %}
+                            </button>
+                            <a href="{% url 'listings_mine' %}" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add form template for adding new images
+        const formset = document.getElementById('image-formset');
+        const totalForms = document.getElementById('id_images-TOTAL_FORMS');
+        const addButton = document.getElementById('add-image');
+        
+        addButton.addEventListener('click', function() {
+            const currentForms = document.querySelectorAll('.image-form').length;
+            const newForm = document.querySelectorAll('.image-form')[0].cloneNode(true);
+            
+            // Update form index
+            newForm.innerHTML = newForm.innerHTML.replace(/-0-/g, `-${currentForms}-`);
+            newForm.innerHTML = newForm.innerHTML.replace(/_0_/g, `_${currentForms}_`);
+            
+            // Clear any values
+            newForm.querySelectorAll('input[type="file"]').forEach(input => {
+                input.value = '';
+            });
+            
+            formset.appendChild(newForm);
+            totalForms.value = currentForms + 1;
+        });
+    });
+</script>
+{% endblock %}

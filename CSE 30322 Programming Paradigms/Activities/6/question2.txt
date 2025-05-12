@@ -1,0 +1,5 @@
+0
+1
+2
+
+// The above was the output. The reason why it prints 0 1 2 is because it is block scoped. Thus, in each timeout, the i is referencing a different i. In this example it thus logs the unique value at that iteration.

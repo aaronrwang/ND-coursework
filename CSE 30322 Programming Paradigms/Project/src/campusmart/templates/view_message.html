@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--This shows a particular message-->
+<div class="container mt-5">
+    <h2>Message from {{ message.sender.username }} regarding {{ message.listing.title }}</h2>
+    <hr>
+    <p><strong>Subject:</strong> {{ message.subject }}</p>
+    <hr>
+    <p>{{ message.body|linebreaks }}</p>
+    <hr>
+    <a href="{% url 'inbox' %}" class="btn btn-secondary">Back to Inbox</a>
+</div>
+{% endblock %}

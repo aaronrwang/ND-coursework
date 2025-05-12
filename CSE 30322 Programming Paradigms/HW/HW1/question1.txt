@@ -1,0 +1,11 @@
+a is global scope that can be reassigned but not redeclared
+b is function scope and can be reassigned and redeclared
+there is a c in block scope and can be reassigned but not redeclared
+there is a c in global scope and can be reassigned and redeclared
+d is block scope and can be reassigned but not redeclared
+
+line 8: console.log(a + b + c); // in block scope; outputs 6 b/c they are all in scope and a+b+c=1+2+3=6.
+line 10: console.log(a + b); // in function scope; outputs 3 b/c they are all in scope and a+b=1+2=3.
+line 15: console.log(a); // in global scope; outputs 1 b/c it is in scope and a=1
+line 16: console.log(c); // in global scope; outputs 20 b/c it is in scope and c=20
+line 17: console.log(d); // in global scope; outputs error b/c it is not in the scope

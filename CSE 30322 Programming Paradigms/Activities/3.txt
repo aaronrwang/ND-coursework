@@ -1,0 +1,3 @@
+0 == "0" // "0" as a number is 0 and since js is weakly typed with ==, 0 == "0" is 0==0 which is true.
+0 == [] // [] as a number and since js is weakly typed with ==, 0 == [] is 0==0 which is true.
+"0" == [] // [] as a string is '' and since js is weakly typed with == "0" == [] is "0" == "" which is false.

@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Home{% endblock %}
+<!--This is what appears to the user on the home page-->
+{% block content %}
+   <div class="d-flex flex-column align-items-center justify-content-center">
+       <img class="mt-4" src="{% static 'Logo-clear.png' %}" style="width: 400px; height: auto;">
+       <p class="mt-4 text-center w-75">By focusing on ease of use and trust, CampusMart streamlines how college members buy and sell items - from textbooks and electronics to dorm furniture - while fostering a stronger sense of community. Our platform empowers students to quickly post listings, browse what’s on offer, and seamlessly communicate with sellers, all in one secure environment. Whether you’re looking to clear out an old closet, find a last-minute used textbook, or score a deal on gently used electronics, CampusMart makes it simple and safe to complete transactions right within your campus network</p>
+   </div>
+<!--Buttons to go to other pages-->
+   <div class="container my-5">
+       <div class="d-flex justify-content-center mb-4">
+           <a href="{% url 'browse_listings' %}" class="btn btn-primary btn-lg px-5 py-3 shadow-lg rounded-pill w-75">
+               Browse Listings
+           </a>
+       </div>
+       <div class="d-flex justify-content-center gap-5">
+           <a href="{% url 'listings_mine' %}" class="btn btn-outline-secondary btn-lg px-4 py-2 shadow-sm rounded w-30 text-center">
+               My Listings
+           </a>
+           <a href="{% url 'inbox' %}" class="btn btn-outline-secondary btn-lg px-4 py-2 shadow-sm rounded w-30 text-center">
+               My Inbox
+           </a>
+       </div>
+   </div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+{% block title %}Sign Up{% endblock %} 
+{% block content %}
+<div
+    class="w-100 h-100 d-flex flex-column align-items-center justify-content-center"
+>
+<!--This is for users who do not have an account and asks for their name, email, and desired username and password-->
+    <form
+        method="POST"
+        class="border p-5 w-auto d-flex flex-column align-items-center"
+        style="border-radius: 2rem"
+    >
+        {% csrf_token %}
+        <h2>Sign Up</h2>
+        <div class="row g-3">
+            <div class="col">
+                <div class="form-group">
+                    {{ form.firstname.label_tag }}
+                    {{ form.firstname }}
+                    {{ form.firstname.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.lastname.label_tag }}
+                    {{ form.lastname }}
+                    {{ form.lastname.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                
+            </div>
+    
+            <div class="col">
+                <div class="form-group mb-3">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+                <div class="form-group">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {{ form.password1.errors }}
+                </div>
+                <div class="form-group mb-3">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+</div>
+{% endblock %}

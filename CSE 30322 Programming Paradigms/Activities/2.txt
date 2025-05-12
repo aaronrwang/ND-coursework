@@ -1,0 +1,1 @@
+The reason why the following code prints undefined instead of 7 is because javascript automatically inserts a semicolon right after the return and before the expression as it is on a new line. Thus, it returns undefined and prints undefined.

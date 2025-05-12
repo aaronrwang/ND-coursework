@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+<!--This allows a user to buy more listings if they run out of their three daily posts-->
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Purchase Additional Listings</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <p>You've reached your daily limit of 3 free listings.</p>
+                        <p>Purchase additional listings to continue selling your items.</p>
+                    </div>
+                    <div class="alert alert-info">
+                        <p>Krato Coins: {{balance}}</p>
+                        <p>Additional purchases: {{purchased}}</p>
+                    </div>
+
+                    <form method="POST" style="border-radius: 2rem">
+                        {% csrf_token %}
+                        <label for="purchase_number">Listings to purchase:</label>
+                        <input type="number" name="purchase_number" min="1" required>
+                        <button type="submit" class="btn btn-primary">Purchase</button>
+                    </form>
+                    <div class="mt-2">
+                    <a href="{% url 'listings_mine' %}" class="btn btn-outline-secondary">Return to My Listings</a>
+                    {% if error %}
+                    <div class="mt-2">
+                        <div class="alert alert-danger">
+                            <p>{{error}}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

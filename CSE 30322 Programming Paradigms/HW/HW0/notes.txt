@@ -1,0 +1,125 @@
+q2
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def text_to_list(expression: str) -> list:
+  value = ''
+  nodes = deque([])
+  for c in expression:
+    if c in ['+','-','*','/']:
+      nodes.append(TreeNode(int(value)))
+      nodes.append(TreeNode(c))
+      value = ''
+    else:
+      value+=c
+  nodes.append(TreeNode(int(value)))
+  return nodes
+
+def list_to_tree(nodes: list) -> TreeNode:
+  root = nodes[1] # assumption from nonempty list
+  while nodes:
+    left = nodes.popleft()
+    cur = nodes.popleft()
+    cur.left = left
+    right = nodes.popleft()
+    if not nodes:
+      cur.right = right
+      break
+    if cur.val in ['+','-'] and len(nodes)>0 and nodes[0].val in ['*','/']:
+      cur.right = nodes[0]
+      nodes.appendleft(right)
+      root = cur
+    else:
+      cur.right = right
+      nodes.appendleft(root)
+  return root
+
+def tree_to_list(root: TreeNode) -> list:
+  q = deque([root])
+  res = []
+  while q:
+    node = q.popleft()
+    if node.left:
+      q.append(node.left)
+      res.append(f'"{node.val}" -> "{node.left.val}" // left')
+      q.append(node.right)
+      res.append(f'"{node.val}" -> "{node.right.val}" // right')
+  return res
+
+def text_to_tree(expression: str) -> list:
+  nodes = text_to_list(expression)
+  store = list(nodes)[:]
+  root = list_to_tree(nodes)
+
+  # for node in store:
+  #   l = node.left.val if node.left else None
+  #   r = node.right.val if node.right else None
+  #   print(node.val, l,r)
+  # print(root.val)
+  return tree_to_list(root)
+
+      
+      
+  
+
+      
+
+'''
+2+7*3
+  +
+ 2 *
+  7 3
+
+2*7+3
+  +
+ * 3
+2 7 
+
+2*7+3*8
+   +
+ *   *
+2 7 3 8
+'''
+      
+
+    
+
+
+def print_output(output: list) -> None:
+    for line in output:
+        print(line)
+
+
+if __name__ == "__main__":
+    expression = "2*7+3*8"  # Test 1
+    output = text_to_tree(expression)
+    print_output(output)
+
+def list_to_tree(nodes: list) -> TreeNode:
+  root = nodes[1] # assumption from nonempty list
+  change_root = True
+  nodes = deque(nodes)
+  while nodes:
+    left = nodes.popleft()
+    if not nodes:
+      break
+    cur = nodes.popleft()
+    if change_root:
+      change_root = False
+      root = cur
+    cur.left = left
+    right = nodes.popleft()
+    if cur.val in ['+','-'] and nodes and nodes[0].val in ['*','/']:
+      cur.right = nodes[0]
+      nodes.appendleft(right)
+      # root = cur
+    else:
+      cur.right = right
+      nodes.appendleft(root)
+      change_root = True
+  return root

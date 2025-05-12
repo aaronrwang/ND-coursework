@@ -1,0 +1,3 @@
+What are templates in Django?
+
+Templates are html files that are responsible for the user interface. They handle static html code as well as python code that lets you dynamically generate content. Using these templates, the python code is executed to generate a final html file which is sent to the client upon request.

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--This is the same as listing_detail.html but a couple small changes to allow when you are viewing other peoples posts-->
+<div class="container my-5 pb-5">
+    {% if messages %}
+        <div class="messages mb-4">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <div class="row">
+        <div class="col-md-8">
+            {% if listing.images.all %}
+                <div id="listingCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in listing.images.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ listing.title }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if listing.images.count > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#listingCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#listingCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="bg-light text-center p-5">
+                    <p class="mb-0">No images available</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ listing.title }}</h3>
+                </div>
+                <div class="card-body">
+                    <p class="h4 text-primary">${{ listing.price }}</p>
+                    <p>
+                        <strong>Condition:</strong> {{ listing.get_condition_display }}
+                    </p>
+                    <p>
+                        <strong>Status:</strong> 
+                        <span class="badge {% if listing.status == 'AVAILABLE' %}bg-success{% else %}bg-secondary{% endif %}">
+                            {{ listing.get_status_display }}
+                        </span>
+                    </p>
+                    <p>
+                        <strong>Posted by:</strong> {{ listing.user.username }}
+                    </p>
+                    <p>
+                        <strong>Posted on:</strong> {{ listing.created_at|date:"F d, Y" }}
+                    </p>
+                    
+                    {% if listing.user == request.user %}
+                        <div class="d-grid gap-2 mt-4">
+                            <a href="{% url 'update_listing' pk=listing.pk %}" class="btn btn-outline-primary">Edit Listing</a>
+                            <a href="{% url 'toggle_listing_status' pk=listing.pk %}" class="btn btn-outline-{% if listing.status == 'AVAILABLE' %}warning{% else %}success{% endif %}">
+                                Mark as {% if listing.status == 'AVAILABLE' %}Unavailable{% else %}Available{% endif %}
+                            </a>
+                            <a href="{% url 'delete_listing' pk=listing.pk %}" class="btn btn-outline-danger">Delete Listing</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Description</h4>
+                </div>
+                <div class="card-body">
+                    <p>{{ listing.description|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'send_message' listing_id=listing.pk %}" class="mx-3 mt-2 btn btn-info">
+            Send a message to the seller
+          </a>
+    </div>
+
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <a href="{% url 'browse_listings' %}" class="btn btn-outline-secondary">Back to browsing</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

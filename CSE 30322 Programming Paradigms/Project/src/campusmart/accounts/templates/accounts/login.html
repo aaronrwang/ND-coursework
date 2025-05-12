@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% block title %}Login{% endblock %} 
+{% block content%}
+<div
+    class="w-100 h-100 d-flex flex-column align-items-center justify-content-center"
+>
+<!--This is for users who already have an account and asks for their username and password-->
+    <form
+        method="Post"
+        class="border p-5 w-auto d-flex flex-column align-items-center"
+        style="border-radius: 2rem"
+    >
+        {% csrf_token %}
+        <h2>Log In</h2>
+        <div class="form-group">
+            <label for="user_username">Username:</label><br />
+            <input
+                type="text"
+                name="username"
+                required
+                id="user_username"
+                class="form-control"
+                placeholder="Enter username"
+            />
+        </div>
+        <div class="form-group">
+            <label for="user_password">Password:</label><br />
+            <input
+                type="password"
+                name="password"
+                required
+                id="user_password"
+                class="form-control"
+                placeholder="Enter password"
+            />
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+        {% if messages %}
+        <ul style="list-style: none; padding-left: 0">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

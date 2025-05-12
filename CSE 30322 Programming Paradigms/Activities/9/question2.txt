@@ -1,0 +1,7 @@
+What is the most appropriate class type to implement the feature below?
+
+Feature 1: view a specific question posted on EdStem
+DetailView because it is designed to retrieve a specific item and display that to the user.
+
+Feature 2: list all questions made on EdStem
+ListView because it is designed to get a list of items from the database and display that to the user.

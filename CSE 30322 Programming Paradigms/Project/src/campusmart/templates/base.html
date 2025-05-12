@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}CampusMart{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <!--This shows the nav bar which all of the pages inherit-->
+    <body>
+        <nav class="d-flex flex-row justify-content-between align-items-center sticky-top w-100 px-3 shadow"
+       style="height: 4rem; background-color: white; z-index: 1;">
+            <div>
+                <a href="{% url 'home'%}" class="mr-4"><img src="{% static 'Logo-clear.png' %}" style="width: 150px; height: auto;"></a>
+                
+                <a href="{% url 'listings_mine' %}" class="btn btn-outline-dark mr-2">My Listings</a>
+                <a href="{% url 'browse_listings' %}" class="btn btn-outline-dark mr-2">Browse Listings</a>
+                <a href="{% url 'inbox' %}" class="btn btn-outline-dark mr-2">Inbox</a>
+
+            </div>
+            <!--The navbar looks a little different of authenticated users-->
+            <div>
+            {% if user.is_authenticated %}
+                <span class="p-2 mr-2">Hello, {{ user.username }}!</span>
+                <form action="{% url 'logout' %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-dark">Log Out</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-dark mr-2">Log In</a>
+                <a href="{% url 'sign_up' %}" class="btn btn-outline-dark">Sign Up</a>
+            {% endif %}
+            </div>
+        </nav>
+
+        <div class="content w-100 d-flex flex-column align-items-center" style="height: calc(100vh - 4rem);">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

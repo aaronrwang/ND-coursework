@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+<!--Make sure that a user cannot easily delete the listing-->
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Delete Listing</h2>
+                </div>
+                <div class="card-body">
+                    <p>Are you sure you want to delete the listing "{{ listing.title }}"?</p>
+                    <p>This action cannot be undone.</p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a href="{% url 'listing_detail' pk=listing.pk %}" class="btn btn-outline-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

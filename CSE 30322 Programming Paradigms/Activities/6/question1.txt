@@ -1,0 +1,5 @@
+3
+3
+3
+
+// The above was the output. The reason why it prints 3 3s is because it is globally scoped. Thus, when the timeout finally prints, it prints 3 b/c the loop finished and i = 3.
